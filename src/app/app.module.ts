@@ -27,10 +27,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     RouterModule.forRoot([
       { 
-        path: 'ListGoods', component: ProductListComponent
+        path: 'ListProduct', component: ProductListComponent
       },
       {
-        path: 'NewGoods', component: ProductNewComponent
+        path: 'NewProduct', component: ProductNewComponent
       }
     ]),
     BrowserAnimationsModule

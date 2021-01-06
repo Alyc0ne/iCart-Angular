@@ -331,3 +331,28 @@ input[type="checkbox"] {
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
+
+.tabbar {
+    margin-bottom: 20px;
+    column-gap: 2rem;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 1px  #F0F3F7;
+}
+
+.tabbar > div.tab.active {
+    border-bottom: solid 1px  blue;
+}
+
+.tabbar > div.tab:hover {
+    border-bottom: solid 1px  blue;
+}
+
+
+.tab-content > div {
+    display: none;
+}
+
+.tab-content > div.active {
+    display: block;
+}
