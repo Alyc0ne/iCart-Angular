@@ -1,0 +1,48 @@
+<div class="header-menu">
+    <div class="search">
+        <i class="material-icons">search</i>
+        <input type="text" name="" id="" placeholder="Search Products">
+    </div>
+    <a [routerLink]="['/NewGoods']" class="button blue-button">
+        ADD NEW PRODUCT
+    </a>
+</div>
+
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="txt-l">Barcode</th>
+                <th class="txt-l">Product Name</th>
+                <th class="txt-r">Quantity</th>
+                <th class="txt-r">Cost</th>
+                <th class="txt-r">Price</th>
+                <th class="">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of service.list">
+                <td>{{ product.barcode }}</td>
+                <td>{{ product.goodsName }}</td>
+                <td class="txt-r">{{ product.productQuantity }}</td>
+                <td class="txt-r">{{ product.productCost }}</td>
+                <td class="txt-r">{{ product.productPrice }}</td>
+                <td class="txt-c">
+                    <i class="material-icons">edit</i>
+                    <i class="material-icons">more_vert</i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="pagination">
+    <a href="#">&laquo;</a>
+    <a href="#" class="active">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">6</a>
+    <a href="#">&raquo;</a>
+</div>
