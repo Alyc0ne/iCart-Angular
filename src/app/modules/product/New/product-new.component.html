@@ -7,15 +7,34 @@
 
 <div class="container-detail">
     <div class="tabbar">
-        <div class="tab active" id="info">ข้อมูลทั่วไป</div>
-        <div class="tab" id="unit">หน่วยนับ</div>
-        <div class="tab" id="images">รูปภาพ</div>
+        <div class="tab active" id="info" (click)="switchTab('info')">ข้อมูลทั่วไป</div>
+        <div class="tab" id="unit" (click)="switchTab('unit')">หน่วยนับ</div>
+        <div class="tab" id="images" (click)="switchTab('images')">รูปภาพ</div>
     </div>
 
     <div class="tab-content">
         <div class="tab-pane active" id="info">
-            <h2>London</h2>
-            <p>London is the capital of England.</p>
+            <div class="text-header">ข้อมูลสินค้า</div>
+            <!-- <form> -->
+                <div class="form-group">
+                    <span class="req"></span>
+                    <label for="InvoiceNo" class="formLabel" title="เลขที่ใบแจ้งหนี้">เลขที่ใบแจ้งหนี้</label>
+                    <div class="form-content">
+                        <input type="text" name="" id="" placeholder="Search Products">
+                    </div>
+                </div>
+                
+                
+                <div class="form-content">
+                    <input type="text" name="" id="" placeholder="Search Products">
+                </div>
+                <div class="form-content">
+                    <input type="text" name="" id="" placeholder="Search Products">
+                </div>
+                <div class="form-content">
+                    <input type="text" name="" id="" placeholder="Search Products">
+                </div>
+            <!-- </form> -->
         </div>
         
         <div class="tab-pane" id="unit">
@@ -33,10 +52,3 @@
 
     <input type="text" name="" id="" placeholder="Search Products">
 </div>
-
-
-<script>
-    document.getElementById('tab').addEventListener("click", (e) => {
-        console.log(e)
-    });
-</script>
