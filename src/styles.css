@@ -26,7 +26,7 @@ body {
 .container-detail {
     padding: 0rem 2rem;
     position: relative;
-    height: 90%;
+    /* height: 90%; */
 }
 
 router-outlet + * {
@@ -91,13 +91,19 @@ label {
     font-weight: normal;
 }
 
-.button:disabled, button:disabled {
-    opacity: 0.5;
+.button.disabled, button:disabled {
+    opacity: .65;
     cursor: auto;
 }
 
 .blue-button {
     background-color: #4BAEE5;
+    color: white;
+    height: 35px;
+}
+
+.save-button {
+    background-color: #28A745;
     color: white;
     height: 35px;
 }
@@ -110,7 +116,7 @@ label {
 .top-bar {
     height: 50px;
     width: 100%;
-    border-bottom: 1.5px solid #f2f2f2;
+    border-bottom: 1px solid #a9adb3;
 }
 
 app-top-bar {
@@ -337,7 +343,7 @@ input[type="checkbox"] {
     column-gap: 2rem;
     display: flex;
     flex-direction: row;
-    border-bottom: solid 1px  #F0F3F7;
+    border-bottom: solid 1px  #a9adb3;
 }
 
 .tabbar > div.tab {
@@ -354,16 +360,25 @@ input[type="checkbox"] {
 
 .tab-content > div {
     display: none;
+    min-height: 450px;
 }
 
 .tab-content > div.active {
     display: block;
 }
 
+.tab-footer {
+    border-top: solid 1px  #a9adb3;
+}
+
+.tab-footer .group-button {
+    margin-top: 20px;
+}
+
 .text-header {
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .form-group {
@@ -372,6 +387,7 @@ input[type="checkbox"] {
     min-height: 40px;
     display: flex;
     flex-direction: row;
+    margin: 15px 0;
 }
 
 .req {
@@ -384,10 +400,10 @@ input[type="checkbox"] {
 
 .formLabel {
     font-weight: bold;
-    line-height: 30px;
+    line-height: 32px;
     width: 15%;
     padding: 0px;
-    display: inline-block;
+    /* display: inline-block; */
     margin-bottom: 5px;
     min-width: 150px;
     /* word-wrap: break-word; */
@@ -400,4 +416,29 @@ input[type="checkbox"] {
 
 .form-content {
     width: 100%;
+}
+
+.form-group .form-content input {
+    width: 440px;
+    max-width: 100%;
+    margin-right: 5px;
+
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #24292e;
+    vertical-align: middle;
+    /* background-color: var(--color-input-bg); */
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: inset 0 1px 0 rgba(225, 228, 232, 0.2);
+}
+
+.form-group .form-content input:focus {
+    border-color: #0366d6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(3, 102 , 214, 0.3);
 }
