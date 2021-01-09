@@ -1,3 +1,5 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 * {
     color: #616161;
     box-sizing: border-box;
@@ -12,11 +14,9 @@ body {
 }
 
 .container {
-    /* display: flex;
-    flex-direction: row; */
-    width: 85vw;
-    height: 90vh;
-    margin: 2rem;
+    width: calc(100% - 35px);
+    height: calc(var(--vh, 1vh)*100);
+    margin: 0 2rem;
     background: white;
     border-radius: 10px;
     padding: 1rem;
@@ -24,14 +24,14 @@ body {
 }
 
 .container-detail {
-    padding: 0rem 2rem;
+    padding-left: 2rem;
     position: relative;
-    /* height: 90%; */
+    height: 95%;
 }
 
-router-outlet + * {
+/* router-outlet + * {
     padding: 0 16px;
-}
+} */
 
 h1 {
     font-size: 32px;
@@ -42,7 +42,7 @@ h2 {
 }
 
 h1, h2 {
-    font-weight: lighter;
+    font-weight: bold;
 }
 
 p {
@@ -78,12 +78,14 @@ label {
     display: inline-flex;
     align-items: center;
     padding: 8px 16px;
-    border-radius: 20px;
+    border-radius: .25rem;
     font-size: 14px;
     cursor: pointer;
     background-color: #1976d2;
     color: white;
     border: none;
+    min-width: 150px;
+    justify-content: center;
 }
 
 .button:hover, button:hover {
@@ -102,10 +104,22 @@ label {
     height: 35px;
 }
 
-.save-button {
-    background-color: #28A745;
-    color: white;
-    height: 35px;
+.primary-button {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.success-button {
+    color: #fff;
+    background-color: #1e7e34;
+    border-color: #1c7430;
+}
+
+.light-button {
+    color: #212529;
+    background-color: #dae0e5;
+    border-color: #e6e9ee;
 }
 
 .blue-button i.material-icons {
@@ -116,7 +130,7 @@ label {
 .top-bar {
     height: 50px;
     width: 100%;
-    border-bottom: 1px solid #a9adb3;
+    /* border-bottom: 1px solid #a9adb3; */
 }
 
 app-top-bar {
@@ -148,10 +162,10 @@ app-left-bar {
     flex-direction: row;
 }
 
-app-product {
+/* app-product {
     width: 100%;
     padding: 16px;
-}
+} */
 
 .header-menu {
     width: 100%;
@@ -164,7 +178,7 @@ app-product {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .header-menu h1{
@@ -276,20 +290,19 @@ input[type="checkbox"] {
 }
 
 
-.table-wrapper{
+.table-wrapper {
     overflow-y: scroll;
     flex-grow: 1;
     height: 70%;
 }
   
-.table-wrapper th{
+.table-wrapper th {
     position: sticky;
     top: 0;
     font-size: 18px;
     color: black;
     line-height: 1.2;
     font-weight: bold;
-    
 }
   
 .table {
@@ -302,7 +315,8 @@ input[type="checkbox"] {
     color: black;
     line-height: 1.2;
     font-weight: bold;
-    border-top: 1px solid #dfdcdc;
+    border-top: 1px solid #a9adb3;
+    border-bottom: 1px solid #a9adb3;
     height: 50px;
     padding: .6em 1em;
 }
@@ -376,18 +390,19 @@ input[type="checkbox"] {
 }
 
 .text-header {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
+    margin-left: 1rem;
     margin-bottom: 1rem;
+    color: #4fc0eb;
 }
 
 .form-group {
-    margin: 0px;
     height: auto;
     min-height: 40px;
     display: flex;
     flex-direction: row;
-    margin: 15px 0;
+    margin: 5px 1.5rem;
 }
 
 .req {
@@ -418,17 +433,15 @@ input[type="checkbox"] {
     width: 100%;
 }
 
-.form-group .form-content input {
+.form-group .form-content input, textarea {
     width: 440px;
     max-width: 100%;
     margin-right: 5px;
-
     padding: 5px 12px;
     font-size: 14px;
     line-height: 20px;
     color: #24292e;
     vertical-align: middle;
-    /* background-color: var(--color-input-bg); */
     background-repeat: no-repeat;
     background-position: right 8px center;
     border: 1px solid #e1e4e8;
@@ -441,4 +454,39 @@ input[type="checkbox"] {
     border-color: #0366d6;
     outline: none;
     box-shadow: 0 0 0 3px rgba(3, 102 , 214, 0.3);
+}
+
+.form-footer {
+    border-top: solid 1px  #a9adb3;
+}
+
+.modal-header {
+    height: 50px;
+    width: 100%;
+}
+
+.modal-header > h1 {
+    border-bottom: solid 1px  #a9adb3;
+}
+
+.modal-content {
+    height: 80%;
+    overflow: auto;
+    margin-bottom: 3%;
+}
+
+.modal-footer {
+    bottom: 0;
+    height: 50px;
+    border-top: solid 1px  #a9adb3;
+}
+
+.modal-footer .form-group {
+    margin-bottom: 0px;
+    justify-content: flex-end;
+    grid-gap: 20px;
+}
+
+.mat-dialog-container {
+    padding-bottom: 10px !important;
 }

@@ -1,21 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
-import { LeftBarComponent } from './left-bar/left-bar.component';
+import { LeftBarComponent } from './default/left-bar/left-bar.component';
 import { ProductListComponent } from './modules/product/List/product.component';
+import { ProductModalComponent } from './modules/product/Shared/product-modal.component';
 import { ProductNewComponent } from './modules/product/New/product-new.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopBarComponent,
     LeftBarComponent,
     ProductListComponent,
     ProductNewComponent
@@ -23,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
       { 
@@ -33,8 +34,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         path: 'NewProduct', component: ProductNewComponent
       }
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatSelectModule
   ],
+  entryComponents:[ProductModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
