@@ -9,7 +9,8 @@ import { ProductModel } from './product.model';
 })
 
 export class ProductModalComponent {
-    FormData:ProductModel;
+    formData:ProductModel;
+    public unitList: Array<any> = [];
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data,
@@ -17,16 +18,45 @@ export class ProductModalComponent {
     ) {}
 
     ngOnInit() {
-        this.FormData = {
-            goodsID: null,
-            goodsNo: '',
-            goodsCode: '',
-            goodsName: this.data.goodsName,
-            goodsNameEng: '',
-            goodsCost: 0,
-            goodsSalePrice: 0,
-            goodsPurchasePrice: 0,
-            companyID: ''
+        this.formData = {
+            productID: null,
+            productNo: '',
+            productCode: '',
+            productName: this.data.goodsName,
+            productNameEng: '',
+            productDesc: '',
+            productSalePrice: 0,
+            productPurchasePrice: 0
         }
     }
+
+    states: string[] = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+        'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+        'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+        'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+        'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+        'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+        'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+      ];
+
+      addUnit() {
+        this.unitList.push({});
+          // var unitList = document.getElementById('unitList') as HTMLTableElement;
+          // if (!!unitList) {
+          //   var obj_htmlcell_css = [ "txt-c", "txt-l", "txt-l", "txt-l" ];
+          //   var obj_htmlcell = [ 
+          //     "<i class='material-icons'>edit</i><i class='material-icons'>more_vert</i>", 
+          //     "<input type='text' class='form-input' #barcode='ngModel' [(ngModel)]='formData.productSalePrice'>", 
+          //     "<mat-select><mat-option>None</mat-option><mat-option *ngFor='let state of states' [value]='state'>{{state}}</mat-option></mat-select>", 
+          //     ""];
+
+          //   let row = unitList.insertRow(1);
+          //   for (let i = 0; i < 4; i++) {
+          //     let cell = row.insertCell(i);
+          //     cell.className = obj_htmlcell_css[i];
+          //     cell.insertAdjacentHTML('afterbegin', obj_htmlcell[i]);
+          //   }
+          // }
+      }
 }

@@ -3,10 +3,20 @@
     grid-template-columns: 50% 40%;
 }
 
-.product-info .form-content > input, textarea {
+.unit-info {
+    padding: 0 2rem;
+}
+
+.unit-info .button {
+    height: 30px;
+    min-width: 110px;
+}
+
+.form-content > input, textarea {
     width: 320px;
 }
 
 .product-info .form-group.fullrow {
     grid-column: 1/3;
 }
+

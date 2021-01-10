@@ -1,11 +1,10 @@
 export class ProductModel {
-    goodsID:string;
-    goodsNo:string;
-    goodsCode:string;
-    goodsName:string;
-    goodsNameEng:string;
-    goodsCost:number;
-    goodsSalePrice:number;
-    goodsPurchasePrice:number;
-    companyID:string;
+    productID:string;
+    productNo:string;
+    productCode:string;
+    productName:string;
+    productNameEng:string;
+    productDesc:string;
+    productSalePrice:number;
+    productPurchasePrice:number;
 }

@@ -3,78 +3,113 @@
 </div>
 
 <div class="modal-content">
-    <div class="text-header">ข้อมูลสินค้า</div>
-    <!-- #searchForm="ngForm" -->
-    <div class="product-info">
-        <div class="form-group fullrow">
-            <span class="req"></span>
-            <label for="ProductNo" class="formLabel" title="รหัสสินค้า">รหัสสินค้า</label>
-            <div class="form-content">
-                <input type="text" name="ProductNo" id="ProductNo" disabled value="GD-001">
+    <form #productForm="ngForm">
+        <div class="text-header">ข้อมูลสินค้า</div>
+        <div class="product-info">
+            <div class="form-group fullrow">
+                <span class="req"></span>
+                <label for="ProductNo" class="formLabel" title="รหัสสินค้า">รหัสสินค้า</label>
+                <div class="form-content">
+                    <input type="text" name="productNo" #productNo="ngModel" [(ngModel)]="formData.productNo" disabled value="GD-001">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <span class="req">*</span>
-            <label for="ProductNo" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
-            <div class="form-content">
-                <input type="text" name="ProductName" id="ProductName" placeholder="กรอกชื่อสินค้า">
+            <div class="form-group">
+                <span class="req">*</span>
+                <label for="ProductNo" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
+                <div class="form-content">
+                    <input type="text" name="productName" #productName="ngModel" [(ngModel)]="formData.productName" placeholder="กรอกชื่อสินค้า">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <span class="req"></span>
-            <label for="ProductNo" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
-            <div class="form-content">
-                <input type="text" name="ProductNameEng" id="ProductNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ">
+            <div class="form-group">
+                <span class="req"></span>
+                <label for="ProductNo" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
+                <div class="form-content">
+                    <input type="text" name="productNameEng" #productNameEng="ngModel" [(ngModel)]="formData.productNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ">
+                </div>
             </div>
-        </div>
-        <div class="form-group fullrow">
-            <span class="req"></span>
-            <label for="ProductNo" class="formLabel" title="รายละเอียดสินค้า">รายละเอียดสินค้า</label>
-            <div class="form-content">
-                <textarea name="ProductDesc" id="ProductDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า"></textarea>
+            <div class="form-group fullrow">
+                <span class="req"></span>
+                <label for="ProductNo" class="formLabel" title="รายละเอียดสินค้า">รายละเอียดสินค้า</label>
+                <div class="form-content">
+                    <textarea name="productDesc" #productDesc="ngModel" [(ngModel)]="formData.productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <span class="req"></span>
-            <label for="ProductNo" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ต้นทุน</label>
-            <div class="form-content">
-                <input type="text" name="ProductNameEng" id="ProductNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ">
+            <div class="form-group">
+                <span class="req">*</span>
+                <label for="ProductNo" class="formLabel" title="ราคาขาย">ราคาขาย</label>
+                <div class="form-content">
+                    <input type="text" name="productSalePrice" #productSalePrice="ngModel" [(ngModel)]="formData.productSalePrice" placeholder="ราคาขาย">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <span class="req">*</span>
-            <label for="ProductNo" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ราคาขาย</label>
-            <div class="form-content">
-                <input type="text" name="ProductNameEng" id="ProductNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ">
+            <div class="form-group">
+                <span class="req"></span>
+                <label for="ProductNo" class="formLabel" title="ราคาซื้อ">ราคาซื้อ</label>
+                <div class="form-content">
+                    <input type="text" name="productPurchasePrice" #productPurchasePrice="ngModel" [(ngModel)]="formData.productPurchasePrice" placeholder="ราคาซื้อ">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <span class="req"></span>
-            <label for="ProductNo" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
-            <div class="form-content">
-                <mat-form-field appearance="fill">
-                    <mat-label>State</mat-label>
+            <div class="form-group">
+                <span class="req"></span>
+                <label for="ProductNo" class="formLabel" title="หน่วยสินค้า">หน่วยสินค้า</label>
+                <div class="form-content">
                     <mat-select>
-                      <mat-option>None</mat-option>
-                      <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
                     </mat-select>
-                  </mat-form-field>>
+                </div>
+            </div>
+            <div class="form-group">
+                <span class="req"></span>
+                <label for="ProductNo" class="formLabel" title="หมวดสินค้า">หมวดสินค้า</label>
+                <div class="form-content">
+                    <mat-select>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                    </mat-select>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <span class="req"></span>
-            <label for="ProductNo" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
-            <div class="form-content">
-                <input type="text" name="ProductNameEng" id="ProductNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ">
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="text-header">ข้อมูลหน่วยนับ</div>
-    <div class="form-group">
         
-    </div>
+
+        <div class="text-header">ข้อมูลหน่วยนับ</div>
+        <div class="unit-info">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th class=" w50-px action">
+                            <a class="button blue-button" (click)="addUnit()">
+                                เพิ่มหน่วยนับ
+                            </a>
+                        </th>
+                        <th class="">บาร์โค้ด</th>
+                        <th class="">หน่วยนับ</th>
+                        <th class="">หน่วยนับหลัก</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let field of unitList; let i = index;">
+                        <td class="txt-c">
+                            <i class="material-icons">edit</i>
+                            <i class="material-icons">more_vert</i>
+                        </td>
+                        <td>8850999321004</td>
+                        <td>ขวด</td>
+                        <td>
+                            <mat-checkbox [color]="'primary'">หน่วยนับหลัก</mat-checkbox>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    
+    <!-- <div class="form-group">
+        <span class="req">*</span>
+        <label for="ProductNo" class="formLabel" title="รหัสบาร์โค้ด">รหัสบาร์โค้ด</label>
+        <div class="form-content">
+            <input type="text" name="productBarcode" id="productBarcode" placeholder="รหัสบาร์โค้ด">
+        </div>
+    </div> -->
 </div>
 
 <form autocomplete="off"> 

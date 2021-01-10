@@ -289,6 +289,9 @@ input[type="checkbox"] {
     width: 80vw;
 }
 
+.w50-px {
+    width: 50px;
+}
 
 .table-wrapper {
     overflow-y: scroll;
@@ -433,7 +436,7 @@ input[type="checkbox"] {
     width: 100%;
 }
 
-.form-group .form-content input, textarea {
+.form-group .form-content input, textarea, .form-input {
     width: 440px;
     max-width: 100%;
     margin-right: 5px;
@@ -489,4 +492,70 @@ input[type="checkbox"] {
 
 .mat-dialog-container {
     padding-bottom: 10px !important;
+}
+
+.form-content .mat-select-trigger  {
+    width: 320px;
+    max-width: 100%;
+    margin-right: 5px;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #24292e;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: inset 0 1px 0 rgba(225, 228, 232, 0.2);
+}
+
+.styled-table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+
+.styled-table thead tr {
+    background-color: #ECF5FF;
+    text-align: left;
+}
+
+.styled-table th.action {
+    padding: 0 15px;
+}
+
+.styled-table th, td {
+    padding: 12px 15px;
+    letter-spacing: 1px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.styled-table td i.material-icons {
+    font-size: 16px;
+}
+
+.unit-info input.form-input {
+    width: 200px !important;
+    margin-bottom: 0px;
 }
