@@ -7,4 +7,10 @@ export class ProductModel {
     productDesc:string;
     productSalePrice:number;
     productPurchasePrice:number;
+    unitModel: [{
+        isFoucs:boolean;
+        barcode:string;
+        unitID:string;
+        isBaseUnit:boolean;
+    }];
 }

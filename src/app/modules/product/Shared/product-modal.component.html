@@ -70,55 +70,52 @@
             </div>
         </div>
         
-
         <div class="text-header">ข้อมูลหน่วยนับ</div>
         <div class="unit-info">
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th class=" w50-px action">
+                        <th class="action">
                             <a class="button blue-button" (click)="addUnit()">
                                 เพิ่มหน่วยนับ
                             </a>
                         </th>
                         <th class="">บาร์โค้ด</th>
                         <th class="">หน่วยนับ</th>
-                        <th class="">หน่วยนับหลัก</th>
+                        <th class="txt-c">หน่วยนับหลัก</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let field of unitList; let i = index;">
-                        <td class="txt-c">
-                            <i class="material-icons">edit</i>
-                            <i class="material-icons">more_vert</i>
+                <tbody id='test'>
+                    <tr *ngFor="let field of formData.unitModel; let i = index;">
+                        <td class="txt-c" *ngIf="true">
+                            <i class="material-icons" style="color: #4BAEE5;">done</i>
+                            <i class="material-icons" style="color: red;">clear</i>
+                            <!-- <i class="material-icons">edit</i>
+                            <i class="material-icons">more_vert</i> -->
                         </td>
-                        <td>8850999321004</td>
-                        <td>ขวด</td>
                         <td>
+                           <input type="text" name="productSalePrice" class="form-input" #productSalePrice="ngModel" [(ngModel)]="formData.productSalePrice" placeholder="ราคาขาย">
+                        </td>
+                        <td>
+                            <mat-select>
+                                <mat-option>None</mat-option>
+                                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                            </mat-select>
+                        </td>
+                        <td class="txt-c">
                             <mat-checkbox [color]="'primary'">หน่วยนับหลัก</mat-checkbox>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <div class="text-header">รายละเอียดอื่นๆ</div>
     </form>
-    
-    <!-- <div class="form-group">
-        <span class="req">*</span>
-        <label for="ProductNo" class="formLabel" title="รหัสบาร์โค้ด">รหัสบาร์โค้ด</label>
-        <div class="form-content">
-            <input type="text" name="productBarcode" id="productBarcode" placeholder="รหัสบาร์โค้ด">
-        </div>
-    </div> -->
 </div>
-
-<form autocomplete="off"> 
-    
-
-    <div class="modal-footer">
-        <div class="form-group">
-            <a class="button light-button">ยกเลิก</a>
-            <a class="button success-button">บันทึก</a>
-        </div>
+<div class="modal-footer">
+    <div class="form-group">
+        <a class="button light-button">ยกเลิก</a>
+        <a class="button success-button">บันทึก</a>
     </div>
-</form>
+</div>

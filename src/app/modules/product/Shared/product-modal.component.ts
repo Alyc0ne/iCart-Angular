@@ -26,7 +26,8 @@ export class ProductModalComponent {
             productNameEng: '',
             productDesc: '',
             productSalePrice: 0,
-            productPurchasePrice: 0
+            productPurchasePrice: 0,
+            unitModel: null
         }
     }
 
@@ -41,22 +42,37 @@ export class ProductModalComponent {
       ];
 
       addUnit() {
-        this.unitList.push({});
-          // var unitList = document.getElementById('unitList') as HTMLTableElement;
-          // if (!!unitList) {
-          //   var obj_htmlcell_css = [ "txt-c", "txt-l", "txt-l", "txt-l" ];
-          //   var obj_htmlcell = [ 
-          //     "<i class='material-icons'>edit</i><i class='material-icons'>more_vert</i>", 
-          //     "<input type='text' class='form-input' #barcode='ngModel' [(ngModel)]='formData.productSalePrice'>", 
-          //     "<mat-select><mat-option>None</mat-option><mat-option *ngFor='let state of states' [value]='state'>{{state}}</mat-option></mat-select>", 
-          //     ""];
+        var obj = []
 
-          //   let row = unitList.insertRow(1);
-          //   for (let i = 0; i < 4; i++) {
-          //     let cell = row.insertCell(i);
-          //     cell.className = obj_htmlcell_css[i];
-          //     cell.insertAdjacentHTML('afterbegin', obj_htmlcell[i]);
-          //   }
-          // }
+        if (!!this.formData.unitModel) {
+            this.formData.unitModel.push({
+                isFoucs: true,
+                barcode: '',
+                unitID: '',
+                isBaseUnit: false
+            });
+        }
+        else
+        {
+            this.formData.unitModel = [{
+                isFoucs: true,
+                barcode: '',
+                unitID: '',
+                isBaseUnit: false
+            }];
+        }
+        
+        
+        //this.unitList.push({});
+        var table = document.getElementsByClassName('styled-table');
+        //document.getElementsByClassName('modal-content');
+        if (table.length > 0) {
+            var tbody = table[0].querySelector('tbody');
+            if (!!tbody) {
+                setTimeout(() => { 
+                    tbody.scrollTo(0, 50000);
+                }, 100);
+            }
+        }
       }
 }

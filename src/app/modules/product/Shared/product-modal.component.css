@@ -12,6 +12,17 @@
     min-width: 110px;
 }
 
+.unit-info input.form-input {
+    width: 200px !important;
+    margin-bottom: 0px;
+}
+
+.unit-content {
+    height: 0px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
 .form-content > input, textarea {
     width: 320px;
 }
@@ -19,4 +30,3 @@
 .product-info .form-group.fullrow {
     grid-column: 1/3;
 }
-

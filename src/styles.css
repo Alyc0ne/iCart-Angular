@@ -395,8 +395,7 @@ input[type="checkbox"] {
 .text-header {
     font-size: 18px;
     font-weight: bold;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0 1rem 1rem;
     color: #4fc0eb;
 }
 
@@ -453,7 +452,7 @@ input[type="checkbox"] {
     box-shadow: inset 0 1px 0 rgba(225, 228, 232, 0.2);
 }
 
-.form-group .form-content input:focus {
+.form-group .form-content input:focus, .form-input:focus {
     border-color: #0366d6;
     outline: none;
     box-shadow: 0 0 0 3px rgba(3, 102 , 214, 0.3);
@@ -473,9 +472,9 @@ input[type="checkbox"] {
 }
 
 .modal-content {
-    height: 80%;
+    height: 450px;
     overflow: auto;
-    margin-bottom: 3%;
+    margin-bottom: 10px;
 }
 
 .modal-footer {
@@ -494,7 +493,7 @@ input[type="checkbox"] {
     padding-bottom: 10px !important;
 }
 
-.form-content .mat-select-trigger  {
+.mat-select-trigger {
     width: 320px;
     max-width: 100%;
     margin-right: 5px;
@@ -518,11 +517,14 @@ input[type="checkbox"] {
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     width: 100%;
+    table-layout: fixed;
 }
 
 .styled-table thead tr {
     background-color: #ECF5FF;
     text-align: left;
+    display: block;
+    position: relative;
 }
 
 .styled-table th.action {
@@ -534,28 +536,56 @@ input[type="checkbox"] {
     letter-spacing: 1px;
 }
 
+.styled-table tbody {
+    display: block;
+    overflow: auto;
+    height: 150px;
+}
+
 .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
+/* .styled-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
-}
+} */
 
 .styled-table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
 }
 
-.styled-table td i.material-icons {
-    font-size: 16px;
+.styled-table td:nth-child(1), th:nth-child(1) {
+     min-width: 140px; 
 }
 
-.unit-info input.form-input {
-    width: 200px !important;
-    margin-bottom: 0px;
+.styled-table td:nth-child(2), th:nth-child(2) { 
+    min-width: 250px; 
+}
+
+.styled-table td:nth-child(3), th:nth-child(3) { 
+    min-width: 285px; 
+}
+
+.styled-table td:nth-child(4), th:nth-child(4) { 
+    width: 500px; 
+}
+
+.styled-table td i.material-icons {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.unit-info .styled-table td .mat-select-trigger {
+    border-collapse: separate;
+    line-height: 16px;
+    width: 250px !important;
+}
+
+.mat-dialog-container {
+    padding-bottom: 0px !important;
 }

@@ -30,8 +30,8 @@ export class ProductListComponent {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         dialogConfig.disableClose = true;
-        dialogConfig.width = "60%";
-        dialogConfig.height = "80%";
+        dialogConfig.width = "1200px";
+        dialogConfig.height = "600px";
 
         dialogConfig.data = { temp1, temp2 };
 
