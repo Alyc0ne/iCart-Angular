@@ -14,15 +14,15 @@ import { AppComponent } from './app.component';
 import { LeftBarComponent } from './default/left-bar/left-bar.component';
 import { ProductListComponent } from './modules/product/List/product.component';
 import { ProductModalComponent } from './modules/product/Shared/product-modal.component';
-import { ProductNewComponent } from './modules/product/New/product-new.component';
+import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LeftBarComponent,
     ProductListComponent,
-    ProductNewComponent,
-    ProductModalComponent
+    ProductModalComponent,
+    AlertModalComponent
   ],
   imports: [
     BrowserModule,
@@ -33,17 +33,18 @@ import { ProductNewComponent } from './modules/product/New/product-new.component
     RouterModule.forRoot([
       { 
         path: 'ListProduct', component: ProductListComponent
-      },
-      {
-        path: 'NewProduct', component: ProductNewComponent
       }
+      // ,
+      // {
+      //   path: 'NewProduct', component: ProductNewComponent
+      // }
     ]),
     BrowserAnimationsModule,
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule
   ],
-  entryComponents:[ProductModalComponent],
+  entryComponents:[ProductModalComponent, AlertModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

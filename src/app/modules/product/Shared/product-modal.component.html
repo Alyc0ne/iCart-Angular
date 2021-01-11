@@ -87,14 +87,19 @@
                 </thead>
                 <tbody id='test'>
                     <tr *ngFor="let field of formData.unitModel; let i = index;">
-                        <td class="txt-c" *ngIf="true">
-                            <i class="material-icons" style="color: #4BAEE5;">done</i>
+                        <td class="txt-c" *ngIf="field.isFoucs; else editAccept">
+                            <i class="material-icons pointer" (click)="changeisFoucs(field.uid)" style="color: #4BAEE5;">done</i>
                             <i class="material-icons" style="color: red;">clear</i>
-                            <!-- <i class="material-icons">edit</i>
-                            <i class="material-icons">more_vert</i> -->
                         </td>
+                        <ng-template #editAccept>
+                            <td class="txt-c" *ngIf="!field.isFoucs">                            
+                                <i class="material-icons">edit</i>
+                                <i class="material-icons">more_vert</i>
+                            </td>
+                        </ng-template>
+                        
                         <td>
-                           <input type="text" name="productSalePrice" class="form-input" #productSalePrice="ngModel" [(ngModel)]="formData.productSalePrice" placeholder="ราคาขาย">
+                           <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" placeholder="รหัสบาร์โค้ด">
                         </td>
                         <td>
                             <mat-select>
@@ -103,7 +108,7 @@
                             </mat-select>
                         </td>
                         <td class="txt-c">
-                            <mat-checkbox [color]="'primary'">หน่วยนับหลัก</mat-checkbox>
+                            <mat-checkbox [color]="'primary'" #isBaseUnit="ngModel" [(ngModel)]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
                         </td>
                     </tr>
                 </tbody>

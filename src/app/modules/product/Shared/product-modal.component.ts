@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductModel } from './product.model';
+import { AlertModalComponent } from '../../Shared/Modal/Alert/alert-modal.component';
 
 @Component({
     selector: 'product-modal',
@@ -14,7 +15,8 @@ export class ProductModalComponent {
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data,
-        public dialogRef:MatDialogRef<ProductModalComponent>
+        public dialogRef:MatDialogRef<ProductModalComponent>,
+        private dialog:MatDialog
     ) {}
 
     ngOnInit() {
@@ -41,28 +43,43 @@ export class ProductModalComponent {
         'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
       ];
 
-      addUnit() {
-        var obj = []
-
+    addUnit() {
         if (!!this.formData.unitModel) {
-            this.formData.unitModel.push({
-                isFoucs: true,
-                barcode: '',
-                unitID: '',
-                isBaseUnit: false
-            });
+            var isFoucs = this.formData.unitModel.filter(e => e.isFoucs == true);
+            if (isFoucs.length == 0) {
+                this.formData.unitModel.push({
+                    uid: 1,
+                    isFoucs: true,
+                    barcode: '',
+                    unitID: '',
+                    isBaseUnit: false
+                });
+            }
+            else 
+            {
+                const dialogConfig = new MatDialogConfig();                
+                dialogConfig.disableClose = true;
+                dialogConfig.width = "600px";
+                dialogConfig.height = "80px";
+                dialogConfig.id = "AlertModal"
+                // dialogConfig.position = {top: '80px'}
+
+                //dialogConfig.data = { temp1, temp2 };
+
+                this.dialog.open(AlertModalComponent, dialogConfig);            
+            }
         }
         else
         {
             this.formData.unitModel = [{
+                uid: 1,
                 isFoucs: true,
                 barcode: '',
                 unitID: '',
                 isBaseUnit: false
             }];
         }
-        
-        
+
         //this.unitList.push({});
         var table = document.getElementsByClassName('styled-table');
         //document.getElementsByClassName('modal-content');
@@ -74,5 +91,14 @@ export class ProductModalComponent {
                 }, 100);
             }
         }
-      }
+    }
+
+    changeisFoucs(uid) {
+        if (!!this.formData.unitModel) {
+            var currentData = this.formData.unitModel.filter(e => e.uid == uid);
+            if (!!currentData) {
+                currentData[0].isFoucs = false;
+            }
+        }
+    }
 }
