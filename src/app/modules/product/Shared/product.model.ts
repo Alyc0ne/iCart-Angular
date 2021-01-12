@@ -8,7 +8,7 @@ export class ProductModel {
     productSalePrice:number;
     productPurchasePrice:number;
     unitModel: [{
-        uid:number;
+        uid:string;
         isFoucs:boolean;
         barcode:string;
         unitID:string;

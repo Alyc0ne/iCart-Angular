@@ -72,7 +72,7 @@
         
         <div class="text-header">ข้อมูลหน่วยนับ</div>
         <div class="unit-info">
-            <table class="styled-table">
+            <table class="table">
                 <thead>
                     <tr>
                         <th class="action">
@@ -88,27 +88,26 @@
                 <tbody id='test'>
                     <tr *ngFor="let field of formData.unitModel; let i = index;">
                         <td class="txt-c" *ngIf="field.isFoucs; else editAccept">
-                            <i class="material-icons pointer" (click)="changeisFoucs(field.uid)" style="color: #4BAEE5;">done</i>
-                            <i class="material-icons" style="color: red;">clear</i>
+                            <i class="material-icons" (click)="changeisFoucs(field.uid, false)">done</i>
+                            <i class="material-icons">clear</i>
                         </td>
                         <ng-template #editAccept>
-                            <td class="txt-c" *ngIf="!field.isFoucs">                            
-                                <i class="material-icons">edit</i>
-                                <i class="material-icons">more_vert</i>
+                            <td class="txt-c">                            
+                                <i class="material-icons" (click)="changeisFoucs(field.uid, true)">edit</i>
+                                <i class="material-icons">delete_outline</i>
                             </td>
                         </ng-template>
                         
                         <td>
-                           <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" placeholder="รหัสบาร์โค้ด">
+                           <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" placeholder="รหัสบาร์โค้ด" [attr.disabled]="!field.isFoucs ? 'disabled' : null">
                         </td>
                         <td>
-                            <mat-select>
-                                <mat-option>None</mat-option>
+                            <mat-select [disabled]="field.isFoucs === false">
                                 <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
                             </mat-select>
                         </td>
                         <td class="txt-c">
-                            <mat-checkbox [color]="'primary'" #isBaseUnit="ngModel" [(ngModel)]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
+                            <mat-checkbox [color]="'primary'" #isBaseUnit="ngModel" [(ngModel)]="field.isBaseUnit" [disabled]="!field.isFoucs ? 'disabled' : null">หน่วยนับหลัก</mat-checkbox>
                         </td>
                     </tr>
                 </tbody>
@@ -120,7 +119,7 @@
 </div>
 <div class="modal-footer">
     <div class="form-group">
-        <a class="button light-button">ยกเลิก</a>
+        <a class="button light-button" (click)="closeDialog()">ยกเลิก</a>
         <a class="button success-button">บันทึก</a>
     </div>
 </div>

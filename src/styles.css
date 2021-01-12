@@ -510,7 +510,7 @@ input[type="checkbox"] {
     box-shadow: inset 0 1px 0 rgba(225, 228, 232, 0.2);
 }
 
-.styled-table {
+.table {
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;
@@ -520,67 +520,66 @@ input[type="checkbox"] {
     table-layout: fixed;
 }
 
-.styled-table thead tr {
+.table thead tr {
     background-color: #ECF5FF;
     text-align: left;
     display: block;
     position: relative;
 }
 
-.styled-table th.action {
+.table th.action {
     padding: 0 15px;
 }
 
-.styled-table th, td {
+.table th, td {
     padding: 12px 15px;
     letter-spacing: 1px;
 }
 
-.styled-table tbody {
+.table tbody {
     display: block;
     overflow: auto;
     height: 150px;
 }
 
-.styled-table tbody tr {
+.table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-/* .styled-table tbody tr:nth-of-type(even) {
+/* .table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 } */
 
-.styled-table tbody tr:last-of-type {
+/* .table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
-}
+} */
 
-.styled-table tbody tr.active-row {
+.table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
 }
 
-.styled-table td:nth-child(1), th:nth-child(1) {
+.table td:nth-child(1), th:nth-child(1) {
      min-width: 140px; 
 }
 
-.styled-table td:nth-child(2), th:nth-child(2) { 
+.table td:nth-child(2), th:nth-child(2) { 
     min-width: 250px; 
 }
 
-.styled-table td:nth-child(3), th:nth-child(3) { 
+.table td:nth-child(3), th:nth-child(3) { 
     min-width: 285px; 
 }
 
-.styled-table td:nth-child(4), th:nth-child(4) { 
+.table td:nth-child(4), th:nth-child(4) { 
     width: 500px; 
 }
 
-.styled-table td i.material-icons {
-    font-size: 16px;
-    font-weight: bold;
+.table td i.material-icons {
+    font-size: 20px;
 }
 
-.unit-info .styled-table td .mat-select-trigger {
+.unit-info .table td .mat-select-trigger {
     border-collapse: separate;
     line-height: 16px;
     width: 250px !important;
@@ -640,4 +639,12 @@ input[type="checkbox"] {
 
 .pointer {
     cursor: pointer;
+}
+
+input:disabled {
+    border-color: #e1e4e8;
+}
+
+.mat-select-disabled > div.mat-select-trigger {
+    background-color: #FAFAFA;
 }

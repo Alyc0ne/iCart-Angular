@@ -30,3 +30,13 @@
 .product-info .form-group.fullrow {
     grid-column: 1/3;
 }
+
+.styled-table td > i.material-icons:nth-child(1) {
+    color: #4BAEE5;
+    cursor: pointer;
+}
+
+.styled-table td > i.material-icons:nth-child(2) {
+    color: red;
+    cursor: pointer;
+}

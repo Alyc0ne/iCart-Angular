@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductModel } from './product.model';
+import { ProductService } from './product.service';
 import { AlertModalComponent } from '../../Shared/Modal/Alert/alert-modal.component';
 
 @Component({
@@ -16,13 +17,18 @@ export class ProductModalComponent {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data,
         public dialogRef:MatDialogRef<ProductModalComponent>,
-        private dialog:MatDialog
+        private dialog:MatDialog,
+        public service: ProductService
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
+        this.service.getRunning()
+
+        console.log(this.service.runningNumber)
+
         this.formData = {
             productID: null,
-            productNo: '',
+            productNo: this.service.runningNumber,
             productCode: '',
             productName: this.data.goodsName,
             productNameEng: '',
@@ -48,7 +54,7 @@ export class ProductModalComponent {
             var isFoucs = this.formData.unitModel.filter(e => e.isFoucs == true);
             if (isFoucs.length == 0) {
                 this.formData.unitModel.push({
-                    uid: 1,
+                    uid: Math.random().toString(16).slice(2),
                     isFoucs: true,
                     barcode: '',
                     unitID: '',
@@ -72,7 +78,7 @@ export class ProductModalComponent {
         else
         {
             this.formData.unitModel = [{
-                uid: 1,
+                uid: Math.random().toString(16).slice(2),
                 isFoucs: true,
                 barcode: '',
                 unitID: '',
@@ -93,12 +99,16 @@ export class ProductModalComponent {
         }
     }
 
-    changeisFoucs(uid) {
+    changeisFoucs(uid, value) {
         if (!!this.formData.unitModel) {
             var currentData = this.formData.unitModel.filter(e => e.uid == uid);
             if (!!currentData) {
-                currentData[0].isFoucs = false;
+                currentData[0].isFoucs = value;
             }
         }
+    }
+
+    closeDialog() {
+        this.dialogRef.close();
     }
 }
