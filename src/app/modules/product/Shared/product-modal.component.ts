@@ -22,7 +22,7 @@ export class ProductModalComponent {
     ) {}
 
     ngOnInit(): void {
-        this.service.getRunning()
+        this.service.getPrepareData()
 
         console.log(this.service.runningNumber)
 

@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService {
     constructor(private http: HttpClient) {}
 
-    readonly baseUrl = 'http://localhost:69/api/Products'
+    readonly baseUrl = 'http://localhost:69/api/Product'
     //formData: ProductModel = new ProductModel();
     list: ProductModel[];
     runningNumber: string;
@@ -22,6 +22,12 @@ export class ProductService {
 
     getRunning() {
         this.http.get(this.baseUrl)
+        .toPromise()
+        .then(res => console.log(res));
+    }
+
+    getPrepareData() {
+        this.http.get(this.baseUrl + '/prepareData')
         .toPromise()
         .then(res => console.log(res));
     }
