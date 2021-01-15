@@ -10,7 +10,7 @@
                 <span class="req"></span>
                 <label for="ProductNo" class="formLabel" title="รหัสสินค้า">รหัสสินค้า</label>
                 <div class="form-content">
-                    <input type="text" name="productNo" #productNo="ngModel" [(ngModel)]="formData.productNo" disabled value="GD-001">
+                    <input type="text" name="productNo" #productNo="ngModel" [(ngModel)]="formData.productNo" [value]="this.service.runningNumber" disabled>
                 </div>
             </div>
             <div class="form-group">
@@ -48,16 +48,15 @@
                     <input type="text" name="productPurchasePrice" #productPurchasePrice="ngModel" [(ngModel)]="formData.productPurchasePrice" placeholder="ราคาซื้อ">
                 </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <span class="req"></span>
                 <label for="ProductNo" class="formLabel" title="หน่วยสินค้า">หน่วยสินค้า</label>
                 <div class="form-content">
-                    <mat-select>
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                    <mat-select [(ngModel)]="formData.unitID">
+                        <mat-option *ngFor="let state of service.listUnit" [value]="state.unitID">{{state.unitName}}</mat-option>
                     </mat-select>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <span class="req"></span>
                 <label for="ProductNo" class="formLabel" title="หมวดสินค้า">หมวดสินค้า</label>
@@ -102,8 +101,8 @@
                            <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" placeholder="รหัสบาร์โค้ด" [attr.disabled]="!field.isFoucs ? 'disabled' : null">
                         </td>
                         <td>
-                            <mat-select [disabled]="field.isFoucs === false">
-                                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                            <mat-select [disabled]="field.isFoucs === false" [(ngModel)]="field.unitID">
+                                <mat-option *ngFor="let unit of service.listUnit" [value]="unit.unitID">{{unit.unitName}}</mat-option>
                             </mat-select>
                         </td>
                         <td class="txt-c">

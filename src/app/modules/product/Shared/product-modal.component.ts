@@ -13,6 +13,8 @@ import { AlertModalComponent } from '../../Shared/Modal/Alert/alert-modal.compon
 export class ProductModalComponent {
     formData:ProductModel;
     public unitList: Array<any> = [];
+    public states: Array<any> = [];
+    public test:any;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data,
@@ -23,12 +25,11 @@ export class ProductModalComponent {
 
     ngOnInit(): void {
         this.service.getPrepareData()
-
-        console.log(this.service.runningNumber)
+        //this.states = this.service.listUnit;
 
         this.formData = {
             productID: null,
-            productNo: this.service.runningNumber,
+            productNo: null,
             productCode: '',
             productName: this.data.goodsName,
             productNameEng: '',
@@ -39,15 +40,15 @@ export class ProductModalComponent {
         }
     }
 
-    states: string[] = [
-        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
-        'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-        'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-        'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-        'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-        'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-        'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-      ];
+    // states: string[] = [
+    //     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+    //     'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+    //     'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+    //     'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    //     'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+    //     'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    //     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+    //   ];
 
     addUnit() {
         if (!!this.formData.unitModel) {
@@ -97,6 +98,8 @@ export class ProductModalComponent {
                 }, 100);
             }
         }
+
+        console.log(this.service.runningNumber)
     }
 
     changeisFoucs(uid, value) {
@@ -110,5 +113,7 @@ export class ProductModalComponent {
 
     closeDialog() {
         this.dialogRef.close();
+        this.formData.productNo = this.service.runningNumber;
+        console.log(this.formData);
     }
 }
