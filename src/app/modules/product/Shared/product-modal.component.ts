@@ -40,16 +40,6 @@ export class ProductModalComponent {
         }
     }
 
-    // states: string[] = [
-    //     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
-    //     'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-    //     'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-    //     'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-    //     'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-    //     'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-    //     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-    //   ];
-
     addUnit() {
         if (!!this.formData.unitModel) {
             var isFoucs = this.formData.unitModel.filter(e => e.isFoucs == true);
@@ -58,7 +48,7 @@ export class ProductModalComponent {
                     uid: Math.random().toString(16).slice(2),
                     isFoucs: true,
                     barcode: '',
-                    unitID: '',
+                    unitID: null,
                     isBaseUnit: false
                 });
             }
@@ -82,7 +72,7 @@ export class ProductModalComponent {
                 uid: Math.random().toString(16).slice(2),
                 isFoucs: true,
                 barcode: '',
-                unitID: '',
+                unitID: null,
                 isBaseUnit: false
             }];
         }
@@ -111,9 +101,20 @@ export class ProductModalComponent {
         }
     }
 
+    bindSave() {
+        this.formData.productNo = this.service.runningNumber; 
+        this.service.bindSave(this.formData);       
+        this.closeDialog();
+    }
+
     closeDialog() {
         this.dialogRef.close();
-        this.formData.productNo = this.service.runningNumber;
-        console.log(this.formData);
+    }
+
+    isBaseUnitClick(uid, value) {
+        var currentData = this.formData.unitModel.filter(e => e.uid == uid);
+        if (!!currentData) {
+            currentData[0].isBaseUnit = value;
+        }
     }
 }

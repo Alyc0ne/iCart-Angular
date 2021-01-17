@@ -12,6 +12,12 @@ export class ProductModel {
         isFoucs:boolean;
         barcode:string;
         unitID:string;
+        // unitObj:[{
+        //     unitID:string;
+        //     unitNo:string;
+        //     unitName:string;
+        //     unitNameEng:string;
+        // }]
         isBaseUnit:boolean;
     }];
 }

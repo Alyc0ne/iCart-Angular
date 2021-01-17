@@ -41,6 +41,12 @@ export class ProductService {
         //console.log(this.runningNumber)
     }
 
+    bindSave = async (ProductModel) => {
+        await this.http.post('/api/Product', ProductModel)
+        .toPromise()
+        .then(res => console.log(res))
+    }
+
     // async getPrepareData() {
     //     
     // }

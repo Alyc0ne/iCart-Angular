@@ -98,27 +98,27 @@
                         </ng-template>
                         
                         <td>
-                           <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" placeholder="รหัสบาร์โค้ด" [attr.disabled]="!field.isFoucs ? 'disabled' : null">
+                           <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" [ngModelOptions]="{standalone: true}" placeholder="รหัสบาร์โค้ด" [attr.disabled]="!field.isFoucs ? 'disabled' : null">
                         </td>
                         <td>
-                            <mat-select [disabled]="field.isFoucs === false" [(ngModel)]="field.unitID">
+                            <mat-select [disabled]="field.isFoucs === false" [(value)]="field.unitID">
                                 <mat-option *ngFor="let unit of service.listUnit" [value]="unit.unitID">{{unit.unitName}}</mat-option>
                             </mat-select>
                         </td>
                         <td class="txt-c">
-                            <mat-checkbox [color]="'primary'" #isBaseUnit="ngModel" [(ngModel)]="field.isBaseUnit" [disabled]="!field.isFoucs ? 'disabled' : null">หน่วยนับหลัก</mat-checkbox>
+                            <mat-checkbox [color]="'primary'" (click)="isBaseUnitClick(field.uid, !field.isBaseUnit)" [disabled]="!field.isFoucs ? 'disabled' : null">หน่วยนับหลัก</mat-checkbox>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="text-header">รายละเอียดอื่นๆ</div>
+        <!-- <div class="text-header">รายละเอียดอื่นๆ</div> -->
     </form>
 </div>
 <div class="modal-footer">
     <div class="form-group">
         <a class="button light-button" (click)="closeDialog()">ยกเลิก</a>
-        <a class="button success-button">บันทึก</a>
+        <a class="button success-button" (click)="bindSave()">บันทึก</a>
     </div>
 </div>
