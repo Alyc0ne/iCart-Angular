@@ -24,7 +24,7 @@ export class ProductModalComponent {
     ) {}
 
     ngOnInit(): void {
-        this.service.getPrepareData()
+        this.service.newProduct()
         //this.states = this.service.listUnit;
 
         this.formData = {

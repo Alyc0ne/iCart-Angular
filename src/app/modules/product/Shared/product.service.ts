@@ -34,11 +34,9 @@ export class ProductService {
         .then(res => this.listUnit = res as UnitModel[]);
     }
 
-    getPrepareData = async () => {
-        await this.http.get('/api/Product/getRunningNumber', {responseType: 'text'}).subscribe( result => { this.runningNumber = result} );
+    newProduct = async () => {
+        await this.http.get(this.baseUrl + 'Product/getRunningNumber', {responseType: 'text'}).subscribe( result => { this.runningNumber = result} );
         await this.getUnit();
-
-        //console.log(this.runningNumber)
     }
 
     bindSave = async (ProductModel) => {
@@ -46,16 +44,4 @@ export class ProductService {
         .toPromise()
         .then(res => console.log(res))
     }
-
-    // async getPrepareData() {
-    //     
-    // }
-
-    // getPrepareData() {
-    //     this.http.get(this.baseUrl + '/prepareData')
-    //     .toPromise()
-    //     .then(
-    //         res => this.listUnit = res[0].listUnit as UnitModel[]
-    //     );
-    // }
 }
