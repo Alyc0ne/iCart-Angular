@@ -57,7 +57,7 @@
                     </mat-select>
                 </div>
             </div> -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <span class="req"></span>
                 <label for="ProductNo" class="formLabel" title="หมวดสินค้า">หมวดสินค้า</label>
                 <div class="form-content">
@@ -66,7 +66,7 @@
                         <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
                     </mat-select>
                 </div>
-            </div>
+            </div> -->
         </div>
         
         <div class="text-header">ข้อมูลหน่วยนับ</div>
@@ -85,7 +85,7 @@
                     </tr>
                 </thead>
                 <tbody id='test'>
-                    <tr *ngFor="let field of formData.unitModel; let i = index;">
+                    <tr *ngFor="let field of formData.ProductUnit; let i = index;">
                         <td class="txt-c" *ngIf="field.isFoucs; else editAccept">
                             <i class="material-icons" (click)="changeisFoucs(field.uid, false)">done</i>
                             <i class="material-icons">clear</i>

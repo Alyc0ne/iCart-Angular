@@ -23,7 +23,7 @@ export class ProductListComponent {
     //products = products;
     calSummary = 10 * 20;
 
-    callProductModal() {
+    callProductModal = async () => {
         const temp1 = "parameter1";
         const temp2 = "parameter2";
 
@@ -35,7 +35,8 @@ export class ProductListComponent {
 
         dialogConfig.data = { temp1, temp2 };
 
-        this.dialog.open(ProductModalComponent, dialogConfig);
+        await this.service.newProduct();
+        await this.dialog.open(ProductModalComponent, dialogConfig);
     }
 
     share() {

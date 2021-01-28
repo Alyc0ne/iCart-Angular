@@ -24,27 +24,26 @@ export class ProductModalComponent {
     ) {}
 
     ngOnInit(): void {
-        this.service.newProduct()
+        //this.service.newProduct()
         //this.states = this.service.listUnit;
 
         this.formData = {
             productID: null,
             productNo: null,
-            productCode: '',
             productName: this.data.goodsName,
             productNameEng: '',
             productDesc: '',
             productSalePrice: 0,
             productPurchasePrice: 0,
-            unitModel: null
+            ProductUnit: null
         }
     }
 
     addUnit() {
-        if (!!this.formData.unitModel) {
-            var isFoucs = this.formData.unitModel.filter(e => e.isFoucs == true);
+        if (!!this.formData.ProductUnit) {
+            var isFoucs = this.formData.ProductUnit.filter(e => e.isFoucs == true);
             if (isFoucs.length == 0) {
-                this.formData.unitModel.push({
+                this.formData.ProductUnit.push({
                     uid: Math.random().toString(16).slice(2),
                     isFoucs: true,
                     barcode: '',
@@ -68,7 +67,7 @@ export class ProductModalComponent {
         }
         else
         {
-            this.formData.unitModel = [{
+            this.formData.ProductUnit = [{
                 uid: Math.random().toString(16).slice(2),
                 isFoucs: true,
                 barcode: '',
@@ -93,8 +92,8 @@ export class ProductModalComponent {
     }
 
     changeisFoucs(uid, value) {
-        if (!!this.formData.unitModel) {
-            var currentData = this.formData.unitModel.filter(e => e.uid == uid);
+        if (!!this.formData.ProductUnit) {
+            var currentData = this.formData.ProductUnit.filter(e => e.uid == uid);
             if (!!currentData) {
                 currentData[0].isFoucs = value;
             }
@@ -112,7 +111,7 @@ export class ProductModalComponent {
     }
 
     isBaseUnitClick(uid, value) {
-        var currentData = this.formData.unitModel.filter(e => e.uid == uid);
+        var currentData = this.formData.ProductUnit.filter(e => e.uid == uid);
         if (!!currentData) {
             currentData[0].isBaseUnit = value;
         }
