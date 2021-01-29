@@ -1,4 +1,5 @@
 export class ProductModel {
+    runningFormatID:string;
     productID:string;
     productNo:string;
     productName:string;

@@ -17,35 +17,35 @@
                 <span class="req">*</span>
                 <label for="ProductNo" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
                 <div class="form-content">
-                    <input type="text" name="productName" #productName="ngModel" [(ngModel)]="formData.productName" placeholder="กรอกชื่อสินค้า">
+                    <input type="text" name="productName" #productName="ngModel" [(ngModel)]="formData.productName" placeholder="กรอกชื่อสินค้า" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
                 <span class="req"></span>
                 <label for="ProductNo" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
                 <div class="form-content">
-                    <input type="text" name="productNameEng" #productNameEng="ngModel" [(ngModel)]="formData.productNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ">
+                    <input type="text" name="productNameEng" #productNameEng="ngModel" [(ngModel)]="formData.productNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ" autocomplete="off">
                 </div>
             </div>
             <div class="form-group fullrow">
                 <span class="req"></span>
                 <label for="ProductNo" class="formLabel" title="รายละเอียดสินค้า">รายละเอียดสินค้า</label>
                 <div class="form-content">
-                    <textarea name="productDesc" #productDesc="ngModel" [(ngModel)]="formData.productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า"></textarea>
+                    <textarea name="productDesc" #productDesc="ngModel" [(ngModel)]="formData.productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า" autocomplete="off"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <span class="req">*</span>
                 <label for="ProductNo" class="formLabel" title="ราคาขาย">ราคาขาย</label>
                 <div class="form-content">
-                    <input type="text" name="productSalePrice" #productSalePrice="ngModel" [(ngModel)]="formData.productSalePrice" placeholder="ราคาขาย">
+                    <input type="text" name="productSalePrice" #productSalePrice="ngModel" [(ngModel)]="formData.productSalePrice" placeholder="ราคาขาย" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
                 <span class="req"></span>
                 <label for="ProductNo" class="formLabel" title="ราคาซื้อ">ราคาซื้อ</label>
                 <div class="form-content">
-                    <input type="text" name="productPurchasePrice" #productPurchasePrice="ngModel" [(ngModel)]="formData.productPurchasePrice" placeholder="ราคาซื้อ">
+                    <input type="text" name="productPurchasePrice" #productPurchasePrice="ngModel" [(ngModel)]="formData.productPurchasePrice" placeholder="ราคาซื้อ" autocomplete="off">
                 </div>
             </div>
             <!-- <div class="form-group">
@@ -98,7 +98,7 @@
                         </ng-template>
                         
                         <td>
-                           <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" [ngModelOptions]="{standalone: true}" placeholder="รหัสบาร์โค้ด" [attr.disabled]="!field.isFoucs ? 'disabled' : null">
+                           <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" [ngModelOptions]="{standalone: true}" placeholder="รหัสบาร์โค้ด" [attr.disabled]="!field.isFoucs ? 'disabled' : null" autocomplete="off">
                         </td>
                         <td>
                             <mat-select [disabled]="field.isFoucs === false" [(value)]="field.unitID">

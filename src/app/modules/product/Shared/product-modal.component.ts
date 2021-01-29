@@ -28,6 +28,7 @@ export class ProductModalComponent {
         //this.states = this.service.listUnit;
 
         this.formData = {
+            runningFormatID: null,
             productID: null,
             productNo: null,
             productName: this.data.goodsName,
@@ -101,6 +102,7 @@ export class ProductModalComponent {
     }
 
     bindSave() {
+        this.formData.runningFormatID = this.service.runningFormatID;
         this.formData.productNo = this.service.runningNumber; 
         this.service.bindSave(this.formData);       
         this.closeDialog();

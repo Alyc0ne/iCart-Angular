@@ -20,7 +20,7 @@ export class ProductService {
     refreshList() {
         this.http.get(this.baseUrl + 'Products')
         .toPromise()
-        .then(res => this.list = res as ProductModel[]);
+        .then(res => (this.list = res as ProductModel[], console.log(res)));
     }
 
     getRunning() {
