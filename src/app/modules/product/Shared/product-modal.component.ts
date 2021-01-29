@@ -101,15 +101,14 @@ export class ProductModalComponent {
         }
     }
 
-    bindSave() {
+    bindSave = async () => {
         this.formData.runningFormatID = this.service.runningFormatID;
         this.formData.productNo = this.service.runningNumber; 
-        this.service.bindSave(this.formData);       
-        this.closeDialog();
+        await this.service.bindSave(this.formData).then(res => this.closeDialog());
     }
 
-    closeDialog() {
-        this.dialogRef.close();
+    closeDialog = async () => {
+        await this.service.refreshList().then(res => this.dialogRef.close());
     }
 
     isBaseUnitClick(uid, value) {

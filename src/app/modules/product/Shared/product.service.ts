@@ -17,7 +17,7 @@ export class ProductService {
     runningFormatID: string;
     listUnit: UnitModel[];
 
-    refreshList() {
+    refreshList = async () => {
         this.http.get(this.baseUrl + 'Products')
         .toPromise()
         .then(res => (this.list = res as ProductModel[], console.log(res)));
