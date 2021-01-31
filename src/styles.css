@@ -24,7 +24,7 @@ body {
 }
 
 .container-detail {
-    padding-left: 2rem;
+    padding: 0 2rem;
     position: relative;
     height: 95%;
 }
@@ -539,7 +539,7 @@ input[type="checkbox"] {
 .table tbody {
     display: block;
     overflow: auto;
-    height: 150px;
+    height: 550px;
 }
 
 .table tbody tr {
@@ -577,6 +577,13 @@ input[type="checkbox"] {
 
 .table td i.material-icons {
     font-size: 20px;
+    cursor: pointer;
+}
+
+.table td i.material-icons:first {
+    font-size: 20px;
+    cursor: pointer;
+    /* padding: 0 5px; */
 }
 
 .unit-info .table td .mat-select-trigger {
@@ -647,4 +654,12 @@ input:disabled {
 
 .mat-select-disabled > div.mat-select-trigger {
     background-color: #FAFAFA;
+}
+
+.text-colorRed {
+    color: red;
+}
+
+.text-colorBule {
+    color: blue;
 }

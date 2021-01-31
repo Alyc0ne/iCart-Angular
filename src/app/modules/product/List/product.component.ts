@@ -35,8 +35,7 @@ export class ProductListComponent {
 
         dialogConfig.data = { temp1, temp2 };
 
-        await this.service.newProduct();
-        await this.dialog.open(ProductModalComponent, dialogConfig);
+        await this.service.newProduct().then(res => this.dialog.open(ProductModalComponent, dialogConfig));
     }
 
     share() {

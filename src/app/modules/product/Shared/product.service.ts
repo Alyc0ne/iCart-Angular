@@ -23,14 +23,14 @@ export class ProductService {
         .then(res => (this.list = res as ProductModel[], console.log(res)));
     }
 
-    getRunning() {
-        this.http.get(this.baseUrl + 'Products/GetrunningNumber')
+    getRunning = async () => {
+        await this.http.get(this.baseUrl + 'Products/GetrunningNumber')
         .toPromise()
         .then(res => (this.runningNumber = res['lastestNo'], this.runningFormatID = res['runningFormatID']));
     }
 
-    getUnit() {
-        this.http.get(this.baseUrl + 'Units')
+    getUnit = async () => {
+        await this.http.get(this.baseUrl + 'Units')
         .toPromise()
         .then(res => this.listUnit = res as UnitModel[]);
     }

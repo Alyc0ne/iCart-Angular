@@ -30,9 +30,10 @@ export class ProductModalComponent {
         this.formData = {
             runningFormatID: null,
             productID: null,
-            productNo: null,
+            productNo: this.data.runningNumber,
             productName: this.data.goodsName,
             productNameEng: '',
+            productQuantity: null,
             productDesc: '',
             productSalePrice: 0,
             productPurchasePrice: 0,
@@ -58,7 +59,7 @@ export class ProductModalComponent {
                 dialogConfig.disableClose = true;
                 dialogConfig.width = "600px";
                 dialogConfig.height = "80px";
-                dialogConfig.id = "AlertModal"
+                dialogConfig.id = "AlertModal";
                 // dialogConfig.position = {top: '80px'}
 
                 //dialogConfig.data = { temp1, temp2 };
@@ -78,7 +79,7 @@ export class ProductModalComponent {
         }
 
         //this.unitList.push({});
-        var table = document.getElementsByClassName('styled-table');
+        var table = document.getElementsByClassName('unit-info');
         //document.getElementsByClassName('modal-content');
         if (table.length > 0) {
             var tbody = table[0].querySelector('tbody');
@@ -104,11 +105,17 @@ export class ProductModalComponent {
     bindSave = async () => {
         this.formData.runningFormatID = this.service.runningFormatID;
         this.formData.productNo = this.service.runningNumber; 
-        await this.service.bindSave(this.formData).then(res => this.closeDialog());
+        await this.service.bindSave(this.formData).then(res => this.closeDialog(true));
     }
 
-    closeDialog = async () => {
-        await this.service.refreshList().then(res => this.dialogRef.close());
+    closeDialog = async (isSave) => {
+        let isClose = false;
+        if (isSave)
+            await this.service.refreshList().then(res => isClose = true);
+        else
+            isClose = true;
+        if (isClose)
+            this.dialogRef.close()
     }
 
     isBaseUnitClick(uid, value) {

@@ -5,6 +5,11 @@
 
 .unit-info {
     padding: 0 2rem;
+    margin-bottom: 20px;
+}
+
+.unit-info tbody {
+    height: 150px !important;
 }
 
 .unit-info .button {

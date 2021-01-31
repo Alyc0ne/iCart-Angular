@@ -4,6 +4,7 @@ export class ProductModel {
     productNo:string;
     productName:string;
     productNameEng:string;
+    productQuantity:number;
     productDesc:string;
     productSalePrice:number;
     productPurchasePrice:number;
