@@ -24,28 +24,31 @@ export class ProductModalComponent {
     ) {}
 
     ngOnInit(): void {
+
+        // console.log("Binding From List : " + this.data.runningNumber)
         //this.service.newProduct()
         //this.states = this.service.listUnit;
 
+        let objProduct = this.data.objProduct;
         this.formData = {
             runningFormatID: null,
             productID: null,
-            productNo: this.data.runningNumber,
-            productName: this.data.goodsName,
-            productNameEng: '',
+            productNo: objProduct.productNo,
+            productName: objProduct.productName,
+            productNameEng: objProduct.productNameEng,
             productQuantity: null,
-            productDesc: '',
-            productSalePrice: 0,
-            productPurchasePrice: 0,
-            ProductUnit: null
+            productDesc: objProduct.productDesc,
+            productSalePrice: objProduct.productSalePrice,
+            productPurchasePrice: objProduct.productPurchasePrice,
+            productUnits: this.data.productUnits
         }
     }
 
     addUnit() {
-        if (!!this.formData.ProductUnit) {
-            var isFoucs = this.formData.ProductUnit.filter(e => e.isFoucs == true);
+        if (!!this.formData.productUnits) {
+            var isFoucs = this.formData.productUnits.filter(e => e.isFoucs == true);
             if (isFoucs.length == 0) {
-                this.formData.ProductUnit.push({
+                this.formData.productUnits.push({
                     uid: Math.random().toString(16).slice(2),
                     isFoucs: true,
                     barcode: '',
@@ -69,7 +72,7 @@ export class ProductModalComponent {
         }
         else
         {
-            this.formData.ProductUnit = [{
+            this.formData.productUnits = [{
                 uid: Math.random().toString(16).slice(2),
                 isFoucs: true,
                 barcode: '',
@@ -94,8 +97,8 @@ export class ProductModalComponent {
     }
 
     changeisFoucs(uid, value) {
-        if (!!this.formData.ProductUnit) {
-            var currentData = this.formData.ProductUnit.filter(e => e.uid == uid);
+        if (!!this.formData.productUnits) {
+            var currentData = this.formData.productUnits.filter(e => e.uid == uid);
             if (!!currentData) {
                 currentData[0].isFoucs = value;
             }
@@ -119,7 +122,7 @@ export class ProductModalComponent {
     }
 
     isBaseUnitClick(uid, value) {
-        var currentData = this.formData.ProductUnit.filter(e => e.uid == uid);
+        var currentData = this.formData.productUnits.filter(e => e.uid == uid);
         if (!!currentData) {
             currentData[0].isBaseUnit = value;
         }

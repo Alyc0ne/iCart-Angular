@@ -20,22 +20,33 @@ export class ProductListComponent {
         this.service.refreshList()
     }
 
-    //products = products;
-    calSummary = 10 * 20;
-
-    callProductModal = async () => {
-        const temp1 = "parameter1";
-        const temp2 = "parameter2";
-
+    callProductModal = async (productID) => {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         dialogConfig.disableClose = true;
         dialogConfig.width = "1200px";
         dialogConfig.height = "600px";
 
-        dialogConfig.data = { temp1, temp2 };
-
-        await this.service.newProduct().then(res => this.dialog.open(ProductModalComponent, dialogConfig));
+        if (productID == null) {
+            await this.service.newProduct().then(res => (
+                dialogConfig.data = {
+                    runningNumber : this.service.runningNumber
+                },
+                this.dialog.open(ProductModalComponent, dialogConfig)
+            ));
+        }
+        else
+        {
+            let objProduct = null;
+            await this.service.getProduct(productID).then(res =>(
+                objProduct = this.service.editProduct,
+                dialogConfig.data = {
+                    objProduct: objProduct,
+                    productUnits: objProduct.productUnits
+                },
+                this.dialog.open(ProductModalComponent, dialogConfig)
+            ));
+        }
     }
 
     share() {

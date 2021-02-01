@@ -7,7 +7,7 @@
         <i class="material-icons">search</i>
         <input type="text" name="" id="" placeholder="Search Products">
     </div>
-    <a class="button blue-button" (click)="callProductModal()">
+    <a class="button blue-button" (click)="callProductModal(null)">
         ADD NEW PRODUCT
     </a>
 </div>
@@ -19,6 +19,7 @@
                 <th class="txt-l">Barcode</th>
                 <th class="txt-l">Product Name</th>
                 <th class="txt-r">Quantity</th>
+                <th class="txt-l">Base Unit</th>
                 <th class="txt-r">Purchase Price</th>
                 <th class="txt-r">Sale Price</th>
                 <th colspan="2" class="txt-c">Action</th>
@@ -29,10 +30,11 @@
                 <td>{{ product.barcode }}</td>
                 <td>{{ product.productName }}</td>
                 <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-r">{{ product.productQuantity }}</td>
+                <td>{{ product.unitName }}</td>
                 <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
                 <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
                 <td class="txt-r">
-                    <i class="material-icons">edit</i>
+                    <i class="material-icons" (click)="callProductModal(product.productID)">edit</i>
                 </td>
                 <td class="txt-l">
                     <i class="material-icons">delete_outline</i>
