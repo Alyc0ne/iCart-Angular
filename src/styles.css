@@ -606,7 +606,7 @@ input[type="checkbox"] {
     padding-right: 5px;
 }
 
-.alert-header {
+.alert-topbar {
     border-style: solid; 
     border-width: 4px; 
     content: ''; 
@@ -620,17 +620,24 @@ input[type="checkbox"] {
 }
 
 .alert-wrapper {
-    height: 50px;
+    height: 80px;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
 .alert-wrapper i.material-icons {
+    margin-bottom: 25px;
     height: 24px;
     width: 24px;
     color: #ff5252 !important;
     caret-color: #ff5252 !important;
+}
+
+.alert-header {
+    margin: 10px 10px 15px 10px;
+    font-size: 24pt;
+    width: 480px;
 }
 
 .alert-content {
@@ -642,6 +649,7 @@ input[type="checkbox"] {
 .alert-close {
     margin-left: 30px;
     padding-top: 6px;
+    margin-bottom: 25px;
 }
 
 .pointer {

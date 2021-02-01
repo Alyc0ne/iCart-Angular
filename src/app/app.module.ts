@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LeftBarComponent } from './default/left-bar/left-bar.component';
+import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
 import { ProductListComponent } from './modules/product/List/product.component';
 import { ProductModalComponent } from './modules/product/Shared/product-modal.component';
 import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
@@ -22,7 +23,8 @@ import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.co
     LeftBarComponent,
     ProductListComponent,
     ProductModalComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    OnlynumberDirective
   ],
   imports: [
     BrowserModule,

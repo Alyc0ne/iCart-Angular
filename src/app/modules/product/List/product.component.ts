@@ -30,7 +30,10 @@ export class ProductListComponent {
         if (productID == null) {
             await this.service.newProduct().then(res => (
                 dialogConfig.data = {
-                    runningNumber : this.service.runningNumber
+                    objProduct : { 
+                        runningFormatID: this.service.runningFormatID, 
+                        productNo: this.service.runningNumber 
+                    }
                 },
                 this.dialog.open(ProductModalComponent, dialogConfig)
             ));

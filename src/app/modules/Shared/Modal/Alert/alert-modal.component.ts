@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 
 export class AlertModalComponent {
+
     constructor(
         @Inject(MAT_DIALOG_DATA) public data,
         public dialogRef:MatDialogRef<AlertModalComponent>

@@ -1,10 +1,13 @@
-<div class="alert-header"></div>
+<div class="alert-topbar"></div>
 <div class="alert-wrapper">
     <i class="material-icons">error_outline</i>
-
-    <div class="alert-content">
-        ไม่สามารถเพิ่มหน่วยนับได้ กรุณาบันทึกหน่วยนับเดิม
+    
+    <div class="alert-detail">
+        <div class="alert-header">{{ this.data.txtAlertHeader }}</div>
+    
+        <div class="alert-content">{{ this.data.txtAlertContent }}</div>
     </div>
+    
 
     <div class="alert-close">
         <i class="material-icons pointer" (click)="closeDialog()">cancel</i>

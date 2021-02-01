@@ -31,8 +31,8 @@ export class ProductModalComponent {
 
         let objProduct = this.data.objProduct;
         this.formData = {
-            runningFormatID: null,
-            productID: null,
+            runningFormatID: objProduct.runningFormatID,
+            productID: objProduct.productID,
             productNo: objProduct.productNo,
             productName: objProduct.productName,
             productNameEng: objProduct.productNameEng,
@@ -42,6 +42,8 @@ export class ProductModalComponent {
             productPurchasePrice: objProduct.productPurchasePrice,
             productUnits: this.data.productUnits
         }
+
+        console.log(this.formData)
     }
 
     addUnit() {
@@ -63,10 +65,7 @@ export class ProductModalComponent {
                 dialogConfig.width = "600px";
                 dialogConfig.height = "80px";
                 dialogConfig.id = "AlertModal";
-                // dialogConfig.position = {top: '80px'}
-
-                //dialogConfig.data = { temp1, temp2 };
-
+   
                 this.dialog.open(AlertModalComponent, dialogConfig);            
             }
         }
@@ -89,6 +88,7 @@ export class ProductModalComponent {
             if (!!tbody) {
                 setTimeout(() => { 
                     tbody.scrollTo(0, 50000);
+                    tbody.querySelector('input').focus();
                 }, 100);
             }
         }
@@ -106,9 +106,9 @@ export class ProductModalComponent {
     }
 
     bindSave = async () => {
-        this.formData.runningFormatID = this.service.runningFormatID;
-        this.formData.productNo = this.service.runningNumber; 
-        await this.service.bindSave(this.formData).then(res => this.closeDialog(true));
+        console.log(this.formData)
+        if (await this.validateProductUnit())
+            await this.service.bindSave(this.formData).then(res => this.closeDialog(true));
     }
 
     closeDialog = async (isSave) => {
@@ -121,9 +121,28 @@ export class ProductModalComponent {
             this.dialogRef.close()
     }
 
+    validateProductUnit = async () => {
+        if (!!this.formData.productUnits && this.formData.productUnits.filter(e => { return e.isFoucs == false}).length > 0)
+            return true;
+        else
+        {
+            const dialogConfig = new MatDialogConfig();                
+            dialogConfig.disableClose = true;
+            dialogConfig.width = "600px";
+            dialogConfig.height = "100px";
+            dialogConfig.id = "AlertModal";
+            dialogConfig.data = { 
+                txtAlertHeader: "ไม่สามารถดำเนินการได้", 
+                txtAlertContent: "กรุณาบันทึกหน่วยนับ" //"เนื่องจากสินค้าต้องมีหน่วยนับอย่างน้อย 1 หน่วยนับ" 
+            }
+
+            this.dialog.open(AlertModalComponent, dialogConfig);      
+        }
+    }
+
     isBaseUnitClick(uid, value) {
         var currentData = this.formData.productUnits.filter(e => e.uid == uid);
-        if (!!currentData) {
+        if (!!currentData && currentData[0].isFoucs) {
             currentData[0].isBaseUnit = value;
         }
     }

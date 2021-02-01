@@ -5,7 +5,7 @@
 
 .table td:nth-child(2), th:nth-child(2) { 
    /* min-width: 500px;  */
-   width: 35%;
+   width: 30%;
 }
 
 .table td:nth-child(3), th:nth-child(3) { 
@@ -14,21 +14,26 @@
 }
 
 .table td:nth-child(4), th:nth-child(4) { 
-   /* width: 300px;  */
-   width: 15%;
-}
+    /* width: 300px;  */
+    width: 10%;
+ }
 
 .table td:nth-child(5), th:nth-child(5) { 
-    /* width: 300px;  */
-    width: 15%;
+   /* width: 300px;  */
+   width: 12.5%;
 }
 
-.table th:nth-child(6) { 
+.table td:nth-child(6), th:nth-child(6) { 
+    /* width: 300px;  */
+    width: 12.5%;
+}
+
+.table th:nth-child(7) { 
     /* width: 200px;  */
     width: 10%;
 }
 
-.table td:nth-child(6), .table td:nth-child(7) { 
+.table td:nth-child(7), .table td:nth-child(8) { 
     /* width: 200px;  */
     width: 5%;
 }
