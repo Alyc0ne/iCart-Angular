@@ -12,13 +12,10 @@
         <button class="blue-button" (click)="callProductModal(null)">
             ADD NEW PRODUCT
         </button>
-    
-        <!-- <button class="action-info">
-            <i class="material-icons">filter_list</i>
-        </button> -->
 
         <button class="multipleAction" [matMenuTriggerFor]="menu" disabled>
-            <i class="material-icons">more_vert</i> Action
+            <i class="material-icons">more_vert</i> 
+            <span>Action</span>
         </button>
         <mat-menu #menu="matMenu">
         <button mat-menu-item>
@@ -34,8 +31,6 @@
             <span>Disable alerts</span>
         </button>
         </mat-menu>
-
-
     </div>
 </div>
 
@@ -68,10 +63,13 @@
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            Pagination
+        </tfoot>
     </table>
 </div>
 
-<div class="pagination">
+<!-- <div class="pagination">
     <a href="#">&laquo;</a>
     <a href="#" class="active">1</a>
     <a href="#">2</a>
@@ -80,4 +78,4 @@
     <a href="#">5</a>
     <a href="#">6</a>
     <a href="#">&raquo;</a>
-</div>
+</div> -->

@@ -17,7 +17,11 @@
                 <span class="req">*</span>
                 <label for="ProductNo" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
                 <div class="form-content">
-                    <input type="text" name="productName" #productName="ngModel" [(ngModel)]="formData.productName" placeholder="กรอกชื่อสินค้า" autocomplete="off">
+                    <input type="text" name="productName" #productName="ngModel" [(ngModel)]="formData.productName" placeholder="กรอกชื่อสินค้า" autocomplete="off" required maxlength="200">
+                    <div *ngIf="productName.invalid && (productName.dirty || productName.touched)" class="alert-danger">
+                        <div *ngIf="productName.errors.required"><span>กรุณากรอกชื่อสินค้า.</span></div>
+                        <div *ngIf="productName.errors.maxlength">Name must be at least 4 characters long.</div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -31,14 +35,17 @@
                 <span class="req"></span>
                 <label for="ProductNo" class="formLabel" title="รายละเอียดสินค้า">รายละเอียดสินค้า</label>
                 <div class="form-content">
-                    <textarea name="productDesc" #productDesc="ngModel" [(ngModel)]="formData.productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า" autocomplete="off"></textarea>
+                    <textarea name="productDesc" #productDesc="ngModel" [(ngModel)]="formData.productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า" autocomplete="off" maxlength="255"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <span class="req">*</span>
                 <label for="ProductNo" class="formLabel" title="ราคาขาย">ราคาขาย</label>
                 <div class="form-content">
-                    <input appOnlynumber type="text" name="productSalePrice" #productSalePrice="ngModel" [(ngModel)]="formData.productSalePrice" placeholder="ราคาขาย" autocomplete="off">
+                    <input appOnlynumber type="text" name="productSalePrice" #productSalePrice="ngModel" [(ngModel)]="formData.productSalePrice" placeholder="ราคาขาย" autocomplete="off" required maxlength="10">
+                    <div *ngIf="productSalePrice.invalid && (productSalePrice.dirty || productSalePrice.touched)" class="alert-danger">
+                        <div *ngIf="productSalePrice.errors.required"><span>กรุณากรอกราคาขาย</span></div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">

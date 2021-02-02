@@ -155,11 +155,12 @@ button.multipleAction {
     height: 35px;
     min-width: 40px;
     background-color: #fafbfc;
-    border-color: rgba(27, 31, 35, 0.15);
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    box-shadow: 0 1px 0 rgba(27, 31, 35, 0.04);
 }
 
 button.multipleAction > i {
-    color: white;
+    color: black;
 }
 
 .top-bar {
@@ -182,11 +183,6 @@ app-top-bar {
 app-top-bar h1{
     color: white;
     margin: 0;
-}
-
-.app-main {
-    /* display: grid;
-    grid-template-columns: 10vw auto; */
 }
 
 app-left-bar {
@@ -503,7 +499,8 @@ input[type="checkbox"] {
 }
 
 .modal-header > h1 {
-    border-bottom: solid 1px  #a9adb3;
+    /* border-bottom: solid 1px #a9adb3; */
+    border-bottom: solid 1px #eaecef
 }
 
 .modal-content {
@@ -705,4 +702,15 @@ input:disabled {
 
 .text-colorBule {
     color: blue;
+}
+
+/* validation */
+input.ng-invalid  {
+    border: 1px solid red !important;
+    margin-bottom: 0px;
+}
+  
+.alert-danger span{
+    color: red;
+    margin-left: 10px;
 }

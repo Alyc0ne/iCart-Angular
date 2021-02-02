@@ -1,23 +1,15 @@
-<div class="app-main">
   <!-- <div class="overlay">
     <div class="center">
         <mat-progress-spinner diameter=50 mode="indeterminate" color="primary"></mat-progress-spinner> 
     </div>
   </div>     -->
 
-  <mat-drawer-container class="container" >
+  <mat-drawer-container>
     <mat-drawer [(opened)]="isToggle" mode="over">I'm a drawer</mat-drawer>
     <mat-drawer-content>
       <app-top-bar (isToggle)="isToggle" (drawerToggle)="isToggle = $event"></app-top-bar>
-      <!-- <div class="container"> -->
         <div class="container-detail">
           <router-outlet></router-outlet>
         </div>
-      <!-- </div>  -->
-
     </mat-drawer-content>
   </mat-drawer-container>
-
-  <!-- <app-left-bar></app-left-bar> --> 
-</div>
-
