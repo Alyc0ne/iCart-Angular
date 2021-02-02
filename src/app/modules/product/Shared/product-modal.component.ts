@@ -135,6 +135,7 @@ export class ProductModalComponent {
                 txtAlertHeader: "ไม่สามารถดำเนินการได้", 
                 txtAlertContent: "กรุณาบันทึกหน่วยนับ" //"เนื่องจากสินค้าต้องมีหน่วยนับอย่างน้อย 1 หน่วยนับ" 
             }
+            dialogConfig.position= { top: '50px' }
 
             this.dialog.open(AlertModalComponent, dialogConfig);      
         }

@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  isToggle: boolean = false;
+
   title = 'iCart-Angular';
 }

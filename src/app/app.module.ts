@@ -8,10 +8,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LeftBarComponent } from './default/left-bar/left-bar.component';
+import { TopBarComponent } from './default/top-bar/top-bar.component';
 import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
 import { ProductListComponent } from './modules/product/List/product.component';
 import { ProductModalComponent } from './modules/product/Shared/product-modal.component';
@@ -20,6 +23,7 @@ import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.co
 @NgModule({
   declarations: [
     AppComponent,
+    TopBarComponent,
     LeftBarComponent,
     ProductListComponent,
     ProductModalComponent,
@@ -45,7 +49,9 @@ import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.co
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatMenuModule
   ],
   entryComponents:[ProductModalComponent, AlertModalComponent],
   providers: [],

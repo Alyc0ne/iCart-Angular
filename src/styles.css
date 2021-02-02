@@ -14,6 +14,22 @@ body {
 }
 
 .container {
+    width: 100%;
+    height: calc(100% - 40px);
+    /* margin: 0 2rem; */
+    background: white;
+    /* border-radius: 10px;
+    padding: 1rem; */
+    padding-top: 0;
+}
+  
+mat-drawer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* .container {
     width: calc(100% - 35px);
     height: calc(var(--vh, 1vh)*100);
     margin: 0 2rem;
@@ -21,7 +37,7 @@ body {
     border-radius: 10px;
     padding: 1rem;
     padding-top: 0;
-}
+} */
 
 .container-detail {
     padding: 0 2rem;
@@ -127,6 +143,25 @@ label {
     padding-right: 4px;
 }
 
+.groupAction {
+    display: flex;
+}
+
+.groupAction button {
+    margin-left: 10px;
+}
+
+button.multipleAction {
+    height: 35px;
+    min-width: 40px;
+    background-color: #fafbfc;
+    border-color: rgba(27, 31, 35, 0.15);
+}
+
+button.multipleAction > i {
+    color: white;
+}
+
 .top-bar {
     height: 50px;
     width: 100%;
@@ -135,7 +170,7 @@ label {
 
 app-top-bar {
     width: 100%;
-    height: 68px;
+    height: 40px;
     background-color: #35464F;
     padding: 16px;
     display: flex;
@@ -150,8 +185,8 @@ app-top-bar h1{
 }
 
 .app-main {
-    display: grid;
-    grid-template-columns: 10vw auto;
+    /* display: grid;
+    grid-template-columns: 10vw auto; */
 }
 
 app-left-bar {

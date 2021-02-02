@@ -7,9 +7,36 @@
         <i class="material-icons">search</i>
         <input type="text" name="" id="" placeholder="Search Products">
     </div>
-    <a class="button blue-button" (click)="callProductModal(null)">
-        ADD NEW PRODUCT
-    </a>
+
+    <div class="groupAction">
+        <button class="blue-button" (click)="callProductModal(null)">
+            ADD NEW PRODUCT
+        </button>
+    
+        <!-- <button class="action-info">
+            <i class="material-icons">filter_list</i>
+        </button> -->
+
+        <button class="multipleAction" [matMenuTriggerFor]="menu" disabled>
+            <i class="material-icons">more_vert</i> Action
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <i class="material-icons">dialpad</i>
+            <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+            <i class="material-icons">voicemail</i>
+            <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+            <i class="material-icons">notifications_off</i>
+            <span>Disable alerts</span>
+        </button>
+        </mat-menu>
+
+
+    </div>
 </div>
 
 <div class="table-wrapper">
