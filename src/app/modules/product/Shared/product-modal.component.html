@@ -73,31 +73,32 @@
                     </tr>
                 </thead>
                 <tbody id='test'>
-                    <tr *ngFor="let field of productUnits; let i = index;">
-                        <!-- <td class="txt-c" *ngIf="field.isFoucs; else editAccept">
-                            <i class="material-icons" (click)="changeisFoucs(field.uid, false)">done</i>
-                            <i class="material-icons">clear</i>
-                        </td>
-                        <ng-template #editAccept>
-                            <td class="txt-c">                            
-                                <i class="material-icons" (click)="changeisFoucs(field.uid, true)">edit</i>
-                                <i class="material-icons">delete_outline</i>
+                    <div formArrayName="productUnits">
+                        <tr *ngFor="let field of productUnits; let i = index;" [formGroupName]="i">
+                            <td class="txt-c" *ngIf="isFoucs; else editAccept">
+                                <i class="material-icons" (click)="changeisFoucs(uid, false)">done</i>
+                                <i class="material-icons">clear</i>
                             </td>
-                        </ng-template> -->
-                        
-                        <td>
-                           <input type="text" id="barcode" class="form-input" formControlName="barcode" placeholder="รหัสบาร์โค้ด" autocomplete="off">
-                           <!-- [attr.disabled]="!field.isFoucs ? 'disabled' : null" -->
-                        </td>
-                        <!-- <td>
-                            <mat-select [disabled]="!field.isFoucs" [(value)]="field.unitID">
-                                <mat-option *ngFor="let unit of service.listUnit" [value]="unit.unitID">{{unit.unitName}}</mat-option>
-                            </mat-select>
-                        </td>
-                        <td class="txt-c">
-                            <mat-checkbox [color]="'primary'" (click)="isBaseUnitClick(field.uid, !field.isBaseUnit)" [checked]="field.isBaseUnit" [disabled]="!field.isFoucs">หน่วยนับหลัก</mat-checkbox>
-                        </td> -->
-                    </tr>
+                            <ng-template #editAccept>
+                                <td class="txt-c">                            
+                                    <i class="material-icons" (click)="changeisFoucs(uid, true)">edit</i>
+                                    <i class="material-icons">delete_outline</i>
+                                </td>
+                            </ng-template>
+                            
+                            <td>
+                               <input type="text" id="barcode" class="form-input" formControlName="barcode" placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
+                            </td>
+                            <td>
+                                <mat-select [(value)]="field.unitID">
+                                    <mat-option *ngFor="let unit of service.listUnit" [value]="unit.unitID">{{unit.unitName}}</mat-option>
+                                </mat-select>
+                            </td>
+                            <td class="txt-c">
+                                <mat-checkbox [color]="'primary'" (click)="isBaseUnitClick(field.uid, !field.isBaseUnit)" [checked]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
+                            </td>
+                        </tr>
+                    </div>
                 </tbody>
             </table>
         </div>
