@@ -16,3 +16,13 @@ export class ProductModel {
         isBaseUnit:boolean;
     }];
 }
+
+export class ProductUnit {
+    constructor(
+        public uid?:string,
+        public isFoucs?:boolean,
+        public barcode?:string,
+        public unitID?:string,
+        public isBaseUnit?:boolean
+    ){}
+}

@@ -705,12 +705,12 @@ input:disabled {
 }
 
 /* validation */
-input.ng-invalid  {
-    border: 1px solid red !important;
+input.ng-invalid.ng-touched {
+    border: solid 1px red;
     margin-bottom: 0px;
 }
   
-.alert-danger span{
+.alert-danger span {
     color: red;
     margin-left: 10px;
 }

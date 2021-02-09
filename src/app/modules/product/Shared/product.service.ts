@@ -51,5 +51,6 @@ export class ProductService {
         await this.http.post(this.baseUrl + 'Products', ProductModel)
         .toPromise()
         .then(res => console.log(res))
+        .catch(res => console.log("catch"))
     }
 }

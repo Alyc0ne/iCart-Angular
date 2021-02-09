@@ -3,77 +3,58 @@
 </div>
 
 <div class="modal-content">
-    <form #productForm="ngForm">
+    <form [formGroup]="productForm">
         <div class="text-header">ข้อมูลสินค้า</div>
         <div class="product-info">
             <div class="form-group fullrow">
                 <span class="req"></span>
-                <label for="ProductNo" class="formLabel" title="รหัสสินค้า">รหัสสินค้า</label>
+                <label for="productNo" class="formLabel" title="รหัสสินค้า">รหัสสินค้า</label>
                 <div class="form-content">
-                    <input type="text" name="productNo" #productNo="ngModel" [(ngModel)]="formData.productNo" disabled>
+                    <input type="text" id="productNo" formControlName="productNo">
                 </div>
             </div>
             <div class="form-group">
                 <span class="req">*</span>
-                <label for="ProductNo" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
+                <label for="productName" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
                 <div class="form-content">
-                    <input type="text" name="productName" #productName="ngModel" [(ngModel)]="formData.productName" placeholder="กรอกชื่อสินค้า" autocomplete="off" required maxlength="200">
-                    <div *ngIf="productName.invalid && (productName.dirty || productName.touched)" class="alert-danger">
-                        <div *ngIf="productName.errors.required"><span>กรุณากรอกชื่อสินค้า.</span></div>
-                        <div *ngIf="productName.errors.maxlength">Name must be at least 4 characters long.</div>
+                    <input type="text" id="productName" formControlName="productName" placeholder="กรอกชื่อสินค้า" autocomplete="off" required maxlength="10">
+                    <div *ngIf="product.productName.invalid && (product.productName.dirty || product.productName.touched)" class="alert-danger">
+                        <div *ngIf="product.productName.errors.required"><span>กรุณากรอกชื่อสินค้า.</span></div>
+                        <div *ngIf="product.productName.errors.maxlength">Name must be at least 4 characters long.</div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <span class="req"></span>
-                <label for="ProductNo" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
+                <label for="productNameEng" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
                 <div class="form-content">
-                    <input type="text" name="productNameEng" #productNameEng="ngModel" [(ngModel)]="formData.productNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ" autocomplete="off">
+                    <input type="text" id="productNameEng" formControlName="productNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ" autocomplete="off">
                 </div>
             </div>
             <div class="form-group fullrow">
                 <span class="req"></span>
-                <label for="ProductNo" class="formLabel" title="รายละเอียดสินค้า">รายละเอียดสินค้า</label>
+                <label for="productDesc" class="formLabel" title="รายละเอียดสินค้า">รายละเอียดสินค้า</label>
                 <div class="form-content">
-                    <textarea name="productDesc" #productDesc="ngModel" [(ngModel)]="formData.productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า" autocomplete="off" maxlength="255"></textarea>
+                    <textarea id="productDesc" formControlName="productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า" autocomplete="off" maxlength="255"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <span class="req">*</span>
-                <label for="ProductNo" class="formLabel" title="ราคาขาย">ราคาขาย</label>
+                <label for="productSalePrice" class="formLabel" title="ราคาขาย">ราคาขาย</label>
                 <div class="form-content">
-                    <input appOnlynumber type="text" name="productSalePrice" #productSalePrice="ngModel" [(ngModel)]="formData.productSalePrice" placeholder="ราคาขาย" autocomplete="off" required maxlength="10">
-                    <div *ngIf="productSalePrice.invalid && (productSalePrice.dirty || productSalePrice.touched)" class="alert-danger">
-                        <div *ngIf="productSalePrice.errors.required"><span>กรุณากรอกราคาขาย</span></div>
+                    <input appOnlynumber type="text" id="productSalePrice" formControlName="productSalePrice" placeholder="ราคาขาย" autocomplete="off" required maxlength="10">
+                    <div *ngIf="product.productSalePrice.invalid && (product.productSalePrice.dirty || product.productSalePrice.touched)" class="alert-danger">
+                        <div *ngIf="product.productSalePrice.errors.required"><span>กรุณากรอกราคาขาย</span></div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <span class="req"></span>
-                <label for="ProductNo" class="formLabel" title="ราคาซื้อ">ราคาซื้อ</label>
+                <label for="productPurchasePrice" class="formLabel" title="ราคาซื้อ">ราคาซื้อ</label>
                 <div class="form-content">
-                    <input appOnlynumber type="text" name="productPurchasePrice" #productPurchasePrice="ngModel" [(ngModel)]="formData.productPurchasePrice" placeholder="ราคาซื้อ" autocomplete="off">
+                    <input appOnlynumber type="text" id="productPurchasePrice" formControlName="productPurchasePrice" placeholder="ราคาซื้อ" autocomplete="off">
                 </div>
             </div>
-            <!-- <div class="form-group">
-                <span class="req"></span>
-                <label for="ProductNo" class="formLabel" title="หน่วยสินค้า">หน่วยสินค้า</label>
-                <div class="form-content">
-                    <mat-select [(ngModel)]="formData.unitID">
-                        <mat-option *ngFor="let state of service.listUnit" [value]="state.unitID">{{state.unitName}}</mat-option>
-                    </mat-select>
-                </div>
-            </div> -->
-            <!-- <div class="form-group">
-                <span class="req"></span>
-                <label for="ProductNo" class="formLabel" title="หมวดสินค้า">หมวดสินค้า</label>
-                <div class="form-content">
-                    <mat-select>
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-                    </mat-select>
-                </div>
-            </div> -->
         </div>
         
         <div class="text-header">ข้อมูลหน่วยนับ</div>
@@ -92,8 +73,8 @@
                     </tr>
                 </thead>
                 <tbody id='test'>
-                    <tr *ngFor="let field of formData.productUnits; let i = index;">
-                        <td class="txt-c" *ngIf="field.isFoucs; else editAccept">
+                    <tr *ngFor="let field of productUnits; let i = index;">
+                        <!-- <td class="txt-c" *ngIf="field.isFoucs; else editAccept">
                             <i class="material-icons" (click)="changeisFoucs(field.uid, false)">done</i>
                             <i class="material-icons">clear</i>
                         </td>
@@ -102,19 +83,20 @@
                                 <i class="material-icons" (click)="changeisFoucs(field.uid, true)">edit</i>
                                 <i class="material-icons">delete_outline</i>
                             </td>
-                        </ng-template>
+                        </ng-template> -->
                         
                         <td>
-                           <input type="text" name="barcode" class="form-input" #barcode="ngModel" [(ngModel)]="field.barcode" [ngModelOptions]="{standalone: true}" placeholder="รหัสบาร์โค้ด" [attr.disabled]="!field.isFoucs ? 'disabled' : null" autocomplete="off">
+                           <input type="text" id="barcode" class="form-input" formControlName="barcode" placeholder="รหัสบาร์โค้ด" autocomplete="off">
+                           <!-- [attr.disabled]="!field.isFoucs ? 'disabled' : null" -->
                         </td>
-                        <td>
+                        <!-- <td>
                             <mat-select [disabled]="!field.isFoucs" [(value)]="field.unitID">
                                 <mat-option *ngFor="let unit of service.listUnit" [value]="unit.unitID">{{unit.unitName}}</mat-option>
                             </mat-select>
                         </td>
                         <td class="txt-c">
                             <mat-checkbox [color]="'primary'" (click)="isBaseUnitClick(field.uid, !field.isBaseUnit)" [checked]="field.isBaseUnit" [disabled]="!field.isFoucs">หน่วยนับหลัก</mat-checkbox>
-                        </td>
+                        </td> -->
                     </tr>
                 </tbody>
             </table>
