@@ -68,22 +68,31 @@ export class ProductModalComponent {
     // }
 
     addUnit() {
-        this.productUnits.push([this.fb.group({
+        var productUnitFG = this.fb.group({
             uid: [Math.random().toString(16).slice(2)],
-            isFoucs: [true],
+            isFoucs: [false],
             barcode: [ { value: 'fff', disabled: false }, Validators.required],
             unitID: [''],
             isBaseUnit: [false]
-        })]);
+        });
 
-        // const productUnitFG = this.ProductUnit.map(e => this.fb.group(e));
-        // this.productForm.setControl('productUnits', this.fb.array([this.fb.group({
-        //     uid: [Math.random().toString(16).slice(2)],
-        //     isFoucs: [true],
-        //     barcode: [ { value: 'fff', disabled: false }, Validators.required],
-        //     unitID: [''],
-        //     isBaseUnit: [false]
-        // })]));
+        if (this.productUnits.length == 0) {
+            this.productForm.setControl('productUnits', this.fb.array([productUnitFG]));
+        }
+        else
+        {
+            this.productUnits.push(productUnitFG);
+        }
+
+        //this.productUnits.push([this.fb.group({
+            // uid: [Math.random().toString(16).slice(2)],
+            // isFoucs: [true],
+            // barcode: [ { value: 'fff', disabled: false }, Validators.required],
+            // unitID: [''],
+            // isBaseUnit: [false]
+        //})]);
+
+
 
 
         // if (!!this.formData.productUnits) {

@@ -75,7 +75,8 @@
                 <tbody id='test'>
                     <div formArrayName="productUnits">
                         <tr *ngFor="let field of productUnits; let i = index;" [formGroupName]="i">
-                            <td class="txt-c" *ngIf="isFoucs; else editAccept">
+                            <td class="txt-c" formControlName="isFoucs" *ngIf="isFoucs; else editAccept">
+                                <input type="text" formControlName="isFoucs">
                                 <i class="material-icons" (click)="changeisFoucs(uid, false)">done</i>
                                 <i class="material-icons">clear</i>
                             </td>
