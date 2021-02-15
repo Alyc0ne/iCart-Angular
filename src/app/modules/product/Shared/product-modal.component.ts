@@ -70,7 +70,7 @@ export class ProductModalComponent {
     addUnit() {
         var productUnitFG = this.fb.group({
             uid: [Math.random().toString(16).slice(2)],
-            isFoucs: [true],
+            isFocus: [false],
             barcode: [ { value: 'fff', disabled: false }, Validators.required],
             unitID: [''],
             isBaseUnit: [false]
@@ -140,15 +140,18 @@ export class ProductModalComponent {
         // }
     }
 
-    changeisFoucs(uid, value) {
+    changeisFocus(uid, value) {
         if (!!this.productUnits) {
             this.product.productUnits.value.forEach((data, index) => {
-                //console.log(data);
-                const myForm = (<FormArray>this.productForm.get('productUnits')).at(index);
+                let myForm = (<FormArray>this.productForm.controls['productUnits']).at(index);
+                //const myForm = (<FormArray>this.productForm.get('productUnits')).at(index);
+                // console.log(myForm);
                 myForm.patchValue({
                     isFocus: false,
                     unitID: 1
                 })
+
+                myForm.disable();
             });
 
             // this.productForm.productUnits.value.forEach((data, index)=>{

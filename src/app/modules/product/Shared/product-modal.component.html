@@ -75,19 +75,19 @@
                 <tbody id='test'>
                     <div formArrayName="productUnits">
                         <tr *ngFor="let field of productUnits; let i = index;" [formGroupName]="i">
-                            <td class="txt-c" *ngIf="field.get('isFoucs'); else editAccept">
-                                <i class="material-icons" (click)="changeisFoucs(uid, false)">done</i>
+                            <td class="txt-c" *ngIf="field.get('isFocus'); else editAccept">
+                                <i class="material-icons" (click)="changeisFocus(uid, false)">done</i>
                                 <i class="material-icons">clear</i>
                             </td>
                             <ng-template #editAccept>
                                 <td class="txt-c">                            
-                                    <i class="material-icons" (click)="changeisFoucs(uid, true)">edit</i>
+                                    <i class="material-icons" (click)="changeisFocus(uid, true)">edit</i>
                                     <i class="material-icons">delete_outline</i>
                                 </td>
                             </ng-template>
                             
                             <td>
-                               <input type="text" id="barcode" class="form-input" formControlName="barcode" [disableControl]="isFoucs" placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
+                               <input type="text" id="barcode" class="form-input" formControlName="barcode" [disableControl]="!isFocus" placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
                             </td>
                             <td>
                                 <mat-select [(value)]="field.unitID">
