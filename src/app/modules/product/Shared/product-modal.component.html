@@ -75,8 +75,7 @@
                 <tbody id='test'>
                     <div formArrayName="productUnits">
                         <tr *ngFor="let field of productUnits; let i = index;" [formGroupName]="i">
-                            <td class="txt-c" formControlName="isFoucs" *ngIf="isFoucs; else editAccept">
-                                <input type="text" formControlName="isFoucs">
+                            <td class="txt-c" *ngIf="field.get('isFoucs'); else editAccept">
                                 <i class="material-icons" (click)="changeisFoucs(uid, false)">done</i>
                                 <i class="material-icons">clear</i>
                             </td>
@@ -88,7 +87,7 @@
                             </ng-template>
                             
                             <td>
-                               <input type="text" id="barcode" class="form-input" formControlName="barcode" placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
+                               <input type="text" id="barcode" class="form-input" formControlName="barcode" [disableControl]="isFoucs" placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
                             </td>
                             <td>
                                 <mat-select [(value)]="field.unitID">
@@ -96,7 +95,7 @@
                                 </mat-select>
                             </td>
                             <td class="txt-c">
-                                <mat-checkbox [color]="'primary'" (click)="isBaseUnitClick(field.uid, !field.isBaseUnit)" [checked]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
+                                <mat-checkbox [color]="'primary'" formControlName="isBaseUnit" [checked]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
                             </td>
                         </tr>
                     </div>

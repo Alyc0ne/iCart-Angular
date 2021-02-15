@@ -70,7 +70,7 @@ export class ProductModalComponent {
     addUnit() {
         var productUnitFG = this.fb.group({
             uid: [Math.random().toString(16).slice(2)],
-            isFoucs: [false],
+            isFoucs: [true],
             barcode: [ { value: 'fff', disabled: false }, Validators.required],
             unitID: [''],
             isBaseUnit: [false]
@@ -141,11 +141,36 @@ export class ProductModalComponent {
     }
 
     changeisFoucs(uid, value) {
-        if (!!this.formData.productUnits) {
-            var currentData = this.formData.productUnits.filter(e => e.uid == uid);
-            if (!!currentData) {
-                currentData[0].isFoucs = value;
-            }
+        if (!!this.productUnits) {
+            this.product.productUnits.value.forEach((data, index) => {
+                //console.log(data);
+                const myForm = (<FormArray>this.productForm.get('productUnits')).at(index);
+                myForm.patchValue({
+                    isFocus: false,
+                    unitID: 1
+                })
+            });
+
+            // this.productForm.productUnits.value.forEach((data, index)=>{
+
+            //     if(this.f.itemId.value == this.f.credentials.value[index].itemId){
+            //         this.PushVaribaleCheck = this.f.credentials.value[index].itemName;
+            //         const addValue = qty +this.f.credentials.value[index].qty;
+            
+            //         const myForm = (<FormArray>this.purchaseOrderGroup.get("credentials")).at(index);
+            //         myForm.patchValue({
+            //         qty:addValue
+            //         })
+            
+            //     }
+            // })
+
+
+            // var currentData = this.productUnits.filter(e => e.uid == uid);
+            // if (!!currentData) { 
+            //     console.log(this.productForm.get('productUnits').at(0))
+            // }
+            //currentData[0].isFoucs = value;
         }
     }
 
