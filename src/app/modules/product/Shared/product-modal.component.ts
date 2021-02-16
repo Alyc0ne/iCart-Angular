@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ProductModel, ProductUnit } from './product.model';
+import { ProductModel } from './product.model';
 import { ProductService } from './product.service';
 import { AlertModalComponent } from '../../Shared/Modal/Alert/alert-modal.component';
 import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -17,7 +17,7 @@ export class ProductModalComponent {
     public states: Array<any> = [];
     public test:any;
     productForm: FormGroup;
-    //productUnitFG: FormGroup;
+    public count = 1;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data,
@@ -40,19 +40,6 @@ export class ProductModalComponent {
         })
 
         this.productForm.valueChanges.subscribe(console.log); 
-
-        this.formData = {
-            runningFormatID: objProduct.runningFormatID,
-            productID: objProduct.productID,
-            productNo: objProduct.productNo,
-            productName: objProduct.productName,
-            productNameEng: objProduct.productNameEng,
-            productQuantity: null,
-            productDesc: objProduct.productDesc,
-            productSalePrice: objProduct.productSalePrice,
-            productPurchasePrice: objProduct.productPurchasePrice,
-            productUnits: this.data.productUnits
-        }
     }
 
     get product() {
@@ -70,19 +57,38 @@ export class ProductModalComponent {
     addUnit() {
         var productUnitFG = this.fb.group({
             uid: [Math.random().toString(16).slice(2)],
-            isFocus: [false],
-            barcode: [ { value: 'fff', disabled: false }, Validators.required],
-            unitID: [''],
+            isFocus: [true],
+            barcode: [{ value: 'fff' + this.count, disabled: false }],
+            unit: ['', Validators.required],
             isBaseUnit: [false]
         });
 
-        if (this.productUnits.length == 0) {
+        var len = this.productUnits.length;
+        if (len == 0) {
             this.productForm.setControl('productUnits', this.fb.array([productUnitFG]));
         }
         else
-        {
-            this.productUnits.push(productUnitFG);
+        {   
+            var controls = this.productUnits[len - 1];
+            if (controls.get('isFocus').value) {
+                const dialogConfig = new MatDialogConfig();                
+                dialogConfig.disableClose = true;
+                dialogConfig.width = "600px";
+                dialogConfig.height = "100px";
+                dialogConfig.id = "AlertModal";
+                dialogConfig.data = { 
+                    txtAlertHeader: "ไม่สามารถดำเนินการได้", 
+                    txtAlertContent: "กรุณาบันทึกหน่วยนับ" //"เนื่องจากสินค้าต้องมีหน่วยนับอย่างน้อย 1 หน่วยนับ" 
+                }
+                //dialogConfig.position= { top: '50px' }
+    
+                this.dialog.open(AlertModalComponent, dialogConfig);       
+            }
+            else
+                this.productUnits.push(productUnitFG);
         }
+
+        this.count++;
 
         //this.productUnits.push([this.fb.group({
             // uid: [Math.random().toString(16).slice(2)],
@@ -140,47 +146,51 @@ export class ProductModalComponent {
         // }
     }
 
-    changeisFocus(uid, value) {
+    changeisFocus(uid, isFocus, index) {
         if (!!this.productUnits) {
-            this.product.productUnits.value.forEach((data, index) => {
-                let myForm = (<FormArray>this.productForm.controls['productUnits']).at(index);
-                //const myForm = (<FormArray>this.productForm.get('productUnits')).at(index);
-                // console.log(myForm);
-                myForm.patchValue({
-                    isFocus: false,
-                    unitID: 1
-                })
-
-                myForm.disable();
-            });
-
-            // this.productForm.productUnits.value.forEach((data, index)=>{
-
-            //     if(this.f.itemId.value == this.f.credentials.value[index].itemId){
-            //         this.PushVaribaleCheck = this.f.credentials.value[index].itemName;
-            //         const addValue = qty +this.f.credentials.value[index].qty;
-            
-            //         const myForm = (<FormArray>this.purchaseOrderGroup.get("credentials")).at(index);
-            //         myForm.patchValue({
-            //         qty:addValue
-            //         })
-            
-            //     }
-            // })
-
-
-            // var currentData = this.productUnits.filter(e => e.uid == uid);
-            // if (!!currentData) { 
-            //     console.log(this.productForm.get('productUnits').at(0))
-            // }
-            //currentData[0].isFoucs = value;
+            let myForm = (<FormArray>this.productForm.controls['productUnits']).at(index);
+            if (!!myForm) {
+                if (myForm.value.uid == uid) {
+                    myForm.patchValue({ isFocus: isFocus })
+                    if (isFocus)
+                        myForm.enable();
+                    else
+                        myForm.disable();
+                }
+            }
         }
     }
 
     bindSave = async () => {
-        console.log(this.formData)
-        if (await this.validateProductUnit())
-            await this.service.bindSave(this.formData).then(res => this.closeDialog(true));
+        if (this.productForm.valid) {
+            console.log('form submitted');
+          } else {
+            this.validateAllFormFields(this.productForm);
+          }
+        // console.log(this.product)
+        // if (await this.validateProductUnit())
+        //     await this.service.bindSave(this.formData).then(res => this.closeDialog(true));
+    }
+
+    validateAllFormFields(formGroup: FormGroup) {   
+        Object.keys(formGroup.controls).forEach(field => {
+            const control = formGroup.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({ onlySelf: true });
+            } else if (control instanceof FormArray) {
+                this.validateAllFormArrayFields(control);
+            }
+        });
+    }
+
+    validateAllFormArrayFields(formArray: FormArray) {   
+        Object.keys(formArray.controls).forEach(index => {
+            var formGroup = formArray.controls[index];
+            Object.keys(formGroup.controls).forEach(field => {
+                const control = formGroup.get(field);
+                control.markAsTouched({ onlySelf: true });
+            });
+        });
     }
 
     closeDialog = async (isSave) => {
@@ -194,7 +204,7 @@ export class ProductModalComponent {
     }
 
     validateProductUnit = async () => {
-        if (!!this.formData.productUnits && this.formData.productUnits.filter(e => { return e.isFoucs == false}).length > 0)
+        if (!!this.formData.productUnits && this.formData.productUnits.filter(e => { return e.isFocus == false}).length > 0)
             return true;
         else
         {
@@ -215,7 +225,7 @@ export class ProductModalComponent {
 
     isBaseUnitClick(uid, value) {
         var currentData = this.formData.productUnits.filter(e => e.uid == uid);
-        if (!!currentData && currentData[0].isFoucs) {
+        if (!!currentData && currentData[0].isFocus) {
             currentData[0].isBaseUnit = value;
         }
     }

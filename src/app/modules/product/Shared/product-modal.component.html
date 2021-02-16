@@ -75,27 +75,36 @@
                 <tbody id='test'>
                     <div formArrayName="productUnits">
                         <tr *ngFor="let field of productUnits; let i = index;" [formGroupName]="i">
-                            <td class="txt-c" *ngIf="field.get('isFocus'); else editAccept">
-                                <i class="material-icons" (click)="changeisFocus(uid, false)">done</i>
+                            <td class="txt-c" *ngIf="field.value.isFocus; else editAccept">
+                                <i class="material-icons" (click)="changeisFocus(field.value.uid, false, i)">done</i>
                                 <i class="material-icons">clear</i>
                             </td>
                             <ng-template #editAccept>
                                 <td class="txt-c">                            
-                                    <i class="material-icons" (click)="changeisFocus(uid, true)">edit</i>
+                                    <i class="material-icons" (click)="changeisFocus(field.value.uid, true, i)">edit</i>
                                     <i class="material-icons">delete_outline</i>
                                 </td>
                             </ng-template>
                             
                             <td>
-                               <input type="text" id="barcode" class="form-input" formControlName="barcode" [disableControl]="!isFocus" placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
+                                <input type="text" id="barcode" class="form-input" formControlName="barcode"  placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
                             </td>
                             <td>
-                                <mat-select [(value)]="field.unitID">
-                                    <mat-option *ngFor="let unit of service.listUnit" [value]="unit.unitID">{{unit.unitName}}</mat-option>
+                                <mat-select formControlName="unit" [disabled]="!field.value.isFocus">
+                                    <mat-option *ngFor="let un of service.listUnit" [value]="un.unitID">{{un.unitName}}</mat-option>
                                 </mat-select>
+                                <div *ngIf="field.controls.unit.invalid && (field.controls.unit.dirty || field.controls.unit.touched)" class="alert-danger">
+                                    <div *ngIf="field.controls.unit.errors.required"><span>กรุณาเลือกหน่วยนับ.</span></div>
+                                </div>
+                                <!-- <mat-error *ngIf="productUnits.get('unitID').hasError('required')">
+                                    You must make a selection
+                                </mat-error> -->
                             </td>
-                            <td class="txt-c">
+                            <!-- <td class="txt-c">
                                 <mat-checkbox [color]="'primary'" formControlName="isBaseUnit" [checked]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
+                            </td> -->
+                            <td class="txt-c">
+                                <mat-checkbox [color]="'primary'" (click)="isBaseUnitClick(field.uid, !field.isBaseUnit)" [checked]="field.isBaseUnit" [disabled]="!field.isFoucs">หน่วยนับหลัก</mat-checkbox>
                             </td>
                         </tr>
                     </div>

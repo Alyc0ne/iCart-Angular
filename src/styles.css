@@ -709,6 +709,11 @@ input.ng-invalid.ng-touched {
     border: solid 1px red;
     margin-bottom: 0px;
 }
+
+mat-select.ng-invalid.ng-touched > div.mat-select-trigger {
+    border: solid 1px red;
+    margin-bottom: 0px;
+}
   
 .alert-danger span {
     color: red;

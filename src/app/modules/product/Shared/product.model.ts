@@ -10,19 +10,9 @@ export class ProductModel {
     productPurchasePrice:number;
     productUnits: [{
         uid:string;
-        isFoucs:boolean;
+        isFocus:boolean;
         barcode:string;
         unitID:string;
         isBaseUnit:boolean;
     }];
-}
-
-export class ProductUnit {
-    constructor(
-        public uid?:string,
-        public isFoucs?:boolean,
-        public barcode?:string,
-        public unitID?:string,
-        public isBaseUnit?:boolean
-    ){}
 }
