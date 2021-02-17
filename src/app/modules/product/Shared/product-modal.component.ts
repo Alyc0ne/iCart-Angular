@@ -59,7 +59,7 @@ export class ProductModalComponent {
             uid: [Math.random().toString(16).slice(2)],
             isFocus: [true],
             barcode: [{ value: 'fff' + this.count, disabled: false }],
-            unit: ['', Validators.required],
+            unitID: ['', Validators.required],
             isBaseUnit: [false]
         });
 
@@ -85,94 +85,55 @@ export class ProductModalComponent {
                 this.dialog.open(AlertModalComponent, dialogConfig);       
             }
             else
+            {
                 this.productUnits.push(productUnitFG);
+
+                var table = document.getElementsByClassName('unit-info');
+                if (table.length > 0) {
+                    var tbody = table[0].querySelector('tbody');
+                    if (!!tbody) {
+                        setTimeout(() => { 
+                            tbody.scrollTo(0, 50000);
+                            tbody.querySelector('input').focus();
+                        }, 100);
+                    }
+                }
+            }
+                
         }
 
         this.count++;
-
-        //this.productUnits.push([this.fb.group({
-            // uid: [Math.random().toString(16).slice(2)],
-            // isFoucs: [true],
-            // barcode: [ { value: 'fff', disabled: false }, Validators.required],
-            // unitID: [''],
-            // isBaseUnit: [false]
-        //})]);
-
-
-
-
-        // if (!!this.formData.productUnits) {
-        //     var isFoucs = this.formData.productUnits.filter(e => e.isFoucs == true);
-        //     if (isFoucs.length == 0) {
-        //         this.formData.productUnits.push({
-        //             uid: Math.random().toString(16).slice(2),
-        //             isFoucs: true,
-        //             barcode: '',
-        //             unitID: null,
-        //             isBaseUnit: false
-        //         });
-        //     }
-        //     else 
-        //     {
-        //         const dialogConfig = new MatDialogConfig();                
-        //         dialogConfig.disableClose = true;
-        //         dialogConfig.width = "600px";
-        //         dialogConfig.height = "80px";
-        //         dialogConfig.id = "AlertModal";
-   
-        //         this.dialog.open(AlertModalComponent, dialogConfig);            
-        //     }
-        // }
-        // else
-        // {
-        //     this.formData.productUnits = [{
-        //         uid: Math.random().toString(16).slice(2),
-        //         isFoucs: true,
-        //         barcode: '',
-        //         unitID: null,
-        //         isBaseUnit: false
-        //     }];
-        // }
-
-        // var table = document.getElementsByClassName('unit-info');
-        // if (table.length > 0) {
-        //     var tbody = table[0].querySelector('tbody');
-        //     if (!!tbody) {
-        //         setTimeout(() => { 
-        //             tbody.scrollTo(0, 50000);
-        //             tbody.querySelector('input').focus();
-        //         }, 100);
-        //     }
-        // }
     }
 
-    changeisFocus(uid, isFocus, index) {
-        if (!!this.productUnits) {
+    changeisFocus = async (uid, isFocus, index) => {
+        if (!!this.productUnits) {            
             let myForm = (<FormArray>this.productForm.controls['productUnits']).at(index);
-            if (!!myForm) {
+            if (!!myForm) {                          
                 if (myForm.value.uid == uid) {
-                    myForm.patchValue({ isFocus: isFocus })
-                    if (isFocus)
-                        myForm.enable();
-                    else
-                        myForm.disable();
+                    if (await this.validateAllFormFields(<FormGroup>myForm)) {
+                        myForm.patchValue({ isFocus: isFocus })
+                        if (isFocus)
+                            myForm.enable();
+                        else
+                            myForm.disable();
+                    }
                 }
             }
         }
     }
 
     bindSave = async () => {
-        if (this.productForm.valid) {
-            console.log('form submitted');
-          } else {
+        if (this.productForm.valid){
+            if (await this.validateProductUnit())
+                await this.service.bindSave(this.productForm.getRawValue()).then(res => this.closeDialog(true));
+        } 
+        else
+        {
             this.validateAllFormFields(this.productForm);
-          }
-        // console.log(this.product)
-        // if (await this.validateProductUnit())
-        //     await this.service.bindSave(this.formData).then(res => this.closeDialog(true));
+        }            
     }
 
-    validateAllFormFields(formGroup: FormGroup) {   
+    validateAllFormFields = async (formGroup: FormGroup) => {
         Object.keys(formGroup.controls).forEach(field => {
             const control = formGroup.get(field);
             if (control instanceof FormControl) {
@@ -181,6 +142,11 @@ export class ProductModalComponent {
                 this.validateAllFormArrayFields(control);
             }
         });
+
+        if (formGroup.valid)
+            return true;
+        else
+            return false;
     }
 
     validateAllFormArrayFields(formArray: FormArray) {   
@@ -204,29 +170,40 @@ export class ProductModalComponent {
     }
 
     validateProductUnit = async () => {
-        if (!!this.formData.productUnits && this.formData.productUnits.filter(e => { return e.isFocus == false}).length > 0)
-            return true;
+        if (this.productUnits.length == 0 || this.productUnits.filter(e => {  return e.value.isFocus == true; }).length > 0) {
+                const dialogConfig = new MatDialogConfig();                
+                dialogConfig.disableClose = true;
+                dialogConfig.width = "600px";
+                dialogConfig.height = "100px";
+                dialogConfig.id = "AlertModal";
+                dialogConfig.data = { 
+                    txtAlertHeader: "ไม่สามารถดำเนินการได้", 
+                    txtAlertContent: "กรุณาบันทึกหน่วยนับ" //"เนื่องจากสินค้าต้องมีหน่วยนับอย่างน้อย 1 หน่วยนับ" 
+                }
+                dialogConfig.position= { top: '50px' }
+
+                this.dialog.open(AlertModalComponent, dialogConfig);      
+        }
         else
         {
-            const dialogConfig = new MatDialogConfig();                
-            dialogConfig.disableClose = true;
-            dialogConfig.width = "600px";
-            dialogConfig.height = "100px";
-            dialogConfig.id = "AlertModal";
-            dialogConfig.data = { 
-                txtAlertHeader: "ไม่สามารถดำเนินการได้", 
-                txtAlertContent: "กรุณาบันทึกหน่วยนับ" //"เนื่องจากสินค้าต้องมีหน่วยนับอย่างน้อย 1 หน่วยนับ" 
+            if (this.productUnits.filter(e => {  return e.value.isBaseUnit == true; }).length == 0) {
+                const dialogConfig = new MatDialogConfig();                
+                dialogConfig.disableClose = true;
+                dialogConfig.width = "600px";
+                dialogConfig.height = "100px";
+                dialogConfig.id = "AlertModal";
+                dialogConfig.data = { 
+                    txtAlertHeader: "ไม่สามารถดำเนินการได้", 
+                    txtAlertContent: "ต้องมีหน่วยนับหลักอย่างน้อย 1 หน่วยนับหลัก" //"เนื่องจากสินค้าต้องมีหน่วยนับอย่างน้อย 1 หน่วยนับ" 
+                }
+                dialogConfig.position= { top: '50px' }
+
+                this.dialog.open(AlertModalComponent, dialogConfig);      
             }
-            dialogConfig.position= { top: '50px' }
-
-            this.dialog.open(AlertModalComponent, dialogConfig);      
-        }
-    }
-
-    isBaseUnitClick(uid, value) {
-        var currentData = this.formData.productUnits.filter(e => e.uid == uid);
-        if (!!currentData && currentData[0].isFocus) {
-            currentData[0].isBaseUnit = value;
+            else
+            {
+                return true;
+            }
         }
     }
 }

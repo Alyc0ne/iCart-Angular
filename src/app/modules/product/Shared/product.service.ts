@@ -48,9 +48,11 @@ export class ProductService {
     }
 
     bindSave = async (ProductModel) => {
-        await this.http.post(this.baseUrl + 'Products', ProductModel)
-        .toPromise()
-        .then(res => console.log(res))
-        .catch(res => console.log("catch"))
+        if (!!ProductModel) {
+            await this.http.post(this.baseUrl + 'Products', ProductModel)
+            .toPromise()
+            .then(res => console.log(res))
+            .catch(res => console.log("catch"))
+        }
     }
 }

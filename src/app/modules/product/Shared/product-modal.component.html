@@ -17,10 +17,10 @@
                 <span class="req">*</span>
                 <label for="productName" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
                 <div class="form-content">
-                    <input type="text" id="productName" formControlName="productName" placeholder="กรอกชื่อสินค้า" autocomplete="off" required maxlength="10">
+                    <input type="text" id="productName" formControlName="productName" placeholder="กรอกชื่อสินค้า" autocomplete="off" required maxlength="255">
                     <div *ngIf="product.productName.invalid && (product.productName.dirty || product.productName.touched)" class="alert-danger">
                         <div *ngIf="product.productName.errors.required"><span>กรุณากรอกชื่อสินค้า.</span></div>
-                        <div *ngIf="product.productName.errors.maxlength">Name must be at least 4 characters long.</div>
+                        <!-- <div *ngIf="product.productName.errors.maxlength">Name must be at least 4 characters long.</div> -->
                     </div>
                 </div>
             </div>
@@ -90,21 +90,15 @@
                                 <input type="text" id="barcode" class="form-input" formControlName="barcode"  placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
                             </td>
                             <td>
-                                <mat-select formControlName="unit" [disabled]="!field.value.isFocus">
+                                <mat-select formControlName="unitID" [disabled]="!field.value.isFocus">
                                     <mat-option *ngFor="let un of service.listUnit" [value]="un.unitID">{{un.unitName}}</mat-option>
                                 </mat-select>
-                                <div *ngIf="field.controls.unit.invalid && (field.controls.unit.dirty || field.controls.unit.touched)" class="alert-danger">
-                                    <div *ngIf="field.controls.unit.errors.required"><span>กรุณาเลือกหน่วยนับ.</span></div>
+                                <div *ngIf="field.controls.unitID.invalid && (field.controls.unitID.dirty || field.controls.unitID.touched)" class="alert-danger">
+                                    <div *ngIf="field.controls.unitID.errors.required"><span>กรุณาเลือกหน่วยนับ.</span></div>
                                 </div>
-                                <!-- <mat-error *ngIf="productUnits.get('unitID').hasError('required')">
-                                    You must make a selection
-                                </mat-error> -->
                             </td>
-                            <!-- <td class="txt-c">
-                                <mat-checkbox [color]="'primary'" formControlName="isBaseUnit" [checked]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
-                            </td> -->
                             <td class="txt-c">
-                                <mat-checkbox [color]="'primary'" (click)="isBaseUnitClick(field.uid, !field.isBaseUnit)" [checked]="field.isBaseUnit" [disabled]="!field.isFoucs">หน่วยนับหลัก</mat-checkbox>
+                                <mat-checkbox [color]="'primary'" formControlName="isBaseUnit" [checked]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
                             </td>
                         </tr>
                     </div>
