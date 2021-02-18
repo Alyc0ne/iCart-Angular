@@ -1,0 +1,58 @@
+.pos-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-gap: 10px;
+    padding: 10px;
+    height: 100%;
+}
+
+.pos-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 5px 15px;
+    font-size: 30px;
+}
+
+.summary div.search > input {
+    width: 100%;
+}
+
+.summary-content {
+    height: 50vh;
+    border: 1px solid black;
+}
+
+.summary-footer {
+    margin-top: 10px;
+    height: 20vh;
+    border: 1px solid black;
+}
+
+.summary-action {
+    margin-top: 10px;
+}
+
+.summary-action > button{
+    background-color: #F07613;
+}
+
+.content-warpper {
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.content-warpper > div{
+    height: 60px;
+    padding: 10px;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.content-detail {
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    grid-gap: 10px;
+    padding: 10px;
+    height: 100%;
+}

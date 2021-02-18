@@ -1,0 +1,37 @@
+<div class="pos-container">
+    <div class="content">
+        
+    </div>
+
+    <div class="summary">
+        <div class="header-menu">
+            <div class="search w100p">
+                <i class="material-icons">search</i>
+                <input type="text" name="" id="" class="w100p" placeholder="รหัสบาร์โค้ด / ชื่อสินค้า">
+            </div>
+        </div>
+        <div class="summary-content">
+            <div class="content-warpper">
+                <div *ngFor="let product of fakeModel" class="content-detail">
+                    <div>
+                        {{ product.name }}
+                    </div>
+                    <div>
+
+                    </div>
+                    <div>
+                        {{ product.totalPrice | number:'1.2-2' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="summary-footer">
+            
+        </div>
+        <div class="summary-action">
+            <button class="blue-button w100p h40px" (click)="callPaymentModal(null)">
+                ชำระเงิน
+            </button>
+        </div>
+    </div>
+</div>

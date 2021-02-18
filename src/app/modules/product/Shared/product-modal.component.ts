@@ -30,6 +30,7 @@ export class ProductModalComponent {
     ngOnInit(): void {
         let objProduct = this.data.objProduct;
         this.productForm = this.fb.group({
+            runningFormatID: [objProduct.runningFormatID],
             productNo: [{ value: objProduct.productNo, disabled:true }],
             productName: ['', Validators.required],
             productNameEng: [''],
@@ -49,10 +50,6 @@ export class ProductModalComponent {
     get productUnits() {
         return this.productForm.get('productUnits')['controls'];
     }
-
-    // get productUnits(): FormArray {
-    //     return this.productForm.get('productUnits') as FormArray;
-    // }
 
     addUnit() {
         var productUnitFG = this.fb.group({
@@ -178,7 +175,7 @@ export class ProductModalComponent {
                 dialogConfig.id = "AlertModal";
                 dialogConfig.data = { 
                     txtAlertHeader: "ไม่สามารถดำเนินการได้", 
-                    txtAlertContent: "กรุณาบันทึกหน่วยนับ" //"เนื่องจากสินค้าต้องมีหน่วยนับอย่างน้อย 1 หน่วยนับ" 
+                    txtAlertContent: "กรุณาบันทึกหน่วยนับ"
                 }
                 dialogConfig.position= { top: '50px' }
 
@@ -194,7 +191,7 @@ export class ProductModalComponent {
                 dialogConfig.id = "AlertModal";
                 dialogConfig.data = { 
                     txtAlertHeader: "ไม่สามารถดำเนินการได้", 
-                    txtAlertContent: "ต้องมีหน่วยนับหลักอย่างน้อย 1 หน่วยนับหลัก" //"เนื่องจากสินค้าต้องมีหน่วยนับอย่างน้อย 1 หน่วยนับ" 
+                    txtAlertContent: "ต้องมีหน่วยนับหลักอย่างน้อย 1 หน่วยนับหลัก"
                 }
                 dialogConfig.position= { top: '50px' }
 

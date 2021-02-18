@@ -19,6 +19,7 @@ import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
 import { ProductListComponent } from './modules/product/List/product.component';
 import { ProductModalComponent } from './modules/product/Shared/product-modal.component';
 import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
+import { POSComponent } from './modules/pos/pos.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.co
     ProductListComponent,
     ProductModalComponent,
     AlertModalComponent,
-    OnlynumberDirective
+    OnlynumberDirective,
+    POSComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,9 @@ import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.co
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
+      { 
+        path: 'POS', component: POSComponent
+      },
       { 
         path: 'ListProduct', component: ProductListComponent
       }
