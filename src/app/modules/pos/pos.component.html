@@ -13,7 +13,7 @@
         <div class="summary-content">
             <div class="content-warpper">
                 <div *ngFor="let product of fakeModel" class="content-detail">
-                    <div>
+                    <div title="{{ product.name }}">
                         {{ product.name }}
                     </div>
                     <div>
@@ -26,7 +26,10 @@
             </div>
         </div>
         <div class="summary-footer">
-            
+            <mat-select [ngModel]="paymentSeleted">
+                <mat-option *ngFor="let pt of paymentModel" [value]="pt.paymentType">{{ pt.paymentName }}</mat-option>
+            </mat-select>
+            <hr>
         </div>
         <div class="summary-action">
             <button class="blue-button w100p h40px" (click)="callPaymentModal(null)">

@@ -51,7 +51,7 @@ mat-drawer-content {
     padding: 0 16px;
 } */
 
-input:focus {
+input:focus, button:focus {
     outline: none !important;
 }
 
