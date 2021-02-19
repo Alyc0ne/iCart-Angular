@@ -4,7 +4,7 @@
     color: #616161;
     box-sizing: border-box;
     font-family: 'Athiti';
-    letter-spacing: 2px;
+    /* letter-spacing: 2px; */
     /* font-family: 'RSU'; */
 }
 
@@ -748,4 +748,8 @@ mat-select.ng-invalid.ng-touched > div.mat-select-trigger {
 .alert-danger span {
     color: red;
     margin-left: 10px;
+}
+
+.summary-footer > div mat-select > div.mat-select-trigger {
+    width: 100% !important;
 }

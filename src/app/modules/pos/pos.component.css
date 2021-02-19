@@ -11,6 +11,43 @@
     padding: 5px 15px;
     font-size: 18px;
 }
+
+/* Product */
+.product-content {
+    display: grid;
+    /*
+        โดย Grid ของเราแบ่งออกเป็น 3 แถว
+        แถวที่1: สูง 50px
+        แถวที่2: สูง 200px
+        แถวที่3: สูง 50px
+    */
+    grid-template-rows: 150px;
+
+    /*
+        ให้ Grid ของเราแบ่งออกเป็น 2 คอลัมภ์
+        คอลัมภ์ 1: กว้าง 200px
+        คอลัมภ์ 2: กว้าง 500px
+    */
+    grid-template-columns: 24% 24% 24% 24%;
+    /* grid-gap: 20px; */
+
+
+    /* grid-template-columns: 24% 24% 24% 24%;
+    grid-template-rows: 120px;
+    grid-gap: 10px;
+    align-items: baseline;
+    padding: 10px; */
+}
+
+.product-content > div {
+    border: black 1px solid;
+    border-radius: 5px;
+    height: 120px;
+    width: 100%;
+    margin: 20px;
+}
+
+/* Summary */
 .summary div.search > input {
     width: 100%;
 }
@@ -21,21 +58,31 @@
 
 .summary-content {
     height: 60%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .summary-footer {
-    margin-top: 10px;
+    margin: 10px 0;
     height: 25%;
-    border: 1px solid black;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    grid-gap: 10px;
+    padding: 10px;
+    box-shadow: 5px 5px 20px 5px rgb(50, 50, 50, .5)
 }
+
+.summary-footer > div {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-gap: 10px;
+    align-items: baseline;
+    padding-right: 10px;
+}
+
+/* .sub-footer {
+ 
+} */
 
 .summary-action {
     /* height: 5vh; */
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .summary-action > button {

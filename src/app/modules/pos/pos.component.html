@@ -1,6 +1,6 @@
 <div class="pos-container">
-    <div class="content">
-        
+    <div class="product-content">
+        <div *ngFor="let product of looper"></div>
     </div>
 
     <div class="summary">
@@ -13,9 +13,7 @@
         <div class="summary-content">
             <div class="content-warpper">
                 <div *ngFor="let product of fakeModel" class="content-detail">
-                    <div title="{{ product.name }}">
-                        {{ product.name }}
-                    </div>
+                    <div title="{{ product.name }}">{{ product.name }}</div>
                     <div>
 
                     </div>
@@ -26,10 +24,34 @@
             </div>
         </div>
         <div class="summary-footer">
-            <mat-select [ngModel]="paymentSeleted">
-                <mat-option *ngFor="let pt of paymentModel" [value]="pt.paymentType">{{ pt.paymentName }}</mat-option>
-            </mat-select>
+            <div>
+                <p>รวมเงิน : </p>
+                <p class="txt-r">{{ 2500 | number:'1.2-2' }}</p>
+            </div>
+            <div>
+                <p>ส่วนลด : </p>
+                <div class="form-content">
+                    <input type="text" class="form-input" disabled>
+                </div>
+                
+            </div>
+            <div>
+                <p>ส่วนลด : </p>
+                <div class="form-content">
+                    <input type="text" class="form-input txt-r" disabled [(ngModel)]="totalAmnt">
+                </div>
+            </div>
+            <div>
+                <p>ประเภทการชำระ : </p>
+                <mat-select [ngModel]="paymentSeleted">
+                    <mat-option *ngFor="let pt of paymentModel" [value]="pt.paymentType">{{ pt.paymentName }}</mat-option>
+                </mat-select>
+            </div>
             <hr>
+            <div>
+                <p>รวมเงิน : </p>
+                <input type="text" [ngModel]="cartProduct.summary.totalAmnt">
+            </div>
         </div>
         <div class="summary-action">
             <button class="blue-button w100p h40px" (click)="callPaymentModal(null)">
