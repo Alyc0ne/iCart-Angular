@@ -14,8 +14,10 @@
             <!-- <div class="content-warpper"> -->
                 <div *ngFor="let product of fakeModel" class="content-detail">
                     <div title="{{ product.name }}">{{ product.name }}</div>
-                    <div>
-
+                    <div class="stepper">
+                        <button><i class="material-icons">remove</i></button>
+                        <span>{{ product.quantity | number:'1.0' }}</span>
+                        <button><i class="material-icons">add</i></button>
                     </div>
                     <div>
                         {{ product.totalPrice | number:'1.2-2' }}
