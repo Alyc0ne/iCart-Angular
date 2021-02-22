@@ -1,9 +1,9 @@
 <div class="modal-header">
     <h1>เพิ่มสินค้า</h1>
 </div>
-
+<form [formGroup]="productForm">
 <div class="modal-content">
-    <form [formGroup]="productForm">
+
         <div class="text-header">ข้อมูลสินค้า</div>
         <div class="product-info">
             <div class="form-group fullrow">
@@ -43,6 +43,7 @@
                 <span class="req">*</span>
                 <label for="productSalePrice" class="formLabel" title="ราคาขาย">ราคาขาย</label>
                 <div class="form-content">
+                    <!-- [value]="productForm.get('productSalePrice').value | numberPipe" -->
                     <input appOnlynumber type="text" id="productSalePrice" formControlName="productSalePrice" placeholder="ราคาขาย" autocomplete="off" required maxlength="10">
                     <div *ngIf="product.productSalePrice.invalid && (product.productSalePrice.dirty || product.productSalePrice.touched)" class="alert-danger">
                         <div *ngIf="product.productSalePrice.errors.required"><span>กรุณากรอกราคาขาย</span></div>
@@ -108,11 +109,12 @@
         </div>
 
         <!-- <div class="text-header">รายละเอียดอื่นๆ</div> -->
-    </form>
+   
 </div>
 <div class="modal-footer">
     <div class="form-group">
         <a class="button light-button" (click)="closeDialog(false)">ยกเลิก</a>
-        <a class="button success-button" (click)="bindSave()">บันทึก</a>
+        <a class="button success-button" (click)="manageProduct(productForm.get('productID').value)">บันทึก</a>
     </div>
 </div>
+</form>

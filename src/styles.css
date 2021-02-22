@@ -41,11 +41,7 @@ mat-drawer-content {
     padding-top: 0;
 } */
 
-.container-detail {
-    padding: 0 2rem;
-    position: relative;
-    height: 95%;
-}
+
 
 /* router-outlet + * {
     padding: 0 16px;

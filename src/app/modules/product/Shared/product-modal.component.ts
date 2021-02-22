@@ -28,17 +28,23 @@ export class ProductModalComponent {
     ) {}
 
     ngOnInit(): void {
+        console.log(this.data)
+
         let objProduct = this.data.objProduct;
-        this.productForm = this.fb.group({
-            runningFormatID: [objProduct.runningFormatID],
-            productNo: [{ value: objProduct.productNo, disabled:true }],
-            productName: ['', Validators.required],
-            productNameEng: [''],
-            productDesc: [''],
-            productSalePrice: ['', Validators.required],
-            productPurchasePrice: [''],
-            productUnits: this.fb.array([])
-        })
+        if (!!objProduct) {
+            this.productForm = this.fb.group({
+                runningFormatID: [objProduct.runningFormatID],
+                productID: [objProduct.productID],
+                productNo: [{ value: objProduct.productNo, disabled:true }],
+                productName: [objProduct.productName, Validators.required],
+                productNameEng: [objProduct.productNameEng],
+                productDesc: [objProduct.productDesc],
+                productSalePrice: [objProduct.productSalePrice, Validators.required],
+                productPurchasePrice: [objProduct.productPurchasePrice],
+                productUnits: this.genProductUnits(objProduct.productUnits)
+            })
+        }
+        
 
         this.productForm.valueChanges.subscribe(console.log); 
     }
@@ -49,6 +55,24 @@ export class ProductModalComponent {
 
     get productUnits() {
         return this.productForm.get('productUnits')['controls'];
+    }
+
+    genProductUnits(productUnits) {
+        var productUnitAR = this.fb.array([]);
+        if (!!productUnits) {
+            productUnits.forEach(element => {
+                productUnitAR.push(this.fb.group({
+                    uid: [Math.random().toString(16).slice(2)],
+                    isFocus: [false],
+                    barcode: [{ value: element.barcode, disabled: true }],
+                    unitID: [element.unitID, Validators.required],
+                    isBaseUnit: [{ value: element.isBaseUnit, disabled: true }]
+                }))
+                console.log(element)
+            });
+        }
+
+        return productUnitAR;
     }
 
     addUnit() {
@@ -119,10 +143,28 @@ export class ProductModalComponent {
         }
     }
 
+    manageProduct(productID) {
+        if (!!productID) 
+            this.bindEdit()
+        else
+            this.bindSave()
+    }
+
     bindSave = async () => {
         if (this.productForm.valid){
             if (await this.validateProductUnit())
                 await this.service.bindSave(this.productForm.getRawValue()).then(res => this.closeDialog(true));
+        } 
+        else
+        {
+            this.validateAllFormFields(this.productForm);
+        }            
+    }
+
+    bindEdit = async () => {
+        if (this.productForm.valid){
+            if (await this.validateProductUnit())
+                await this.service.bindEdit(this.productForm.getRawValue()).then(res => this.closeDialog(true));
         } 
         else
         {

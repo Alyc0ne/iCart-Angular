@@ -15,11 +15,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LeftBarComponent } from './default/left-bar/left-bar.component';
 import { TopBarComponent } from './default/top-bar/top-bar.component';
-import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
 import { ProductListComponent } from './modules/product/List/product.component';
 import { ProductModalComponent } from './modules/product/Shared/product-modal.component';
 import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
 import { POSComponent } from './modules/pos/pos.component';
+
+//Extension
+import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
+import { NumberPipePipe } from '../assets/extension/number-pipe';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { POSComponent } from './modules/pos/pos.component';
     ProductModalComponent,
     AlertModalComponent,
     OnlynumberDirective,
+    NumberPipePipe,
     POSComponent
   ],
   imports: [

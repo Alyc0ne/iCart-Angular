@@ -13,10 +13,10 @@ export class ProductService {
     readonly baseUrl = 'http://localhost:5000/api/'
     //formData: ProductModel = new ProductModel();
     list: ProductModel[];
-    editProduct: ProductModel[];
     runningNumber: string;
     runningFormatID: string;
     listUnit: UnitModel[];
+    productModel: ProductModel[];
 
     refreshList = async () => {
         this.http.get(this.baseUrl + 'Products')
@@ -44,7 +44,7 @@ export class ProductService {
     getProduct = async (productID) => {
         await this.http.get(this.baseUrl + 'Products/' + productID)
         .toPromise()
-        .then(res => this.editProduct = res as ProductModel[])
+        .then(res => (this.productModel = res as ProductModel[], this.getUnit()))
     }
 
     bindSave = async (ProductModel) => {
@@ -53,6 +53,22 @@ export class ProductService {
             .toPromise()
             .then(res => console.log(res))
             .catch(res => console.log("catch"))
+        }
+    }
+
+    bindEdit = async (ProductModel) => {
+        if (!!ProductModel) {
+            console.log(ProductModel)
+            // await this.http.post(this.baseUrl + 'Products', ProductModel)
+            // .toPromise()
+            // .then(res => console.log(res))
+            // .catch(res => console.log("catch"))
+        }
+    }
+
+    bindDelete = async (productID) => {
+        if (!!productID) {
+            
         }
     }
 }

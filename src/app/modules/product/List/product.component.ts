@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductService } from '../Shared/product.service';
 import { ProductModalComponent } from '../Shared/product-modal.component'
+import { ProductModel } from '../Shared/product.model';
 
 @Component({
     selector: 'app-product',
@@ -16,6 +17,8 @@ export class ProductListComponent {
         private dialog:MatDialog,
     ) { }
 
+    productModel: ProductModel[];
+    
     ngOnInit(): void {
         this.service.refreshList()
     }
@@ -40,12 +43,11 @@ export class ProductListComponent {
         }
         else
         {
-            let objProduct = null;
-            await this.service.getProduct(productID).then(res =>(
-                objProduct = this.service.editProduct,
+            let productModel = null;
+            await this.service.getProduct(productID).then(res => (
+                productModel = this.service.productModel,
                 dialogConfig.data = {
-                    objProduct: objProduct,
-                    productUnits: objProduct.productUnits
+                    objProduct: productModel
                 },
                 this.dialog.open(ProductModalComponent, dialogConfig)
             ));
