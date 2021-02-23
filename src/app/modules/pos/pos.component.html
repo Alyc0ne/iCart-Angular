@@ -12,12 +12,12 @@
         </div>
         <div class="summary-content">
             <!-- <div class="content-warpper"> -->
-                <div *ngFor="let product of fakeModel" class="content-detail">
+                <div *ngFor="let product of cartProduct.products" class="content-detail">
                     <div title="{{ product.name }}">{{ product.name }}</div>
                     <div class="stepper">
-                        <button><i class="material-icons">remove</i></button>
+                        <button (click)="manageQuatity(false, product.id)"><i class="material-icons">remove</i></button>
                         <span>{{ product.quantity | number:'1.0' }}</span>
-                        <button><i class="material-icons">add</i></button>
+                        <button (click)="manageQuatity(true, product.id)"><i class="material-icons">add</i></button>
                     </div>
                     <div>
                         {{ product.totalPrice | number:'1.2-2' }}
@@ -28,21 +28,22 @@
         <div class="summary-footer">
             <div>
                 <p>รวมเงิน : </p>
-                <p class="txt-r">{{ 2500 | number:'1.2-2' }}</p>
+                <input type="text" [ngModel]="cartProduct.summary.subTotal">
+                <!-- <p class="txt-r">{{ 2500 | number:'1.2-2' }}</p> -->
             </div>
             <div>
                 <p>ส่วนลด : </p>
                 <div class="form-content">
-                    <input type="text" class="form-input" disabled>
+                    <input type="text" [(ngModel)]="cartProduct.summary.discount" class="form-input" disabled>
                 </div>
                 
             </div>
-            <div>
+            <!-- <div>
                 <p>ส่วนลด : </p>
                 <div class="form-content">
                     <input type="text" class="form-input txt-r" disabled [(ngModel)]="totalAmnt">
                 </div>
-            </div>
+            </div> -->
             <div>
                 <p>ประเภทการชำระ : </p>
                 <mat-select [ngModel]="paymentSeleted">
@@ -56,7 +57,7 @@
             </div>
         </div>
         <div class="summary-action">
-            <button class="blue-button w100p h40px" (click)="callPaymentModal(null)">
+            <button class="blue-button" (click)="callPaymentModal()">
                 ชำระเงิน
             </button>
         </div>
