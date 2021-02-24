@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { POSModel } from './Shared/pos.model';
+import { Component, HostListener } from '@angular/core';
+import { POSService } from './Shared/pos.service';
+import { cartModel } from './Shared/pos.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PaymentModalComponent } from './Shared/payment-modal.component'
 
@@ -10,106 +11,147 @@ import { PaymentModalComponent } from './Shared/payment-modal.component'
 })
 
 export class POSComponent {
-    constructor(
-        private dialog:MatDialog,
+    constructor(        
+        public POSservice: POSService,
+        private dialogPayment:MatDialog,
     ) {}
 
-    paymentModel = [
-        { paymentType: 1, paymentName: 'เงินสด' },
-        { paymentType: 2, paymentName: 'เงินโอน / พร้อมเพย์' },
-        { paymentType: 3, paymentName: 'คนละครึ่ง / เราชนะ' }
-    ]
+    private dialogRef;
 
-    totalAmnt = "25450";
-
-    paymentSeleted = this.paymentModel[0].paymentType
-
-    cartProduct = {
-        products: [
-            { id: 1, name: 'Dr Nice Kim So Hyun My Girl Friend', quantity: 1, price: 100, totalPrice: 100 },
-            { id: 2, name: 'Narco', quantity: 1, price: 200, totalPrice: 200 },
-            { id: 3, name: 'Bombasto', quantity: 1, price: 300, totalPrice: 300 },
-            { id: 4, name: 'Celeritas', quantity: 1, price: 400, totalPrice: 400 },
-            { id: 5, name: 'Magneta', quantity: 1, price: 500, totalPrice: 500 },
-            { id: 6, name: 'RubberMan', quantity: 1, price: 600, totalPrice: 600 },
-            { id: 7, name: 'Dynama', quantity: 1, price: 700, totalPrice: 700 },
-            { id: 8, name: 'Dr IQ', quantity: 1, price: 800, totalPrice: 800 },
-            { id: 9, name: 'Magma', quantity: 1, price: 900, totalPrice: 900 },
-            { id: 10, name: 'Singha', quantity: 1, price: 1000, totalPrice: 1000 },
-            { id: 11, name: 'Drinking', quantity: 1, price: 1100, totalPrice: 1100 },
-            { id: 12, name: 'Water', quantity: 1, price: 1200, totalPrice: 1200 }
-        ],
-        summary : 
-        {   
-            paymentSeleted: this.paymentModel[0].paymentType,
-            subTotal: 0,
-            discount: 500,
-            totalAmnt: 0
-        }
+    private _openDialog(component, _data) {
+        if (!!this.dialogRef) return;        
+        this.dialogRef = this.dialogPayment.open(component, {
+            autoFocus: true,
+            disableClose: true,
+            width: "500px",
+            height: "250px",
+            data: !!_data ? _data : null
+        })
+      
+        this.dialogRef.afterClosed().subscribe(() => {
+            this.dialogRef = undefined;
+        })
     }
+
+    cartModel: cartModel;
 
     looper = [
         {},{},{},{},
         {},{},{},{}
     ]
 
-    // ,{},{},{},{},{},{}
+    objProduct = [
+        { productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend', productQuantity: 1, productPrice: 100, productTotalPrice: 100 },
+        { productID: '2', productName: 'Narco', productQuantity: 1, productPrice: 200, productTotalPrice: 200 },
+        { productID: '3', productName: 'Bombasto', productQuantity: 1, productPrice: 300, productTotalPrice: 300 },
+        { productID: '4', productName: 'Celeritas', productQuantity: 1, productPrice: 400, productTotalPrice: 400 },
+        { productID: '5', productName: 'Magneta', productQuantity: 1, productPrice: 500, productTotalPrice: 500 },
+        { productID: '6', productName: 'RubberMan', productQuantity: 1, productPrice: 600, productTotalPrice: 600 },
+        { productID: '7', productName: 'Dynama', productQuantity: 1, productPrice: 700, productTotalPrice: 700 },
+        { productID: '8', productName: 'Dr IQ', productQuantity: 1, productPrice: 800, productTotalPrice: 800 },
+        { productID: '9', productName: 'Magma', productQuantity: 1, productPrice: 900, productTotalPrice: 900 },
+        { productID: '10', productName: 'Singha', productQuantity: 1, productPrice: 1000, productTotalPrice: 1000 },
+        { productID: '11', productName: 'Drinking', productQuantity: 1, productPrice: 1100, productTotalPrice: 1100 },
+        { productID: '12', productName: 'Water', productQuantity: 1, productPrice: 1200, productTotalPrice: 1200 }
+    ]
 
 
     ngOnInit(): void {
-        this.calSummary();
+        this.POSservice.getPaymentType();
+        console.log(this.cartModel)
+        console.log(this.POSservice.paymentModel)
+        this.cartModel = {
+            //products: [{ productID: null, productName: null, productQuantity: null, productPrice: null, productTotalPrice: null}],
+            summary: { paymentSeleted: this.POSservice.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
+        }
+        
+        // this.cartModel = {
+        //     products: [{productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend', productQuantity: 1, productPrice: 100, productTotalPrice: 100}],
+        //     //products: this.objProduct
+        //     summary: { paymentSeleted: this.POSservice.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
+        // }
+           
+        // this.cartModel.products.push(
+        //     { productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend', productQuantity: 1, productPrice: 100, productTotalPrice: 100 },
+        //     { productID: '2', productName: 'Narco', productQuantity: 1, productPrice: 200, productTotalPrice: 200 },
+        //     { productID: '3', productName: 'Bombasto', productQuantity: 1, productPrice: 300, productTotalPrice: 300 },
+        //     { productID: '4', productName: 'Celeritas', productQuantity: 1, productPrice: 400, productTotalPrice: 400 },
+        //     { productID: '5', productName: 'Magneta', productQuantity: 1, productPrice: 500, productTotalPrice: 500 },
+        //     { productID: '6', productName: 'RubberMan', productQuantity: 1, productPrice: 600, productTotalPrice: 600 },
+        //     { productID: '7', productName: 'Dynama', productQuantity: 1, productPrice: 700, productTotalPrice: 700 },
+        //     { productID: '8', productName: 'Dr IQ', productQuantity: 1, productPrice: 800, productTotalPrice: 800 },
+        //     { productID: '9', productName: 'Magma', productQuantity: 1, productPrice: 900, productTotalPrice: 900 },
+        //     { productID: '10', productName: 'Singha', productQuantity: 1, productPrice: 1000, productTotalPrice: 1000 },
+        //     { productID: '11', productName: 'Drinking', productQuantity: 1, productPrice: 1100, productTotalPrice: 1100 },
+        //     { productID: '12', productName: 'Water', productQuantity: 1, productPrice: 1200, productTotalPrice: 1200 }
+        // )
+
+        // this.calSummary();
     }
 
-    manageQuatity(type, productID) {
+    getProductByBarcode_text = async(event) => {
+        var product = await this.POSservice.getProductByBarcode_text();
+        if (!!product) {
+            if (!!this.cartModel.products) {
+                var currentProduct = this.cartModel.products.filter(x => { return x.productID == product.productID; });
+                if (currentProduct.length > 0) {
+                    this.manageQuatity(true.valueOf, currentProduct[0].productID, false)
+                }
+            }
+            else
+            {
+                this.cartModel.products = [product];
+            }
+
+            this.calSummary();
+        }
+
+        console.log(event)
+    }
+
+    manageQuatity(type, productID, isCal = true) {
         if (!!productID) {
-            if (!!this.cartProduct.products) {
-                var product = this.cartProduct.products.filter(x => { return x.id == productID; })
+            if (!!this.cartModel.products) {
+                var product = this.cartModel.products.filter(x => { return x.productID == productID; })
                 if (product != null && product.length > 0) {
                     const _product = product[0];
                     if (type) {
-                        _product.quantity += 1;
-                        _product.totalPrice = (product[0].totalPrice + product[0].price);
+                        _product.productQuantity += 1;
+                        _product.productTotalPrice = (product[0].productTotalPrice + product[0].productPrice);
                     }
                     else
                     {
-                        _product.quantity -= 1;
-                        _product.totalPrice = (product[0].totalPrice - product[0].price);
+                        _product.productQuantity -= 1;
+                        _product.productTotalPrice = (product[0].productTotalPrice - product[0].productPrice);
                     }
                 }
-
-                this.calSummary();
+                
+                if (isCal)
+                    this.calSummary();
             }
         }
     }
 
     calSummary() {
-        if (this.cartProduct.products.length > 0) {
-            var subTotal = this.cartProduct.products.reduce((sum, obj) => { return sum + obj.totalPrice; }, 0);
-            console.log(subTotal);
-            this.cartProduct.summary.subTotal = subTotal;
-
-            this.cartProduct.summary.totalAmnt = (subTotal - this.cartProduct.summary.discount);
+        console.log(this.cartModel)
+        if (!!this.cartModel.products.length) {
+            var subTotal = this.cartModel.products.reduce((sum, obj) => { return sum + obj.productTotalPrice; }, 0);
+            this.cartModel.summary.subTotal = subTotal;
+            this.cartModel.summary.totalAmnt = (subTotal - this.cartModel.summary.discount);
         }    
     }
 
-    callPaymentModal() {
-        if (this.cartProduct.products.length > 0) {
-            const dialogConfig = new MatDialogConfig();
-            dialogConfig.autoFocus = true;
-            dialogConfig.disableClose = true;
-            dialogConfig.width = "500px";
-            dialogConfig.height = "200px";
+    @HostListener('document:keydown', ['$event'])
+    onKeyDown(e: KeyboardEvent) {
+        if (e.keyCode == 32)
+            this.callPaymentModal();
+    }
 
-                /*await this.service.newProduct().then(res => (
-                    dialogConfig.data = {
-                        objProduct : { 
-                            runningFormatID: this.service.runningFormatID, 
-                            productNo: this.service.runningNumber 
-                        }
-                    },*/
-                    this.dialog.open(PaymentModalComponent, dialogConfig)
-                //));
-            
+    callPaymentModal() {
+        if (this.cartModel.products.length > 0) {                
+            /*await this.service.newProduct().then(res => (*/
+                this._openDialog(PaymentModalComponent, this.cartModel.summary.totalAmnt);
+            //));
         }
         else
         {

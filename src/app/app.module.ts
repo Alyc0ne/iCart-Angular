@@ -16,9 +16,12 @@ import { AppComponent } from './app.component';
 import { LeftBarComponent } from './default/left-bar/left-bar.component';
 import { TopBarComponent } from './default/top-bar/top-bar.component';
 import { ProductListComponent } from './modules/product/List/product.component';
+import { POSComponent } from './modules/pos/pos.component';
+
+//Modal
 import { ProductModalComponent } from './modules/product/Shared/product-modal.component';
 import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
-import { POSComponent } from './modules/pos/pos.component';
+import { PaymentModalComponent } from './modules/pos/Shared/payment-modal.component';
 
 //Extension
 import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
@@ -35,7 +38,8 @@ import { NumberPipePipe } from '../assets/extension/number-pipe';
     AlertModalComponent,
     OnlynumberDirective,
     NumberPipePipe,
-    POSComponent
+    POSComponent,
+    PaymentModalComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,7 @@ import { NumberPipePipe } from '../assets/extension/number-pipe';
     MatSidenavModule,
     MatMenuModule
   ],
-  entryComponents:[ProductModalComponent, AlertModalComponent],
+  entryComponents:[ProductModalComponent, AlertModalComponent, PaymentModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

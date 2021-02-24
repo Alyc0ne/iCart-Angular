@@ -7,20 +7,20 @@
         <div class="header-menu">
             <div class="search w100p">
                 <i class="material-icons">search</i>
-                <input type="text" name="" id="" class="w100p" placeholder="รหัสบาร์โค้ด / ชื่อสินค้า">
+                <input type="text" class="w100p" placeholder="รหัสบาร์โค้ด / ชื่อสินค้า" (change)="getProductByBarcode_text($event)">
             </div>
         </div>
         <div class="summary-content">
             <!-- <div class="content-warpper"> -->
-                <div *ngFor="let product of cartProduct.products" class="content-detail">
-                    <div title="{{ product.name }}">{{ product.name }}</div>
+                <div *ngFor="let product of cartModel.products" class="content-detail">
+                    <div title="{{ product.productName }}">{{ product.productName }}</div>
                     <div class="stepper">
-                        <button (click)="manageQuatity(false, product.id)"><i class="material-icons">remove</i></button>
-                        <span>{{ product.quantity | number:'1.0' }}</span>
-                        <button (click)="manageQuatity(true, product.id)"><i class="material-icons">add</i></button>
+                        <button (click)="manageQuatity(false, product.productID)"><i class="material-icons">remove</i></button>
+                        <span>{{ product.productQuantity | number:'1.0' }}</span>
+                        <button (click)="manageQuatity(true, product.productID)"><i class="material-icons">add</i></button>
                     </div>
                     <div>
-                        {{ product.totalPrice | number:'1.2-2' }}
+                        {{ product.productTotalPrice | number:'1.2-2' }}
                     </div>
                 </div>
             <!-- </div> -->
@@ -28,13 +28,13 @@
         <div class="summary-footer">
             <div>
                 <p>รวมเงิน : </p>
-                <input type="text" [ngModel]="cartProduct.summary.subTotal">
+                <input type="text" [ngModel]="cartModel.summary.subTotal">
                 <!-- <p class="txt-r">{{ 2500 | number:'1.2-2' }}</p> -->
             </div>
             <div>
                 <p>ส่วนลด : </p>
                 <div class="form-content">
-                    <input type="text" [(ngModel)]="cartProduct.summary.discount" class="form-input" disabled>
+                    <input type="text" [(ngModel)]="cartModel.summary.discount" class="form-input" disabled>
                 </div>
                 
             </div>
@@ -46,19 +46,19 @@
             </div> -->
             <div>
                 <p>ประเภทการชำระ : </p>
-                <mat-select [ngModel]="paymentSeleted">
-                    <mat-option *ngFor="let pt of paymentModel" [value]="pt.paymentType">{{ pt.paymentName }}</mat-option>
+                <mat-select [ngModel]="cartModel.summary.paymentSeleted">
+                    <mat-option *ngFor="let pt of POSservice.paymentModel" [value]="pt.paymentType">{{ pt.paymentName }}</mat-option>
                 </mat-select>
             </div>
             <hr>
             <div>
                 <p>รวมเงิน : </p>
-                <input type="text" [ngModel]="cartProduct.summary.totalAmnt">
+                <input type="text" [ngModel]="cartModel.summary.totalAmnt">
             </div>
-        </div>
+        </div> 
         <div class="summary-action">
             <button class="blue-button" (click)="callPaymentModal()">
-                ชำระเงิน
+                ชำระเงิน (Space Bar)
             </button>
         </div>
     </div>

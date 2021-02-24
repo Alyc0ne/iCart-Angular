@@ -1,18 +1,20 @@
-export class POSModel {
-    runningFormatID:string;
-    productID:string;
-    productNo:string;
-    productName:string;
-    productNameEng:string;
-    productQuantity:number;
-    productDesc:string;
-    productSalePrice:number;
-    productPurchasePrice:number;
-    productUnits: [{
-        uid:string;
-        isFocus:boolean;
-        barcode:string;
-        unitID:string;
-        isBaseUnit:boolean;
-    }];
+export class cartModel {
+    products?: [{
+        productID: string;
+        productName: string;
+        productQuantity: number;
+        productPrice: number;
+        productTotalPrice: number;
+    }]
+    summary: {
+        paymentSeleted: string;
+        subTotal: number;
+        discount: number;
+        totalAmnt: number;
+    }
+}
+
+export class PaymentModel {
+     paymentType: string;
+     paymentName: string;
 }
