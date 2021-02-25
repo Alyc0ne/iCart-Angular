@@ -26,6 +26,7 @@ import { PaymentModalComponent } from './modules/pos/Shared/payment-modal.compon
 //Extension
 import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
 import { NumberPipePipe } from '../assets/extension/number-pipe';
+import { OrderByPipe } from '../assets/extension/order-by.pipe';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { NumberPipePipe } from '../assets/extension/number-pipe';
     AlertModalComponent,
     OnlynumberDirective,
     NumberPipePipe,
+    OrderByPipe,
     POSComponent,
     PaymentModalComponent
   ],

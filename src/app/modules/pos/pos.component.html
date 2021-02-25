@@ -7,7 +7,7 @@
         <div class="header-menu">
             <div class="search w100p">
                 <i class="material-icons">search</i>
-                <input type="text" class="w100p" placeholder="รหัสบาร์โค้ด / ชื่อสินค้า" (change)="getProductByBarcode_text($event)">
+                <input type="text" class="w100p" placeholder="รหัสบาร์โค้ด / ชื่อสินค้า" [(ngModel)]="textSearch" (change)="getProductByBarcode_text()">
             </div>
         </div>
         <div class="summary-content">
@@ -57,7 +57,7 @@
             </div>
         </div> 
         <div class="summary-action">
-            <button class="blue-button" (click)="callPaymentModal()">
+            <button class="blue-button" (click)="callPaymentModal()" [disabled]="!cartModel.products">
                 ชำระเงิน (Space Bar)
             </button>
         </div>

@@ -34,28 +34,13 @@ export class POSComponent {
     }
 
     cartModel: cartModel;
+    textSearch: string;
 
     looper = [
         {},{},{},{},
         {},{},{},{}
     ]
-
-    objProduct = [
-        { productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend', productQuantity: 1, productPrice: 100, productTotalPrice: 100 },
-        { productID: '2', productName: 'Narco', productQuantity: 1, productPrice: 200, productTotalPrice: 200 },
-        { productID: '3', productName: 'Bombasto', productQuantity: 1, productPrice: 300, productTotalPrice: 300 },
-        { productID: '4', productName: 'Celeritas', productQuantity: 1, productPrice: 400, productTotalPrice: 400 },
-        { productID: '5', productName: 'Magneta', productQuantity: 1, productPrice: 500, productTotalPrice: 500 },
-        { productID: '6', productName: 'RubberMan', productQuantity: 1, productPrice: 600, productTotalPrice: 600 },
-        { productID: '7', productName: 'Dynama', productQuantity: 1, productPrice: 700, productTotalPrice: 700 },
-        { productID: '8', productName: 'Dr IQ', productQuantity: 1, productPrice: 800, productTotalPrice: 800 },
-        { productID: '9', productName: 'Magma', productQuantity: 1, productPrice: 900, productTotalPrice: 900 },
-        { productID: '10', productName: 'Singha', productQuantity: 1, productPrice: 1000, productTotalPrice: 1000 },
-        { productID: '11', productName: 'Drinking', productQuantity: 1, productPrice: 1100, productTotalPrice: 1100 },
-        { productID: '12', productName: 'Water', productQuantity: 1, productPrice: 1200, productTotalPrice: 1200 }
-    ]
-
-
+    
     ngOnInit(): void {
         this.POSservice.getPaymentType();
         console.log(this.cartModel)
@@ -89,24 +74,34 @@ export class POSComponent {
         // this.calSummary();
     }
 
-    getProductByBarcode_text = async(event) => {
-        var product = await this.POSservice.getProductByBarcode_text();
-        if (!!product) {
+    getProductByBarcode_text = async() => {
+        var product = await this.POSservice.getProductByBarcode_text(this.textSearch);
+        if (product.length > 0) {
+            var _product = product[0];
             if (!!this.cartModel.products) {
-                var currentProduct = this.cartModel.products.filter(x => { return x.productID == product.productID; });
-                if (currentProduct.length > 0) {
+                var currentProduct = this.cartModel.products.filter(x => { return x.productID == _product.productID; });
+                if (currentProduct.length > 0)
                     this.manageQuatity(true.valueOf, currentProduct[0].productID, false)
-                }
+                else
+                    this.cartModel.products.push(_product);
             }
             else
-            {
-                this.cartModel.products = [product];
+            {1
+                this.cartModel.products = [_product];
             }
+
+            var e = this.cartModel.products.sort((a, b) => {
+                console.log('A : ' + a.added_on)
+                console.log('B : ' + b.added_on)
+                return <any>new Date(b.added_on) - <any>new Date(a.added_on);
+            })
+
+            console.log(e)
 
             this.calSummary();
         }
 
-        console.log(event)
+        this.textSearch = ''
     }
 
     manageQuatity(type, productID, isCal = true) {
@@ -124,6 +119,8 @@ export class POSComponent {
                         _product.productQuantity -= 1;
                         _product.productTotalPrice = (product[0].productTotalPrice - product[0].productPrice);
                     }
+
+                    _product.added_on = new Date().getTime();
                 }
                 
                 if (isCal)
@@ -133,7 +130,7 @@ export class POSComponent {
     }
 
     calSummary() {
-        console.log(this.cartModel)
+        // console.log(this.cartModel)
         if (!!this.cartModel.products.length) {
             var subTotal = this.cartModel.products.reduce((sum, obj) => { return sum + obj.productTotalPrice; }, 0);
             this.cartModel.summary.subTotal = subTotal;
