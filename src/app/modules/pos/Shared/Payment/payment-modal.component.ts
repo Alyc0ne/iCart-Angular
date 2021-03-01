@@ -1,5 +1,6 @@
 import { Component, Inject, HostListener } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { ReceiptModalComponent } from '../Receipt/receipt-modal.component';
 
 @Component({
     selector: 'payment-modal',
@@ -11,20 +12,33 @@ export class PaymentModalComponent {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data,
         public dialogRef:MatDialogRef<PaymentModalComponent>,
+        public dialog:MatDialog
     ) {}
 
     public totalAmnt: number;
     public amntReceived: number;
     public balanceAmnt: number;
     private isCloseDialog = false;
+    
+    private dialogOpen;
+    private _openDialog(component, _data) {
+        if (!!this.dialogOpen) return;        
+        this.dialogOpen = this.dialog.open(component, {
+            autoFocus: true,
+            disableClose: true,
+            width: "500px",
+            height: "250px",
+            data: !!_data ? _data : null
+        })
+      
+        this.dialogOpen.afterClosed().subscribe(() => {
+            this.dialogOpen = undefined;
+        })
+    }
 
     ngOnInit(): void {
         this.totalAmnt = this.data;
-        this.amntReceived = 0;
-    }
-
-    onAmntReceivedChange(amntReceived: number) {
-        this.balanceAmnt = this.totalAmnt - amntReceived;
+        this.amntReceived = null;
     }
 
     @HostListener('document:keydown', ['$event'])
@@ -34,6 +48,7 @@ export class PaymentModalComponent {
 
         if (e.key == "Enter") {
             if (this.amntReceived >= this.totalAmnt) {
+                this.payment();
                 console.log('Call Payment')
             }
             
@@ -44,5 +59,13 @@ export class PaymentModalComponent {
         }
 
         console.log(e.keyCode)
+    }
+
+    onAmntReceivedChange(amntReceived: number) {
+        this.balanceAmnt = amntReceived - this.totalAmnt;
+    }
+
+    payment() {
+        this._openDialog(ReceiptModalComponent, null);
     }
 }

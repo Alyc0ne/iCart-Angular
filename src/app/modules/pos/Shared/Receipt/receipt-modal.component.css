@@ -1,0 +1,21 @@
+.modal-content {
+    height: 100px !important;
+    overflow: hidden !important;
+}
+
+.modal-footer {
+    border: none;
+}
+
+.modal-footer > div > button {
+    width: 100%;
+}
+
+label {
+    font-size: 26px !important;
+    min-width: 200px;
+}
+
+input.form-input {
+    width: 200px !important;
+}

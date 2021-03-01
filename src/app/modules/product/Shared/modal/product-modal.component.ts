@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ProductModel } from './product.model';
-import { ProductService } from './product.service';
-import { AlertModalComponent } from '../../Shared/Modal/Alert/alert-modal.component';
+import { ProductModel } from '../product.model';
+import { ProductService } from '../product.service';
+import { AlertModalComponent } from '../../../Shared/Modal/Alert/alert-modal.component';
 import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({

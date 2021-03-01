@@ -1,0 +1,29 @@
+.newtable {
+    border-collapse: separate;
+    width: 100%;
+    border-spacing: 0 10px;
+    table-layout: fixed;
+}
+
+.newtable > thead > th {
+    padding: 0 15px;
+}
+
+.newtable tbody {
+    display: block;
+    overflow: auto;
+    height: 100px;
+}
+
+.newtable tbody > tr {
+    border: solid 1px black;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    height: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+tbody > tr > td:first-child() { 
+    width: 200px;
+}

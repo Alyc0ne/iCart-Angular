@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductService } from '../Shared/product.service';
-import { ProductModalComponent } from '../Shared/product-modal.component'
+import { ProductModalComponent } from '../Shared/modal/product-modal.component'
 import { ProductModel } from '../Shared/product.model';
 
 @Component({

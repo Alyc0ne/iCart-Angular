@@ -15,14 +15,16 @@ body {
     /* font-family: 'Athiti'; */
 }
 
-.container {
+/* .container {
     width: 100%;
     height: calc(100% - 40px);
-    /* margin: 0 2rem; */
-    /* background: white; */
-    /* border-radius: 10px;
-    padding: 1rem; */
     padding-top: 0;
+} */
+
+.container-content {
+    margin: 20px 0px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 15px;
 }
   
 mat-drawer-content {
@@ -101,8 +103,8 @@ label {
     /* border-radius: .25rem; */
     font-size: 14px;
     cursor: pointer;
-    background-color: #1976d2;
-    color: white;
+    /* background-color: #1976d2; */
+    color: #fff;
     border: none;
     min-width: 150px;
     justify-content: center;
@@ -110,12 +112,16 @@ label {
 
 .button:hover, button:hover {
     opacity: 0.8;
-    font-weight: normal;
+    font-weight: normal; 
 }
 
 .button.disabled, button:disabled {
     opacity: .65;
     cursor: auto;
+}
+
+.button .shadow {
+    box-shadow: 0 3px 1px -2px rgb(0, 0, 0, 0.2), 0 2px 2px 0 rgb(0, 0, 0, 1.4), 0 1px 5px 0 rgb(0, 0, 0, 1.2);
 }
 
 .blue-button {
@@ -134,6 +140,10 @@ label {
     color: #fff;
     background-color: #1e7e34;
     border-color: #1c7430;
+}
+
+button.warn {
+    background-color: #f44336 !important;
 }
 
 .light-button {
@@ -170,6 +180,7 @@ button.multipleAction > i {
 .top-bar {
     height: 50px;
     width: 100%;
+    padding-top: 20px;
     /* border-bottom: 1px solid #a9adb3; */
 }
 
@@ -218,6 +229,10 @@ app-left-bar {
 
 .header-menu h1{
     margin: 0;
+}
+
+.content-menu {
+    padding-top: 10px;
 }
 
 /* Text */

@@ -8,15 +8,19 @@
     <mat-drawer [(opened)]="isToggle" mode="over">
       <div class="sidebar">
         <ul class="link">
-          <li routerLink="">Home</li>
+          <li routerLink="Dashboard" routerLinkActive="active">Dashboard</li>
           <li routerLink="POS" routerLinkActive="active">POS</li>
           <li routerLink="ListProduct" routerLinkActive="active">สินค้า</li>
+          <li routerLink="ListUnit" routerLinkActive="active">หน่วยนับ</li>
         </ul>
       </div>
     </mat-drawer>
     <mat-drawer-content>
       <app-top-bar (isToggle)="isToggle" (drawerToggle)="isToggle = $event"></app-top-bar>
-        <div class="container-detail">
+        <div class="container">
+          <!-- <div class="container-content">
+            
+          </div> -->
           <router-outlet></router-outlet>
         </div>
     </mat-drawer-content>

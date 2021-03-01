@@ -1,0 +1,47 @@
+.product-info {
+    display: grid;
+    grid-template-columns: 50% 40%;
+}
+
+.unit-info {
+    padding: 0 2rem;
+    margin-bottom: 20px;
+}
+
+.unit-info tbody {
+    height: 150px !important;
+}
+
+.unit-info .button {
+    height: 30px;
+    min-width: 110px;
+}
+
+.unit-info input.form-input {
+    width: 200px !important;
+    margin-bottom: 0px;
+}
+
+.unit-content {
+    height: 0px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.form-content > input, textarea {
+    width: 320px;
+}
+
+.product-info .form-group.fullrow {
+    grid-column: 1/3;
+}
+
+.styled-table td > i.material-icons:nth-child(1) {
+    color: #4BAEE5;
+    cursor: pointer;
+}
+
+.styled-table td > i.material-icons:nth-child(2) {
+    color: red;
+    cursor: pointer;
+}

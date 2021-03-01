@@ -1,0 +1,114 @@
+<!-- <div class="top-bar">
+    <h1>หน่วยนับทั้งหมด</h1>
+</div> -->
+
+<div class="header-menu">
+    <h1><b>หน่วยนับทั้งหมด</b></h1>
+    <!-- <div class="search">
+        <i class="material-icons">search</i>
+        <input type="text" name="" id="" placeholder="Search Products">
+    </div> -->
+
+    <div class="groupAction">
+        <button class="blue-button" (click)="callProductModal(null)">
+            Add Unit
+        </button>
+
+        <button class="multipleAction" [matMenuTriggerFor]="menu" disabled>
+            <i class="material-icons">more_vert</i> 
+            <span>Action</span>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <i class="material-icons">dialpad</i>
+            <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+            <i class="material-icons">voicemail</i>
+            <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+            <i class="material-icons">notifications_off</i>
+            <span>Disable alerts</span>
+        </button>
+        </mat-menu>
+    </div>
+</div>
+
+<div class="content-menu">
+    <table class="newtable">
+        <thead>
+            <th class="txt-l">รหัสหน่วยนับ</th>
+            <th class="txt-l">ชื่อหน่วยนับ</th>
+            <th class="txt-l">CREATED DATE</th>
+            <!-- <th class="txt-r">จำนวนคงเหลือ</th>
+            <th class="txt-l">หน่วยนับหลัก</th>
+            <th class="txt-r">ราคาซื้อ</th>
+            <th class="txt-r">ราคาขาย</th>
+            <th colspan="2" class="txt-c">Action</th>   -->
+        </thead>
+            <tbody>
+                <tr *ngFor="let un of units">
+                    <td>{{ un.unitNo }}</td>
+                    <td>{{ un.unitName }}</td>
+                    <td>{{ un.createdDate }}</td>
+                    <!-- <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-r">{{ product.productQuantity }}</td> -->
+                    <!-- <td>{{ product.unitName }}</td>
+                    <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
+                    <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
+                    <td class="txt-r">
+                        <i class="material-icons" (click)="callProductModal(product.productID)">edit</i>
+                    </td>
+                    <td class="txt-l">
+                        <i class="material-icons">delete_outline</i>
+                    </td> -->
+                </tr>
+            </tbody>    
+    </table>
+</div>
+
+<!-- <div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="txt-l">Barcode</th>
+                <th class="txt-l">ชื่อสินค้า</th>
+                <th class="txt-r">จำนวนคงเหลือ</th>
+                <th class="txt-l">หน่วยนับหลัก</th>
+                <th class="txt-r">ราคาซื้อ</th>
+                <th class="txt-r">ราคาขาย</th>
+                <th colspan="2" class="txt-c">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of service.list">
+                <td>{{ product.barcode }}</td>
+                <td>{{ product.productName }}</td>
+                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-r">{{ product.productQuantity }}</td>
+                <td>{{ product.unitName }}</td>
+                <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
+                <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
+                <td class="txt-r">
+                    <i class="material-icons" (click)="callProductModal(product.productID)">edit</i>
+                </td>
+                <td class="txt-l">
+                    <i class="material-icons">delete_outline</i>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            Pagination
+        </tfoot>
+    </table>
+</div> -->
+
+<!-- <div class="pagination">
+    <a href="#">&laquo;</a>
+    <a href="#" class="active">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">6</a>
+    <a href="#">&raquo;</a>
+</div> -->

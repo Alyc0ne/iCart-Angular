@@ -13,15 +13,17 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LeftBarComponent } from './default/left-bar/left-bar.component';
 import { TopBarComponent } from './default/top-bar/top-bar.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { ProductListComponent } from './modules/product/List/product.component';
 import { POSComponent } from './modules/pos/pos.component';
+import { UnitListComponent } from './modules/unit/List/unit.component';
 
 //Modal
-import { ProductModalComponent } from './modules/product/Shared/product-modal.component';
+import { ProductModalComponent } from './modules/product/Shared/modal/product-modal.component';
 import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
-import { PaymentModalComponent } from './modules/pos/Shared/payment-modal.component';
+import { PaymentModalComponent } from './modules/pos/Shared/Payment/payment-modal.component';
+import { ReceiptModalComponent } from './modules/pos/Shared/Receipt/receipt-modal.component';
 
 //Extension
 import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
@@ -33,15 +35,20 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
   declarations: [
     AppComponent,
     TopBarComponent,
-    LeftBarComponent,
     ProductListComponent,
     ProductModalComponent,
+    POSComponent,
+    UnitListComponent,
+
+    //Modal
     AlertModalComponent,
+    PaymentModalComponent,
+    ReceiptModalComponent,
+
+    //Extension
     OnlynumberDirective,
     NumberPipePipe,
-    OrderByPipe,
-    POSComponent,
-    PaymentModalComponent
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
@@ -50,16 +57,21 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
+      {
+        path: '', redirectTo: '/DashboardComponent', pathMatch: 'full' 
+      },
+      { 
+        path: 'Dashboard', component: DashboardComponent
+      },
       { 
         path: 'POS', component: POSComponent
       },
       { 
         path: 'ListProduct', component: ProductListComponent
+      },
+      {
+        path: 'ListUnit', component: UnitListComponent
       }
-      // ,
-      // {
-      //   path: 'NewProduct', component: ProductNewComponent
-      // }
     ]),
     BrowserAnimationsModule,
     MatDialogModule,
@@ -69,7 +81,7 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     MatSidenavModule,
     MatMenuModule
   ],
-  entryComponents:[ProductModalComponent, AlertModalComponent, PaymentModalComponent],
+  entryComponents:[ProductModalComponent, AlertModalComponent, PaymentModalComponent, ReceiptModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

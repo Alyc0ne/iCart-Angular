@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { POSService } from './Shared/pos.service';
 import { cartModel } from './Shared/pos.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PaymentModalComponent } from './Shared/payment-modal.component'
+import { PaymentModalComponent } from './Shared/Payment/payment-modal.component'
 
 @Component({
     selector: 'app-pos',
@@ -43,8 +43,8 @@ export class POSComponent {
     
     ngOnInit(): void {
         this.POSservice.getPaymentType();
-        console.log(this.cartModel)
-        console.log(this.POSservice.paymentModel)
+        // console.log(this.cartModel)
+        // console.log(this.POSservice.paymentModel)
         this.cartModel = {
             //products: [{ productID: null, productName: null, productQuantity: null, productPrice: null, productTotalPrice: null}],
             summary: { paymentSeleted: this.POSservice.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
