@@ -281,9 +281,9 @@ input[type="checkbox"] {
 .pagination {
     /* display: flex;
     justify-content: flex-end; */
-    position: absolute;
+    /* position: absolute;
     bottom: 10px;
-    right: 0px;
+    right: 0px; */
 }
 
 .pagination a {
@@ -765,4 +765,10 @@ mat-select.ng-invalid.ng-touched > div.mat-select-trigger {
 
 .summary-footer > div mat-select > div.mat-select-trigger {
     width: 100% !important;
+}
+
+
+
+.table1 mat-checkbox > label {
+    margin-bottom: 0px !important;
 }

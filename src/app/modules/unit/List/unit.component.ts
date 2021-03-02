@@ -17,19 +17,52 @@ export class UnitListComponent {
         private dialog:MatDialog,
     ) { }
 
-    public units:any
+    public units = [
+        { isCheck: false, unitID: 1, unitNo: 'UN-25641020-001', unitName: 'ชิ้น', createdDate: '22 ตุลาคม 2564'},
+        { isCheck: false, unitID: 2, unitNo: 'UN-25640910-002', unitName: 'ขวด', createdDate: '10 กันยายน 2564'},
+        { isCheck: false, unitID: 3, unitNo: 'UN-25640902-003', unitName: 'อัน', createdDate: '02 กันยายน 2564'},
+        { isCheck: false, unitID: 4, unitNo: 'UN-25640206-004', unitName: 'แพ๊ค', createdDate: '06 กุมภาพันธ์ 2564'},
+        { isCheck: false, unitID: 5, unitNo: 'UN-25640122-001', unitName: 'กล่อง', createdDate: '22 มกราคม 2564'},
+        { isCheck: false, unitID: 6, unitNo: 'UN-25640122-002', unitName: 'ซอง', createdDate: '22 มกราคม 2564'},
+        { isCheck: false, unitID: 7, unitNo: 'UN-25640122-003', unitName: 'ถุง', createdDate: '22 มกราคม 2564'},
+        { isCheck: false, unitID: 8, unitNo: 'UN-25640122-004', unitName: 'มัด', createdDate: '22 มกราคม 2564'},
+        { isCheck: false, unitID: 9, unitNo: 'UN-25640122-005', unitName: 'เครื่อง', createdDate: '22 มกราคม 2564'},
+        { isCheck: false, unitID: 10, unitNo: 'UN-25640122-006', unitName: 'หน่วย', createdDate: '22 มกราคม 2564'},
+    ]
+
+    public unitNo:any
+    public unitName:any
+    public createdDate:any
+    
     //productModel: ProductModel[];
     
     ngOnInit(): void {
         //this.service.refreshList()
 
-        this.units = [
-            { unitID: 1, unitNo: 'UN-001', unitName: 'ชิ้น', createdDate: '22 ตุลาคม 2564'},
-            { unitID: 2, unitNo: 'UN-002', unitName: 'ขวด', createdDate: '10 กันยายน 2564'},
-            { unitID: 3, unitNo: 'UN-003', unitName: 'อัน', createdDate: '02 กันยายน 2564'},
-            { unitID: 4, unitNo: 'UN-004', unitName: 'แพ๊ค', createdDate: '06 กุมภาพันธ์ 2564'},
-            { unitID: 5, unitNo: 'UN-005', unitName: 'กล่อง', createdDate: '22 มกราคม 2564'},
-        ]
+        //this.units 
+    }
+
+    showDetail(unitID, isCheck) {
+        if (!!unitID) {
+            var unit = this.units.filter(x => {
+                return x.unitID == unitID && x.isCheck == false;
+            })
+
+            this.units.map(x => x.isCheck = false);
+
+            if (unit.length > 0) {
+                unit[0].isCheck = !isCheck
+                this.unitNo = unit[0].unitNo
+                this.unitName = unit[0].unitName
+                this.createdDate = unit[0].createdDate
+            }
+            else
+            {
+                this.unitNo = ''
+                this.unitName = ''
+                this.createdDate = ''
+            }
+        }
     }
 
     callProductModal = async (productID) => {

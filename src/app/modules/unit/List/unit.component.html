@@ -15,7 +15,7 @@
         </button>
 
         <button class="multipleAction" [matMenuTriggerFor]="menu" disabled>
-            <i class="material-icons">more_vert</i> 
+            <i class="material-icons">more_horiz</i> 
             <span>Action</span>
         </button>
         <mat-menu #menu="matMenu">
@@ -36,35 +36,71 @@
 </div>
 
 <div class="content-menu">
-    <table class="newtable">
-        <thead>
-            <th class="txt-l">รหัสหน่วยนับ</th>
-            <th class="txt-l">ชื่อหน่วยนับ</th>
-            <th class="txt-l">CREATED DATE</th>
-            <!-- <th class="txt-r">จำนวนคงเหลือ</th>
-            <th class="txt-l">หน่วยนับหลัก</th>
-            <th class="txt-r">ราคาซื้อ</th>
-            <th class="txt-r">ราคาขาย</th>
-            <th colspan="2" class="txt-c">Action</th>   -->
-        </thead>
+    <div class="left-content">
+        <table class="table1">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="txt-l">รหัสหน่วยนับ</th>
+                    <th class="txt-l">ชื่อหน่วยนับ</th>
+                    <th class="txt-l">CREATED DATE</th>
+                    <th></th>
+                </tr>
+            </thead>
             <tbody>
-                <tr *ngFor="let un of units">
+                <tr *ngFor="let un of units" (click)="showDetail(un.unitID, un.isCheck)" [ngClass]="un.isCheck ? 'active' : ''">
+                    <td>
+                        <mat-checkbox [color]="'primary'" [checked]="un.isCheck"></mat-checkbox>
+                    </td>
                     <td>{{ un.unitNo }}</td>
                     <td>{{ un.unitName }}</td>
                     <td>{{ un.createdDate }}</td>
-                    <!-- <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-r">{{ product.productQuantity }}</td> -->
-                    <!-- <td>{{ product.unitName }}</td>
-                    <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
-                    <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
-                    <td class="txt-r">
-                        <i class="material-icons" (click)="callProductModal(product.productID)">edit</i>
+                    <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menuAction">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
                     </td>
-                    <td class="txt-l">
-                        <i class="material-icons">delete_outline</i>
-                    </td> -->
                 </tr>
-            </tbody>    
-    </table>
+            </tbody>
+            <tfoot>
+                <div class="pagination">
+                    <div>1</div>
+                    <div>2</div>
+                </div>
+            </tfoot>
+        </table>
+    </div>
+    
+    <div class="right-content">
+        <div class="form-group">
+            <span class="req"></span>
+            <label for="productNo" class="formLabel" title="รหัสหน่วยนับ">รหัสหน่วยนับ</label>
+            <label for="productNo" class="formLabel" title="รหัสหน่วยนับ" >{{ unitNo }}</label>
+        </div>
+
+        <div class="form-group">
+            <span class="req"></span>
+            <label for="productNo" class="formLabel" title="ชื่อหน่วยนับ">ชื่อหน่วยนับ</label>
+            <label for="productNo" class="formLabel" title="ชื่อหน่วยนับ">{{ unitName }}</label>
+        </div>
+
+        <div class="form-group">
+            <span class="req"></span>
+            <label for="productNo" class="formLabel" title="CREATED DATE">CREATED DATE</label>
+            <label for="productNo" class="formLabel" title="CREATED DATE">{{ createdDate }}</label>
+        </div>
+    </div>
+
+    <mat-menu #menuAction="matMenu">
+        <button mat-menu-item>
+            <mat-icon>create</mat-icon>
+            <span>แก้ไขหน่วยนับ</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>ลบหน่วยนับ</span>
+        </button>
+    </mat-menu>
 </div>
 
 <!-- <div class="table-wrapper">

@@ -10,6 +10,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRippleModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -79,7 +81,9 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatIconModule,
+    MatRippleModule
   ],
   entryComponents:[ProductModalComponent, AlertModalComponent, PaymentModalComponent, ReceiptModalComponent],
   providers: [],
