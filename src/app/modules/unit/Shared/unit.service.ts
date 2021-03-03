@@ -7,11 +7,10 @@ import { UnitModel } from './unit.model';
     providedIn: 'root'
 })
 
-export class ProductService {
+export class UnitService {
     constructor(private http: HttpClient) {}
 
     readonly baseUrl = 'http://localhost:5000/api/'
-    //formData: ProductModel = new ProductModel();
     list: ProductModel[];
     runningNumber: string;
     runningFormatID: string;
@@ -19,32 +18,19 @@ export class ProductService {
     productModel: ProductModel[];
 
     refreshList = async () => {
-        this.http.get(this.baseUrl + 'Products')
+        this.http.get(this.baseUrl + 'Units')
         .toPromise()
         .then(res => this.list = res as ProductModel[]);
     }
 
     getRunning = async () => {
-        await this.http.get(this.baseUrl + 'Products/GetrunningNumber')
+        await this.http.get(this.baseUrl + 'Units/GetrunningNumber')
         .toPromise()
         .then(res => (this.runningNumber = res['lastestNo'], this.runningFormatID = res['runningFormatID']));
     }
 
-    getUnit = async () => {
-        await this.http.get(this.baseUrl + 'Units')
-        .toPromise()
-        .then(res => this.listUnit = res as UnitModel[]);
-    }
-
-    newProduct = async () => {
+    newUnit = async () => {
         await this.getRunning();
-        await this.getUnit();
-    }
-
-    getProduct = async (productID) => {
-        await this.http.get(this.baseUrl + 'Products/' + productID)
-        .toPromise()
-        .then(res => (this.productModel = res as ProductModel[], this.getUnit()))
     }
 
     bindSave = async (ProductModel) => {

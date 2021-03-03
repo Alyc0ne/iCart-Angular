@@ -1,3 +1,8 @@
+.modal-content {
+    height: 190px;
+}
+
+
 .product-info {
     display: grid;
     grid-template-columns: 50% 40%;

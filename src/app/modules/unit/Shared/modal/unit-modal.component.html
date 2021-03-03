@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h1>{{ modalHeaderText }}</h1>
+</div>
+
+<div class="modal-content">
+    <form [formGroup]="unitForm">
+        <div class="text-header">ข้อมูลหน่วยนับ</div>
+        <div class="unit-info">
+            <div class="form-group fullrow">
+                <span class="req"></span>
+                <label for="unitNo" class="formLabel" title="รหัสหน่วยนับ">รหัสหน่วยนับ</label>
+                <div class="form-content">
+                    <input type="text" id="unitNo" formControlName="unitNo">
+                    <input type="hidden" id="runningFormatID" formControlName="runningFormatID">
+                </div>
+            </div>
+            <div class="form-group">
+                <span class="req">*</span>
+                <label for="unitName" class="formLabel" title="ชื่อหน่วยนับ">ชื่อหน่วยนับ</label>
+                <div class="form-content">
+                    <input type="text" id="unitName" formControlName="unitName" placeholder="กรอกชื่อหน่วยนับ" autocomplete="off" required maxlength="255">
+                    <div *ngIf="unit.unitName.invalid && (unit.unitName.dirty || unit.unitName.touched)" class="alert-danger">
+                        <div *ngIf="unit.unitName.errors.required"><span>กรุณากรอกชื่อหน่วยนับ.</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <a class="button light-button" (click)="closeDialog(false)">ยกเลิก</a>
+        <a class="button success-button" (click)="manageUnit(unitForm.get('unitID').value)">บันทึก</a>
+    </div>
+</div>

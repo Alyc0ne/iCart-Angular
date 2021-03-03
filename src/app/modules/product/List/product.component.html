@@ -38,35 +38,53 @@
     <table class="table">
         <thead>
             <tr>
+                <th></th>
+                <th class="txt-l">รหัสสินค้า</th>
                 <th class="txt-l">Barcode</th>
                 <th class="txt-l">ชื่อสินค้า</th>
                 <th class="txt-r">จำนวนคงเหลือ</th>
                 <th class="txt-l">หน่วยนับหลัก</th>
                 <th class="txt-r">ราคาซื้อ</th>
                 <th class="txt-r">ราคาขาย</th>
-                <th colspan="2" class="txt-c">Action</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let product of service.list">
+                <td><mat-checkbox [color]="'primary'" [checked]="product.isCheck"></mat-checkbox></td>
+                <td>{{ product.productNo }}</td>
                 <td>{{ product.barcode }}</td>
                 <td>{{ product.productName }}</td>
                 <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-r">{{ product.productQuantity }}</td>
                 <td>{{ product.unitName }}</td>
                 <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
                 <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
-                <td class="txt-r">
-                    <i class="material-icons" (click)="callProductModal(product.productID)">edit</i>
+                <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menuAction">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                    <!-- <i class="material-icons" (click)="callProductModal(product.productID)">edit</i> -->
                 </td>
-                <td class="txt-l">
+                <!-- <td class="txt-l">
                     <i class="material-icons">delete_outline</i>
-                </td>
+                </td> -->
             </tr>
         </tbody>
         <tfoot>
             Pagination
         </tfoot>
     </table>
+
+    <mat-menu #menuAction="matMenu">
+        <button mat-menu-item (click)="callProductModal(product.productID)">
+            <mat-icon>create</mat-icon>
+            <span>แก้ไขสินค้า</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>ลบหน่วยนับ</span>
+        </button>
+    </mat-menu>
 </div>
 
 <!-- <div class="pagination">

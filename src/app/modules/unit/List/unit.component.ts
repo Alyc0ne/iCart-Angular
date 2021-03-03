@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-// import { ProductService } from '../Shared/product.service';
-// import { ProductModalComponent } from '../Shared/modal/product-modal.component'
+import { UnitService } from '../Shared/unit.service';
+import { UnitModalComponent } from '../Shared/modal/unit-modal.component'
 // import { ProductModel } from '../Shared/product.model';
 
 @Component({
@@ -13,7 +13,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 export class UnitListComponent {
 
     constructor(
-        // public service: ProductService,
+        public unitService: UnitService,
         private dialog:MatDialog,
     ) { }
 
@@ -38,18 +38,20 @@ export class UnitListComponent {
     
     ngOnInit(): void {
         //this.service.refreshList()
-
-        //this.units 
     }
 
-    showDetail(unitID, isCheck) {
+    showDetail(event ,unitID, isCheck) {
+        
+
         if (!!unitID) {
             var unit = this.units.filter(x => {
                 return x.unitID == unitID && x.isCheck == false;
             })
 
-            this.units.map(x => x.isCheck = false);
-
+            const localName = event.target.localName;
+            if (localName != "button" && localName != "mat-icon")
+                this.units.map(x => x.isCheck = false);
+            
             if (unit.length > 0) {
                 unit[0].isCheck = !isCheck
                 this.unitNo = unit[0].unitNo
@@ -65,24 +67,25 @@ export class UnitListComponent {
         }
     }
 
-    callProductModal = async (productID) => {
-        // const dialogConfig = new MatDialogConfig();
-        // dialogConfig.autoFocus = true;
-        // dialogConfig.disableClose = true;
-        // dialogConfig.width = "1200px";
-        // dialogConfig.height = "600px";
+    callUnitModal = async (unitID) => {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.disableClose = true;
+        dialogConfig.width = "650px";
+        // dialogConfig.height = "400px";
 
-        // if (productID == null) {
-        //     await this.service.newProduct().then(res => (
-        //         dialogConfig.data = {
-        //             objProduct : { 
-        //                 runningFormatID: this.service.runningFormatID, 
-        //                 productNo: this.service.runningNumber 
-        //             }
-        //         },
-        //         this.dialog.open(ProductModalComponent, dialogConfig)
-        //     ));
-        // }
+        if (unitID == null) {
+            //await this.unitService.newUnit().then(res => (
+                dialogConfig.data = {
+                    headerText: "เพิ่มหน่วยนับ",
+                    objUnit : {
+                        runningFormatID: this.unitService.runningFormatID, 
+                        unitNo: this.unitService.runningNumber 
+                    }
+                },
+                this.dialog.open(UnitModalComponent, dialogConfig)
+            //));
+        }
         // else
         // {
         //     let productModel = null;

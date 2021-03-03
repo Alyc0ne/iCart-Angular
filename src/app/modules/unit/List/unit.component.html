@@ -10,8 +10,8 @@
     </div> -->
 
     <div class="groupAction">
-        <button class="blue-button" (click)="callProductModal(null)">
-            Add Unit
+        <button class="blue-button" (click)="callUnitModal(null)">
+            <mat-icon>note_add</mat-icon>Add Unit
         </button>
 
         <button class="multipleAction" [matMenuTriggerFor]="menu" disabled>
@@ -34,38 +34,45 @@
         </mat-menu>
     </div>
 </div>
+<mat-divider></mat-divider>
 
 <div class="content-menu">
     <div class="left-content">
-        <table class="table1">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th class="txt-l">รหัสหน่วยนับ</th>
-                    <th class="txt-l">ชื่อหน่วยนับ</th>
-                    <th class="txt-l">CREATED DATE</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let un of units" (click)="showDetail(un.unitID, un.isCheck)" [ngClass]="un.isCheck ? 'active' : ''">
-                    <td>
-                        <mat-checkbox [color]="'primary'" [checked]="un.isCheck"></mat-checkbox>
-                    </td>
-                    <td>{{ un.unitNo }}</td>
-                    <td>{{ un.unitName }}</td>
-                    <td>{{ un.createdDate }}</td>
-                    <td>
-                        <button mat-icon-button [matMenuTriggerFor]="menuAction">
-                            <mat-icon>more_horiz</mat-icon>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
+        <table class="table">
+            <div class="">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="txt-l">รหัสหน่วยนับ</th>
+                        <th class="txt-l">ชื่อหน่วยนับ</th>
+                        <th class="txt-l">CREATED DATE</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let un of units" (click)="showDetail($event, un.unitID, un.isCheck)" [ngClass]="un.isCheck ? 'active' : ''">
+                        <td>
+                            <mat-checkbox [color]="'primary'" [checked]="un.isCheck"></mat-checkbox>
+                        </td>
+                        <td>{{ un.unitNo }}</td>
+                        <td>{{ un.unitName }}</td>
+                        <td>{{ un.createdDate }}</td>
+                        <td>
+                            <button mat-icon-button [matMenuTriggerFor]="menuAction">
+                                <mat-icon>more_horiz</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </div>            
             <tfoot>
                 <div class="pagination">
-                    <div>1</div>
-                    <div>2</div>
+                    <a>&laquo;</a>
+                    <a>1</a>
+                    <a>2</a>
+                    <a>...</a>
+                    <a>10</a>
+                    <a>&raquo;</a>
                 </div>
             </tfoot>
         </table>
@@ -102,49 +109,3 @@
         </button>
     </mat-menu>
 </div>
-
-<!-- <div class="table-wrapper">
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="txt-l">Barcode</th>
-                <th class="txt-l">ชื่อสินค้า</th>
-                <th class="txt-r">จำนวนคงเหลือ</th>
-                <th class="txt-l">หน่วยนับหลัก</th>
-                <th class="txt-r">ราคาซื้อ</th>
-                <th class="txt-r">ราคาขาย</th>
-                <th colspan="2" class="txt-c">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of service.list">
-                <td>{{ product.barcode }}</td>
-                <td>{{ product.productName }}</td>
-                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-r">{{ product.productQuantity }}</td>
-                <td>{{ product.unitName }}</td>
-                <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
-                <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
-                <td class="txt-r">
-                    <i class="material-icons" (click)="callProductModal(product.productID)">edit</i>
-                </td>
-                <td class="txt-l">
-                    <i class="material-icons">delete_outline</i>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            Pagination
-        </tfoot>
-    </table>
-</div> -->
-
-<!-- <div class="pagination">
-    <a href="#">&laquo;</a>
-    <a href="#" class="active">1</a>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">&raquo;</a>
-</div> -->

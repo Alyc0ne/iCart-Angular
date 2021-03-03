@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { ProductModalComponent } from './modules/product/Shared/modal/product-mo
 import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
 import { PaymentModalComponent } from './modules/pos/Shared/Payment/payment-modal.component';
 import { ReceiptModalComponent } from './modules/pos/Shared/Receipt/receipt-modal.component';
+import { UnitModalComponent } from './modules/unit/Shared/modal/unit-modal.component';
 
 //Extension
 import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
@@ -46,6 +48,7 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     AlertModalComponent,
     PaymentModalComponent,
     ReceiptModalComponent,
+    UnitModalComponent,
 
     //Extension
     OnlynumberDirective,
@@ -83,9 +86,16 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     MatSidenavModule,
     MatMenuModule,
     MatIconModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDividerModule
   ],
-  entryComponents:[ProductModalComponent, AlertModalComponent, PaymentModalComponent, ReceiptModalComponent],
+  entryComponents:[
+    ProductModalComponent, 
+    AlertModalComponent, 
+    PaymentModalComponent, 
+    ReceiptModalComponent,
+    UnitModalComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

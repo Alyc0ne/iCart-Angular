@@ -11,92 +11,53 @@
     margin: 70px 0 0 10px;
 }
 
-.table1 {
-    border-collapse: separate;
-    width: 100%;
-    border-spacing: 0 10px;
-    table-layout: fixed;
-}
-
-.table1 thead {
-    padding-right: 10px;
-}
-
-.table1 thead tr {
-    text-align: left;
-    display: block;
-    position: relative;
-}
-
-.table1 th {
-    padding: 0 15px;
-}
-
-.table1 td {
-    padding: 12px 15px;
-}
-
-th, td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.table1 tbody {
-    display: block;
-    overflow: auto;
-    height: 450px;
-    padding-right: 10px;
-}
-
-.table1 tbody > tr {
-    background-color: #FFFFFF;
-    height: 20px;
-    margin-top: 20px;
-}
-
-.table1 tbody > tr:hover, .table1 tbody > tr.active {
+.table tbody > tr:hover, .table tbody > tr.active {
     background: #f2f2f2;
 }
 
-.table1 td:nth-child(1), th:nth-child(1) {
-    width: 5%;
+.table td:nth-child(1), th:nth-child(1) {
     min-width: 50px;
 }
 
-.table1 td:nth-child(2), th:nth-child(2) {
-    width: 20%;
+.table td:nth-child(2), th:nth-child(2) {
+    min-width: 200px;
 }
 
-.table1 td:nth-child(3), th:nth-child(3) { 
-    width: 45%;
+.table td:nth-child(3), th:nth-child(3) { 
+    min-width: 300px;
 }
 
-.table1 td:nth-child(4), th:nth-child(4) { 
+.table td:nth-child(4), th:nth-child(4) { 
     width: 1500px;
 }
 
-.table1 button {
+.table button {
     background: transparent;
     min-width: 50px;
 }
 
-.pagination {
-    display: flex;
+.table button > mat-icon {
+    color: #B5C2C8;
 }
 
-.pagination > div {
-    border: solid 1px black;
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination > a {
+    /* border: solid 1px black; */
     /* width: 50px;
     height: 50px; */
     margin: 0 20px 20px 0;
     text-align: center;
     padding: 10px 18px;
-    border-radius: 20px;
     background-color: white;
+    color: #91A5AF;
+    font-weight: bold;
     /* box-shadow: 0px 1px 3px 0px rgb(0, 0, 0); */
 }
 
-.pagination > div:hover {
+.pagination > a:hover {
     background: #f2f2f2;
 }
