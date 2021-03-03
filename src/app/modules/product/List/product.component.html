@@ -9,7 +9,7 @@
     </div>
 
     <div class="groupAction">
-        <button class="blue-button" (click)="callProductModal(null)">
+        <button class="blue-button" (click)="productID = null; callProductModal()">
             ADD NEW PRODUCT
         </button>
 
@@ -55,12 +55,12 @@
                 <td>{{ product.productNo }}</td>
                 <td>{{ product.barcode }}</td>
                 <td>{{ product.productName }}</td>
-                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-r">{{ product.productQuantity }}</td>
+                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-c">{{ product.productQuantity | number:'1.2-2' }}</td>
                 <td>{{ product.unitName }}</td>
                 <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
                 <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
                 <td>
-                    <button mat-icon-button [matMenuTriggerFor]="menuAction">
+                    <button mat-icon-button [matMenuTriggerFor]="menuAction" (click)="productID = product.productID">
                         <mat-icon>more_horiz</mat-icon>
                     </button>
                     <!-- <i class="material-icons" (click)="callProductModal(product.productID)">edit</i> -->
@@ -76,7 +76,7 @@
     </table>
 
     <mat-menu #menuAction="matMenu">
-        <button mat-menu-item (click)="callProductModal(product.productID)">
+        <button mat-menu-item (click)="callProductModal()">
             <mat-icon>create</mat-icon>
             <span>แก้ไขสินค้า</span>
         </button>

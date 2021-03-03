@@ -11,10 +11,6 @@
     margin: 70px 0 0 10px;
 }
 
-.table tbody > tr:hover, .table tbody > tr.active {
-    background: #f2f2f2;
-}
-
 .table td:nth-child(1), th:nth-child(1) {
     min-width: 50px;
 }
@@ -24,20 +20,16 @@
 }
 
 .table td:nth-child(3), th:nth-child(3) { 
-    min-width: 300px;
+    min-width: 150px;
+    width: 100%;
 }
 
 .table td:nth-child(4), th:nth-child(4) { 
-    width: 1500px;
+    min-width: 150px;
 }
 
-.table button {
-    background: transparent;
-    min-width: 50px;
-}
-
-.table button > mat-icon {
-    color: #B5C2C8;
+.table td:nth-child(5), th:nth-child(5) { 
+    min-width: 100px;
 }
 
 .pagination {

@@ -8,10 +8,10 @@
     <mat-drawer [(opened)]="isToggle" mode="over">
       <div class="sidebar">
         <ul class="link">
-          <li routerLink="Dashboard" routerLinkActive="active">Dashboard</li>
-          <li routerLink="POS" routerLinkActive="active">POS</li>
-          <li routerLink="ListProduct" routerLinkActive="active">สินค้า</li>
-          <li routerLink="ListUnit" routerLinkActive="active">หน่วยนับ</li>
+          <li routerLink="Dashboard" (click)="isToggle = false" routerLinkActive="active">Dashboard</li>
+          <li routerLink="POS" (click)="isToggle = false" routerLinkActive="active">POS</li>
+          <li routerLink="ListProduct" (click)="isToggle = false" routerLinkActive="active">สินค้า</li>
+          <li routerLink="ListUnit" (click)="isToggle = false" routerLinkActive="active">หน่วยนับ</li>
         </ul>
       </div>
     </mat-drawer>

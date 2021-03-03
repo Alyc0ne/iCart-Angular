@@ -18,19 +18,20 @@ export class ProductListComponent {
     ) { }
 
     productModel: ProductModel[];
+    productID: string;
     
     ngOnInit(): void {
         this.service.refreshList()
     }
 
-    callProductModal = async (productID) => {
+    callProductModal = async () => {        
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         dialogConfig.disableClose = true;
         dialogConfig.width = "1200px";
         dialogConfig.height = "600px";
 
-        if (productID == null) {
+        if (this.productID == null) {
             await this.service.newProduct().then(res => (
                 dialogConfig.data = {
                     objProduct : { 
@@ -44,7 +45,7 @@ export class ProductListComponent {
         else
         {
             let productModel = null;
-            await this.service.getProduct(productID).then(res => (
+            await this.service.getProduct(this.productID).then(res => (
                 productModel = this.service.productModel,
                 dialogConfig.data = {
                     objProduct: productModel

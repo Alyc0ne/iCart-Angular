@@ -1,39 +1,31 @@
 .table td:nth-child(1), th:nth-child(1) {
-    /* min-width: 150px; */
-    width: 15%;
+    min-width: 50px;
 }
 
-.table td:nth-child(2), th:nth-child(2) { 
-   /* min-width: 500px;  */
-   width: 30%;
+.table td:nth-child(2), th:nth-child(2) {
+    min-width: 200px;
 }
 
 .table td:nth-child(3), th:nth-child(3) { 
-   /* min-width: 100px;  */
-   width: 10%;
+    min-width: 200px;
 }
 
 .table td:nth-child(4), th:nth-child(4) { 
-    /* width: 300px;  */
-    width: 10%;
- }
+    width: 100%;
+}
 
 .table td:nth-child(5), th:nth-child(5) { 
-   /* width: 300px;  */
-   width: 12.5%;
+    min-width: 120px;
 }
 
 .table td:nth-child(6), th:nth-child(6) { 
-    /* width: 300px;  */
-    width: 12.5%;
+    min-width: 120px;
 }
 
-.table th:nth-child(7) { 
-    /* width: 200px;  */
-    width: 10%;
+.table td:nth-child(7), th:nth-child(7), .table td:nth-child(8), th:nth-child(8) { 
+    min-width: 180px;
 }
 
-.table td:nth-child(7), .table td:nth-child(8) { 
-    /* width: 200px;  */
-    width: 5%;
+.table td:nth-child(9), th:nth-child(9) { 
+    min-width: 100px;
 }

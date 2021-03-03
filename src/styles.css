@@ -375,49 +375,6 @@ input[type="checkbox"] {
     height: 100px;
 }
 
-/* .table-wrapper {
-    overflow-y: scroll;
-    flex-grow: 1;
-    height: 70%;
-}
-  
-.table-wrapper th {
-    position: sticky;
-    top: 0;
-    font-size: 18px;
-    color: black;
-    line-height: 1.2;
-    font-weight: bold;
-}
-  
-.table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.table th,td {
-    font-size: 15px;
-    color: black;
-    line-height: 1.2;
-    font-weight: bold;
-    border-top: 1px solid #a9adb3;
-    border-bottom: 1px solid #a9adb3;
-    height: 50px;
-    padding: .6em 1em;
-}
-
-.table td i.material-icons {
-    font-size: 16px;
-}
-
-.table tr:last-child .cell {
-    border-bottom: none;
-}
-
-.table tr:not(.header):hover {
-    background: #ECF5FF !important;
-} */
-
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -614,7 +571,7 @@ h1 {
 } */
 
 .table thead {
-    padding-right: 10px;
+    padding-right: 20px;
     display: block;
     overflow: hidden;
 }
@@ -651,6 +608,23 @@ th, td {
     background-color: #FFFFFF;
     height: 20px;
     margin-top: 20px;
+}
+
+.table tbody > tr:hover, .table tbody > tr.active {
+    background: #f2f2f2;
+}
+
+.table button {
+    background: transparent;
+    min-width: 50px;
+}
+
+.table button > mat-icon {
+    color: #B5C2C8;
+}
+
+.table mat-checkbox > label {
+    margin-bottom: 0px !important;
 }
 
 /* .table td i.material-icons {
@@ -767,10 +741,4 @@ mat-select.ng-invalid.ng-touched > div.mat-select-trigger {
 
 .summary-footer > div mat-select > div.mat-select-trigger {
     width: 100% !important;
-}
-
-
-
-.table mat-checkbox > label {
-    margin-bottom: 0px !important;
 }
