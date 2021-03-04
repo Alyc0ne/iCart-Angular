@@ -34,6 +34,7 @@ export class ProductListComponent {
         if (this.productID == null) {
             await this.service.newProduct().then(res => (
                 dialogConfig.data = {
+                    headerText: "เพิ่มสินค้า",
                     objProduct : { 
                         runningFormatID: this.service.runningFormatID, 
                         productNo: this.service.runningNumber 
@@ -48,6 +49,7 @@ export class ProductListComponent {
             await this.service.getProduct(this.productID).then(res => (
                 productModel = this.service.productModel,
                 dialogConfig.data = {
+                    headerText: "แก้ไขสินค้า",
                     objProduct: productModel
                 },
                 this.dialog.open(ProductModalComponent, dialogConfig)

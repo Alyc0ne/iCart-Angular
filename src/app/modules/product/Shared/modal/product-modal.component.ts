@@ -12,11 +12,12 @@ import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@ang
 })
 
 export class ProductModalComponent {
-    formData:ProductModel;
+    productForm: FormGroup;
+    modalHeaderText: string;
     public unitList: Array<any> = [];
     public states: Array<any> = [];
     public test:any;
-    productForm: FormGroup;
+    
     public count = 1;
 
     constructor(
@@ -28,8 +29,6 @@ export class ProductModalComponent {
     ) {}
 
     ngOnInit(): void {
-        console.log(this.data)
-
         let objProduct = this.data.objProduct;
         if (!!objProduct) {
             this.productForm = this.fb.group({
@@ -45,6 +44,7 @@ export class ProductModalComponent {
             })
         }
         
+        this.modalHeaderText = this.data.headerText;
 
         this.productForm.valueChanges.subscribe(console.log); 
     }

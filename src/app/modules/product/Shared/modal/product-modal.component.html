@@ -1,9 +1,9 @@
 <div class="modal-header">
-    <h1>เพิ่มสินค้า</h1>
+    <h1>{{ modalHeaderText }}</h1>
 </div>
-<form [formGroup]="productForm">
-<div class="modal-content">
 
+<div class="modal-content">
+    <form [formGroup]="productForm">
         <div class="text-header">ข้อมูลสินค้า</div>
         <div class="product-info">
             <div class="form-group fullrow">
@@ -107,7 +107,7 @@
                 </tbody>
             </table>
         </div>
-
+    </form>
         <!-- <div class="text-header">รายละเอียดอื่นๆ</div> -->
    
 </div>
@@ -117,4 +117,3 @@
         <a class="button success-button" (click)="manageProduct(productForm.get('productID').value)">บันทึก</a>
     </div>
 </div>
-</form>
