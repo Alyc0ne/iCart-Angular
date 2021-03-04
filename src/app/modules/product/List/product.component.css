@@ -7,7 +7,7 @@
 }
 
 .table td:nth-child(3), th:nth-child(3) { 
-    min-width: 200px;
+    min-width: 240px;
 }
 
 .table td:nth-child(4), th:nth-child(4) { 

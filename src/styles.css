@@ -590,7 +590,7 @@ h1 {
     padding: 2px 15px;
 }
 
-th, td {
+.table th, td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
