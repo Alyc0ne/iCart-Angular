@@ -1,7 +1,7 @@
 <div class="top-bar">
     <h1>รายการสินค้าทั้งหมด</h1>
 </div>
-
+<mat-divider></mat-divider>
 <div class="header-menu">
     <div class="search">
         <i class="material-icons">search</i>
@@ -10,26 +10,29 @@
 
     <div class="groupAction">
         <button class="blue-button" (click)="productID = null; callProductModal()">
-            ADD NEW PRODUCT
+            เพิ่มสินค้า
         </button>
 
-        <button class="multipleAction" [matMenuTriggerFor]="menu" disabled>
-            <i class="material-icons">more_vert</i> 
-            <span>Action</span>
+        <button class="multipleAction" [matMenuTriggerFor]="menu">
+             <mat-icon>more_horiz</mat-icon>            
         </button>
         <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-            <i class="material-icons">dialpad</i>
-            <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-            <i class="material-icons">voicemail</i>
-            <span>Check voice mail</span>
-        </button>
-        <button mat-menu-item>
-            <i class="material-icons">notifications_off</i>
-            <span>Disable alerts</span>
-        </button>
+            <button mat-menu-item (click)="callProductModal()">
+                <mat-icon>create</mat-icon>
+                <span>แก้ไขสินค้า</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>ลบหน่วยนับ</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>file_upload</mat-icon>
+                <span>นำเข้าสินค้า</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>file_download</mat-icon>
+                <span>นำออกสินค้า</span>
+            </button>
         </mat-menu>
     </div>
 </div>
@@ -62,16 +65,16 @@
                 <td>
                     <button mat-icon-button [matMenuTriggerFor]="menuAction" (click)="productID = product.productID">
                         <mat-icon>more_horiz</mat-icon>
-                    </button>
-                    <!-- <i class="material-icons" (click)="callProductModal(product.productID)">edit</i> -->
+                    </button>                    
                 </td>
-                <!-- <td class="txt-l">
-                    <i class="material-icons">delete_outline</i>
-                </td> -->
             </tr>
         </tbody>
         <tfoot>
-            Pagination
+            <div class="pagination">
+                <a>&laquo;</a>
+                <a *ngFor="let page of totalPages; let i = index;">{{ i + 1 }}</a>                
+                <a>&raquo;</a>
+            </div>
         </tfoot>
     </table>
 
@@ -86,14 +89,3 @@
         </button>
     </mat-menu>
 </div>
-
-<!-- <div class="pagination">
-    <a href="#">&laquo;</a>
-    <a href="#" class="active">1</a>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">&raquo;</a>
-</div> -->

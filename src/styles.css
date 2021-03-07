@@ -159,6 +159,7 @@ button.warn {
 
 .groupAction {
     display: flex;
+    margin-right: 10px;
 }
 
 .groupAction button {
@@ -173,13 +174,13 @@ button.warn {
 button.multipleAction {
     height: 35px;
     min-width: 40px;
-    background-color: #fafbfc;
+    background-color: #DDEFF9;
     border: 1px solid rgba(27, 31, 35, 0.15);
     box-shadow: 0 1px 0 rgba(27, 31, 35, 0.04);
 }
 
-button.multipleAction > i {
-    color: black;
+button.multipleAction > mat-icon {
+    color: #25A8F8;
 }
 
 .top-bar {
@@ -287,15 +288,8 @@ input[type="checkbox"] {
     border-color: #4BAEE5 !important;
 }
 
-.pagination {
-    /* display: flex;
-    justify-content: flex-end; */
-    /* position: absolute;
-    bottom: 10px;
-    right: 0px; */
-}
 
-.pagination a {
+/* .pagination a {
     color: black;
     padding: 8px 16px;
     text-decoration: none;
@@ -305,7 +299,9 @@ input[type="checkbox"] {
     color: white;
     background-color: #4BAEE5;
     border: solid 1px #1976d2;
-}
+} */
+
+
 
 /* Transition */
 
@@ -627,6 +623,28 @@ h1 {
     margin-bottom: 0px !important;
 }
 
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination > a {
+    /* border: solid 1px black; */
+    /* width: 50px;
+    height: 50px; */
+    margin: 0 20px 20px 0;
+    text-align: center;
+    padding: 10px 18px;
+    background-color: white;
+    color: #91A5AF;
+    font-weight: bold;
+    /* box-shadow: 0px 1px 3px 0px rgb(0, 0, 0); */
+}
+
+.pagination > a:hover {
+    background: #f2f2f2;
+}
+
 /* .table td i.material-icons {
     font-size: 20px;
     cursor: pointer;
@@ -717,10 +735,12 @@ input:disabled {
 
 .text-colorRed {
     color: red;
+    font-weight: bold;
 }
 
 .text-colorBule {
-    color: blue;
+    color: #4BAEE5;
+    font-weight: bold;
 }
 
 /* validation */

@@ -19,8 +19,10 @@ export class ProductListComponent {
 
     productModel: ProductModel[];
     productID: string;
+    totalPages: any;
     
     ngOnInit(): void {
+        this.totalPages = Array(6);
         this.service.refreshList()
     }
 
