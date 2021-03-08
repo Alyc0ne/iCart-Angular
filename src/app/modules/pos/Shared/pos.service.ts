@@ -15,7 +15,7 @@ export class POSService {
     paymentModel: PaymentModel[];
 
     objProduct = [
-        { productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend', productQuantity: 1, productPrice: 100, productTotalPrice: 100, added_on: null },
+        { productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend11111111111111111111111111111', productQuantity: 1, productPrice: 100, productTotalPrice: 100, added_on: null },
         { productID: '2', productName: 'Narco', productQuantity: 1, productPrice: 200, productTotalPrice: 200, added_on: null },
         { productID: '3', productName: 'Bombasto', productQuantity: 1, productPrice: 300, productTotalPrice: 300, added_on: null },
         { productID: '4', productName: 'Celeritas', productQuantity: 1, productPrice: 400, productTotalPrice: 400, added_on: null },

@@ -21,7 +21,10 @@ export class ProductService {
     refreshList = async () => {
         this.http.get(this.baseUrl + 'Products')
         .toPromise()
-        .then(res => this.list = res as ProductModel[]);
+        .then(res => { 
+            this.list = res as ProductModel[] 
+            //console.log(res.headers.get('x-pagination'));
+        });
     }
 
     getRunning = async () => {

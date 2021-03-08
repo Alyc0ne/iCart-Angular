@@ -28,7 +28,7 @@
         คอลัมภ์ 1: กว้าง 200px
         คอลัมภ์ 2: กว้าง 500px
     */
-    grid-template-columns: 24% 24% 24% 24%;
+    grid-template-columns: 20% 20% 20% 20%;
     /* grid-gap: 20px; */
 
 
@@ -37,14 +37,31 @@
     grid-gap: 10px;
     align-items: baseline;
     padding: 10px; */
+    grid-gap: 15px;
 }
 
-.product-content > div {
+.product-column {
     border: black 1px solid;
     border-radius: 10px;
     height: 120px;
     width: 100%;
     margin: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-column > div:last-child {
+    color: #F07613 !important;
+    font-weight: bold;
+}
+
+.product-column:hover {
+    border: #4BAEE5  1px solid;
 }
 
 /* Summary */

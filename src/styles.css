@@ -1,7 +1,6 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 * {
-    color: #616161;
     box-sizing: border-box;
     font-family: 'Athiti';
     /* letter-spacing: 2px; */

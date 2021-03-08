@@ -1,6 +1,12 @@
 <div class="pos-container">
     <div class="product-content">
-        <div *ngFor="let product of looper"></div>
+        <div *ngFor="let product of POSservice.objProduct" class="product-column">
+            <div>{{ product.productName }}</div>
+            <div>
+                <!-- <img src="assets/images/no-image.png" width="60"> -->
+                <div>{{ product.productPrice }}</div>
+            </div>
+        </div>
     </div>
 
     <div class="summary">
