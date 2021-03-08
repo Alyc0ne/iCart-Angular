@@ -1,12 +1,20 @@
 <div class="pos-container">
     <div class="product-content">
-        <div *ngFor="let product of POSservice.objProduct" class="product-column">
-            <div>{{ product.productName }}</div>
-            <div>
-                <!-- <img src="assets/images/no-image.png" width="60"> -->
-                <div>{{ product.productPrice }}</div>
+        <div class="product-filter">
+            <button class="blue-button">เพิ่มสินค้า</button>
+            <button class="blue-button">Food</button>
+            <button class="blue-button">Alcohol</button>
+        </div>
+        <div class="product-items">
+            <div *ngFor="let product of POSservice.objProduct" class="product-column">
+                <div>{{ product.productName }}</div>
+                <div>                
+                    <div>{{ product.productPrice | number:'1.2-2' }}</div>
+                    <img src="assets/images/no-image.png" width="80">
+                </div>
             </div>
         </div>
+        
     </div>
 
     <div class="summary">

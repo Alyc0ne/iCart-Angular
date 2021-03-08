@@ -13,7 +13,15 @@
 }
 
 /* Product */
-.product-content {
+.product-filter {
+    padding: 30px;
+}
+
+.product-filter > button {
+    /* padding: 30px; */
+}
+
+.product-items {
     display: grid;
     /*
         โดย Grid ของเราแบ่งออกเป็น 3 แถว
@@ -21,31 +29,25 @@
         แถวที่2: สูง 200px
         แถวที่3: สูง 50px
     */
-    grid-template-rows: 150px;
+    grid-template-rows:  auto auto auto;
 
     /*
         ให้ Grid ของเราแบ่งออกเป็น 2 คอลัมภ์
         คอลัมภ์ 1: กว้าง 200px
         คอลัมภ์ 2: กว้าง 500px
     */
-    grid-template-columns: 20% 20% 20% 20%;
-    /* grid-gap: 20px; */
-
-
-    /* grid-template-columns: 24% 24% 24% 24%;
-    grid-template-rows: 120px;
-    grid-gap: 10px;
-    align-items: baseline;
-    padding: 10px; */
-    grid-gap: 15px;
+    grid-template-columns: 30% 30% 30%;
+    grid-gap: 30px;
+    align-content: baseline;
+    justify-content: center;
 }
 
 .product-column {
-    border: black 1px solid;
+    border: #e7e5e5 1px solid;
     border-radius: 10px;
-    height: 120px;
+    height: 150px;
     width: 100%;
-    margin: 20px;
+    /* margin: 20px; */
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -53,15 +55,19 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: bold;
 }
 
 .product-column > div:last-child {
-    color: #F07613 !important;
-    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #F07613 !important;    
 }
 
 .product-column:hover {
     border: #4BAEE5  1px solid;
+    cursor: pointer;
 }
 
 /* Summary */

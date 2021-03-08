@@ -15,18 +15,18 @@ export class POSService {
     paymentModel: PaymentModel[];
 
     objProduct = [
-        { productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend11111111111111111111111111111', productQuantity: 1, productPrice: 100, productTotalPrice: 100, added_on: null },
-        { productID: '2', productName: 'Narco', productQuantity: 1, productPrice: 200, productTotalPrice: 200, added_on: null },
-        { productID: '3', productName: 'Bombasto', productQuantity: 1, productPrice: 300, productTotalPrice: 300, added_on: null },
-        { productID: '4', productName: 'Celeritas', productQuantity: 1, productPrice: 400, productTotalPrice: 400, added_on: null },
-        { productID: '5', productName: 'Magneta', productQuantity: 1, productPrice: 500, productTotalPrice: 500, added_on: null },
-        { productID: '6', productName: 'RubberMan', productQuantity: 1, productPrice: 600, productTotalPrice: 600, added_on: null },
+        { productID: '1', productName: 'ปลาดอลลี่หั่นชิ้น 1 แพ๊ค', productQuantity: 1, productPrice: 100, productTotalPrice: 100, added_on: null },
+        { productID: '2', productName: 'สามชั้นหมูกะทะ', productQuantity: 1, productPrice: 200, productTotalPrice: 200, added_on: null },
+        { productID: '3', productName: 'สามชั้นสไลด์ 2mm', productQuantity: 1, productPrice: 300, productTotalPrice: 300, added_on: null },
+        { productID: '4', productName: 'ปูอัดอาซามิ', productQuantity: 1, productPrice: 400, productTotalPrice: 400, added_on: null },
+        { productID: '5', productName: 'ปูอัดเบนโตะ', productQuantity: 1, productPrice: 500, productTotalPrice: 500, added_on: null },
+        { productID: '6', productName: 'ปลาหมึกบั้ง', productQuantity: 1, productPrice: 600, productTotalPrice: 600, added_on: null },
         { productID: '7', productName: 'Dynama', productQuantity: 1, productPrice: 700, productTotalPrice: 700, added_on: null },
-        { productID: '8', productName: 'Dr IQ', productQuantity: 1, productPrice: 800, productTotalPrice: 800, added_on: null },
-        { productID: '9', productName: 'Magma', productQuantity: 1, productPrice: 900, productTotalPrice: 900, added_on: null },
-        { productID: '10', productName: 'Singha', productQuantity: 1, productPrice: 1000, productTotalPrice: 1000, added_on: null },
-        { productID: '11', productName: 'Drinking', productQuantity: 1, productPrice: 1100, productTotalPrice: 1100, added_on: null },
-        { productID: '12', productName: 'Water', productQuantity: 1, productPrice: 1200, productTotalPrice: 1200, added_on: null }
+        // { productID: '8', productName: 'Dr IQ', productQuantity: 1, productPrice: 800, productTotalPrice: 800, added_on: null },
+        // { productID: '9', productName: 'Magma', productQuantity: 1, productPrice: 900, productTotalPrice: 900, added_on: null },
+        // { productID: '10', productName: 'Singha', productQuantity: 1, productPrice: 1000, productTotalPrice: 1000, added_on: null },
+        // { productID: '11', productName: 'Drinking', productQuantity: 1, productPrice: 1100, productTotalPrice: 1100, added_on: null },
+        // { productID: '12', productName: 'Water', productQuantity: 1, productPrice: 1200, productTotalPrice: 1200, added_on: null }
     ]
 
     getPaymentType = async () => {

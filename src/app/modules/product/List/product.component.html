@@ -58,7 +58,7 @@
                 <td>{{ product.productNo }}</td>
                 <td>{{ product.barcode }}</td>
                 <td>{{ product.productName }}</td>
-                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-c">{{ 10 | number:'1.2-2' }}</td>
+                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-c">{{ product.productQuantity | number:'1.2-2' }}</td>
                 <td>{{ product.unitName }}</td>
                 <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
                 <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
