@@ -1,7 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { POSService } from './Shared/pos.service';
 import { cartModel } from './Shared/pos.model';
-import { PaymentModalComponent } from './Shared/Payment/payment-modal.component'
+import { PaymentModalComponent } from './Shared/Payment/payment-modal.component';
+import { ConfirmModalComponent } from '../Shared/Modal/Confirm/confirm-modal.component';
 import { AppService } from '../Shared/ts/apps';
 
 @Component({
@@ -99,6 +100,7 @@ export class POSComponent {
 
     clearCart() {
         if (!!this.cartModel.products.length) {
+            this.baseService._openDialog(ConfirmModalComponent, null);
             this.cartModel = {
                 summary: { paymentSeleted: this.posService.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
             }

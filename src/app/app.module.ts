@@ -25,6 +25,7 @@ import { UnitListComponent } from './modules/unit/List/unit.component';
 //Modal
 import { ProductModalComponent } from './modules/product/Shared/modal/product-modal.component';
 import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
+import { ConfirmModalComponent } from './modules/Shared/Modal/Confirm/confirm-modal.component';
 import { PaymentModalComponent } from './modules/pos/Shared/Payment/payment-modal.component';
 import { ReceiptModalComponent } from './modules/pos/Shared/Receipt/receipt-modal.component';
 import { UnitModalComponent } from './modules/unit/Shared/modal/unit-modal.component';
@@ -45,6 +46,7 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     UnitListComponent,
 
     //Modal
+    ConfirmModalComponent,
     AlertModalComponent,
     PaymentModalComponent,
     ReceiptModalComponent,
@@ -91,6 +93,7 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
   ],
   entryComponents:[
     ProductModalComponent, 
+    ConfirmModalComponent,
     AlertModalComponent, 
     PaymentModalComponent, 
     ReceiptModalComponent,
