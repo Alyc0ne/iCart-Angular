@@ -21,7 +21,7 @@ export class POSService {
         { productID: '4', productName: 'ปูอัดอาซามิ', productQuantity: 1, productPrice: 400, productTotalPrice: 400, added_on: null },
         { productID: '5', productName: 'ปูอัดเบนโตะ', productQuantity: 1, productPrice: 500, productTotalPrice: 500, added_on: null },
         { productID: '6', productName: 'ปลาหมึกบั้ง', productQuantity: 1, productPrice: 600, productTotalPrice: 600, added_on: null },
-        { productID: '7', productName: 'Dynama', productQuantity: 1, productPrice: 700, productTotalPrice: 700, added_on: null },
+        { productID: '7', productName: 'ลูกชิ้นเนื้อ วัณนา', productQuantity: 1, productPrice: 700, productTotalPrice: 700, added_on: null },
         // { productID: '8', productName: 'Dr IQ', productQuantity: 1, productPrice: 800, productTotalPrice: 800, added_on: null },
         // { productID: '9', productName: 'Magma', productQuantity: 1, productPrice: 900, productTotalPrice: 900, added_on: null },
         // { productID: '10', productName: 'Singha', productQuantity: 1, productPrice: 1000, productTotalPrice: 1000, added_on: null },

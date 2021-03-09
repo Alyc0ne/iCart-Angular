@@ -1,12 +1,12 @@
 <div class="pos-container">
     <div class="product-content">
         <div class="product-filter">
-            <button class="blue-button">เพิ่มสินค้า</button>
-            <button class="blue-button">Food</button>
-            <button class="blue-button">Alcohol</button>
+            <button class="orange-button active">อาหารแช่แข็ง</button>
+            <button class="orange-button">Food</button>
+            <button class="orange-button">Alcohol</button>
         </div>
         <div class="product-items">
-            <div *ngFor="let product of POSservice.objProduct" class="product-column">
+            <div *ngFor="let product of posService.objProduct" class="product-column" (click)="setProductToCart(product)">
                 <div>{{ product.productName }}</div>
                 <div>                
                     <div>{{ product.productPrice | number:'1.2-2' }}</div>
@@ -19,26 +19,31 @@
 
     <div class="summary">
         <div class="header-menu">
-            <div class="search w100p">
-                <i class="material-icons">search</i>
-                <input type="text" class="w100p" placeholder="รหัสบาร์โค้ด / ชื่อสินค้า" [(ngModel)]="textSearch" (change)="getProductByBarcode_text()">
+            <div class="search">
+                <mat-icon>search</mat-icon>
+                <input type="text" class="w100p" placeholder="รหัสบาร์โค้ด / ชื่อสินค้า" [(ngModel)]="textSearch" (change)="getProductByBarcode_text()" autofocus>
+            </div>
+
+            <button class="orange-button clear-all" [disabled]="!cartModel.products" (click)="clearCart()">Clear All (ESC)</button>
+        </div>
+        <div class="summary-content" *ngIf="cartModel.products; else cartEmpty">
+            <div *ngFor="let product of cartModel.products" class="content-detail">
+                <div title="{{ product.productName }}">{{ product.productName }}</div>
+                <div class="stepper">
+                    <button (click)="manageQuatity(false, product.productID)"><i class="material-icons">remove</i></button>
+                    <span>{{ product.productQuantity | number:'1.0' }}</span>
+                    <button (click)="manageQuatity(true, product.productID)"><i class="material-icons">add</i></button>
+                </div>
+                <div>
+                    {{ product.productTotalPrice | number:'1.2-2' }}
+                </div>
             </div>
         </div>
-        <div class="summary-content">
-            <!-- <div class="content-warpper"> -->
-                <div *ngFor="let product of cartModel.products" class="content-detail">
-                    <div title="{{ product.productName }}">{{ product.productName }}</div>
-                    <div class="stepper">
-                        <button (click)="manageQuatity(false, product.productID)"><i class="material-icons">remove</i></button>
-                        <span>{{ product.productQuantity | number:'1.0' }}</span>
-                        <button (click)="manageQuatity(true, product.productID)"><i class="material-icons">add</i></button>
-                    </div>
-                    <div>
-                        {{ product.productTotalPrice | number:'1.2-2' }}
-                    </div>
-                </div>
-            <!-- </div> -->
-        </div>
+        <ng-template #cartEmpty>
+            <div class="summary-content empty-cart">
+                <img src="assets/images/empty-cart.png">
+            </div>
+        </ng-template>
         <div class="summary-footer">
             <div>
                 <p>รวมเงิน : </p>
@@ -61,7 +66,7 @@
             <div>
                 <p>ประเภทการชำระ : </p>
                 <mat-select [ngModel]="cartModel.summary.paymentSeleted">
-                    <mat-option *ngFor="let pt of POSservice.paymentModel" [value]="pt.paymentType">{{ pt.paymentName }}</mat-option>
+                    <mat-option *ngFor="let pt of posService.paymentModel" [value]="pt.paymentType">{{ pt.paymentName }}</mat-option>
                 </mat-select>
             </div>
             <hr>

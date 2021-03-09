@@ -1,8 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { POSService } from './Shared/pos.service';
 import { cartModel } from './Shared/pos.model';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PaymentModalComponent } from './Shared/Payment/payment-modal.component'
+import { AppService } from '../Shared/ts/apps';
 
 @Component({
     selector: 'app-pos',
@@ -11,97 +11,48 @@ import { PaymentModalComponent } from './Shared/Payment/payment-modal.component'
 })
 
 export class POSComponent {
-    constructor(        
-        public POSservice: POSService,
-        private dialogPayment:MatDialog,
+    constructor(
+        public baseService: AppService,
+        public posService: POSService,
     ) {}
-
-    private dialogRef;
-
-    private _openDialog(component, _data) {
-        if (!!this.dialogRef) return;        
-        this.dialogRef = this.dialogPayment.open(component, {
-            autoFocus: true,
-            disableClose: true,
-            width: "500px",
-            height: "250px",
-            data: !!_data ? _data : null
-        })
-      
-        this.dialogRef.afterClosed().subscribe(() => {
-            this.dialogRef = undefined;
-        })
-    }
 
     cartModel: cartModel;
     textSearch: string;
-
-    looper = [
-        {},{},{},{},
-        {},{},{},{}
-    ]
     
     ngOnInit(): void {
-        this.POSservice.getPaymentType();
-        // console.log(this.cartModel)
-        // console.log(this.POSservice.paymentModel)
+        this.posService.getPaymentType();
         this.cartModel = {
-            //products: [{ productID: null, productName: null, productQuantity: null, productPrice: null, productTotalPrice: null}],
-            summary: { paymentSeleted: this.POSservice.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
+            summary: { paymentSeleted: this.posService.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
         }
-        
-        // this.cartModel = {
-        //     products: [{productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend', productQuantity: 1, productPrice: 100, productTotalPrice: 100}],
-        //     //products: this.objProduct
-        //     summary: { paymentSeleted: this.POSservice.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
-        // }
-           
-        // this.cartModel.products.push(
-        //     { productID: '1', productName: 'Dr Nice Kim So Hyun My Girl Friend', productQuantity: 1, productPrice: 100, productTotalPrice: 100 },
-        //     { productID: '2', productName: 'Narco', productQuantity: 1, productPrice: 200, productTotalPrice: 200 },
-        //     { productID: '3', productName: 'Bombasto', productQuantity: 1, productPrice: 300, productTotalPrice: 300 },
-        //     { productID: '4', productName: 'Celeritas', productQuantity: 1, productPrice: 400, productTotalPrice: 400 },
-        //     { productID: '5', productName: 'Magneta', productQuantity: 1, productPrice: 500, productTotalPrice: 500 },
-        //     { productID: '6', productName: 'RubberMan', productQuantity: 1, productPrice: 600, productTotalPrice: 600 },
-        //     { productID: '7', productName: 'Dynama', productQuantity: 1, productPrice: 700, productTotalPrice: 700 },
-        //     { productID: '8', productName: 'Dr IQ', productQuantity: 1, productPrice: 800, productTotalPrice: 800 },
-        //     { productID: '9', productName: 'Magma', productQuantity: 1, productPrice: 900, productTotalPrice: 900 },
-        //     { productID: '10', productName: 'Singha', productQuantity: 1, productPrice: 1000, productTotalPrice: 1000 },
-        //     { productID: '11', productName: 'Drinking', productQuantity: 1, productPrice: 1100, productTotalPrice: 1100 },
-        //     { productID: '12', productName: 'Water', productQuantity: 1, productPrice: 1200, productTotalPrice: 1200 }
-        // )
-
-        // this.calSummary();
     }
 
     getProductByBarcode_text = async() => {
-        var product = await this.POSservice.getProductByBarcode_text(this.textSearch);
+        var product = await this.posService.getProductByBarcode_text(this.textSearch);
         if (product.length > 0) {
-            var _product = product[0];
-            if (!!this.cartModel.products) {
-                var currentProduct = this.cartModel.products.filter(x => { return x.productID == _product.productID; });
-                if (currentProduct.length > 0)
-                    this.manageQuatity(true.valueOf, currentProduct[0].productID, false)
-                else
-                    this.cartModel.products.push(_product);
-            }
-            else
-            {1
-                this.cartModel.products = [_product];
-            }
-
-            var e = this.cartModel.products.sort((a, b) => {
-                console.log('A : ' + a.added_on)
-                console.log('B : ' + b.added_on)
-                return <any>new Date(b.added_on) - <any>new Date(a.added_on);
-            })
-
-            console.log(e)
-
-            this.calSummary();
+            this.setProductToCart(product[0]);
         }
 
         this.textSearch = ''
+    }
+
+    setProductToCart(product) {
+        if (!!this.cartModel.products) {
+            var currentProduct = this.cartModel.products.filter(x => { return x.productID == product.productID; });
+            if (currentProduct.length > 0)
+                this.manageQuatity(true.valueOf, currentProduct[0].productID, false)
+            else
+                this.cartModel.products.push(product);
+        }
+        else
+        {
+            this.cartModel.products = [product];
+        }
+
+        this.cartModel.products.sort((a, b) => {
+            return <any>new Date(b.added_on) - <any>new Date(a.added_on);
+        })
+
+        this.calSummary();
     }
 
     manageQuatity(type, productID, isCal = true) {
@@ -142,12 +93,22 @@ export class POSComponent {
     onKeyDown(e: KeyboardEvent) {
         if (e.keyCode == 32)
             this.callPaymentModal();
+        if (e.keyCode == 27) 
+            this.clearCart();
+    }
+
+    clearCart() {
+        if (!!this.cartModel.products.length) {
+            this.cartModel = {
+                summary: { paymentSeleted: this.posService.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
+            }
+        }
     }
 
     callPaymentModal() {
         if (this.cartModel.products.length > 0) {                
             /*await this.service.newProduct().then(res => (*/
-                this._openDialog(PaymentModalComponent, this.cartModel.summary.totalAmnt);
+                this.baseService._openDialog(PaymentModalComponent, this.cartModel.summary.totalAmnt);
             //));
         }
         else
