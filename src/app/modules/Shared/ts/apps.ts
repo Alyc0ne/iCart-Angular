@@ -12,15 +12,21 @@ export class AppService {
 
     private dialogRef;
 
-    _openDialog(component, _data) {
+    _openDialog(component, customConfig, _data) {
         if (!!this.dialogRef) return;        
-        this.dialogRef = this.dialog.open(component, {
+
+        var defaultConfig = {
             autoFocus: true,
             disableClose: true,
             width: "500px",
             height: "250px",
             data: !!_data ? _data : null
-        })
+        }
+
+        if (!!customConfig)
+            defaultConfig = customConfig
+
+        this.dialogRef = this.dialog.open(component, defaultConfig)
       
         this.dialogRef.afterClosed().subscribe(() => {
             this.dialogRef = undefined;

@@ -100,7 +100,16 @@ export class POSComponent {
 
     clearCart() {
         if (!!this.cartModel.products.length) {
-            this.baseService._openDialog(ConfirmModalComponent, null);
+            
+            this.baseService._openDialog(ConfirmModalComponent,
+                {
+                    autoFocus: true,
+                    disableClose: true,
+                    width: "500px",
+                    height: "250px",
+                    id: "alertModal"
+                },
+                null);
             this.cartModel = {
                 summary: { paymentSeleted: this.posService.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
             }
@@ -110,7 +119,7 @@ export class POSComponent {
     callPaymentModal() {
         if (this.cartModel.products.length > 0) {                
             /*await this.service.newProduct().then(res => (*/
-                this.baseService._openDialog(PaymentModalComponent, this.cartModel.summary.totalAmnt);
+                this.baseService._openDialog(PaymentModalComponent, null, this.cartModel.summary.totalAmnt);
             //));
         }
         else
