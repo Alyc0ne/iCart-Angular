@@ -1,7 +1,7 @@
 <div class="pos-container">
     <div class="product-content">
         <div class="product-filter">
-            <button class="orange-button active">อาหารแช่แข็ง</button>
+            <button class="green-button active">อาหารแช่แข็ง</button>
             <button class="orange-button">Food</button>
             <button class="orange-button">Alcohol</button>
         </div>
@@ -76,7 +76,7 @@
             </div>
         </div> 
         <div class="summary-action">
-            <button class="blue-button" (click)="callPaymentModal()" [disabled]="!cartModel.products">
+            <button (click)="callPaymentModal()" [disabled]="!cartModel.products">
                 ชำระเงิน (Space Bar)
             </button>
         </div>

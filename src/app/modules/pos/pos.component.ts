@@ -100,19 +100,10 @@ export class POSComponent {
 
     clearCart() {
         if (!!this.cartModel.products.length) {
-            
-            this.baseService._openDialog(ConfirmModalComponent,
-                {
-                    autoFocus: true,
-                    disableClose: true,
-                    width: "500px",
-                    height: "250px",
-                    id: "alertModal"
-                },
-                null);
-            this.cartModel = {
-                summary: { paymentSeleted: this.posService.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
-            }
+            this.baseService._openDialog(ConfirmModalComponent, null, null);
+            // this.cartModel = {
+            //     summary: { paymentSeleted: this.posService.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
+            // }
         }
     }
 

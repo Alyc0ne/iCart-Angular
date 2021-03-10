@@ -18,8 +18,8 @@ export class AppService {
         var defaultConfig = {
             autoFocus: true,
             disableClose: true,
-            width: "500px",
-            height: "250px",
+            width: "380px",
+            height: "380px",
             data: !!_data ? _data : null
         }
 

@@ -26,8 +26,8 @@
 }
 
 .product-filter > button.active {
-    color: white;
-    background-color: #F07613;
+    color: #76CA3D;
+    /* background-color: #F07613; */
 }
 
 .product-items {
@@ -75,7 +75,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    color: #F07613 !important;    
+    color: #76CA3D !important;    
 }
 
 .product-column:hover {
@@ -105,6 +105,7 @@
 .header-menu > button.clear-all {
     margin-left: 10px;
     min-width: 120px;
+    background-color: #20B49E;
 }
 
 .summary-content {
@@ -163,7 +164,7 @@
 }
 
 .summary-action > button {
-    background-color: #F07613;
+    background-color: #20B49E;
     color: white;
     border-radius: 10px;
     width: 100%;
