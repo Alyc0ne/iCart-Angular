@@ -1,33 +1,27 @@
-<div class="modal-header">
-    <div class="form-group fullrow">
-        <span class="req"></span>
-        <label for="totalAmnt" class="formLabel" title="รวมราคาสินค้า">รวมราคาสินค้า</label>
-        <div class="form-content">
-            <h1 class="txt-r">{{ this.totalAmnt | number:'1.2-2'}}</h1>
-        </div>
-    </div>    
+<!-- <div class="modal-header">
+    <div class="content-header">รับเงินไอ่หน้าหี</div>
 </div>
+<mat-divider></mat-divider> -->
 
-<div class="modal-content">
-    <div class="form-group fullrow">
-        <span class="req"></span>
-        <label for="amntReceived" class="formLabel" title="จำนวนเงินที่รับมา">จำนวนเงินที่รับมา</label>
-        <div class="form-content">
-            <input appOnlynumber type="text" [(ngModel)]="amntReceived" (ngModelChange)="onAmntReceivedChange($event)" class="form-input txt-r" autocomplete="off">
-        </div>
-    </div>    
+ <div class="modal-content">
 
-    <div class="form-group fullrow">
-        <span class="req"></span>
-        <label for="balanceAmnt" class="formLabel" title="เงินทอน">เงินทอน</label>
+    <h2>ยอดที่ต้องชำระ</h2>
+    <span>{{ this.totalAmnt | number:'1.2-2'}} บาท</span>
+
+
+
+
+    <!-- <div class="form-group">
+        <label for="balanceAmnt" class="formLabel" title="เงินทอน">เงินทอน :</label>
         <div class="form-content">
             <h1 class="txt-r">{{ this.balanceAmnt | number:'1.2-2'}}</h1>
         </div>
-    </div>  
+    </div>   -->
 </div>
 
 <div class="modal-footer">
-    <div class="form-group">
-        <button class="blue-button" [disabled]="totalAmnt > amntReceived">ชำระเงิน (Enter)</button>
-    </div>
+    <div class="payment">
+        <input appOnlynumber type="text" class="form-input" [(ngModel)]="amntReceived" (ngModelChange)="onAmntReceivedChange($event)" class="form-input" autocomplete="off">
+        <button class="green-button">ชำระเงิน</button>
+    </div>  
 </div>

@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { AppService } from '@services/base/apps.service';
 
 @Component({
     selector: 'app-confirm-modal',
@@ -10,11 +10,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class ConfirmModalComponent {
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data,
-        public dialogRef:MatDialogRef<ConfirmModalComponent>
+       public baseService: AppService,
     ){ }
-
-    closeDialog() {
-        this.dialogRef.close();
-    }
 }

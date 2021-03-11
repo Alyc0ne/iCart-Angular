@@ -3,7 +3,7 @@ import { POSService } from './Shared/pos.service';
 import { cartModel } from './Shared/pos.model';
 import { PaymentModalComponent } from './Shared/Payment/payment-modal.component';
 import { ConfirmModalComponent } from '../Shared/Modal/Confirm/confirm-modal.component';
-import { AppService } from '../Shared/ts/apps';
+import { AppService } from '@services/base/apps.service';
 
 @Component({
     selector: 'app-pos',
@@ -82,7 +82,6 @@ export class POSComponent {
     }
 
     calSummary() {
-        // console.log(this.cartModel)
         if (!!this.cartModel.products.length) {
             var subTotal = this.cartModel.products.reduce((sum, obj) => { return sum + obj.productTotalPrice; }, 0);
             this.cartModel.summary.subTotal = subTotal;
@@ -100,7 +99,7 @@ export class POSComponent {
 
     clearCart() {
         if (!!this.cartModel.products.length) {
-            this.baseService._openDialog(ConfirmModalComponent, null, null);
+            this.baseService._openDialog(ConfirmModalComponent);
             // this.cartModel = {
             //     summary: { paymentSeleted: this.posService.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
             // }
@@ -110,7 +109,11 @@ export class POSComponent {
     callPaymentModal() {
         if (this.cartModel.products.length > 0) {                
             /*await this.service.newProduct().then(res => (*/
-                this.baseService._openDialog(PaymentModalComponent, null, this.cartModel.summary.totalAmnt);
+                this.baseService.configDialog.height = "200px";
+                this.baseService.configDialog.width = "400px"
+                this.baseService.configDialog.data = this.cartModel.summary.totalAmnt
+                this.baseService._openDialog(PaymentModalComponent);
+                //, null, t
             //));
         }
         else

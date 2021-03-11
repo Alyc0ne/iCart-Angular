@@ -2,7 +2,16 @@
     <img src="assets/images/warning.png" width="80">
 </div>
 
-<!-- <div class="modal-footer">
-    <button class="green-button">OK</button>
-    <button class="warn-button">ยกเลิก</button>
-</div> -->
+<div class="modal-content">
+    <div class="content-header">
+        ต้องการเคลียร์สินค้าในตะกร้า ?
+    </div>
+    <div class="content-content">
+        ถ้าทำการเคลียร์สินค้าในตะกร้าแล้วจะไม่สามารถกู้คืนได้.
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="warn-button" (click)="baseService._closeDialog()">ยกเลิก</button>
+    <button class="green-button">ตกลง</button>
+</div>

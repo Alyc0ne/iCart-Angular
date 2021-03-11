@@ -1,0 +1,20 @@
+.modal-header {
+    height: 75px;
+    justify-content: center;
+    display: flex;
+}
+
+.modal-content {
+    height: 200px !important;
+}
+
+.modal-footer {
+    height: 100px;
+    justify-content: space-around;
+    align-self: flex-end;
+    display: flex;
+}
+
+.modal-footer > button {
+    font-size: 16pt;
+}

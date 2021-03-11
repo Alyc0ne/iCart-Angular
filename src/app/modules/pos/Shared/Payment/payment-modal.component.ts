@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dial
 import { ReceiptModalComponent } from '../Receipt/receipt-modal.component';
 
 @Component({
-    selector: 'payment-modal',
+    selector: 'app-payment-modal',
     templateUrl: './payment-modal.component.html',
     styleUrls: ['./payment-modal.component.css']
 })
@@ -38,7 +38,7 @@ export class PaymentModalComponent {
 
     ngOnInit(): void {
         this.totalAmnt = this.data;
-        this.amntReceived = null;
+        this.amntReceived = this.data;
     }
 
     @HostListener('document:keydown', ['$event'])
