@@ -21,6 +21,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { ProductListComponent } from './modules/product/List/product.component';
 import { POSComponent } from './modules/pos/pos.component';
 import { UnitListComponent } from './modules/unit/List/unit.component';
+import { EmployeeListComponent } from './modules/employee/List/employee.component';
 
 //Modal
 import { ProductModalComponent } from './modules/product/Shared/modal/product-modal.component';
@@ -44,6 +45,7 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     ProductModalComponent,
     POSComponent,
     UnitListComponent,
+    EmployeeListComponent,
 
     //Modal
     ConfirmModalComponent,

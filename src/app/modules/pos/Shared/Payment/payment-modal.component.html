@@ -1,27 +1,12 @@
-<!-- <div class="modal-header">
-    <div class="content-header">รับเงินไอ่หน้าหี</div>
-</div>
-<mat-divider></mat-divider> -->
-
- <div class="modal-content">
-
+<div class="close-dialog"><mat-icon (click)="baseService._closeDialog('PaymentModalComponent')">clear</mat-icon></div>
+<div class="modal-content">    
     <h2>ยอดที่ต้องชำระ</h2>
     <span>{{ this.totalAmnt | number:'1.2-2'}} บาท</span>
-
-
-
-
-    <!-- <div class="form-group">
-        <label for="balanceAmnt" class="formLabel" title="เงินทอน">เงินทอน :</label>
-        <div class="form-content">
-            <h1 class="txt-r">{{ this.balanceAmnt | number:'1.2-2'}}</h1>
-        </div>
-    </div>   -->
 </div>
 
 <div class="modal-footer">
     <div class="payment">
-        <input appOnlynumber type="text" class="form-input" [(ngModel)]="amntReceived" (ngModelChange)="onAmntReceivedChange($event)" class="form-input" autocomplete="off">
-        <button class="green-button">ชำระเงิน</button>
+        <input appOnlynumber type="text" class="form-input" [(ngModel)]="amntReceived" class="form-input" autocomplete="off">
+        <button class="green-button" [disabled]="totalAmnt > amntReceived">ชำระเงิน</button>
     </div>  
 </div>

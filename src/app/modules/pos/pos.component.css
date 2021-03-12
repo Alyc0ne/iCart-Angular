@@ -130,6 +130,10 @@
     align-items: center;
 }
 
+.content-detail:first-child {
+    background-color: burlywood;
+}
+
 .content-detail > div:first-child {
     white-space: nowrap;
     overflow: hidden;

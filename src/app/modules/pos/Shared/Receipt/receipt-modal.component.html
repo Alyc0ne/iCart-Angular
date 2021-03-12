@@ -1,10 +1,9 @@
-<div class="modal-header">
-    <h1 class="txt-c">ต้องการใบเสร็จรับเงินหรือไม่ ? </h1>
+<div class="close-dialog"><mat-icon (click)="baseService._closeDialog('ReceiptModalComponent')">clear</mat-icon></div>
+<div class="modal-content">    
+    <h2>เงินทอน</h2>
+    <span>{{ this.balanceAmnt | number:'1.2-2'}} บาท</span>
 </div>
 
-<div class="modal-footer">
-    <div class="form-group">
-        <button class="blue-button">ต้องการใบเสร็จรับเงิน (Space bae)</button>
-        <button class="button warn">ไม่ต้องการต้องการใบเสร็จรับเงิน (Enter)</button>
-    </div>
+<div class="modal-footer">        
+    <button class="green-button">พิมพ์ใบเสร็จรับเงิน</button>
 </div>

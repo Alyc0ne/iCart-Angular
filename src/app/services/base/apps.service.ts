@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { HostListener, Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 
 @Injectable({
@@ -10,46 +10,49 @@ export class AppService {
         private dialog:MatDialog,
     ) {}
 
+    private objDialog = []
     private dialogRef;
     public configDialog = {
-        autoFocus: true,
-        disableClose: true,
-        width: "380px",
-        height: "380px",
+        autoFocus: null,
+        disableClose: null,
+        width: null,
+        height: null,
         data: null
     }
 
+    // @HostListener('document:keydown', ['$event'])
+    // onKeyDown(e: KeyboardEvent) {
+    //     if (!!this.dialogRef) return;        
+    //     if (e.key == "Escape")
+    //         console.log(e)
+    //         // this._closeDialog(e)
+    // }
+
     _openDialog(component) {
-        if (!!this.dialogRef) return;        
-        this.dialogRef = this.dialog.open(component, this.configDialog)
-        this.dialogRef.afterClosed().subscribe(() => {
-            this.dialogRef = undefined;
+        var componentName = component.name
+        if (this.objDialog.filter(x => x.componentName == componentName).length > 0) return;
+        this.dialogRef = this.dialog.open(component, {
+            autoFocus: !!this.configDialog.autoFocus ? this.configDialog.autoFocus : true,
+            disableClose: !!this.configDialog.disableClose ? this.configDialog.disableClose : true,
+            width: !!this.configDialog.width ? this.configDialog.width : "380px",
+            height: !!this.configDialog.height ? this.configDialog.height : "380px",
+            data: !!this.configDialog.data ? this.configDialog.data : null
         })
+        
+        this.dialogRef['componentName'] = componentName
+        this.objDialog.push(this.dialogRef)
     }
 
-    _closeDialog() {
-        this.dialogRef.close()
-    }
-
-    getConfigModal(type, data) {
-        var config = {};
-
-        if (type == "confirm") {
-           
-        } else {
-            config = {
-                autoFocus: true,
-                disableClose: true,
-                width: "380px",
-                height: "380px",
-                data: !!data ? data : null
+    _closeDialog(componentName) {
+        if (!!componentName) {
+            var _dialog = this.objDialog.filter(x => x.componentName == componentName)
+            if (_dialog.length > 0) {
+                _dialog[0].close()
+                this.dialogRef.afterClosed().subscribe(() => {
+                    this.configDialog = { autoFocus: null, disableClose: null, width: null, height: null, data: null }
+                    this.objDialog = this.objDialog.filter(x => x.componentName != componentName)
+                })
             }
         }
-
-        return config;
-    }
-
-    showKuy() {
-        console.log('boho')
     }
 }

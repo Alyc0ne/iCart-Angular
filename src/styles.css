@@ -118,7 +118,7 @@ button:hover, .button:hover {
 }
 
 button:disabled, .button.disabled {
-    opacity: .65;
+    opacity: .35;
     cursor: auto;
 }
 
@@ -587,6 +587,10 @@ h1 {
     min-width: 50px;
 }
 
+mat-icon {
+    cursor: pointer;
+}
+
 .table button > mat-icon {
     color: #B5C2C8;
 }
@@ -617,16 +621,6 @@ h1 {
     background: #f2f2f2;
 }
 
-/* .table td i.material-icons {
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.table td i.material-icons:first {
-    font-size: 20px;
-    cursor: pointer;
-} */
-
 .unit-info .table td .mat-select-trigger {
     border-collapse: separate;
     line-height: 16px;
@@ -642,6 +636,14 @@ h1 {
     border-radius: 20px !important;
     width: 100% !important;
     padding: 0px !important;
+}
+
+.close-dialog {
+    height: 30px;
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+    padding: 10px;
 }
 
 .modal-header {
@@ -689,6 +691,13 @@ app-confirm-modal {
 
 app-payment-modal {
     width: 100% !important;
+    text-align: center;
+}
+
+app-receipt-modal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 

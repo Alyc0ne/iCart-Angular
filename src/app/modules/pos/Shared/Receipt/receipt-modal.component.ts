@@ -1,17 +1,21 @@
 import { Component, Inject, HostListener } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { AppService } from '@services/base/apps.service';
 
 @Component({
-    selector: 'receipt-modal',
+    selector: 'app-receipt-modal',
     templateUrl: './receipt-modal.component.html',
     styleUrls: ['./receipt-modal.component.css']
 })
 
 export class ReceiptModalComponent {
     constructor(
+        public baseService: AppService,
         // @Inject(MAT_DIALOG_DATA) public data,
         public dialogRef:MatDialogRef<ReceiptModalComponent>,
     ) {}
+
+    public balanceAmnt: number = 0;
 
     ngOnInit(): void {}
 

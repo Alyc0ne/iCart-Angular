@@ -24,7 +24,7 @@
                 <input type="text" class="w100p" placeholder="รหัสบาร์โค้ด / ชื่อสินค้า" [(ngModel)]="textSearch" (change)="getProductByBarcode_text()" autofocus>
             </div>
 
-            <button class="orange-button clear-all" [disabled]="!cartModel.products" (click)="clearCart()">Clear All (ESC)</button>
+            <button class="orange-button clear-all" [disabled]="!cartModel.products" (click)="clearCart()">Clear All (Delete)</button>
         </div>
         <div class="summary-content" *ngIf="cartModel.products; else cartEmpty">
             <div *ngFor="let product of cartModel.products" class="content-detail">

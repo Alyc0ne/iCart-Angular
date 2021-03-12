@@ -1,21 +1,27 @@
+.modal-header {
+    text-align: center;
+    height: 40px !important;
+    margin-bottom: 0px;
+}
+
 .modal-content {
-    height: 100px !important;
-    overflow: hidden !important;
+    height: 80px !important;
+    margin-bottom: 20px;
+}
+.modal-content > h2 {
+    color: #A4A8AB !important;
+    font-weight: bold;
+}
+
+.modal-content > span {
+    font-size: 22pt;
+    font-weight: bold;
 }
 
 .modal-footer {
-    border: none;
+    height: 50px;
 }
 
-.modal-footer > div > button {
-    width: 100%;
-}
-
-label {
-    font-size: 26px !important;
-    min-width: 200px;
-}
-
-input.form-input {
-    width: 200px !important;
+.modal-footer > button {
+    width: 80%;
 }

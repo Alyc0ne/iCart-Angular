@@ -91,9 +91,10 @@ export class POSComponent {
 
     @HostListener('document:keydown', ['$event'])
     onKeyDown(e: KeyboardEvent) {
+        console.log(e.keyCode)
         if (e.keyCode == 32)
             this.callPaymentModal();
-        if (e.keyCode == 27) 
+        if (e.keyCode == 46) 
             this.clearCart();
     }
 
