@@ -80,6 +80,9 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
       },
       {
         path: 'ListUnit', component: UnitListComponent
+      },
+      {
+        path: 'ListEmployee', component: EmployeeListComponent
       }
     ]),
     BrowserAnimationsModule,

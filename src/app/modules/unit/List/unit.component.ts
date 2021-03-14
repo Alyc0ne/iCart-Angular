@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UnitService } from '../Shared/unit.service';
 import { UnitModalComponent } from '../Shared/modal/unit-modal.component'
-// import { ProductModel } from '../Shared/product.model';
+import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-unit',
@@ -15,7 +15,10 @@ export class UnitListComponent {
     constructor(
         public unitService: UnitService,
         private dialog:MatDialog,
+        private fb: FormBuilder
     ) { }
+
+    unitForm: FormGroup;
 
     public units = [
         { isCheck: false, unitID: 1, unitNo: 'UN-25641020-001', unitName: 'ชิ้น', createdDate: '22 ตุลาคม 2564'},
@@ -68,24 +71,31 @@ export class UnitListComponent {
     }
 
     callUnitModal = async (unitID) => {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = "650px";
-        // dialogConfig.height = "400px";
+        var objUnit = this.unitService
+        this.unitForm = this.fb.group({
+            runningFormatID: [objUnit.runningFormatID],
+            unitID: [''],
+            unitNo: [{ value: '', disabled:true }],
+            unitName: ['', Validators.required],
+        })
+        // const dialogConfig = new MatDialogConfig();
+        // dialogConfig.autoFocus = true;
+        // dialogConfig.disableClose = true;
+        // dialogConfig.width = "650px";
+        // // dialogConfig.height = "400px";
 
-        if (unitID == null) {
-            //await this.unitService.newUnit().then(res => (
-                dialogConfig.data = {
-                    headerText: "เพิ่มหน่วยนับ",
-                    objUnit : {
-                        runningFormatID: this.unitService.runningFormatID, 
-                        unitNo: this.unitService.runningNumber 
-                    }
-                },
-                this.dialog.open(UnitModalComponent, dialogConfig)
-            //));
-        }
+        // if (unitID == null) {
+        //     //await this.unitService.newUnit().then(res => (
+        //         dialogConfig.data = {
+        //             headerText: "เพิ่มหน่วยนับ",
+        //             objUnit : {
+        //                 runningFormatID: this.unitService.runningFormatID, 
+        //                 unitNo: this.unitService.runningNumber 
+        //             }
+        //         },
+        //         this.dialog.open(UnitModalComponent, dialogConfig)
+        //     //));
+        // }
         // else
         // {
         //     let productModel = null;

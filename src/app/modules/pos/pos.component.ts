@@ -37,47 +37,40 @@ export class POSComponent {
     }
 
     setProductToCart(product) {
-        if (!!this.cartModel.products) {
-            var currentProduct = this.cartModel.products.filter(x => { return x.productID == product.productID; });
-            if (currentProduct.length > 0)
-                this.manageQuatity(true.valueOf, currentProduct[0].productID, false)
-            else
-                this.cartModel.products.push(product);
-        }
-        else
-        {
-            this.cartModel.products = [product];
-        }
+        if (!!product) {
+            this.manageQuatity("plus", product)
 
-        this.cartModel.products.sort((a, b) => {
-            return <any>new Date(b.added_on) - <any>new Date(a.added_on);
-        })
-
-        this.calSummary();
+        }
     }
 
-    manageQuatity(type, productID, isCal = true) {
-        if (!!productID) {
+    manageQuatity(type, objProduct) {
+        if (!!objProduct) {
+            objProduct['added_on'] = new Date().getTime();
             if (!!this.cartModel.products) {
-                var product = this.cartModel.products.filter(x => { return x.productID == productID; })
+                var product = this.cartModel.products.filter(x => { return x.productID == objProduct.productID; })
                 if (product != null && product.length > 0) {
                     const _product = product[0];
-                    if (type) {
+                    if (type == "plus") {
                         _product.productQuantity += 1;
-                        _product.productTotalPrice = (product[0].productTotalPrice + product[0].productPrice);
+                        _product.productTotalPrice = (_product.productTotalPrice + _product.productPrice);
                     }
-                    else
+                    else if (type == "minus")
                     {
                         _product.productQuantity -= 1;
-                        _product.productTotalPrice = (product[0].productTotalPrice - product[0].productPrice);
+                        _product.productTotalPrice = (_product.productTotalPrice - _product.productPrice);
                     }
-
-                    _product.added_on = new Date().getTime();
+                } else {
+                    this.cartModel.products.push(objProduct);
                 }
-                
-                if (isCal)
-                    this.calSummary();
+            } else {
+                this.cartModel.products = [objProduct];
             }
+
+            this.cartModel.products.sort((a, b) => {
+                return <any>new Date(b.added_on) - <any>new Date(a.added_on);
+            })
+
+            this.calSummary();
         }
     }
 

@@ -51,6 +51,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let un of units" (click)="showDetail($event, un.unitID, un.isCheck)" [ngClass]="un.isCheck ? 'active' : ''">
+                        
                         <td>
                             <mat-checkbox [color]="'primary'" [checked]="un.isCheck"></mat-checkbox>
                         </td>

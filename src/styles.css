@@ -687,6 +687,7 @@ app-confirm-modal {
     display: flex;
     flex-direction: column;
     text-align: center;
+    padding: 5px;
 }
 
 app-payment-modal {

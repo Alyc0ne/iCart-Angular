@@ -35,12 +35,16 @@ export class AppService {
             autoFocus: !!this.configDialog.autoFocus ? this.configDialog.autoFocus : true,
             disableClose: !!this.configDialog.disableClose ? this.configDialog.disableClose : true,
             width: !!this.configDialog.width ? this.configDialog.width : "380px",
-            height: !!this.configDialog.height ? this.configDialog.height : "380px",
+            height: !!this.configDialog.height ? this.configDialog.height : "330px",
             data: !!this.configDialog.data ? this.configDialog.data : null
         })
         
         this.dialogRef['componentName'] = componentName
         this.objDialog.push(this.dialogRef)
+
+        this.dialogRef.afterOpened().subscribe(() => {
+            console.log("test")
+        })
     }
 
     _closeDialog(componentName) {
