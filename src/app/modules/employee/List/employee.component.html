@@ -1,1 +1,75 @@
-<h1>มองดูไรไอ่ควายไม่มีให้มึงดูหรอก</h1>
+<div class="top-bar">
+    <h1>รายชื่อพนักงานทั้งหมด</h1>
+</div>
+<mat-divider></mat-divider>
+<div class="header-menu">
+    <div class="search">
+        <mat-icon>search</mat-icon>
+        <input type="text" name="" id="" placeholder="Search Products">
+    </div>
+
+    <div class="groupAction">
+        <button class="green-button">
+            เพิ่มพนักงาน
+        </button>
+
+        <button class="multipleAction" [matMenuTriggerFor]="menu">
+             <mat-icon>more_horiz</mat-icon>            
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>create</mat-icon>
+                <span>แก้ไขพนักงาน</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>ลบพนักงาน</span>
+            </button>
+        </mat-menu>
+    </div>
+</div>
+
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="txt-l">รหัสพนักงาน</th>
+                <th class="txt-l">ชื่อพนักงาน</th>
+                <th class="txt-l">ชื่อเล่นพนักงาน</th>
+                <th class="txt-r">สถานะ</th>
+                <th class="txt-l">วันที่เริ่มทำงาน</th>
+                <th class="txt-r">อายุงานปัจจุบัน</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employeeService.employees">
+                <td><mat-checkbox [color]="'primary'"></mat-checkbox></td>
+                <td>{{ employee.employeeNo }}</td>
+                <td>{{ employee.employeeFullName }}</td>
+                <td>{{ employee.employeeNickName }}</td>                
+                <td>{{ employee.rowFlag }}</td>       
+                <td>{{ employee.workStartDate }}</td>       
+            </tr>
+        </tbody>
+        <tfoot>
+            <!-- <div class="pagination">
+                <a>&laquo;</a>
+                <a *ngFor="let page of totalPages; let i = index;">{{ i + 1 }}</a>                
+                <a>&raquo;</a>
+            </div> -->
+        </tfoot>
+    </table>
+
+    <mat-menu #menuAction="matMenu">
+        <button mat-menu-item>
+            <mat-icon>create</mat-icon>
+            <span>แก้ไขสินค้า</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>ลบหน่วยนับ</span>
+        </button>
+    </mat-menu>
+</div>

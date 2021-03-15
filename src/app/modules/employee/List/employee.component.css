@@ -1,0 +1,23 @@
+.table td:nth-child(3), th:nth-child(3) { 
+    min-width: 240px;
+}
+
+.table td:nth-child(4), th:nth-child(4) { 
+    width: 100%;
+}
+
+.table td:nth-child(5), th:nth-child(5) { 
+    min-width: 120px;
+}
+
+.table td:nth-child(6), th:nth-child(6) { 
+    min-width: 120px;
+}
+
+.table td:nth-child(7), th:nth-child(7), .table td:nth-child(8), th:nth-child(8) { 
+    min-width: 180px;
+}
+
+.table td:nth-child(9), th:nth-child(9) { 
+    min-width: 100px;
+}

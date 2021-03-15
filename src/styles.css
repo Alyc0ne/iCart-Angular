@@ -574,7 +574,7 @@ h1 {
 
 .table  tbody > tr {
     background-color: #FFFFFF;
-    height: 20px;
+    height: 44px;
     margin-top: 20px;
 }
 
@@ -587,6 +587,16 @@ h1 {
     min-width: 50px;
 }
 
+/* CHECK BOX */
+.table td:nth-child(1), th:nth-child(1) {
+    min-width: 50px;
+}
+
+/* NO */
+.table td:nth-child(2), th:nth-child(2) {
+    min-width: 200px;
+}
+
 mat-icon {
     cursor: pointer;
 }
@@ -595,9 +605,13 @@ mat-icon {
     color: #B5C2C8;
 }
 
-.table mat-checkbox > label {
+mat-checkbox > label {
     margin-bottom: 0px !important;
 }
+
+/* .divTable mat-checkbox > label {
+    margin-bottom: 0px !important;
+} */
 
 .pagination {
     display: flex;

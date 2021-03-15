@@ -3,15 +3,11 @@
     grid-template-columns: 70% 30%;
 }
 
-.left-content {
-    
-}
-
 .right-content {
     margin: 70px 0 0 10px;
 }
 
-.table td:nth-child(1), th:nth-child(1) {
+/* .table td:nth-child(1), th:nth-child(1) {
     min-width: 50px;
 }
 
@@ -30,4 +26,89 @@
 
 .table td:nth-child(5), th:nth-child(5) { 
     min-width: 100px;
+} */
+
+/* CHECK BOX */
+.divTableCell:nth-child(1), .divTableHead:nth-child(1) {
+    width: 50px;
+}
+
+/* NO */
+.divTableCell:nth-child(2), .divTableHead:nth-child(2) {
+    width: 200px;
+}
+
+.divTableCell:nth-child(3), .divTableHead:nth-child(3) {
+    width: 300px;
+}
+
+.divTableCell:nth-child(4), .divTableHead:nth-child(4) {
+    width: 250px;
+}
+
+.divTableCell:nth-child(5), .divTableHead:nth-child(5) {
+    width: 100px;
+}
+
+.divTable{
+	display: table;
+	width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    table-layout: fixed;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+    padding-right: 20px;
+    display: block;
+    overflow: hidden;
+    /* display: table-header-group; */
+    font-weight: bold;
+}
+
+.divTableHeading  div.divTableCell {
+    padding: 0 15px;
+}
+
+.divTableCell, .divTableHead {
+	display: table-cell;
+	padding: 3px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+    display: block;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 450px;
+    padding-right: 10px;
+    width: fit-content;
+}
+
+.divTableBody > div.divTableRow {
+    background-color: #FFFFFF;
+    height: 44px;
+    margin-top: 20px;
+}
+
+.divTableBody div.divTableCell {
+    padding: 15px;
+}
+
+.divTableBody button {
+    background: transparent;
+    min-width: 50px;
+}
+
+.divTableBody button > mat-icon {
+    color: #B5C2C8;
 }

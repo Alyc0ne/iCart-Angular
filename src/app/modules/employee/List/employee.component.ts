@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EmployeeService } from '../Shared/employee.service'
 
 @Component({
     selector: 'app-employee',
@@ -8,5 +9,15 @@ import { Component } from '@angular/core';
 
 export class EmployeeListComponent {
     
-    constructor() { }
+    constructor(
+        public employeeService: EmployeeService
+    ) { }
+
+    ngOnInit(): void {
+        this.employeeService.getEmployees()
+    }
+
+    public employees = {
+        
+    }
 }

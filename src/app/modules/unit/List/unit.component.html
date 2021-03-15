@@ -38,7 +38,34 @@
 
 <div class="content-menu">
     <div class="left-content">
-        <table class="table">
+        <div class="divTable">
+            <div class="divTableHeading">
+                <div class="divTableRow">
+                    <div class="divTableHead"></div>
+                    <div class="divTableHead">รหัสหน่วยนับ</div>
+                    <div class="divTableHead">ชื่อหน่วยนับ</div>
+                    <div class="divTableHead">CREATED DATE</div>
+                    <div class="divTableHead"></div>
+                </div>
+            </div>
+            <div class="divTableBody">
+                <div class="divTableRow" *ngFor="let un of units" (click)="showDetail($event, un.unitID, un.isCheck)">
+                    <div class="divTableCell"><mat-checkbox [color]="'primary'" [checked]="un.isCheck"></mat-checkbox></div>
+                    <div class="divTableCell">{{ un.unitNo }}</div>
+                    <div class="divTableCell">{{ un.unitName }}</div>
+                    <div class="divTableCell">{{ un.createdDate }}</div>
+                    <div class="divTableCell">
+                        <button mat-icon-button [matMenuTriggerFor]="menuAction">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- <table class="table">
             <div class="">
                 <thead>
                     <tr>
@@ -76,7 +103,7 @@
                     <a>&raquo;</a>
                 </div>
             </tfoot>
-        </table>
+        </table> -->
     </div>
     
     <div class="right-content">
