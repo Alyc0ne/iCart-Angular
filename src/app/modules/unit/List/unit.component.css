@@ -58,7 +58,9 @@
     table-layout: fixed;
 }
 .divTableRow {
-	display: table-row;
+	/* display: table-row; */
+    display: flex;
+    align-items: center;
 }
 .divTableHeading {
     padding-right: 20px;
@@ -94,10 +96,16 @@
     width: fit-content;
 }
 
+.divTableBody > div.divTableRow:first-child {
+    background-color: #FFFFFF;
+    height: 44px;
+    margin-top: 10px;
+}
+
 .divTableBody > div.divTableRow {
     background-color: #FFFFFF;
     height: 44px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .divTableBody div.divTableCell {
@@ -111,4 +119,13 @@
 
 .divTableBody button > mat-icon {
     color: #B5C2C8;
+}
+
+
+form {
+    display: contents;
+}
+
+.addUnit div.divTableCell:nth-child(1) {
+    width: 80px;
 }
