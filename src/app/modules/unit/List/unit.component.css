@@ -28,14 +28,23 @@
     min-width: 100px;
 } */
 
-/* CHECK BOX */
-.divTableCell:nth-child(1), .divTableHead:nth-child(1) {
-    width: 50px;
+.divTableCell:nth-child(1) > mat-icon:first-child {
+    color: #20B49E;
+    font-size: 16pt;
 }
 
-/* NO */
+.divTableCell:nth-child(1) > mat-icon:last-child {
+    color: #f44336;
+    font-size: 16pt;
+}
+
+.divTableCell:nth-child(1), .divTableHead:nth-child(1) {
+    width: 80px;
+    justify-content: center;
+}
+
 .divTableCell:nth-child(2), .divTableHead:nth-child(2) {
-    width: 200px;
+    width: 240px;
 }
 
 .divTableCell:nth-child(3), .divTableHead:nth-child(3) {
@@ -110,6 +119,7 @@
 
 .divTableBody div.divTableCell {
     padding: 15px;
+    display: flex;
 }
 
 .divTableBody button {
@@ -122,10 +132,35 @@
 }
 
 
-form {
+
+.grid-inline > form {
     display: contents;
 }
 
-.addUnit div.divTableCell:nth-child(1) {
+.grid-inline.validate {
+    height: 80px !important;
+}
+
+.grid-inline.validate .divTableCell {
+    height: 80px !important;
+    flex-direction: column;
+}
+
+.grid-inline.validate .divTableCell:nth-child(1) {
+    padding-bottom: 28px;
+}
+
+.grid-inline .divTableCell:nth-child(1) {
     width: 80px;
+    flex-direction: initial;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.grid-inline .divTableCell > input {
+    width: 100%;
+}
+
+.grid-inline input {
+    margin-bottom: 0px !important;
 }

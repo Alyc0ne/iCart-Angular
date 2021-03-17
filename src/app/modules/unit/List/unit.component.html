@@ -49,11 +49,11 @@
                 </div>
             </div>
             <div class="divTableBody">
-                <div class="divTableRow addUnit" *ngFor="let unit of addUnit">
+                <div class="divTableRow grid-inline" *ngFor="let unit of addUnit" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
                     <form [formGroup]="unitForm">
                         <div class="divTableCell">
-                            <mat-icon>done</mat-icon>
-                            <mat-icon>clear</mat-icon>
+                            <mat-icon (click)="acceptAddUnit()">done</mat-icon>
+                            <mat-icon (click)="cancelAddUnit()">clear</mat-icon>
                         </div>
     
                         <div class="divTableCell">
@@ -62,26 +62,19 @@
                         </div>
 
                         <div class="divTableCell">
-                            <div class="form-content">
-                                <input type="text" id="unitName" formControlName="unitName" placeholder="กรอกชื่อหน่วยนับ" autocomplete="off" required maxlength="255">
-                                <div *ngIf="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched)" class="alert-danger">
-                                    <div *ngIf="_unit.unitName.errors.required"><span>กรุณากรอกชื่อหน่วยนับ.</span></div>
-                                </div>
+                            <input type="text" id="unitName" formControlName="unitName" class="form-input" placeholder="กรอกชื่อหน่วยนับ" autocomplete="off" required maxlength="255">
+                            <div *ngIf="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched)" class="alert-danger">
+                                <div *ngIf="_unit.unitName.errors.required"><span>กรุณากรอกชื่อหน่วยนับ.</span></div>
                             </div>
+                        </div>
+
+                        <div class="divTableCell">
+                            <input type="text" id="createdDate" formControlName="createdDate">
                         </div>
 
                         <!-- <div class="divTableCell">
-                            <div class="form-content">
-                                <input type="text" id="unitName" formControlName="unitName" placeholder="กรอกชื่อหน่วยนับ" autocomplete="off" required maxlength="255">
-                                <div *ngIf="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched)" class="alert-danger">
-                                    <div *ngIf="_unit.unitName.errors.required"><span>กรุณากรอกชื่อหน่วยนับ.</span></div>
-                                </div>
-                            </div>
+
                         </div> -->
-
-                        <div class="divTableCell">
-
-                        </div>
                   
                         
                             <!-- <div class="form-group">

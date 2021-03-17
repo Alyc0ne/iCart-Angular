@@ -26,6 +26,7 @@ import { EmployeeListComponent } from './modules/employee/List/employee.componen
 //Modal
 import { ProductModalComponent } from './modules/product/Shared/modal/product-modal.component';
 import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
+import { SuccessModalComponent } from './modules/Shared/Modal/Success/success-modal.component';
 import { ConfirmModalComponent } from './modules/Shared/Modal/Confirm/confirm-modal.component';
 import { PaymentModalComponent } from './modules/pos/Shared/Payment/payment-modal.component';
 import { ReceiptModalComponent } from './modules/pos/Shared/Receipt/receipt-modal.component';
@@ -99,7 +100,8 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
   entryComponents:[
     ProductModalComponent, 
     ConfirmModalComponent,
-    AlertModalComponent, 
+    AlertModalComponent,
+    SuccessModalComponent,
     PaymentModalComponent, 
     ReceiptModalComponent,
     UnitModalComponent

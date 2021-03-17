@@ -803,3 +803,17 @@ mat-select.ng-invalid.ng-touched > div.mat-select-trigger {
 .summary-footer > div mat-select > div.mat-select-trigger {
     width: 100% !important;
 }
+
+
+app-success-modal {
+    border-width: 0;
+    border-left-width: 4px;
+    border-radius: 0;
+    color: #85262c;
+    background-color: #ffdbdd;
+    border-color: #ffcccf;
+    padding: 0.75rem 1.25rem;
+    /* margin-bottom: 1rem; */
+    border: 1px solid transparent;
+    width: 100%;
+}

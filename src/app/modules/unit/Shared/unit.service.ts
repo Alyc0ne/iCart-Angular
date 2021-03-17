@@ -22,15 +22,11 @@ export class UnitService {
         .toPromise()
         .then(res => this.list = res as ProductModel[]);
     }
-
+    
     getRunning = async () => {
         await this.http.get(this.baseUrl + 'Units/GetrunningNumber')
         .toPromise()
         .then(res => (this.runningNumber = res['lastestNo'], this.runningFormatID = res['runningFormatID']));
-    }
-
-    newUnit = async () => {
-        await this.getRunning();
     }
 
     bindSave = async (ProductModel) => {

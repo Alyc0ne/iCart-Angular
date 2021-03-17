@@ -3,7 +3,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UnitService } from '../Shared/unit.service';
 import { UnitModel } from '../Shared/unit.model';
 import { UnitModalComponent } from '../Shared/modal/unit-modal.component'
-import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AppService } from '@services/base/apps.service';
+import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
 
 @Component({
     selector: 'app-unit',
@@ -14,6 +16,7 @@ import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@ang
 export class UnitListComponent {
 
     constructor(
+        public baseService: AppService,
         public unitService: UnitService,
         private dialog:MatDialog,
         private fb: FormBuilder
@@ -70,15 +73,42 @@ export class UnitListComponent {
     }
 
     callUnitModal = async (unitID) => {
-        this.addUnit = [{ isAdd: true, isCheck: false, unitID: null, unitNo: 'UN-25641020-001', unitName: null, added_on: new Date().getTime() }]
-        //var running = this.unitService.getRunning();
+        await this.unitService.getRunning().then(res => {
+            this.unitForm = this.fb.group({
+                runningFormatID: [this.unitService.runningFormatID],
+                unitID: [''],
+                unitNo: [{ value: this.unitService.runningNumber, disabled:true }],
+                unitName: ['', Validators.required],
+                createdDate: [{ value: '17 มีนาคม 264', disabled: true }]
+            })
 
-        this.unitForm = this.fb.group({
-            runningFormatID: '', //[objUnit.runningFormatID],
-            unitID: [''],
-            unitNo: [{ value: 'UN-001', disabled:true }],
-            unitName: ['', Validators.required],
+            this.addUnit = [{ isAdd: true, isCheck: false, unitID: null, unitNo: 'UN-25641020-001', unitName: null, added_on: new Date().getTime() }]
+
+            setTimeout(() => { 
+                document.getElementById("unitName").focus();
+            }, 100);
+            
         })
+    }
+
+    get _unit() {
+        return this.unitForm.controls;
+    }
+
+    acceptAddUnit = async () => {
+        if (this.unitForm.valid) {
+            //await this.unitService.bindSave(this.unitForm.getRawValue()).then(res => this.addUnit = null);
+            // this.baseService.configDialog.height
+            this.baseService.configDialog.height = "50px";
+            // this.baseService.configDialog.
+            this.baseService._openDialog(SuccessModalComponent)
+        }
+    }
+
+    cancelAddUnit() {
+        this.addUnit = null
+    }
+
 
         // this.units.sort((a, b) => {
         //     return <any>new Date(b.added_on) - <any>new Date(a.added_on);
@@ -115,9 +145,5 @@ export class UnitListComponent {
         //         this.dialog.open(ProductModalComponent, dialogConfig)
         //     ));
         // }
-    }
-
-    get _unit() {
-        return this.unitForm.controls;
-    }
+    //}
 }
