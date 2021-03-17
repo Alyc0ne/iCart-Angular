@@ -73,7 +73,7 @@ export class UnitListComponent {
     }
 
     callUnitModal = async (unitID) => {
-        await this.unitService.getRunning().then(res => {
+        //await this.unitService.getRunning().then(res => {
             this.unitForm = this.fb.group({
                 runningFormatID: [this.unitService.runningFormatID],
                 unitID: [''],
@@ -88,7 +88,7 @@ export class UnitListComponent {
                 document.getElementById("unitName").focus();
             }, 100);
             
-        })
+        //})
     }
 
     get _unit() {
@@ -99,8 +99,11 @@ export class UnitListComponent {
         if (this.unitForm.valid) {
             //await this.unitService.bindSave(this.unitForm.getRawValue()).then(res => this.addUnit = null);
             // this.baseService.configDialog.height
+            this.baseService.configDialog.id = "success-modal";
             this.baseService.configDialog.height = "50px";
-            // this.baseService.configDialog.
+            this.baseService.configDialog.data = "ระบบทำงานผิดพลาดไม่สามารถบันทึกหน่วยนับได้"
+            this.baseService.configDialog.position = { right: '50px', bottom: '10px' }
+            this.baseService.configDialog.hasBackdrop = true
             this.baseService._openDialog(SuccessModalComponent)
         }
     }

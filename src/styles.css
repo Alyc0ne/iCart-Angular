@@ -804,16 +804,45 @@ mat-select.ng-invalid.ng-touched > div.mat-select-trigger {
     width: 100% !important;
 }
 
+#success-modal {
+    border-radius: 0 !important;
+}
 
 app-success-modal {
+    border: 1px solid transparent;
     border-width: 0;
-    border-left-width: 4px;
+    border-left-width: 6px;
     border-radius: 0;
     color: #85262c;
     background-color: #ffdbdd;
     border-color: #ffcccf;
     padding: 0.75rem 1.25rem;
     /* margin-bottom: 1rem; */
-    border: 1px solid transparent;
+    
     width: 100%;
+}
+
+/* app-success-modal .content::before {
+    color: white;
+    width: 1.5em;
+    height: 1.5em;
+    position: absolute;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+    background-color: darkorange;
+    content: "x";
+    right: 30px;
+    bottom: 50px;
+} */
+
+app-success-modal .content {
+    display: flex;
+    align-items: flex-start;
+}
+
+app-success-modal .content > p {
+    margin: 3px 0 0 10px;
 }

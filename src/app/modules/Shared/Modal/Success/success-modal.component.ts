@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-success-modal',
@@ -8,8 +9,12 @@ import { Component } from '@angular/core';
 export class SuccessModalComponent {
 
     constructor(
-
+        @Inject(MAT_DIALOG_DATA) public dataRef,
     ){ }
 
+    text: string
 
+    ngOnInit(): void {
+        this.text = this.dataRef
+    }
 }

@@ -51,6 +51,7 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     //Modal
     ConfirmModalComponent,
     AlertModalComponent,
+    SuccessModalComponent,
     PaymentModalComponent,
     ReceiptModalComponent,
     UnitModalComponent,
