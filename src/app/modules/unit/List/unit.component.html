@@ -93,48 +93,6 @@
                 </div>
             </div>
         </div>
-
-
-
-        <!-- <table class="table">
-            <div class="">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th class="txt-l">รหัสหน่วยนับ</th>
-                        <th class="txt-l">ชื่อหน่วยนับ</th>
-                        <th class="txt-l">CREATED DATE</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let unit of units" (click)="showDetail($event, unit.unitID, unit.isCheck)" [ngClass]="unit.isCheck ? 'active' : ''">
-                        
-                        <td>
-                            <mat-checkbox [color]="'primary'" [checked]="unit.isCheck"></mat-checkbox>
-                        </td>
-                        <td>{{ unit.unitNo }}</td>
-                        <td>{{ unit.unitName }}</td>
-                        <td>{{ unit.createdDate }}</td>
-                        <td>
-                            <button mat-icon-button [matMenuTriggerFor]="menuAction">
-                                <mat-icon>more_horiz</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </div>            
-            <tfoot>
-                <div class="pagination">
-                    <a>&laquo;</a>
-                    <a>1</a>
-                    <a>2</a>
-                    <a>...</a>
-                    <a>10</a>
-                    <a>&raquo;</a>
-                </div>
-            </tfoot>
-        </table> -->
     </div>
     
     <div class="right-content">
