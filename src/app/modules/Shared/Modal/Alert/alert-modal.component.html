@@ -1,16 +1,4 @@
-<div class="alert-topbar"></div>
-<div class="alert-wrapper">
-    <i class="material-icons">error_outline</i>
-    
-    <div class="alert-detail">
-        <div class="alert-header">{{ this.data.txtAlertHeader }}</div>
-    
-        <div class="alert-content">{{ this.data.txtAlertContent }}</div>
-    </div>
-    
-
-    <div class="alert-close">
-        <i class="material-icons pointer" (click)="closeDialog()">cancel</i>
-    </div>
-    
+<div class="content">
+    <mat-icon>warning</mat-icon>
+    <p>{{ dataRef.message }}</p>
 </div>

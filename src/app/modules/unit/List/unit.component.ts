@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UnitService } from '../Shared/unit.service';
 import { UnitModel } from '../Shared/unit.model';
-import { UnitModalComponent } from '../Shared/modal/unit-modal.component'
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppService } from '@services/base/apps.service';
 import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
@@ -18,33 +16,20 @@ export class UnitListComponent {
     constructor(
         public baseService: AppService,
         public unitService: UnitService,
-        private dialog:MatDialog,
         private fb: FormBuilder
     ) { }
 
     unitForm: FormGroup;
     units: UnitModel[]
     addUnit: UnitModel[]
-    public unitNo:any
-    public unitName:any
-    public createdDate:any
-    
-    //productModel: ProductModel[];
+    UnitID: string
+    unitNo: any
+    unitName: any
+    createdDate: any
     
     ngOnInit(): void {
-        //this.service.refreshList()
-        this.units = [
-            { isCheck: false, unitID: '1', unitNo: 'UN-25641020-001', unitName: 'ชิ้น', createdDate: '22 ตุลาคม 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '2', unitNo: 'UN-25640910-002', unitName: 'ขวด', createdDate: '10 กันยายน 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '3', unitNo: 'UN-25640902-003', unitName: 'อัน', createdDate: '02 กันยายน 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '4', unitNo: 'UN-25640206-004', unitName: 'แพ๊ค', createdDate: '06 กุมภาพันธ์ 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '5', unitNo: 'UN-25640122-001', unitName: 'กล่อง', createdDate: '22 มกราคม 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '6', unitNo: 'UN-25640122-002', unitName: 'ซอง', createdDate: '22 มกราคม 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '7', unitNo: 'UN-25640122-003', unitName: 'ถุง', createdDate: '22 มกราคม 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '8', unitNo: 'UN-25640122-004', unitName: 'มัด', createdDate: '22 มกราคม 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '9', unitNo: 'UN-25640122-005', unitName: 'เครื่อง', createdDate: '22 มกราคม 2564', added_on: new Date().getTime()},
-            { isCheck: false, unitID: '10', unitNo: 'UN-25640122-006', unitName: 'หน่วย', createdDate: '22 มกราคม 2564', added_on: new Date().getTime()},
-        ]
+        this.UnitID = "bc778400-e31f-4d49-b47b-05cad6a73e30"
+        this.unitService.refreshList()
     }
 
     showDetail(event ,unitID, isCheck) {
@@ -72,23 +57,33 @@ export class UnitListComponent {
         }
     }
 
-    callUnitModal = async (unitID) => {
-        //await this.unitService.getRunning().then(res => {
-            this.unitForm = this.fb.group({
-                runningFormatID: [this.unitService.runningFormatID],
-                unitID: [''],
-                unitNo: [{ value: this.unitService.runningNumber, disabled:true }],
-                unitName: ['', Validators.required],
-                createdDate: [{ value: '17 มีนาคม 264', disabled: true }]
+    callUnitModal = async () => {
+        console.log(this.UnitID)
+        if (!!this.UnitID) {
+            var units = this.unitService.units
+            if (!!units) {
+                units.filter(x => x.unitID == this.UnitID).map(x => x.isAdd == true)
+            }
+        }
+        else
+        {
+            await this.unitService.getRunning().then(res => {
+                this.unitForm = this.fb.group({
+                    runningFormatID: [this.unitService.runningFormatID],
+                    unitID: [''],
+                    unitNo: [{ value: this.unitService.runningNumber, disabled:true }],
+                    unitName: ['', Validators.required],
+                    unitNameEng: [''],
+                    createdDate: [{ value: '17 มีนาคม 264', disabled: true }]
+                })
+    
+                this.addUnit = [{ isAdd: true }]
+    
+                setTimeout(() => { 
+                    document.getElementById("unitName").focus();
+                }, 100);
             })
-
-            this.addUnit = [{ isAdd: true, isCheck: false, unitID: null, unitNo: 'UN-25641020-001', unitName: null, added_on: new Date().getTime() }]
-
-            setTimeout(() => { 
-                document.getElementById("unitName").focus();
-            }, 100);
-            
-        //})
+        }
     }
 
     get _unit() {
@@ -97,14 +92,37 @@ export class UnitListComponent {
 
     acceptAddUnit = async () => {
         if (this.unitForm.valid) {
-            //await this.unitService.bindSave(this.unitForm.getRawValue()).then(res => this.addUnit = null);
-            // this.baseService.configDialog.height
-            this.baseService.configDialog.id = "success-modal";
-            this.baseService.configDialog.height = "50px";
-            this.baseService.configDialog.data = "ระบบทำงานผิดพลาดไม่สามารถบันทึกหน่วยนับได้"
-            this.baseService.configDialog.position = { right: '50px', bottom: '10px' }
-            this.baseService.configDialog.hasBackdrop = true
-            this.baseService._openDialog(SuccessModalComponent)
+            await this.unitService.bindSave(this.unitForm.getRawValue()).then(res => {
+                this.addUnit = null
+
+                this.baseService.configDialog.id = "success-modal";
+                this.baseService.configDialog.height = "50px";
+                this.baseService.configDialog.width = "500px";
+                this.baseService.configDialog.data = { message: "บันทึกข้อมูลหน่วยนับสำเร็จ" }
+                this.baseService.configDialog.position = { right: '50px', top: '10px' }
+                this.baseService.configDialog.hasBackdrop = false
+                this.baseService._openDialog(SuccessModalComponent)
+
+                setTimeout(() => {
+                    this.baseService._closeDialog("SuccessModalComponent")
+                }, 1500);
+
+                this.unitService.refreshList();
+            });
+
+            
+
+            // this.baseService.configDialog.id = "alert-modal";
+            // this.baseService.configDialog.height = "50px";
+            // this.baseService.configDialog.width = "500px";
+            // this.baseService.configDialog.data = { message: "ระบบทำงานผิดพลาดไม่สามารถบันทึกหน่วยนับได้" }
+            // this.baseService.configDialog.position = { right: '50px', top: '10px' }
+            // this.baseService.configDialog.hasBackdrop = false
+            // this.baseService._openDialog(AlertModalComponent)
+
+            // setTimeout(() => {
+            //     this.baseService._closeDialog("AlertModalComponent")
+            // }, 1500);
         }
     }
 

@@ -41,7 +41,7 @@ export class AppService {
             width: !!this.configDialog.width ? this.configDialog.width : "380px",
             height: !!this.configDialog.height ? this.configDialog.height : "330px",
             data: !!this.configDialog.data ? this.configDialog.data : null,
-            hasBackdrop: !!this.configDialog.hasBackdrop ? this.configDialog.hasBackdrop : true,
+            hasBackdrop: this.configDialog.hasBackdrop == false ? this.configDialog.hasBackdrop : true,
             position: !!this.configDialog.position ? this.configDialog.position : true,
         })
         
@@ -49,12 +49,12 @@ export class AppService {
         this.objDialog.push(this.dialogRef)
 
         this.dialogRef.afterOpened().subscribe(() => {
-            console.log("test")
+            console.log("afterOpened")
         })
     }
 
     _closeDialog(componentName) {
-        if (!!componentName) {
+        if (!!componentName && typeof componentName == "string") {
             var _dialog = this.objDialog.filter(x => x.componentName == componentName)
             if (_dialog.length > 0) {
                 _dialog[0].close()

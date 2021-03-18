@@ -12,9 +12,7 @@ export class SuccessModalComponent {
         @Inject(MAT_DIALOG_DATA) public dataRef,
     ){ }
 
-    text: string
-
     ngOnInit(): void {
-        this.text = this.dataRef
+
     }
 }

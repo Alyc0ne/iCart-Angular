@@ -8,10 +8,12 @@ import { UnitModel } from './unit.model';
 })
 
 export class UnitService {
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient,
+    ) {}
 
     readonly baseUrl = 'http://localhost:5000/api/'
-    list: ProductModel[];
+    units: UnitModel[]
     runningNumber: string;
     runningFormatID: string;
     listUnit: UnitModel[];
@@ -20,7 +22,17 @@ export class UnitService {
     refreshList = async () => {
         this.http.get(this.baseUrl + 'Units')
         .toPromise()
-        .then(res => this.list = res as ProductModel[]);
+        .then(res => {
+            this.units = res as UnitModel[]
+            this.units.forEach(x => {
+                x.createdDate = new Date(x.createdDate).toLocaleDateString('th-TH', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: '2-digit',
+                });
+            });
+
+        });
     }
     
     getRunning = async () => {
@@ -29,9 +41,10 @@ export class UnitService {
         .then(res => (this.runningNumber = res['lastestNo'], this.runningFormatID = res['runningFormatID']));
     }
 
-    bindSave = async (ProductModel) => {
-        if (!!ProductModel) {
-            await this.http.post(this.baseUrl + 'Products', ProductModel)
+    bindSave = async (UnitModel) => {
+        console.log("UnitModel : " + UnitModel)
+        if (!!UnitModel) {
+            await this.http.post(this.baseUrl + 'Units', UnitModel)
             .toPromise()
             .then(res => console.log(res))
             .catch(res => console.log("catch"))

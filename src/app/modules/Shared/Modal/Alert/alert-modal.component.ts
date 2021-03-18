@@ -1,19 +1,15 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-alert',
+    selector: 'app-alert-modal',
     templateUrl: './alert-modal.component.html'
 })
 
 export class AlertModalComponent {
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data,
-        public dialogRef:MatDialogRef<AlertModalComponent>
+        @Inject(MAT_DIALOG_DATA) public dataRef
     ){ }
 
-    closeDialog() {
-        this.dialogRef.close();
-    }
 }
