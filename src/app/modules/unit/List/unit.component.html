@@ -10,7 +10,7 @@
     </div> -->
 
     <div class="groupAction">
-        <button class="blue-button" (click)="callUnitModal()">
+        <button class="blue-button" (click)="manageUnit(null)">
             <mat-icon>note_add</mat-icon>Add Unit
         </button>
 
@@ -42,6 +42,7 @@
             <div class="divTableHeading">
                 <div class="divTableRow">
                     <div class="divTableHead"></div>
+                    <div class="divTableHead"></div>
                     <div class="divTableHead">รหัสหน่วยนับ</div>
                     <div class="divTableHead">ชื่อหน่วยนับ</div>
                     <div class="divTableHead">ชื่อหน่วยนับภาษาอังกฤษ</div>
@@ -50,7 +51,53 @@
                 </div>
             </div>
             <div class="divTableBody">
-                <div class="divTableRow grid-inline" *ngFor="let unit of addUnit" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
+                <div *ngFor="let unit of unitService.units" >
+                    <div class="divTableRow" *ngIf="!unit.isAdd; else isAdd">
+                        <div class="divTableCell">
+                            <mat-checkbox [color]="'primary'" [checked]="unit.isCheck"></mat-checkbox>
+                        </div>
+                        <div class="divTableCell">
+                            <mat-icon (click)="manageUnit(unit.unitID)">edit</mat-icon>
+                            <mat-icon (click)="deleteUnit()">delete_outline</mat-icon>
+                        </div>
+                        <div class="divTableCell">{{ unit.unitNo }}</div>
+                        <div class="divTableCell">{{ unit.unitName }}</div>
+                        <div class="divTableCell">{{ unit.unitNameEng }}</div>
+                        <div class="divTableCell">{{ unit.createdDate }}</div>
+                    </div>
+                    <ng-template #isAdd>
+                        <div class="divTableRow grid-inline" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
+                            <form [formGroup]="unitForm">
+                                <div class="divTableCell"></div>
+                                <div class="divTableCell">
+                                    <mat-icon (click)="acceptAddUnit()">done</mat-icon>
+                                    <mat-icon (click)="cancelAddUnit()">clear</mat-icon>
+                                </div>
+            
+                                <div class="divTableCell">
+                                    <input type="text" id="unitNo" formControlName="unitNo">
+                                    <input type="hidden" id="runningFormatID" formControlName="runningFormatID">
+                                </div>
+        
+                                <div class="divTableCell">
+                                    <input type="text" id="unitName" formControlName="unitName" class="form-input" placeholder="กรอกชื่อหน่วยนับ" autocomplete="off" required maxlength="255">
+                                    <div *ngIf="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched)" class="alert-validate">
+                                        <div *ngIf="_unit.unitName.errors.required"><span>กรุณากรอกชื่อหน่วยนับ.</span></div>
+                                    </div>
+                                </div>
+        
+                                <div class="divTableCell">
+                                    <input type="text" id="unitNameEng" formControlName="unitNameEng" class="form-input" placeholder="ชื่อหน่วยนับภาษาอังกฤษ" autocomplete="off" maxlength="255">
+                                </div>
+        
+                                <div class="divTableCell">
+                                    <!-- <input type="text" id="createdDate" formControlName="createdDate"> -->
+                                </div>
+                            </form>
+                        </div>
+                    </ng-template>
+                </div>
+                <!-- <div class="divTableRow grid-inline" *ngFor="let unit of addUnit" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
                     <form [formGroup]="unitForm">
                         <div class="divTableCell">
                             <mat-icon (click)="acceptAddUnit()">done</mat-icon>
@@ -90,7 +137,7 @@
                             <mat-icon>more_horiz</mat-icon>
                         </button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -114,15 +161,4 @@
             <label for="productNo" class="formLabel" title="CREATED DATE">{{ createdDate }}</label>
         </div>
     </div>
-
-    <mat-menu #menuAction="matMenu">
-        <button mat-menu-item (click)="callUnitModal()">
-            <mat-icon>create</mat-icon>
-            <span>แก้ไขหน่วยนับ</span>
-        </button>
-        <button mat-menu-item>
-            <mat-icon>delete</mat-icon>
-            <span>ลบหน่วยนับ</span>
-        </button>
-    </mat-menu>
 </div>

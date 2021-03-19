@@ -24,12 +24,13 @@ export class UnitService {
         .toPromise()
         .then(res => {
             this.units = res as UnitModel[]
-            this.units.forEach(x => {
+            this.units.forEach((x, index) => {
                 x.createdDate = new Date(x.createdDate).toLocaleDateString('th-TH', {
                     year: 'numeric',
                     month: 'long',
                     day: '2-digit',
                 });
+                x.added_on = (index + 1)
             });
 
         });
@@ -46,8 +47,8 @@ export class UnitService {
         if (!!UnitModel) {
             await this.http.post(this.baseUrl + 'Units', UnitModel)
             .toPromise()
-            .then(res => console.log(res))
-            .catch(res => console.log("catch"))
+            .then(res => { return res})
+            .catch(error => console.log(error) )
         }
     }
 

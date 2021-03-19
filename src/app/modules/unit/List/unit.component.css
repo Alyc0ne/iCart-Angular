@@ -7,39 +7,44 @@
     margin: 70px 0 0 10px;
 }
 
-.divTableCell:nth-child(1) > mat-icon:first-child {
+.divTableCell > mat-icon:first-child {
     color: #20B49E;
     font-size: 16pt;
 }
 
-.divTableCell:nth-child(1) > mat-icon:last-child {
+.divTableCell > mat-icon:last-child {
     color: #f44336;
     font-size: 16pt;
 }
 
 .divTableCell:nth-child(1), .divTableHead:nth-child(1) {
-    width: 80px;
+    min-width: 50px;
     justify-content: center;
 }
 
 .divTableCell:nth-child(2), .divTableHead:nth-child(2) {
-    width: 240px;
+    min-width: 80px;
+    justify-content: center;
 }
 
 .divTableCell:nth-child(3), .divTableHead:nth-child(3) {
-    width: 220px;
+    min-width: 240px;
 }
 
 .divTableCell:nth-child(4), .divTableHead:nth-child(4) {
-    width: 220px;
+    min-width: 220px;
 }
 
 .divTableCell:nth-child(5), .divTableHead:nth-child(5) {
-    width: 160px;
+    min-width: 220px;
 }
 
 .divTableCell:nth-child(6), .divTableHead:nth-child(6) {
-    width: 100px;
+    min-width: 160px;
+}
+
+.divTableCell:nth-child(7), .divTableHead:nth-child(7) {
+    min-width: 100px;
 }
 
 .divTable{
@@ -68,7 +73,7 @@
 
 .divTableCell, .divTableHead {
 	display: table-cell;
-	padding: 3px 10px;
+	padding: 3px 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -88,19 +93,19 @@
     width: fit-content;
 }
 
-.divTableBody > div.divTableRow:first-child {
+.divTableBody .divTableRow:first-child {
     background-color: #FFFFFF;
     height: 44px;
     margin-top: 10px;
 }
 
-.divTableBody > div.divTableRow {
+.divTableBody .divTableRow {
     background-color: #FFFFFF;
     height: 44px;
     margin-top: 10px;
 }
 
-.divTableBody div.divTableCell {
+.divTableBody .divTableCell {
     padding: 15px;
     display: flex;
 }
@@ -129,11 +134,11 @@
     flex-direction: column;
 }
 
-.grid-inline.validate .divTableCell:nth-child(1) {
+.grid-inline.validate .divTableCell:nth-child(2) {
     padding-bottom: 28px;
 }
 
-.grid-inline .divTableCell:nth-child(1) {
+.grid-inline .divTableCell:nth-child(2) {
     width: 80px;
     flex-direction: initial;
     align-items: center;

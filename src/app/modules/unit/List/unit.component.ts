@@ -22,13 +22,11 @@ export class UnitListComponent {
     unitForm: FormGroup;
     units: UnitModel[]
     addUnit: UnitModel[]
-    UnitID: string
     unitNo: any
     unitName: any
     createdDate: any
     
     ngOnInit(): void {
-        this.UnitID = "bc778400-e31f-4d49-b47b-05cad6a73e30"
         this.unitService.refreshList()
     }
 
@@ -57,12 +55,22 @@ export class UnitListComponent {
         }
     }
 
-    callUnitModal = async () => {
-        console.log(this.UnitID)
-        if (!!this.UnitID) {
+    get _unit() {
+        return this.unitForm.controls;
+    }
+
+    manageUnit = async (unitID) => {
+        if (!!unitID) {
             var units = this.unitService.units
             if (!!units) {
-                units.filter(x => x.unitID == this.UnitID).map(x => x.isAdd == true)
+                units.filter(x => x.unitID == unitID).map(x => x.isAdd = true)
+                this.unitForm = this.fb.group({
+                    runningFormatID: [''],
+                    unitID: [units[0].unitID],
+                    unitNo: [{ value: units[0].unitNo, disabled:true }],
+                    unitName: [units[0].unitName, Validators.required],
+                    unitNameEng: [units[0].unitNameEng]
+                })
             }
         }
         else
@@ -77,22 +85,23 @@ export class UnitListComponent {
                     createdDate: [{ value: '17 มีนาคม 264', disabled: true }]
                 })
     
-                this.addUnit = [{ isAdd: true }]
-    
-                setTimeout(() => { 
-                    document.getElementById("unitName").focus();
-                }, 100);
+                this.unitService.units.push({ isAdd: true, added_on: 0 })
+                this.unitService.units.sort((a, b) => { 
+                    return <any>new Date(a.added_on) - <any>new Date(b.added_on);
+                })
             })
         }
-    }
 
-    get _unit() {
-        return this.unitForm.controls;
+        setTimeout(() => { 
+            document.getElementById("unitName").focus();
+        }, 100);
     }
 
     acceptAddUnit = async () => {
         if (this.unitForm.valid) {
             await this.unitService.bindSave(this.unitForm.getRawValue()).then(res => {
+                console.log(res)
+                console.log("catch แล้วนะมึงยังจะกลับมาอีก")
                 this.addUnit = null
 
                 this.baseService.configDialog.id = "success-modal";
@@ -127,7 +136,11 @@ export class UnitListComponent {
     }
 
     cancelAddUnit() {
-        this.addUnit = null
+        var _unit = this.unitService.units.filter(x => x.isAdd == true);
+        if (!!_unit[0].unitID)
+            _unit.map(x => x.isAdd = false)
+        else
+            this.unitService.units.splice(0, 1)
     }
 
 
