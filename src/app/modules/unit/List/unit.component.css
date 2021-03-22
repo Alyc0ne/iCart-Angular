@@ -7,59 +7,59 @@
     margin: 70px 0 0 10px;
 }
 
-.divTableCell > mat-icon:first-child {
+.grid-inline-cell > mat-icon:first-child {
     color: #20B49E;
     font-size: 16pt;
 }
 
-.divTableCell > mat-icon:last-child {
+.grid-inline-cell > mat-icon:last-child {
     color: #f44336;
     font-size: 16pt;
 }
 
-.divTableCell:nth-child(1), .divTableHead:nth-child(1) {
+.grid-inline-cell:nth-child(1), .grid-inline-header:nth-child(1) {
     min-width: 50px;
     justify-content: center;
 }
 
-.divTableCell:nth-child(2), .divTableHead:nth-child(2) {
+.grid-inline-cell:nth-child(2), .grid-inline-header:nth-child(2) {
     min-width: 80px;
     justify-content: center;
 }
 
-.divTableCell:nth-child(3), .divTableHead:nth-child(3) {
+.grid-inline-cell:nth-child(3), .grid-inline-header:nth-child(3) {
     min-width: 240px;
 }
 
-.divTableCell:nth-child(4), .divTableHead:nth-child(4) {
+.grid-inline-cell:nth-child(4), .grid-inline-header:nth-child(4) {
     min-width: 220px;
 }
 
-.divTableCell:nth-child(5), .divTableHead:nth-child(5) {
+.grid-inline-cell:nth-child(5), .grid-inline-header:nth-child(5) {
     min-width: 220px;
 }
 
-.divTableCell:nth-child(6), .divTableHead:nth-child(6) {
+.grid-inline-cell:nth-child(6), .grid-inline-header:nth-child(6) {
     min-width: 160px;
 }
 
-.divTableCell:nth-child(7), .divTableHead:nth-child(7) {
+.grid-inline-cell:nth-child(7), .grid-inline-header:nth-child(7) {
     min-width: 100px;
 }
 
-.divTable{
+.grid-inline {
 	display: table;
 	width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px;
     table-layout: fixed;
 }
-.divTableRow {
+.grid-inline-row {
 	/* display: table-row; */
     display: flex;
     align-items: center;
 }
-.divTableHeading {
+.grid-inline-groupHeader {
     padding-right: 20px;
     display: block;
     overflow: hidden;
@@ -67,11 +67,11 @@
     font-weight: bold;
 }
 
-.divTableHeading  div.divTableCell {
+.grid-inline-groupHeader .grid-inline-cell {
     padding: 0 15px;
 }
 
-.divTableCell, .divTableHead {
+.grid-inline-cell, .grid-inline-header {
 	display: table-cell;
 	padding: 3px 15px;
     white-space: nowrap;
@@ -79,12 +79,7 @@
     text-overflow: ellipsis;
 }
 
-.divTableFoot {
-	background-color: #EEE;
-	display: table-footer-group;
-	font-weight: bold;
-}
-.divTableBody {
+.grid-inline-body {
     display: block;
     overflow: hidden;
     overflow-y: scroll;
@@ -93,29 +88,29 @@
     width: fit-content;
 }
 
-.divTableBody .divTableRow:first-child {
+.grid-inline-body .grid-inline-row:first-child {
     background-color: #FFFFFF;
     height: 44px;
     margin-top: 10px;
 }
 
-.divTableBody .divTableRow {
+.grid-inline-body .grid-inline-row {
     background-color: #FFFFFF;
     height: 44px;
     margin-top: 10px;
 }
 
-.divTableBody .divTableCell {
+.grid-inline-body .grid-inline-cell {
     padding: 15px;
     display: flex;
 }
 
-.divTableBody button {
+.grid-inline-body button {
     background: transparent;
     min-width: 50px;
 }
 
-.divTableBody button > mat-icon {
+.grid-inline-body button > mat-icon {
     color: #B5C2C8;
 }
 
@@ -129,23 +124,23 @@
     height: 80px !important;
 }
 
-.grid-inline.validate .divTableCell {
+.grid-inline.validate .grid-inline-cell {
     height: 80px !important;
     flex-direction: column;
 }
 
-.grid-inline.validate .divTableCell:nth-child(2) {
+.grid-inline.validate .grid-inline-cell:nth-child(2) {
     padding-bottom: 28px;
 }
 
-.grid-inline .divTableCell:nth-child(2) {
+.grid-inline .grid-inline-cell:nth-child(2) {
     width: 80px;
     flex-direction: initial;
     align-items: center;
     justify-content: space-around;
 }
 
-.grid-inline .divTableCell > input {
+.grid-inline .grid-inline-cell > input {
     width: 100%;
 }
 

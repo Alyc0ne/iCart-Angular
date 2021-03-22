@@ -38,101 +38,101 @@
 
 <div class="content-menu">
     <div class="left-content">
-        <div class="divTable">
-            <div class="divTableHeading">
-                <div class="divTableRow">
-                    <div class="divTableHead"></div>
-                    <div class="divTableHead"></div>
-                    <div class="divTableHead">รหัสหน่วยนับ</div>
-                    <div class="divTableHead">ชื่อหน่วยนับ</div>
-                    <div class="divTableHead">ชื่อหน่วยนับภาษาอังกฤษ</div>
-                    <div class="divTableHead">CREATED DATE</div>
-                    <div class="divTableHead"></div>
+        <div class="grid-inline">
+            <div class="grid-inline-groupHeader">
+                <div class="grid-inline-row">
+                    <div class="grid-inline-header"></div>
+                    <div class="grid-inline-header"></div>
+                    <div class="grid-inline-header">รหัสหน่วยนับ</div>
+                    <div class="grid-inline-header">ชื่อหน่วยนับ</div>
+                    <div class="grid-inline-header">ชื่อหน่วยนับภาษาอังกฤษ</div>
+                    <div class="grid-inline-header">CREATED DATE</div>
+                    <div class="grid-inline-header"></div>
                 </div>
             </div>
-            <div class="divTableBody">
+            <div class="grid-inline-body">
                 <div *ngFor="let unit of unitService.units" >
-                    <div class="divTableRow" *ngIf="!unit.isAdd; else isAdd">
-                        <div class="divTableCell">
+                    <div class="grid-inline-row" *ngIf="!unit.isAdd; else isAdd">
+                        <div class="grid-inline-cell">
                             <mat-checkbox [color]="'primary'" [checked]="unit.isCheck"></mat-checkbox>
                         </div>
-                        <div class="divTableCell">
+                        <div class="grid-inline-cell">
                             <mat-icon (click)="manageUnit(unit.unitID)">edit</mat-icon>
                             <mat-icon (click)="deleteUnit()">delete_outline</mat-icon>
                         </div>
-                        <div class="divTableCell">{{ unit.unitNo }}</div>
-                        <div class="divTableCell">{{ unit.unitName }}</div>
-                        <div class="divTableCell">{{ unit.unitNameEng }}</div>
-                        <div class="divTableCell">{{ unit.createdDate }}</div>
+                        <div class="grid-inline-cell">{{ unit.unitNo }}</div>
+                        <div class="grid-inline-cell">{{ unit.unitName }}</div>
+                        <div class="grid-inline-cell">{{ unit.unitNameEng }}</div>
+                        <div class="grid-inline-cell">{{ unit.createdDate }}</div>
                     </div>
                     <ng-template #isAdd>
-                        <div class="divTableRow grid-inline" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
+                        <div class="grid-inline-row grid-inline" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
                             <form [formGroup]="unitForm">
-                                <div class="divTableCell"></div>
-                                <div class="divTableCell">
+                                <div class="grid-inline-cell"></div>
+                                <div class="grid-inline-cell">
                                     <mat-icon (click)="acceptAddUnit(unit.unitID)">done</mat-icon>
                                     <mat-icon (click)="cancelAddUnit()">clear</mat-icon>
                                 </div>
             
-                                <div class="divTableCell">
+                                <div class="grid-inline-cell">
                                     <input type="text" id="unitNo" formControlName="unitNo">
                                     <input type="hidden" id="runningFormatID" formControlName="runningFormatID">
                                 </div>
         
-                                <div class="divTableCell">
+                                <div class="grid-inline-cell">
                                     <input type="text" id="unitName" formControlName="unitName" class="form-input" placeholder="กรอกชื่อหน่วยนับ" autocomplete="off" required maxlength="255">
                                     <div *ngIf="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched)" class="alert-validate">
                                         <div *ngIf="_unit.unitName.errors.required"><span>กรุณากรอกชื่อหน่วยนับ.</span></div>
                                     </div>
                                 </div>
         
-                                <div class="divTableCell">
+                                <div class="grid-inline-cell">
                                     <input type="text" id="unitNameEng" formControlName="unitNameEng" class="form-input" placeholder="ชื่อหน่วยนับภาษาอังกฤษ" autocomplete="off" maxlength="255">
                                 </div>
         
-                                <div class="divTableCell">
+                                <div class="grid-inline-cell">
                                     <!-- <input type="text" id="createdDate" formControlName="createdDate"> -->
                                 </div>
                             </form>
                         </div>
                     </ng-template>
                 </div>
-                <!-- <div class="divTableRow grid-inline" *ngFor="let unit of addUnit" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
+                <!-- <div class="grid-inline-row grid-inline" *ngFor="let unit of addUnit" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
                     <form [formGroup]="unitForm">
-                        <div class="divTableCell">
+                        <div class="grid-inline-cell">
                             <mat-icon (click)="acceptAddUnit()">done</mat-icon>
                             <mat-icon (click)="cancelAddUnit()">clear</mat-icon>
                         </div>
     
-                        <div class="divTableCell">
+                        <div class="grid-inline-cell">
                             <input type="text" id="unitNo" formControlName="unitNo">
                             <input type="hidden" id="runningFormatID" formControlName="runningFormatID">
                         </div>
 
-                        <div class="divTableCell">
+                        <div class="grid-inline-cell">
                             <input type="text" id="unitName" formControlName="unitName" class="form-input" placeholder="กรอกชื่อหน่วยนับ" autocomplete="off" required maxlength="255">
                             <div *ngIf="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched)" class="alert-validate">
                                 <div *ngIf="_unit.unitName.errors.required"><span>กรุณากรอกชื่อหน่วยนับ.</span></div>
                             </div>
                         </div>
 
-                        <div class="divTableCell">
+                        <div class="grid-inline-cell">
                             <input type="text" id="unitNameEng" formControlName="unitNameEng" class="form-input" placeholder="ชื่อหน่วยนับภาษาอังกฤษ" autocomplete="off" maxlength="255">
                         </div>
 
-                        <div class="divTableCell">
+                        <div class="grid-inline-cell">
                             <input type="text" id="createdDate" formControlName="createdDate">
                         </div>
                     </form>
                 </div>
 
-                <div class="divTableRow" *ngFor="let unit of unitService.units" (click)="showDetail($event, unit.unitID, unit.isCheck)">
-                    <div class="divTableCell"><mat-checkbox [color]="'primary'" [checked]="unit.isCheck"></mat-checkbox></div>
-                    <div class="divTableCell">{{ unit.unitNo }}</div>
-                    <div class="divTableCell">{{ unit.unitName }}</div>
-                    <div class="divTableCell">{{ unit.unitNameEng }}</div>
-                    <div class="divTableCell">{{ unit.createdDate }}</div>
-                    <div class="divTableCell">
+                <div class="grid-inline-row" *ngFor="let unit of unitService.units" (click)="showDetail($event, unit.unitID, unit.isCheck)">
+                    <div class="grid-inline-cell"><mat-checkbox [color]="'primary'" [checked]="unit.isCheck"></mat-checkbox></div>
+                    <div class="grid-inline-cell">{{ unit.unitNo }}</div>
+                    <div class="grid-inline-cell">{{ unit.unitName }}</div>
+                    <div class="grid-inline-cell">{{ unit.unitNameEng }}</div>
+                    <div class="grid-inline-cell">{{ unit.createdDate }}</div>
+                    <div class="grid-inline-cell">
                         <button mat-icon-button [matMenuTriggerFor]="menuAction">
                             <mat-icon>more_horiz</mat-icon>
                         </button>
