@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductModel } from './product.model';
 import { UnitModel } from './unit.model';
+import { AppService } from '@services/base/apps.service';
 
 @Injectable({
     providedIn: 'root'
@@ -9,6 +10,7 @@ import { UnitModel } from './unit.model';
 
 export class UnitService {
     constructor(
+        private baseService: AppService,
         private http: HttpClient,
     ) {}
 
@@ -20,6 +22,7 @@ export class UnitService {
     productModel: ProductModel[];
 
     refreshList = async () => {
+        this.baseService.setIsLoading(true)
         this.http.get(this.baseUrl + 'Units')
         .toPromise()
         .then(res => {
@@ -32,7 +35,7 @@ export class UnitService {
                 });
                 x.added_on = (index + 1)
             });
-
+            this.baseService.setIsLoading(false)
         });
     }
     
@@ -43,22 +46,19 @@ export class UnitService {
     }
 
     bindSave = async (UnitModel) => {
-        console.log("UnitModel : " + UnitModel)
         if (!!UnitModel) {
-            await this.http.post(this.baseUrl + 'Units', UnitModel)
+            await this.http.post(this.baseUrl + 'Units/CreateUnit', UnitModel)
             .toPromise()
-            .then(res => { return res})
-            .catch(error => console.log(error) )
+            .catch(error => { throw new Error(error) } )
         }
     }
 
-    bindEdit = async (ProductModel) => {
-        if (!!ProductModel) {
-            console.log(ProductModel)
-            // await this.http.post(this.baseUrl + 'Products', ProductModel)
-            // .toPromise()
-            // .then(res => console.log(res))
-            // .catch(res => console.log("catch"))
+    bindEdit = async (UnitModel) => {
+        if (!!UnitModel) {
+            console.log(UnitModel)
+            await this.http.post(this.baseUrl + 'Units/UpdateUnit', UnitModel)
+            .toPromise()
+            .catch(error => { throw new Error(error) } )
         }
     }
 

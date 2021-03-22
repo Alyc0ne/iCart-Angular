@@ -4,6 +4,7 @@ import { UnitModel } from '../Shared/unit.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppService } from '@services/base/apps.service';
 import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
+import { AlertModalComponent } from 'app/modules/Shared/Modal/Alert/alert-modal.component';
 
 @Component({
     selector: 'app-unit',
@@ -60,6 +61,7 @@ export class UnitListComponent {
     }
 
     manageUnit = async (unitID) => {
+        this.baseService.setIsLoading(true)
         if (!!unitID) {
             var units = this.unitService.units
             if (!!units) {
@@ -78,7 +80,7 @@ export class UnitListComponent {
             await this.unitService.getRunning().then(res => {
                 this.unitForm = this.fb.group({
                     runningFormatID: [this.unitService.runningFormatID],
-                    unitID: [''],
+                    unitID: [null],
                     unitNo: [{ value: this.unitService.runningNumber, disabled:true }],
                     unitName: ['', Validators.required],
                     unitNameEng: [''],
@@ -94,44 +96,28 @@ export class UnitListComponent {
 
         setTimeout(() => { 
             document.getElementById("unitName").focus();
+            this.baseService.setIsLoading(false)
         }, 100);
     }
 
-    acceptAddUnit = async () => {
+    acceptAddUnit = async (unitID) => {
         if (this.unitForm.valid) {
-            await this.unitService.bindSave(this.unitForm.getRawValue()).then(res => {
-                console.log(res)
-                console.log("catch แล้วนะมึงยังจะกลับมาอีก")
-                this.addUnit = null
+            try {
+                let isResult = false
+                if (!!unitID)
+                    await this.unitService.bindEdit(this.unitForm.getRawValue()).then(res => isResult = true)
+                else
+                    await this.unitService.bindSave(this.unitForm.getRawValue()).then(res => isResult = true)
 
-                this.baseService.configDialog.id = "success-modal";
-                this.baseService.configDialog.height = "50px";
-                this.baseService.configDialog.width = "500px";
-                this.baseService.configDialog.data = { message: "บันทึกข้อมูลหน่วยนับสำเร็จ" }
-                this.baseService.configDialog.position = { right: '50px', top: '10px' }
-                this.baseService.configDialog.hasBackdrop = false
-                this.baseService._openDialog(SuccessModalComponent)
-
-                setTimeout(() => {
-                    this.baseService._closeDialog("SuccessModalComponent")
-                }, 1500);
-
-                this.unitService.refreshList();
-            });
-
-            
-
-            // this.baseService.configDialog.id = "alert-modal";
-            // this.baseService.configDialog.height = "50px";
-            // this.baseService.configDialog.width = "500px";
-            // this.baseService.configDialog.data = { message: "ระบบทำงานผิดพลาดไม่สามารถบันทึกหน่วยนับได้" }
-            // this.baseService.configDialog.position = { right: '50px', top: '10px' }
-            // this.baseService.configDialog.hasBackdrop = false
-            // this.baseService._openDialog(AlertModalComponent)
-
-            // setTimeout(() => {
-            //     this.baseService._closeDialog("AlertModalComponent")
-            // }, 1500);
+                if (isResult) {
+                    this.unitService.refreshList();
+                    this.baseService.configDialog.success.data = { message: "ระบบบันทึกข้อมูลหน่วยนับเรียบร้อยแล้ว" }
+                    this.baseService._openDialog(SuccessModalComponent, "success")
+                }
+            } catch (error) {
+                this.baseService.configDialog.alert.data = { message: "ระบบทำงานผิดพลาดไม่สามารถบันทึกหน่วยนับได้" }
+                this.baseService._openDialog(AlertModalComponent, "alert")
+            }
         }
     }
 

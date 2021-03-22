@@ -1,8 +1,8 @@
-  <!-- <div class="overlay">
+<div class="overlay" *ngIf="isLoading">
     <div class="center">
         <mat-progress-spinner diameter=50 mode="indeterminate" color="primary"></mat-progress-spinner> 
     </div>
-  </div>     -->
+  </div>
 
   <mat-drawer-container>
     <mat-drawer [(opened)]="isToggle" mode="over">

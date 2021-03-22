@@ -753,8 +753,8 @@ app-success-modal:hover::before {
     text-align: center;
     background-color: #e16a70;
     content: "x";
-    right: 30px;
-    top: 5px;
+    right: 530px;
+    top: 2px;
     cursor: pointer;
 }
 
@@ -795,8 +795,8 @@ app-alert-modal:hover::before {
     text-align: center;
     background-color: #e16a70;
     content: "x";
-    right: 30px;
-    top: 5px;
+    right: 530px;
+    top: 2px;
     cursor: pointer;
 }
 

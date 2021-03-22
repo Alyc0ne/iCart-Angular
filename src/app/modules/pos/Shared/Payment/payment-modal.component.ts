@@ -35,6 +35,6 @@ export class PaymentModalComponent {
     }
 
     payment() {
-        this.baseService._openDialog(ReceiptModalComponent);
+        //this.baseService._openDialog(ReceiptModalComponent);
     }
 }
