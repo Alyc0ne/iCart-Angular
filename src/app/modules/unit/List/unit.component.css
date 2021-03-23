@@ -100,6 +100,10 @@
     margin-top: 10px;
 }
 
+.grid-inline-body .grid-inline-row:hover {
+    cursor: pointer;
+}
+
 .grid-inline-body .grid-inline-cell {
     padding: 15px;
     display: flex;

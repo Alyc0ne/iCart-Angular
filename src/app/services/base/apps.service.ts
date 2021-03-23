@@ -55,16 +55,6 @@ export class AppService {
         this.isLoading.next(value)
     }
 
-    //this.baseService.configDialog.data = { message: "ระบบทำงานผิดพลาดไม่สามารถบันทึกหน่วยนับได้" }
-
-    // @HostListener('document:keydown', ['$event'])
-    // onKeyDown(e: KeyboardEvent) {
-    //     if (!!this.dialogRef) return;        
-    //     if (e.key == "Escape")
-    //         console.log(e)
-    //         // this._closeDialog(e)
-    // }
-
     _openDialog(component, type) {
         var componentName = component.name
         type = type == null ? 'default' : type
@@ -91,11 +81,14 @@ export class AppService {
             var _dialog = this.objDialog.filter(x => x.componentName == componentName)
             if (_dialog.length > 0) {                             
                 _dialog[0].close()
-                this.dialogRef.afterClosed().subscribe(() => {
-                    //this.configDialog = { id: null, autoFocus: null, disableClose: null, width: null, height: null, data: null, hasBackdrop: null, position: null }
+                this.dialogRef.afterClosed().subscribe(() => {                    
                     this.objDialog = this.objDialog.filter(x => x.componentName != componentName) 
                 })                
             }
         }
+    }
+
+    getIdFromFocus() {
+        //!!document.getElementsByClassName('grid-inline-row rowHover').length
     }
 }

@@ -34,6 +34,7 @@ import { UnitModalComponent } from './modules/unit/Shared/modal/unit-modal.compo
 
 //Extension
 import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
+import { TableControlDirective } from '../assets/extension/tableControl.directive';
 import { NumberPipePipe } from '../assets/extension/number-pipe';
 import { OrderByPipe } from '../assets/extension/order-by.pipe';
 
@@ -59,7 +60,8 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     //Extension
     OnlynumberDirective,
     NumberPipePipe,
-    OrderByPipe
+    OrderByPipe,
+    TableControlDirective,
   ],
   imports: [
     BrowserModule,

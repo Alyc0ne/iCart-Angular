@@ -844,3 +844,7 @@ mat-select.ng-invalid.ng-touched > div.mat-select-trigger {
 .summary-footer > div mat-select > div.mat-select-trigger {
     width: 100% !important;
 }
+
+.rowHover {
+    background: #f2f2f2 !important;
+}

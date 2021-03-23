@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AppService } from '@services/base/apps.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +20,5 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.baseService.getIsLoading().subscribe(x => this.isLoading = x)
-    //this.isLoading = 
   }
 }

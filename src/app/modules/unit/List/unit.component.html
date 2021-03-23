@@ -10,10 +10,9 @@
     </div> -->
 
     <div class="groupAction">
-        <button class="blue-button" (click)="manageUnit(null)">
-            <mat-icon>note_add</mat-icon>Add Unit
+        <button class="green-button" (click)="manageUnit(null)">
+            เพิ่มหน่วยนับ
         </button>
-
         <button class="multipleAction" [matMenuTriggerFor]="menu" disabled>
             <i class="material-icons">more_horiz</i> 
             <span>Action</span>
@@ -38,7 +37,7 @@
 
 <div class="content-menu">
     <div class="left-content">
-        <div class="grid-inline">
+        <div class="grid-inline" tableControl>
             <div class="grid-inline-groupHeader">
                 <div class="grid-inline-row">
                     <div class="grid-inline-header"></div>
@@ -52,9 +51,9 @@
             </div>
             <div class="grid-inline-body">
                 <div *ngFor="let unit of unitService.units" >
-                    <div class="grid-inline-row" *ngIf="!unit.isAdd; else isAdd">
+                    <div class="grid-inline-row"  [attr.data-id]="unit.unitID" *ngIf="!unit.isAdd; else isAdd">
                         <div class="grid-inline-cell">
-                            <mat-checkbox [color]="'primary'" [checked]="unit.isCheck"></mat-checkbox>
+                            <mat-checkbox #myCheckbox [color]="'primary'" [checked]="unit.isCheck"></mat-checkbox>
                         </div>
                         <div class="grid-inline-cell">
                             <mat-icon (click)="manageUnit(unit.unitID)">edit</mat-icon>
