@@ -12,6 +12,6 @@ export class ConfirmModalComponent {
 
     constructor(
        public baseService: AppService,
-       @Inject(MAT_DIALOG_DATA) public dataRef,
+       @Inject(MAT_DIALOG_DATA) public dataRef
     ){ }
 }

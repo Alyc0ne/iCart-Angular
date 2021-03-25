@@ -123,6 +123,7 @@ export class UnitListComponent {
     }
 
     deleteUnit = async (unitID) => {
+        this.baseService.configDialog.confirm.data = { message: { header: "ยืนยันการลบหน่วยนับ + รอออ ?", confirmText: "ต้องการลบหน่วยนับนี้ หรือไม่" } }
         this.baseService._openDialog(ConfirmModalComponent, "confirm");
         //this.confirmDelete([unitID])
         //const unitID = await this.baseService.getIdFromFocus('gridUnit')
@@ -133,7 +134,7 @@ export class UnitListComponent {
             if (unitIDs.length > 0) {
                 await this.unitService.bindDelete(unitIDs)
                 this.unitService.refreshList();
-                this.baseService.configDialog.success.data = { message: { header: "ยืนยันการลบหน่วยนับ + " + obj.unitName + " ?", confirmText: "ต้องการลบหน่วยนับนี้ หรือไม่" } }
+                this.baseService.configDialog.confirm.data = { message: "ระบบทำการบันทึกหน่วยนับเรียบร้อยแล้ว" }
                 this.baseService._openDialog(SuccessModalComponent, "success")
             }
         } catch (error) {
