@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppService } from '@services/base/apps.service';
 import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
 import { AlertModalComponent } from 'app/modules/Shared/Modal/Alert/alert-modal.component';
+import { ConfirmModalComponent } from 'app/modules/Shared/Modal/Confirm/confirm-modal.component';
 
 @Component({
     selector: 'app-unit',
@@ -100,7 +101,7 @@ export class UnitListComponent {
         }, 100);
     }
 
-    acceptAddUnit = async (unitID) => {
+    acceptUnit = async (unitID) => {
         if (this.unitForm.valid) {
             try {
                 let isResult = false
@@ -121,7 +122,27 @@ export class UnitListComponent {
         }
     }
 
-    cancelAddUnit() {
+    deleteUnit = async (unitID) => {
+        this.baseService._openDialog(ConfirmModalComponent, "confirm");
+        //this.confirmDelete([unitID])
+        //const unitID = await this.baseService.getIdFromFocus('gridUnit')
+    }
+
+    confirmDelete = async (unitIDs, obj) => {
+        try {
+            if (unitIDs.length > 0) {
+                await this.unitService.bindDelete(unitIDs)
+                this.unitService.refreshList();
+                this.baseService.configDialog.success.data = { message: { header: "ยืนยันการลบหน่วยนับ + " + obj.unitName + " ?", confirmText: "ต้องการลบหน่วยนับนี้ หรือไม่" } }
+                this.baseService._openDialog(SuccessModalComponent, "success")
+            }
+        } catch (error) {
+            this.baseService.configDialog.alert.data = { message: "ระบบทำงานผิดพลาดไม่สามารถลบหน่วยนับได้" }
+            this.baseService._openDialog(AlertModalComponent, "alert")
+        }
+    }
+
+    cancelUnit() {
         var _unit = this.unitService.units.filter(x => x.isAdd == true);
         if (!!_unit[0].unitID)
             _unit.map(x => x.isAdd = false)

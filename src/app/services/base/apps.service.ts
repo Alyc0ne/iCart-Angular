@@ -15,15 +15,16 @@ export class AppService {
     private objDialog = []
     private dialogRef;
     public configDialog = {
-        default: {
-            id: null,
-            autoFocus: null,
-            disableClose: null,
-            width: null,
-            height: null,
+        default: { id: null, autoFocus: null, disableClose: null, width: null, height: null, data: null, hasBackdrop: null, position: null },
+        confirm: {
+            id: "confirm-modal",
+            autoFocus: true,
+            disableClose: true,
+            width: "500px",
+            height: "300px",
             data: null,
-            hasBackdrop: null,
-            position: null 
+            hasBackdrop: true,
+            position: null,
         },
         alert: {
             id: "alert-modal",
@@ -57,7 +58,6 @@ export class AppService {
 
     _openDialog(component, type) {
         var componentName = component.name
-        type = type == null ? 'default' : type
 
         if (this.objDialog.filter(x => x.componentName == componentName).length > 0) return;
         this.dialogRef = this.dialog.open(component, this.configDialog[type])
@@ -88,7 +88,39 @@ export class AppService {
         }
     }
 
-    getIdFromFocus() {
-        //!!document.getElementsByClassName('grid-inline-row rowHover').length
+    getIdFromFocus(gridID) {
+        if(gridID === undefined || gridID === null) return
+
+        var objTables = []
+        var ids = []
+        var _class = "grid-inline-row"
+
+        var tables = document.querySelectorAll('.table');
+        if (tables.length == 0) return
+
+        tables.forEach(x => {
+            if (!!objTables[x['dataset']['gridid']]) {
+
+            } else {
+                objTables[x['dataset']['gridid']] = [{ 
+                    'gridType': x['dataset']['gridtype'],
+                    'classList': x.classList,
+                    'rowHover': Array.prototype.slice.call(x.getElementsByClassName('grid-inline-row rowHover'))
+                }]
+            }
+        })
+
+        var table_classList = tables
+        var selectOne = document.querySelector('div.gridSelectOne')
+        if (selectOne) {
+            
+        }
+
+        const currentGrid = objTables[gridID][0]
+        currentGrid['rowHover'].forEach(x => {
+            ids.push(x['dataset']['id'])
+        })
+
+        return ids
     }
 }

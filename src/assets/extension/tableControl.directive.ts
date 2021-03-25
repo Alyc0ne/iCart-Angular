@@ -5,16 +5,13 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class TableControlDirective {
   element: HTMLElement
-  isHover: boolean = false
 
   constructor(public el: ElementRef) {
     this.element = el.nativeElement;
-    console.log(this.element)
   }
 
   @HostListener('click', ['$event']) 
   onClick(event) {
-    console.log(event)
     const target = event.target
     if (target.className == 'grid-inline-cell') {      
       const parentElement = target.parentElement
@@ -31,13 +28,12 @@ export class TableControlDirective {
         }
       });
       
-      if (focusId != outId || !this.isHover)
+      if (focusId != outId)
         this.focusCell(parentElement, true)
     }
   }
 
   focusCell(element, type) {
-    this.isHover = type
     const mat_checkbox = element.querySelector('.mat-checkbox')
     mat_checkbox.querySelector('.mat-checkbox-input').checked = type
 

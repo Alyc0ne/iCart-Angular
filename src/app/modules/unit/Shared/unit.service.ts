@@ -55,16 +55,15 @@ export class UnitService {
 
     bindEdit = async (UnitModel) => {
         if (!!UnitModel) {
-            console.log(UnitModel)
             await this.http.post(this.baseUrl + 'Units/UpdateUnit', UnitModel)
             .toPromise()
             .catch(error => { throw new Error(error) } )
         }
     }
 
-    bindDelete = async (productID) => {
-        if (!!productID) {
-            
-        }
+    bindDelete = async (unitIDs) => {        
+        await this.http.post(this.baseUrl + 'Units/DeleteUnit', unitIDs)
+            .toPromise()
+            .catch(error => { throw new Error(error) } )
     }
 }

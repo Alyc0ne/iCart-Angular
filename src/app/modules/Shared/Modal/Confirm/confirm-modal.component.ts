@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppService } from '@services/base/apps.service';
 
 @Component({
@@ -11,5 +12,6 @@ export class ConfirmModalComponent {
 
     constructor(
        public baseService: AppService,
+       @Inject(MAT_DIALOG_DATA) public dataRef,
     ){ }
 }
