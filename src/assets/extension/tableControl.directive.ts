@@ -12,37 +12,47 @@ export class TableControlDirective {
 
   @HostListener('click', ['$event']) 
   onClick(event) {
-    const target = event.target
+    var isSelectMuti = this.element.dataset.gridtype == "gridSelectMulti" ? true : false
+    let target = event.target
+
+    if (target.classList.contains('mat-checkbox-inner-container'))
+      target = target.parentElement.parentElement.parentElement
+
     if (target.className == 'grid-inline-cell') {      
       const parentElement = target.parentElement
-      const focusId = parentElement.dataset.id
-      let outId = ""
-
+      const focusId_now = parentElement.dataset.id
+      let focusIds = []
+      
       const dom_table_row = document.querySelectorAll('.grid-inline-row')
       dom_table_row.forEach(parentElement => {
         if (parentElement.parentElement.className != "grid-inline-groupHeader") {
           if (parentElement.classList.contains('rowHover')) {
-            outId = parentElement['dataset'].id
-            this.focusCell(parentElement, false)
+            const id = parentElement['dataset'].id
+            focusIds.push(id)
+            if (!isSelectMuti) {
+              this.focusCell(parentElement, false)
+              focusIds.splice(focusIds.findIndex(x => x == id), 1)
+            }
           }
         }
       });
       
-      if (focusId != outId)
-        this.focusCell(parentElement, true)
+      this.focusCell(parentElement, focusIds.indexOf(focusId_now) < 0 ? true : false)
     }
   }
 
   focusCell(element, type) {
     const mat_checkbox = element.querySelector('.mat-checkbox')
-    mat_checkbox.querySelector('.mat-checkbox-input').checked = type
+    if (!!mat_checkbox) {
+      mat_checkbox.querySelector('.mat-checkbox-input').checked = type
 
-    if (type) {
-      element.classList.add('rowHover')
-      mat_checkbox.classList.add('mat-checkbox-checked')
-    } else {
-      element.classList.remove('rowHover')
-      mat_checkbox.classList.remove('mat-checkbox-checked')
+      if (type) {
+        element.classList.add('rowHover')
+        mat_checkbox.classList.add('mat-checkbox-checked')
+      } else {
+        element.classList.remove('rowHover')
+        mat_checkbox.classList.remove('mat-checkbox-checked')
+      }
     }
   }
 }

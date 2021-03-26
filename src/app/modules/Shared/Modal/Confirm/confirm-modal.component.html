@@ -13,6 +13,6 @@
 </div>
 
 <div class="modal-footer">
-    <button class="warn-button" (click)="baseService._closeDialog('ConfirmModalComponent')">ยกเลิก</button>
-    <button class="green-button">ตกลง</button>
+    <button class="warn-button" (click)="baseService._closeDialog('ConfirmModalComponent', null)">ยกเลิก</button>
+    <button class="green-button" (click)="baseService._closeDialog('ConfirmModalComponent', dataRef.action)">ตกลง</button>
 </div>

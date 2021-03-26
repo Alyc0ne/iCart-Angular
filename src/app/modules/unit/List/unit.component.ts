@@ -61,8 +61,7 @@ export class UnitListComponent {
         return this.unitForm.controls;
     }
 
-    manageUnit = async (unitID) => {
-        this.baseService.setIsLoading(true)
+    manageUnit = async (unitID) => {        
         if (!!unitID) {
             var units = this.unitService.units
             if (!!units) {
@@ -78,25 +77,28 @@ export class UnitListComponent {
         }
         else
         {
-            await this.unitService.getRunning().then(res => {
-                this.unitForm = this.fb.group({
-                    runningFormatID: [this.unitService.runningFormatID],
-                    unitID: [null],
-                    unitNo: [{ value: this.unitService.runningNumber, disabled:true }],
-                    unitName: ['', Validators.required],
-                    unitNameEng: [''],
-                    createdDate: [{ value: '17 มีนาคม 264', disabled: true }]
+            if (this.validateNewUnit()) {
+                this.baseService.setIsLoading(true)
+                await this.unitService.getRunning().then(res => {
+                    this.unitForm = this.fb.group({
+                        runningFormatID: [this.unitService.runningFormatID],
+                        unitID: [null],
+                        unitNo: [{ value: this.unitService.runningNumber, disabled:true }],
+                        unitName: ['', Validators.required],
+                        unitNameEng: [''],
+                    })
+        
+                    this.unitService.units.push({ isAdd: true, added_on: 0 })
+                    this.unitService.units.sort((a, b) => { 
+                        return <any>new Date(a.added_on) - <any>new Date(b.added_on);
+                    })
                 })
-    
-                this.unitService.units.push({ isAdd: true, added_on: 0 })
-                this.unitService.units.sort((a, b) => { 
-                    return <any>new Date(a.added_on) - <any>new Date(b.added_on);
-                })
-            })
+            }                    
         }
 
         setTimeout(() => { 
-            document.getElementById("unitName").focus();
+            const field = document.getElementById("unitName")
+            if (!!field) field.focus();
             this.baseService.setIsLoading(false)
         }, 100);
     }
@@ -122,25 +124,16 @@ export class UnitListComponent {
         }
     }
 
-    deleteUnit = async (unitID) => {
-        this.baseService.configDialog.confirm.data = { message: { header: "ยืนยันการลบหน่วยนับ + รอออ ?", confirmText: "ต้องการลบหน่วยนับนี้ หรือไม่" } }
-        this.baseService._openDialog(ConfirmModalComponent, "confirm");
-        //this.confirmDelete([unitID])
-        //const unitID = await this.baseService.getIdFromFocus('gridUnit')
-    }
-
-    confirmDelete = async (unitIDs, obj) => {
-        try {
-            if (unitIDs.length > 0) {
-                await this.unitService.bindDelete(unitIDs)
-                this.unitService.refreshList();
-                this.baseService.configDialog.confirm.data = { message: "ระบบทำการบันทึกหน่วยนับเรียบร้อยแล้ว" }
-                this.baseService._openDialog(SuccessModalComponent, "success")
-            }
-        } catch (error) {
-            this.baseService.configDialog.alert.data = { message: "ระบบทำงานผิดพลาดไม่สามารถลบหน่วยนับได้" }
-            this.baseService._openDialog(AlertModalComponent, "alert")
+    deleteUnit = async (unitID, unitName) => {
+        this.baseService.configDialog.confirm.data = { 
+            message: { header: "ยืนยันการลบหน่วยนับ " + unitName + " ?", confirmText: "ต้องการลบหน่วยนับนี้ หรือไม่" },
+            action: this.confirmDelete
         }
+        this.baseService._openDialog(ConfirmModalComponent, "confirm");
+        this.baseService.dialogRef.afterClosed().subscribe(callback => {
+            if (typeof callback == "function")
+                callback([unitID])
+        })
     }
 
     cancelUnit() {
@@ -151,41 +144,41 @@ export class UnitListComponent {
             this.unitService.units.splice(0, 1)
     }
 
+    bindDeleteMulti = async () => {
+        const unitIDs = await this.baseService.getIdFromFocus('gridUnit')
+        if (unitIDs.length > 0) {
+            this.baseService.configDialog.confirm.data = { 
+                message: { header: "ยืนยันการลบหน่วยนับ " + unitIDs.length + " หน่วยนับ ?", confirmText: "ต้องการรายการลบหน่วยนับนี้ หรือไม่" },
+                action: this.confirmDelete
+            }
+            this.baseService._openDialog(ConfirmModalComponent, "confirm");
+            this.baseService.dialogRef.afterClosed().subscribe(callback => {
+                if (typeof callback == "function")
+                    callback(unitIDs)
+            })
+        } else {
+            this.baseService.configDialog.alert.data = { message: "ไม่สามารถดำเนินการได้ กรุณาทำการเลือกหน่วยนับ" }
+            this.baseService._openDialog(AlertModalComponent, "alert")
+        }
+    }
 
-        // this.units.sort((a, b) => {
-        //     return <any>new Date(b.added_on) - <any>new Date(a.added_on);
-        // })
+    confirmDelete = async (unitIDs) => {
+        try {
+            if (unitIDs.length > 0) {
+                await this.unitService.bindDelete(unitIDs)
+                this.unitService.refreshList();
+                this.baseService.configDialog.success.data = { message: "ระบบทำการลบหน่วยนับเรียบร้อยแล้ว" }
+                this.baseService._openDialog(SuccessModalComponent, "success")
+            }
+        } catch (error) {
+            this.baseService.configDialog.alert.data = { message: "ระบบทำงานผิดพลาดไม่สามารถลบหน่วยนับได้" }
+            this.baseService._openDialog(AlertModalComponent, "alert")
+        }
+    }
 
-        // console.log(this.units)
-
-        // const dialogConfig = new MatDialogConfig();
-        // dialogConfig.autoFocus = true;
-        // dialogConfig.disableClose = true;
-        // dialogConfig.width = "650px";
-        // // dialogConfig.height = "400px";
-
-        // if (unitID == null) {
-        //     //await this.unitService.newUnit().then(res => (
-        //         dialogConfig.data = {
-        //             headerText: "เพิ่มหน่วยนับ",
-        //             objUnit : {
-        //                 runningFormatID: this.unitService.runningFormatID, 
-        //                 unitNo: this.unitService.runningNumber 
-        //             }
-        //         },
-        //         this.dialog.open(UnitModalComponent, dialogConfig)
-        //     //));
-        // }
-        // else
-        // {
-        //     let productModel = null;
-        //     await this.service.getProduct(productID).then(res => (
-        //         productModel = this.service.productModel,
-        //         dialogConfig.data = {
-        //             objProduct: productModel
-        //         },
-        //         this.dialog.open(ProductModalComponent, dialogConfig)
-        //     ));
-        // }
-    //}
+    validateNewUnit() {
+        if (this.unitService.units.filter(x => x.isAdd == true).length == 0) return true
+        this.baseService.configDialog.alert.data = { message: "ไม่สามารภดำเนินการได้ กรุณาบันทึกหน่วยนับ" }
+        this.baseService._openDialog(AlertModalComponent, "alert")
+    }
 }

@@ -76,9 +76,9 @@ export class POSComponent {
 
     calSummary() {
         if (!!this.cartModel.products.length) {
-            var subTotal = this.cartModel.products.reduce((sum, obj) => { return sum + obj.productTotalPrice; }, 0);
-            this.cartModel.summary.subTotal = subTotal;
-            this.cartModel.summary.totalAmnt = (subTotal - this.cartModel.summary.discount);
+            var subTotal = this.cartModel.products.reduce((sum, obj) => { return sum + obj.productTotalPrice; }, 0)
+            this.cartModel.summary.subTotal = subTotal
+            this.cartModel.summary.totalAmnt = (subTotal - this.cartModel.summary.discount)
         }    
     }
 
@@ -86,14 +86,14 @@ export class POSComponent {
     onKeyDown(e: KeyboardEvent) {
         console.log(e.keyCode)
         if (e.keyCode == 32)
-            this.callPaymentModal();
+            this.callPaymentModal()
         if (e.keyCode == 46) 
-            this.clearCart();
+            this.clearCart()
     }
 
     clearCart() {
         if (!!this.cartModel.products.length) {
-            //this.baseService._openDialog(ConfirmModalComponent);
+            this.baseService._openDialog(ConfirmModalComponent, null)
             // this.cartModel = {
             //     summary: { paymentSeleted: this.posService.paymentModel[0].paymentType, subTotal: 0, discount: 0, totalAmnt: 0 }
             // }

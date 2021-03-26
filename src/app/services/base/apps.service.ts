@@ -13,14 +13,14 @@ export class AppService {
     
     public isLoading: Subject<boolean> = new BehaviorSubject(false)
     private objDialog = []
-    private dialogRef;
+    public dialogRef;
     public configDialog = {
         default: { id: null, autoFocus: null, disableClose: null, width: null, height: null, data: null, hasBackdrop: null, position: null },
         confirm: {
             id: "confirm-modal",
             autoFocus: true,
             disableClose: true,
-            width: "500px",
+            width: "350px",
             height: "300px",
             data: null,
             hasBackdrop: true,
@@ -71,16 +71,16 @@ export class AppService {
 
         if (type == "alert" || type =="success") {
             setTimeout(() => {
-                this._closeDialog(componentName)
+                this._closeDialog(componentName, null)
             }, 1500);
         }
     }
 
-    _closeDialog(componentName) {
+    _closeDialog(componentName, action) {
         if (!!componentName && typeof componentName == "string") {
             var _dialog = this.objDialog.filter(x => x.componentName == componentName)
             if (_dialog.length > 0) {                             
-                _dialog[0].close()
+                _dialog[0].close(action)
                 this.dialogRef.afterClosed().subscribe(() => {                    
                     this.objDialog = this.objDialog.filter(x => x.componentName != componentName) 
                 })                
@@ -88,7 +88,9 @@ export class AppService {
         }
     }
 
-    getIdFromFocus(gridID) {
+
+
+    getIdFromFocus = async (gridID) => {
         if(gridID === undefined || gridID === null) return
 
         var objTables = []

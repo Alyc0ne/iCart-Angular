@@ -13,23 +13,23 @@
         <button class="green-button" (click)="manageUnit(null)">
             เพิ่มหน่วยนับ
         </button>
-        <button class="multipleAction" [matMenuTriggerFor]="menu" disabled>
+        <button class="multipleAction" [matMenuTriggerFor]="menu">
             <i class="material-icons">more_horiz</i> 
             <span>Action</span>
         </button>
         <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-            <i class="material-icons">dialpad</i>
-            <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-            <i class="material-icons">voicemail</i>
-            <span>Check voice mail</span>
-        </button>
-        <button mat-menu-item>
-            <i class="material-icons">notifications_off</i>
-            <span>Disable alerts</span>
-        </button>
+            <button mat-menu-item (click)="bindDeleteMulti()">
+                <mat-icon>delete</mat-icon>
+                <span>ลบหน่วยนับ</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>file_upload</mat-icon>
+                <span>นำเข้าหน่วยนับ</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>file_download</mat-icon>
+                <span>นำออกหน่วยนับ</span>
+            </button>
         </mat-menu>
     </div>
 </div>
@@ -37,7 +37,7 @@
 
 <div class="content-menu">
     <div class="left-content">
-        <div class="table grid-inline" data-gridtype="gridSelectOne" data-gridid="gridUnit" tableControl>
+        <div class="table grid-inline" data-gridtype="gridSelectMulti" data-gridid="gridUnit" tableControl>
             <div class="grid-inline-groupHeader">
                 <div class="grid-inline-row">
                     <div class="grid-inline-header"></div>
