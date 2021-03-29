@@ -1,13 +1,14 @@
-<!-- <div class="top-bar">
-    <h1>หน่วยนับทั้งหมด</h1>
-</div> -->
-
+<div class="top-bar">
+    <h1><b>รายการหน่วยนับทั้งหมด</b></h1>
+</div>
 <div class="header-menu">
-    <h1><b>หน่วยนับทั้งหมด</b></h1>
-    <!-- <div class="search">
-        <i class="material-icons">search</i>
-        <input type="text" name="" id="" placeholder="Search Products">
-    </div> -->
+    <div class="search">
+        <mat-select [formControl]="toppings" multiple>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+        </mat-select>
+        <input type="text" class="form-input" placeholder="Search Unit">
+        <!-- <i class="material-icons">search</i> -->
+    </div>
 
     <div class="groupAction">
         <button class="green-button" (click)="manageUnit(null)">

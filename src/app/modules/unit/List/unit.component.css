@@ -7,16 +7,6 @@
     margin: 70px 0 0 10px;
 }
 
-.grid-inline-cell > mat-icon:first-child {
-    color: #20B49E;
-    font-size: 16pt;
-}
-
-.grid-inline-cell > mat-icon:last-child {
-    color: #f44336;
-    font-size: 16pt;
-}
-
 .grid-inline-cell:nth-child(1), .grid-inline-header:nth-child(1) {
     min-width: 50px;
     justify-content: center;
@@ -28,15 +18,15 @@
 }
 
 .grid-inline-cell:nth-child(3), .grid-inline-header:nth-child(3) {
-    min-width: 240px;
+    min-width: 180px;
 }
 
 .grid-inline-cell:nth-child(4), .grid-inline-header:nth-child(4) {
-    min-width: 220px;
+    min-width: 260px;
 }
 
 .grid-inline-cell:nth-child(5), .grid-inline-header:nth-child(5) {
-    min-width: 220px;
+    min-width: 260px;
 }
 
 .grid-inline-cell:nth-child(6), .grid-inline-header:nth-child(6) {
@@ -47,107 +37,3 @@
     min-width: 100px;
 }
 
-.grid-inline {
-	display: table;
-	width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 10px;
-    table-layout: fixed;
-}
-.grid-inline-row {
-	/* display: table-row; */
-    display: flex;
-    align-items: center;
-}
-.grid-inline-groupHeader {
-    padding-right: 20px;
-    display: block;
-    overflow: hidden;
-    /* display: table-header-group; */
-    font-weight: bold;
-}
-
-.grid-inline-groupHeader .grid-inline-cell {
-    padding: 0 15px;
-}
-
-.grid-inline-cell, .grid-inline-header {
-	display: table-cell;
-	padding: 3px 15px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.grid-inline-body {
-    display: block;
-    overflow: hidden;
-    overflow-y: scroll;
-    height: 450px;
-    padding-right: 10px;
-    width: fit-content;
-}
-
-.grid-inline-body .grid-inline-row:first-child {
-    background-color: #FFFFFF;
-    height: 44px;
-    margin-top: 10px;
-}
-
-.grid-inline-body .grid-inline-row {
-    background-color: #FFFFFF;
-    height: 44px;
-    margin-top: 10px;
-}
-
-.grid-inline-body .grid-inline-row:hover {
-    cursor: pointer;
-}
-
-.grid-inline-body .grid-inline-cell {
-    padding: 15px;
-    display: flex;
-}
-
-.grid-inline-body button {
-    background: transparent;
-    min-width: 50px;
-}
-
-.grid-inline-body button > mat-icon {
-    color: #B5C2C8;
-}
-
-
-
-.grid-inline > form {
-    display: contents;
-}
-
-.grid-inline.validate {
-    height: 80px !important;
-}
-
-.grid-inline.validate .grid-inline-cell {
-    height: 80px !important;
-    flex-direction: column;
-}
-
-.grid-inline.validate .grid-inline-cell:nth-child(2) {
-    padding-bottom: 28px;
-}
-
-.grid-inline .grid-inline-cell:nth-child(2) {
-    width: 80px;
-    flex-direction: initial;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.grid-inline .grid-inline-cell > input {
-    width: 100%;
-}
-
-.grid-inline input {
-    margin-bottom: 0px !important;
-}

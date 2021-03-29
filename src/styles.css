@@ -197,12 +197,7 @@ button.multipleAction > mat-icon {
     color: #25A8F8;
 }
 
-.top-bar {
-    height: 50px;
-    width: 100%;
-    padding-top: 20px;
-    /* border-bottom: 1px solid #a9adb3; */
-}
+
 
 app-top-bar {
     width: 100%;
@@ -234,6 +229,20 @@ app-left-bar {
     padding: 16px;
 } */
 
+.top-bar {
+    height: 50px;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.top-bar h1 {
+    margin: 0;
+}
+
+.top-bar b {
+    color: #20B49E !important;
+}
+
 .header-menu {
     width: 100%;
     height: 40px;
@@ -248,13 +257,32 @@ app-left-bar {
     margin: 20px 10px 0;
 }
 
-.header-menu h1 {
-    margin: 0;
+.search {
+    width: 13%;
+    display: flex;
 }
 
-.header-menu h1 > b {
-    color: #4BAEE5 !important;
+.search .mat-select-trigger {
+    width: 160px;
+    height: 35px;
+    background-color: white;
 }
+
+.search > mat-icon {
+    margin: 7px 0 0 10px;
+    position: absolute;
+}
+
+.search input[type="text"] {
+    border-radius: 10px;
+    padding-left: 40px;
+    min-width: 450px;
+}
+
+.search input[type="text"]:hover, .search input[type="text"]:focus{
+    border-color: #4BAEE5 !important;
+}
+
 
 .content-menu {
     padding: 10px 30px 0 30px;
@@ -286,21 +314,6 @@ input[type="checkbox"] {
     margin-right: 5px;
     border-color: blue;
     box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
-}
-
-.search > mat-icon {
-    margin: 7px 0 0 10px;
-    position: absolute;
-}
-
-.search input[type="text"] {
-    border-radius: 10px;
-    padding-left: 40px;
-    min-width: 450px;
-}
-
-.search input[type="text"]:hover, .search input[type="text"]:focus{
-    border-color: #4BAEE5 !important;
 }
 
 
@@ -498,15 +511,11 @@ input[type="checkbox"] {
     border-top: solid 1px  #a9adb3;
 }
 
-
-
 h1 {
     font-family: 'Athiti' !important;
     color: #4BAEE5 !important;
     font-weight: bold !important;
 }
-
-
 
 .mat-select-trigger {
     width: 320px;
@@ -525,84 +534,8 @@ h1 {
     box-shadow: inset 0 1px 0 rgba(225, 228, 232, 0.2);
 }
 
-/************************ TABLE **************************/
-.table {
-    border-collapse: separate;
-    width: 100%;
-    border-spacing: 0 10px;
-    table-layout: fixed;
-}
-
-/* .table .table-scroll {
-    width: min-content;
-    overflow-x: scroll;
-} */
-
-.table thead {
-    padding-right: 20px;
-    display: block;
-    overflow: hidden;
-}
-
-.table thead tr {
-    text-align: left;
-    display: block;
-    position: relative;
-}
-
-.table th {
-    padding: 0 15px;
-}
-
-.table td {
-    padding: 2px 15px;
-}
-
-.table th, td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.table tbody {
-    display: block;
-    overflow: hidden;
-    overflow-y: scroll;
-    height: 450px;
-    padding-right: 10px;
-}
-
-.table  tbody > tr {
-    background-color: #FFFFFF;
-    height: 44px;
-    margin-top: 20px;
-}
-
-.table tbody > tr:hover, .table tbody > tr.active {
-    background: #f2f2f2;
-}
-
-.table button {
-    background: transparent;
-    min-width: 50px;
-}
-
-/* CHECK BOX */
-.table td:nth-child(1), th:nth-child(1) {
-    min-width: 50px;
-}
-
-/* NO */
-.table td:nth-child(2), th:nth-child(2) {
-    min-width: 200px;
-}
-
 mat-icon {
     cursor: pointer;
-}
-
-.table button > mat-icon {
-    color: #B5C2C8;
 }
 
 mat-checkbox > label {
@@ -613,27 +546,7 @@ mat-checkbox > label {
     margin-bottom: 0px !important;
 } */
 
-.pagination {
-    display: flex;
-    justify-content: flex-end;
-}
 
-.pagination > a {
-    /* border: solid 1px black; */
-    /* width: 50px;
-    height: 50px; */
-    margin: 0 20px 20px 0;
-    text-align: center;
-    padding: 10px 18px;
-    background-color: white;
-    color: #91A5AF;
-    font-weight: bold;
-    /* box-shadow: 0px 1px 3px 0px rgb(0, 0, 0); */
-}
-
-.pagination > a:hover {
-    background: #f2f2f2;
-}
 
 .unit-info .table td .mat-select-trigger {
     border-collapse: separate;

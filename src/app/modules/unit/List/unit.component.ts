@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UnitService } from '../Shared/unit.service';
 import { UnitModel } from '../Shared/unit.model';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { AppService } from '@services/base/apps.service';
 import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
 import { AlertModalComponent } from 'app/modules/Shared/Modal/Alert/alert-modal.component';
@@ -27,6 +27,9 @@ export class UnitListComponent {
     unitNo: any
     unitName: any
     createdDate: any
+
+    toppings = new FormControl();
+    toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
     
     ngOnInit(): void {
         this.unitService.refreshList()

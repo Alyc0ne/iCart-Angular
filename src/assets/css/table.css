@@ -1,0 +1,215 @@
+.table {
+    border-collapse: separate;
+    width: 100%;
+    border-spacing: 0 10px;
+    table-layout: fixed;
+}
+
+/* .table .table-scroll {
+    width: min-content;
+    overflow-x: scroll;
+} */
+
+.table thead {
+    padding-right: 20px;
+    display: block;
+    overflow: hidden;
+}
+
+.table thead tr {
+    text-align: left;
+    display: block;
+    position: relative;
+}
+
+.table th {
+    padding: 0 15px;
+}
+
+.table td {
+    padding: 2px 15px;
+}
+
+.table th, td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table tbody {
+    display: block;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 450px;
+    padding-right: 10px;
+}
+
+.table  tbody > tr {
+    background-color: #FFFFFF;
+    height: 44px;
+    margin-top: 20px;
+}
+
+.table tbody > tr:hover, .table tbody > tr.active {
+    background: #f2f2f2;
+}
+
+.table button {
+    background: transparent;
+    min-width: 50px;
+}
+
+.table button > mat-icon {
+    color: #B5C2C8;
+}
+
+/* CHECK BOX */
+.table td:nth-child(1), th:nth-child(1) {
+    min-width: 50px;
+}
+
+/* NO */
+.table td:nth-child(2), th:nth-child(2) {
+    min-width: 200px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination > a {
+    /* border: solid 1px black; */
+    /* width: 50px;
+    height: 50px; */
+    margin: 0 20px 20px 0;
+    text-align: center;
+    padding: 10px 18px;
+    background-color: white;
+    color: #91A5AF;
+    font-weight: bold;
+    /* box-shadow: 0px 1px 3px 0px rgb(0, 0, 0); */
+}
+
+.pagination > a:hover {
+    background: #f2f2f2;
+}
+
+/** Grid Inline **/
+.grid-inline {
+	display: table;
+	width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    table-layout: fixed;
+}
+.grid-inline-row {
+    display: flex;
+    align-items: center;
+}
+.grid-inline-groupHeader {
+    padding-right: 20px;
+    display: block;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.grid-inline-groupHeader .grid-inline-cell {
+    padding: 0 15px;
+}
+
+.grid-inline-cell, .grid-inline-header {
+    display: inline-block;
+	padding: 3px 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.grid-inline-body {
+    display: block;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 450px;
+    padding-right: 10px;
+    width: fit-content;
+}
+
+.grid-inline-body .grid-inline-row:first-child {
+    background-color: #FFFFFF;
+    height: 44px;
+    margin-top: 10px;
+}
+
+.grid-inline-body .grid-inline-row {
+    background-color: #FFFFFF;
+    height: 44px;
+    margin-top: 10px;
+}
+
+.grid-inline-body .grid-inline-row:hover {
+    cursor: pointer;
+}
+
+.grid-inline-body .grid-inline-cell {
+    padding: 15px;
+    display: flex;
+}
+
+.grid-inline-body button {
+    background: transparent;
+    min-width: 50px;
+}
+
+.grid-inline-body button > mat-icon {
+    color: #B5C2C8;
+}
+
+.grid-inline > form {
+    display: contents;
+}
+
+.grid-inline.validate {
+    height: 80px !important;
+}
+
+.grid-inline.validate .grid-inline-cell {
+    height: 80px !important;
+    flex-direction: column;
+}
+
+.grid-inline.validate .grid-inline-cell:nth-child(2) {
+    padding-bottom: 28px;
+}
+
+.grid-inline .grid-inline-cell:nth-child(2) {
+    width: 80px;
+    flex-direction: initial;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.grid-inline .grid-inline-cell > input {
+    width: 100%;
+}
+
+.grid-inline input {
+    margin-bottom: 0px !important;
+}
+
+.grid-inline-cell {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.grid-inline-cell > mat-icon:first-child {
+    color: #20B49E;
+    font-size: 16pt;
+}
+
+.grid-inline-cell > mat-icon:last-child {
+    color: #f44336;
+    font-size: 16pt;
+}
