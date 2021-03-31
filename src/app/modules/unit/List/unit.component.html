@@ -3,9 +3,12 @@
 </div>
 <div class="header-menu">
     <div class="search">
-        <mat-select [formControl]="toppings" multiple>
-            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-        </mat-select>
+        <form [formGroup]="searchFilterForm" autocomplete="off">
+            <mat-select placeholder="User Type" formControlName="unitFilters" multiple>
+                <mat-option #allSelected (click)="selectAll()" [value]="0">ค้นหาทั้งหมด</mat-option>
+                <mat-option *ngFor="let filter of filters" [value]="filter.key" (click)="select()">{{ filter.value }}</mat-option>
+            </mat-select>
+        </form>
         <input type="text" class="form-input" placeholder="Search Unit">
         <!-- <i class="material-icons">search</i> -->
     </div>
@@ -50,7 +53,7 @@
                     <div class="grid-inline-header"></div>
                 </div>
             </div>
-            <div class="grid-inline-body">
+            <div class="grid-inline-body" *ngIf="!unitService.units; else emptyUnits">
                 <div *ngFor="let unit of unitService.units" >
                     <div class="grid-inline-row" [attr.data-id]="unit.unitID" *ngIf="!unit.isAdd; else isAdd">
                         <div class="grid-inline-cell">
@@ -97,10 +100,17 @@
                     </ng-template>
                 </div>
             </div>
+
+            <ng-template #emptyUnits>
+                <div class="grid-inline-body empty-items">
+                    <img src="assets/images/empty-items.png">
+                    <h1>บะปะข้อมูลตี้คิงหา !!</h1>
+                </div>
+            </ng-template>
         </div>
     </div>
     
-    <div class="right-content">
+    <!-- <div class="right-content">
         <div class="form-group">
             <span class="req"></span>
             <label for="productNo" class="formLabel" title="รหัสหน่วยนับ">รหัสหน่วยนับ</label>
@@ -118,5 +128,5 @@
             <label for="productNo" class="formLabel" title="CREATED DATE">CREATED DATE</label>
             <label for="productNo" class="formLabel" title="CREATED DATE">{{ createdDate }}</label>
         </div>
-    </div>
+    </div> -->
 </div>

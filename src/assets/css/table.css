@@ -135,6 +135,15 @@
     width: fit-content;
 }
 
+.grid-inline-body.empty-items {
+    display: block;
+    overflow: hidden;
+    height: 450px;
+    text-align: center;
+    width: auto;
+}
+
+
 .grid-inline-body .grid-inline-row:first-child {
     background-color: #FFFFFF;
     height: 44px;

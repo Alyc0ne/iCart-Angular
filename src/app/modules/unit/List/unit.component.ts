@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UnitService } from '../Shared/unit.service';
 import { UnitModel } from '../Shared/unit.model';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
@@ -6,6 +6,7 @@ import { AppService } from '@services/base/apps.service';
 import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
 import { AlertModalComponent } from 'app/modules/Shared/Modal/Alert/alert-modal.component';
 import { ConfirmModalComponent } from 'app/modules/Shared/Modal/Confirm/confirm-modal.component';
+import { MatOption } from '@angular/material/core';
 
 @Component({
     selector: 'app-unit',
@@ -28,11 +29,36 @@ export class UnitListComponent {
     unitName: any
     createdDate: any
 
-    toppings = new FormControl();
-    toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+    searchFilterForm: FormGroup;
+    filters = [
+        { key: 1, value: 'รหัสหน่วยนับ' },
+        { key: 2, value: 'ชื่อหน่วยนับ' },
+        { key: 3, value: 'ชื่อหน่วยนับภาษาอังกฤษ' },
+        { key: 4, value: 'วันที่สร้าง' }
+      ];
+
+    @ViewChild('allSelected') private allSelected: MatOption;
     
     ngOnInit(): void {
         this.unitService.refreshList()
+        this.searchFilterForm = this.fb.group({
+            unitFilters: new FormControl('')
+        });
+    }
+    
+    selectAll() {
+        if (this.allSelected.selected)
+            this.searchFilterForm.controls.unitFilters.patchValue([...this.filters.map(item => item.key), 0]);
+        else
+            this.searchFilterForm.controls.unitFilters.patchValue([]);
+    }
+
+    select() {
+        if (this.allSelected.selected) {  
+            this.allSelected.deselect();
+            return false;
+        }
+          if (this.searchFilterForm.controls.unitFilters.value.length == this.filters.length) this.allSelected.select();
     }
 
     showDetail(event ,unitID, isCheck) {
