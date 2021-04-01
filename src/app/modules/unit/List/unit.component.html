@@ -4,9 +4,9 @@
 <div class="header-menu">
     <div class="search">
         <form [formGroup]="searchFilterForm" autocomplete="off">
-            <mat-select placeholder="User Type" formControlName="unitFilters" multiple>
-                <mat-option #allSelected (click)="selectAll()" [value]="0">ค้นหาทั้งหมด</mat-option>
-                <mat-option *ngFor="let filter of filters" [value]="filter.key" (click)="select()">{{ filter.value }}</mat-option>
+            <mat-select formControlName="unitFilters" multiple>
+                <mat-option #allSelected (click)="selectAll()" value="all">ค้นหาทั้งหมด</mat-option>
+                <mat-option [disabled]="allSelected.selected" *ngFor="let filter of filters" [value]="filter.key" (click)="select(filter.key)">{{ filter.value }}</mat-option>
             </mat-select>
         </form>
         <input type="text" class="form-input" placeholder="Search Unit">

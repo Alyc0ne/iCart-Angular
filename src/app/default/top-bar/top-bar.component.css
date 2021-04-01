@@ -1,9 +1,9 @@
 .drawerToggle {
-    background-color: white;
+    background-color: transparent;
     min-width: 60px;
     padding: 3px 16px;
 }
 
 .drawerToggle > mat-icon {
-    color: #616161;
+    color: white;
 }

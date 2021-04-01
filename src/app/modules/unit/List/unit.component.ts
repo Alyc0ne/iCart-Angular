@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { UnitService } from '../Shared/unit.service';
 import { UnitModel } from '../Shared/unit.model';
-import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppService } from '@services/base/apps.service';
 import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
 import { AlertModalComponent } from 'app/modules/Shared/Modal/Alert/alert-modal.component';
@@ -29,37 +29,71 @@ export class UnitListComponent {
     unitName: any
     createdDate: any
 
+    filterSeleted: string[]
     searchFilterForm: FormGroup;
     filters = [
-        { key: 1, value: 'รหัสหน่วยนับ' },
-        { key: 2, value: 'ชื่อหน่วยนับ' },
-        { key: 3, value: 'ชื่อหน่วยนับภาษาอังกฤษ' },
-        { key: 4, value: 'วันที่สร้าง' }
+        { key: 'unitNo', value: 'รหัสหน่วยนับ' },
+        { key: 'unitName', value: 'ชื่อหน่วยนับ' },
+        { key: 'unitNameEng', value: 'ชื่อหน่วยนับภาษาอังกฤษ' },
+        { key: 'createdDate', value: 'วันที่สร้าง' }
       ];
 
     @ViewChild('allSelected') private allSelected: MatOption;
     
     ngOnInit(): void {
         this.unitService.refreshList()
-        this.searchFilterForm = this.fb.group({
-            unitFilters: new FormControl('')
-        });
+        this.searchFilterForm = this.fb.group({ unitFilters: [null] })
+        this.searchFilterForm.get('unitFilters').setValue(['all'])
     }
     
     selectAll() {
-        if (this.allSelected.selected)
-            this.searchFilterForm.controls.unitFilters.patchValue([...this.filters.map(item => item.key), 0]);
-        else
-            this.searchFilterForm.controls.unitFilters.patchValue([]);
+        //if (this.allSelected.selected) {
+            this.searchFilterForm.controls.unitFilters.patchValue(['all'])
+            // this.filterSeleted = this.filters.map(x => x.key)
+            //this.searchFilterForm.controls.unitFilters.patchValue([this.filters[0].key]);
+        //} //this.searchFilterForm.controls.unitFilters.patchValue([...this.filters.map(item => item.key), 0]);
+        // else
+        //     this.searchFilterForm.controls.unitFilters.patchValue([])
+        
+        // console.log(this.searchFilterForm.getRawValue())
     }
 
-    select() {
+    select(key) {
         if (this.allSelected.selected) {  
             this.allSelected.deselect();
-            return false;
+            // return false;
         }
-          if (this.searchFilterForm.controls.unitFilters.value.length == this.filters.length) this.allSelected.select();
+
+        if (this.searchFilterForm.controls.unitFilters.value.length == this.filters.length) {
+            this.searchFilterForm.get('unitFilters').setValue(['all'])
+        }
+        else
+        {
+            var value = this.searchFilterForm.get('unitFilters').value
+            if (value.length == 0) {
+                this.searchFilterForm.get('unitFilters').setValue([key])
+            }
+            else
+            {
+                this.searchFilterForm.get('unitFilters').value.push([key])
+            }
+            //
+            
+        }
+
+        console.log(key)
+
+          //this.manageFilterSearch()
     }
+
+    // manageFilterSearch() {
+    //     const unitFiltersLength = this.searchFilterForm.controls.unitFilters.value.length
+    //     if (unitFiltersLength == this.filters.length) {
+    //         this.searchFilterForm.get('unitFilters').setValue(['all'])
+    //     }
+
+    //     console.log(this.searchFilterForm)
+    // }
 
     showDetail(event ,unitID, isCheck) {
         if (!!unitID) {
