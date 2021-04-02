@@ -132,7 +132,7 @@
     overflow-y: scroll;
     height: 450px;
     padding-right: 10px;
-    width: fit-content;
+    /* width: fit-content; */
 }
 
 .grid-inline-body.empty-items {
@@ -207,7 +207,7 @@
 }
 
 .grid-inline-cell {
-    display: inline-block;
+    display: inline-block !important;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductService } from '../Shared/product.service';
 import { ProductModalComponent } from '../Shared/modal/product-modal.component'
 import { ProductModel } from '../Shared/product.model';
+import { FormGroup } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
 
 @Component({
     selector: 'app-product',
@@ -20,6 +22,16 @@ export class ProductListComponent {
     productModel: ProductModel[];
     productID: string;
     totalPages: any;
+
+    @ViewChild('allSelected') private allSelected: MatOption;
+    filterSeleted: string[]
+    searchFilterForm: FormGroup;
+    filters = [
+        { key: 'productNo', value: 'รหัสสินค้า' },
+        { key: 'productName', value: 'ชื่อสินค้า' },
+        { key: 'productNameEng', value: 'ชื่อสินค้าภาษาอังกฤษ' },
+        { key: 'createdDate', value: 'วันที่สร้าง' }
+    ];
     
     ngOnInit(): void {
         this.totalPages = Array(6);

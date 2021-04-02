@@ -1,4 +1,86 @@
 <div class="top-bar">
+    <h1><b>รายการสินค้าทั้งหมด</b></h1>
+</div>
+<div class="header-menu">
+    <div class="search">
+        <form [formGroup]="searchFilterForm" autocomplete="off">
+            <mat-select formControlName="productFilters" multiple>
+                <mat-option #allSelected (click)="selectAll()" value="all">ค้นหาทั้งหมด</mat-option>
+                <mat-option [disabled]="allSelected.selected" *ngFor="let filter of filters" [value]="filter.key" (click)="select(filter.key)">{{ filter.value }}</mat-option>
+            </mat-select>
+        </form>
+        <input type="text" class="form-input" placeholder="Search Unit">
+        <!-- <i class="material-icons">search</i> -->
+    </div>
+
+    <div class="groupAction">
+        <button class="green-button" (click)="manageProduct(null)">เพิ่มสินค้า</button>
+        <button class="multipleAction" [matMenuTriggerFor]="menu">
+            <i class="material-icons">more_horiz</i> 
+            <span>Action</span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="bindDeleteMulti()">
+                <mat-icon>delete</mat-icon>
+                <span>ลบสินค้า</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>file_upload</mat-icon>
+                <span>นำเข้าสินค้า</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>file_download</mat-icon>
+                <span>นำออกสินค้า</span>
+            </button>
+        </mat-menu>
+    </div>
+</div>
+<mat-divider></mat-divider>
+
+<div class="content-menu">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="txt-l">รหัสสินค้า</th>
+                <th class="txt-l">Barcode</th>
+                <th class="txt-l">ชื่อสินค้า</th>
+                <th class="txt-r">จำนวนคงเหลือ</th>
+                <th class="txt-l">หน่วยนับหลัก</th>
+                <th class="txt-r">ราคาซื้อ</th>
+                <th class="txt-r">ราคาขาย</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of service.list">
+                <td><mat-checkbox [color]="'primary'" [checked]="product.isCheck"></mat-checkbox></td>
+                <td>{{ product.productNo }}</td>
+                <td>{{ product.barcode }}</td>
+                <td>{{ product.productName }}</td>
+                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-c">{{ product.productQuantity | number:'1.2-2' }}</td>
+                <td>{{ product.unitName }}</td>
+                <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
+                <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
+                <td>
+                    <button mat-icon-button [matMenuTriggerFor]="menuAction" (click)="productID = product.productID">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>                    
+                </td>
+            </tr>
+        </tbody>
+        <!-- <tfoot>
+            <div class="pagination">
+                <a>&laquo;</a>
+                <a *ngFor="let page of totalPages; let i = index;">{{ i + 1 }}</a>                
+                <a>&raquo;</a>
+            </div>
+        </tfoot> -->
+    </table>
+</div>
+
+
+<!-- <div class="top-bar">
     <h1>รายการสินค้าทั้งหมด</h1>
 </div>
 <mat-divider></mat-divider>
@@ -88,4 +170,4 @@
             <span>ลบหน่วยนับ</span>
         </button>
     </mat-menu>
-</div>
+</div> -->

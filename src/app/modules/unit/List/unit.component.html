@@ -40,7 +40,7 @@
 <mat-divider></mat-divider>
 
 <div class="content-menu">
-    <div class="left-content">
+    <!-- <div class="left-content"> -->
         <div class="table grid-inline" data-gridtype="gridSelectMulti" data-gridid="gridUnit" tableControl>
             <div class="grid-inline-groupHeader">
                 <div class="grid-inline-row">
@@ -53,7 +53,7 @@
                     <div class="grid-inline-header"></div>
                 </div>
             </div>
-            <div class="grid-inline-body" *ngIf="!unitService.units; else emptyUnits">
+            <div class="grid-inline-body" *ngIf="!!unitService.units; else emptyUnits">
                 <div *ngFor="let unit of unitService.units" >
                     <div class="grid-inline-row" [attr.data-id]="unit.unitID" *ngIf="!unit.isAdd; else isAdd">
                         <div class="grid-inline-cell">
@@ -108,7 +108,7 @@
                 </div>
             </ng-template>
         </div>
-    </div>
+    <!-- </div> -->
     
     <!-- <div class="right-content">
         <div class="form-group">

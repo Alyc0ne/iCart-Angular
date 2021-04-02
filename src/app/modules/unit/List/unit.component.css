@@ -1,6 +1,6 @@
 .content-menu {
-    display: grid;
-    grid-template-columns: 70% 30%;
+    /* display: grid;
+    grid-template-columns: 70% 30%; */
 }
 
 .right-content {
@@ -18,19 +18,23 @@
 }
 
 .grid-inline-cell:nth-child(3), .grid-inline-header:nth-child(3) {
-    min-width: 180px;
+    width: 200px;
+    /* min-width: 200px; */
 }
 
 .grid-inline-cell:nth-child(4), .grid-inline-header:nth-child(4) {
-    min-width: 260px;
+    width: 350px;
+    /* min-width: 350px; */
 }
 
 .grid-inline-cell:nth-child(5), .grid-inline-header:nth-child(5) {
-    min-width: 260px;
+    width: 350px;
+    /* min-width: 350px; */
 }
 
 .grid-inline-cell:nth-child(6), .grid-inline-header:nth-child(6) {
-    min-width: 160px;
+    width: 250px;
+    /* min-width: 250px; */
 }
 
 .grid-inline-cell:nth-child(7), .grid-inline-header:nth-child(7) {

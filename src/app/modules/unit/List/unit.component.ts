@@ -29,6 +29,7 @@ export class UnitListComponent {
     unitName: any
     createdDate: any
 
+    @ViewChild('allSelected') private allSelected: MatOption;
     filterSeleted: string[]
     searchFilterForm: FormGroup;
     filters = [
@@ -36,9 +37,7 @@ export class UnitListComponent {
         { key: 'unitName', value: 'ชื่อหน่วยนับ' },
         { key: 'unitNameEng', value: 'ชื่อหน่วยนับภาษาอังกฤษ' },
         { key: 'createdDate', value: 'วันที่สร้าง' }
-      ];
-
-    @ViewChild('allSelected') private allSelected: MatOption;
+    ];
     
     ngOnInit(): void {
         this.unitService.refreshList()
