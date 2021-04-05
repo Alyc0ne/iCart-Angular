@@ -53,7 +53,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of service.list">
+            <tr *ngFor="let product of productService.list">
                 <td><mat-checkbox [color]="'primary'" [checked]="product.isCheck"></mat-checkbox></td>
                 <td>{{ product.productNo }}</td>
                 <td>{{ product.barcode }}</td>

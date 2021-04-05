@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ProductService } from '../Shared/product.productService';
+import { ProductService } from '../Shared/product.service';
 import { ProductModalComponent } from '../Shared/modal/product-modal.component'
 import { ProductModel } from '../Shared/product.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -41,7 +41,15 @@ export class ProductListComponent {
         this.productService.refreshList()
     }
 
-    callProductModal = async () => {        
+    selectAll() {
+
+    }
+
+    select() {
+        
+    }
+
+    manageProduct = async (productID) => {        
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         dialogConfig.disableClose = true;
@@ -74,7 +82,7 @@ export class ProductListComponent {
         }
     }
 
-    share() {
-        window.alert('The product has been shared!')
+    bindDeleteMulti() {
+
     }
 }
