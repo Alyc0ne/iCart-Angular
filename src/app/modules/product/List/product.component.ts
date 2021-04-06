@@ -39,6 +39,8 @@ export class ProductListComponent {
     ngOnInit(): void {
         this.totalPages = Array(6);
         this.productService.refreshList()
+        this.searchFilterForm = this.fb.group({ productFilters: [null] })
+        this.searchFilterForm.get('productFilters').setValue(['all'])
     }
 
     selectAll() {

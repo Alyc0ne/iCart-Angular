@@ -487,7 +487,7 @@ input[type="checkbox"] {
 .form-group .form-content input, textarea, .form-input {
     width: 440px;
     max-width: 100%;
-    margin-right: 5px;
+    /* margin-right: 5px; */
     padding: 5px 12px;
     font-size: 14px;
     line-height: 20px;
