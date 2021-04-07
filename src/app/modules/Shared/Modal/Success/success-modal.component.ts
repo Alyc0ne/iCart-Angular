@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class SuccessModalComponent {
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public dataRef,
+        @Inject(MAT_DIALOG_DATA) public dataDialogRef,
     ){ }
 
     ngOnInit(): void {

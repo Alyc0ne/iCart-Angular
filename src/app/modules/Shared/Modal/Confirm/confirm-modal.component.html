@@ -4,15 +4,15 @@
 
 <div class="modal-content">
     <div class="content-header">
-        {{ dataRef.message.header }}
+        {{ dataDialogRef.message.header }}
         <!-- ต้องการเคลียร์สินค้าในตะกร้า ? -->
     </div>
     <div class="content-content">
-        {{ dataRef.message.confirmText }}<!-- ถ้าทำการเคลียร์สินค้าในตะกร้าแล้วจะไม่สามารถกู้คืนได้. -->
+        {{ dataDialogRef.message.confirmText }}<!-- ถ้าทำการเคลียร์สินค้าในตะกร้าแล้วจะไม่สามารถกู้คืนได้. -->
     </div>
 </div>
 
 <div class="modal-footer">
     <button class="warn-button" (click)="baseService._closeDialog('ConfirmModalComponent', null)">ยกเลิก</button>
-    <button class="green-button" (click)="baseService._closeDialog('ConfirmModalComponent', dataRef.action)">ตกลง</button>
+    <button class="green-button" (click)="baseService._closeDialog('ConfirmModalComponent', dataDialogRef.action)">ตกลง</button>
 </div>

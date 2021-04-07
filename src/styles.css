@@ -576,16 +576,38 @@ mat-checkbox > label {
 .modal-header {
     height: 65px;
     width: 100%;
-    margin: 24px 0 40px 0;
+    /* margin-top: 24px; */
+    padding: 15px 0;
+    padding: 0 1.3rem;
+}
+
+.modal-header .text-header {
+    color: black !important;
 }
 
 .modal-content {
+    padding: 0 1.3rem;
+    /* margin-left: 2.6rem; */
     height: 450px;
     margin-bottom: 40px;
 }
 
+.modal-content .mat-tab-nav-bar, .modal-content .mat-tab-header {
+    border: none !important;
+}
+
+
+
 .modal-content > .content-header {
     margin-bottom: 20px;
+}
+
+.modal-content mat-ink-bar {
+    background-color: #20B49E !important;
+}
+
+.modal-content .mat-tab-label-active {
+    font-weight: bold;
 }
 
 .modal-content > .content-content {
@@ -760,4 +782,12 @@ mat-select.ng-invalid.ng-touched > div.mat-select-trigger {
 
 .rowHover {
     background: #f2f2f2 !important;
+}
+
+product-modal .mat-select-trigger {
+    width: 180px !important;
+    height: 35px !important;
+    padding: 0 0 0 10px !important;
+    line-height: 13px;
+    /* width: 250px !important; */
 }

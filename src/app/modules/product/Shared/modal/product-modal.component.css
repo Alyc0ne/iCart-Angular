@@ -1,10 +1,13 @@
+.modal-content {
+    height: 340px !important;
+}
+
 .product-info {
     display: grid;
     grid-template-columns: 50% 40%;
 }
 
-.unit-info {
-    padding: 0 2rem;
+/* .unit-info {
     margin-bottom: 20px;
 }
 
@@ -15,7 +18,7 @@
 .unit-info .button {
     height: 30px;
     min-width: 110px;
-}
+} */
 
 /* .unit-info input.form-input {
     width: 200px !important;
@@ -46,6 +49,35 @@
     cursor: pointer;
 }
 
+.mat-tab-body-wrapper {
+    margin-top: 15px !important;
+    max-width: 1080px;
+}
+/* .unit-info .table.grid-inline {
+    width: 80%;
+    display: block;
+} */
+
+.grid-inline-groupHeader .grid-inline-row {
+    /* border-top: 1px solid rgba(0,0,0,.12); */
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    /* border-radius: 10px; */
+}
+
+.grid-inline-body {
+    height: 220px !important;
+}
+
+mat-tab-body {
+    overflow: hidden !important;
+}
+
+.grid-inline-body .grid-inline-row {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    /* border-radius: 10px; */
+}
+
 .grid-inline-cell:nth-child(1), .grid-inline-header:nth-child(1) {
     min-width: 50px;
     justify-content: center;
@@ -63,5 +95,10 @@
 
 .grid-inline-cell:nth-child(4), .grid-inline-header:nth-child(4) {
     width: 200px;
+    /* min-width: 350px; */
+}
+
+.grid-inline-cell:nth-child(5), .grid-inline-header:nth-child(5) {
+    width: 150px;
     /* min-width: 350px; */
 }

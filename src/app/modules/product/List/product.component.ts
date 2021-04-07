@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductService } from '../Shared/product.service';
 import { ProductModalComponent } from '../Shared/modal/product-modal.component'
 import { ProductModel } from '../Shared/product.model';
@@ -14,12 +13,10 @@ import { AppService } from '@services/base/apps.service';
 })
 
 export class ProductListComponent {
-
     constructor(
         public baseService: AppService,
         public productService: ProductService,
-        private fb: FormBuilder,
-        private dialog:MatDialog,
+        private fb: FormBuilder
     ) { }
 
     productModel: ProductModel[];
@@ -51,37 +48,41 @@ export class ProductListComponent {
         
     }
 
-    manageProduct = async (productID) => {        
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.disableClose = true;
-        dialogConfig.width = "1200px";
-        dialogConfig.height = "600px";
-
+    manageProduct = async (productID) => {  
         if (this.productID == null) {
-            await this.productService.newProduct().then(res => (
-                dialogConfig.data = {
-                    headerText: "เพิ่มสินค้า",
-                    objProduct : { 
+            await this.productService.newProduct().then(res => {
+                this.baseService.configDialog.default.width = "1200px"
+                this.baseService.configDialog.default.height = "500px"
+                this.baseService.configDialog.default.data = { 
+                    textHeader: "เพิ่มสินค้า",
+                    objProduct: { 
                         runningFormatID: this.productService.runningFormatID, 
                         productNo: this.productService.runningNumber 
                     }
-                },
-                this.dialog.open(ProductModalComponent, dialogConfig)
-            ));
+                }
+                // dialogConfig.data = {
+                //     headerText: "เพิ่มสินค้า",
+                //     objProduct : { 
+                //         runningFormatID: this.productService.runningFormatID, 
+                //         productNo: this.productService.runningNumber 
+                //     }
+                // },
+                // this.dialog.open(ProductModalComponent, dialogConfig)
+            });
         }
-        else
-        {
-            let productModel = null;
-            await this.productService.getProduct(this.productID).then(res => (
-                productModel = this.productService.productModel,
-                dialogConfig.data = {
-                    headerText: "แก้ไขสินค้า",
-                    objProduct: productModel
-                },
-                this.dialog.open(ProductModalComponent, dialogConfig)
-            ));
-        }
+        // else
+        // {
+        //     let productModel = null;
+        //     await this.productService.getProduct(this.productID).then(res => (
+        //         productModel = this.productService.productModel,
+        //         dialogConfig.data = {
+        //             headerText: "แก้ไขสินค้า",
+        //             objProduct: productModel
+        //         },
+        //         this.dialog.open(ProductModalComponent, dialogConfig)
+        //     ));
+        // }
+        this.baseService._openDialog(ProductModalComponent, "default")
     }
 
     bindDeleteMulti() {

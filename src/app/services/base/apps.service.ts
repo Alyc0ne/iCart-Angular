@@ -15,7 +15,7 @@ export class AppService {
     private objDialog = []
     public dialogRef;
     public configDialog = {
-        default: { id: null, autoFocus: null, disableClose: null, width: null, height: null, data: null, hasBackdrop: null, position: null },
+        default: { id: null, autoFocus: true, disableClose: true, width: null, height: null, data: null, hasBackdrop: true, position: null },
         confirm: {
             id: "confirm-modal",
             autoFocus: true,

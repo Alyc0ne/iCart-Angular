@@ -2,6 +2,10 @@
     height: 75px;
     justify-content: center;
     display: flex;
+
+    /* height: 65px;
+    width: 100%;
+    margin: 24px 0 40px 0; */
 }
 
 .modal-content {

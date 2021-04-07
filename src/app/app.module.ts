@@ -13,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -98,7 +99,8 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     MatMenuModule,
     MatIconModule,
     MatRippleModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTabsModule
   ],
   entryComponents:[
     ProductModalComponent, 

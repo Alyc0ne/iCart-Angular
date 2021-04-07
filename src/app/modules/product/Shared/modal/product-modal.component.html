@@ -1,201 +1,134 @@
 <div class="modal-header">
-    <h1>{{ modalHeaderText }}</h1>
+    <h1 class="text-header">{{ dataDialogRef.textHeader }}</h1>
 </div>
+<mat-divider></mat-divider>
 
 <div class="modal-content">
     <form [formGroup]="productForm">
-        <div class="text-header">ข้อมูลสินค้า</div>
-        <div class="product-info">
-            <div class="form-group fullrow">
-                <span class="req"></span>
-                <label for="productNo" class="formLabel" title="รหัสสินค้า">รหัสสินค้า</label>
-                <div class="form-content">
-                    <input type="text" id="productNo" formControlName="productNo">
-                    <input type="hidden" id="runningFormatID" formControlName="runningFormatID">
-                </div>
-            </div>
-            <div class="form-group">
-                <span class="req">*</span>
-                <label for="productName" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
-                <div class="form-content">
-                    <input type="text" id="productName" formControlName="productName" placeholder="กรอกชื่อสินค้า" autocomplete="off" required maxlength="255">
-                    <div *ngIf="product.productName.invalid && (product.productName.dirty || product.productName.touched)" class="alert-danger">
-                        <div *ngIf="product.productName.errors.required"><span>กรุณากรอกชื่อสินค้า.</span></div>
-                        <!-- <div *ngIf="product.productName.errors.maxlength">Name must be at least 4 characters long.</div> -->
+        <mat-tab-group>
+            <mat-tab label="ข้อมูลสินค้า"> 
+                <!-- <div class="text-header">ข้อมูลสินค้า</div> -->
+                <div class="product-info">
+                    <div class="form-group fullrow">
+                        <span class="req"></span>
+                        <label for="productNo" class="formLabel" title="รหัสสินค้า">รหัสสินค้า</label>
+                        <div class="form-content">
+                            <input type="text" id="productNo" formControlName="productNo">
+                            <input type="hidden" id="runningFormatID" formControlName="runningFormatID">
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <span class="req"></span>
-                <label for="productNameEng" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
-                <div class="form-content">
-                    <input type="text" id="productNameEng" formControlName="productNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ" autocomplete="off">
-                </div>
-            </div>
-            <div class="form-group fullrow">
-                <span class="req"></span>
-                <label for="productDesc" class="formLabel" title="รายละเอียดสินค้า">รายละเอียดสินค้า</label>
-                <div class="form-content">
-                    <textarea id="productDesc" formControlName="productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า" autocomplete="off" maxlength="255"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <span class="req">*</span>
-                <label for="productSalePrice" class="formLabel" title="ราคาขาย">ราคาขาย</label>
-                <div class="form-content">
-                    <!-- [value]="productForm.get('productSalePrice').value | numberPipe" -->
-                    <input appOnlynumber type="text" id="productSalePrice" formControlName="productSalePrice" placeholder="ราคาขาย" autocomplete="off" required maxlength="10">
-                    <div *ngIf="product.productSalePrice.invalid && (product.productSalePrice.dirty || product.productSalePrice.touched)" class="alert-danger">
-                        <div *ngIf="product.productSalePrice.errors.required"><span>กรุณากรอกราคาขาย</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <span class="req"></span>
-                <label for="productPurchasePrice" class="formLabel" title="ราคาซื้อ">ราคาซื้อ</label>
-                <div class="form-content">
-                    <input appOnlynumber type="text" id="productPurchasePrice" formControlName="productPurchasePrice" placeholder="ราคาซื้อ" autocomplete="off">
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-header">ข้อมูลหน่วยนับ</div>
-        <div class="unit-info">
-            <div class="header-menu">    
-                <div class="groupAction">
-                    <button class="green-button" (click)="addUnit()">
-                        เพิ่มหน่วยนับ
-                    </button>
-                    <button class="green-button">
-                        ลบหน่วยนับ
-                    </button>
-                </div>
-            </div>
-            <mat-divider></mat-divider>
-            <div class="table grid-inline" data-gridtype="gridSelectMulti" data-gridid="gridUnit" tableControl>
-                <div class="grid-inline-groupHeader">
-                    <div class="grid-inline-row">
-                        <div class="grid-inline-header"></div>
-                        <div class="grid-inline-header"></div>
-                        <div class="grid-inline-header">บาร์โค้ด</div>
-                        <div class="grid-inline-header">หน่วยนับ</div>
-                        <div class="grid-inline-header">หน่วยนับหลัก</div>
-                    </div>
-                </div>
-                <div class="grid-inline-body">
-                    <div formArrayName="productUnits">
-                        <div *ngFor="let field of productUnits; let i = index;" [formGroupName]="i">
-                            <!-- <div class="grid-inline-row" [attr.data-id]="unit.unitID" *ngIf="!unit.isAdd; else isAdd">
-                                <div class="grid-inline-cell">
-                                    <mat-checkbox #myCheckbox [color]="'primary'" [checked]="unit.isCheck"></mat-checkbox>
-                                </div>
-                                <div class="grid-inline-cell">
-                                    <mat-icon (click)="manageUnit(unit.unitID)">edit</mat-icon>
-                                    <mat-icon (click)="deleteUnit(unit.unitID)">delete_outline</mat-icon>
-                                </div>
-                                <div class="grid-inline-cell">{{ unit.unitNo }}</div>
-                                <div class="grid-inline-cell">{{ unit.unitName }}</div>
-                                <div class="grid-inline-cell">{{ unit.unitNameEng }}</div>
-                                <div class="grid-inline-cell">{{ unit.createdDate }}</div>
+                    <div class="form-group">
+                        <span class="req">*</span>
+                        <label for="productName" class="formLabel" title="ชื่อสินค้า">ชื่อสินค้า</label>
+                        <div class="form-content">
+                            <input type="text" id="productName" formControlName="productName" placeholder="กรอกชื่อสินค้า" autocomplete="off" required maxlength="255">
+                            <div *ngIf="product.productName.invalid && (product.productName.dirty || product.productName.touched)" class="alert-danger">
+                                <div *ngIf="product.productName.errors.required"><span>กรุณากรอกชื่อสินค้า.</span></div>
+                                <!-- <div *ngIf="product.productName.errors.maxlength">Name must be at least 4 characters long.</div> -->
                             </div>
-                            <ng-template #isAdd> -->
-                                <div class="grid-inline-row grid-inline" [ngClass]="_unit.unitName.invalid && (_unit.unitName.dirty || _unit.unitName.touched) ? 'validate' : ''">
-                                    <form [formGroup]="unitForm">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="req"></span>
+                        <label for="productNameEng" class="formLabel" title="ชื่อสินค้าภาษาอังกฤษ">ชื่อสินค้าภาษาอังกฤษ</label>
+                        <div class="form-content">
+                            <input type="text" id="productNameEng" formControlName="productNameEng" placeholder="ชื่อสินค้าภาษาอังกฤษ" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group fullrow">
+                        <span class="req"></span>
+                        <label for="productDesc" class="formLabel" title="รายละเอียดสินค้า">รายละเอียดสินค้า</label>
+                        <div class="form-content">
+                            <textarea id="productDesc" formControlName="productDesc" rows="3" placeholder="กรอกรายละเอียดสินค้า" autocomplete="off" maxlength="255"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="req">*</span>
+                        <label for="productSalePrice" class="formLabel" title="ราคาขาย">ราคาขาย</label>
+                        <div class="form-content">
+                            <!-- [value]="productForm.get('productSalePrice').value | numberPipe" -->
+                            <input appOnlynumber type="text" id="productSalePrice" formControlName="productSalePrice" placeholder="ราคาขาย" autocomplete="off" required maxlength="10">
+                            <div *ngIf="product.productSalePrice.invalid && (product.productSalePrice.dirty || product.productSalePrice.touched)" class="alert-danger">
+                                <div *ngIf="product.productSalePrice.errors.required"><span>กรุณากรอกราคาขาย</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="req"></span>
+                        <label for="productPurchasePrice" class="formLabel" title="ราคาซื้อ">ราคาซื้อ</label>
+                        <div class="form-content">
+                            <input appOnlynumber type="text" id="productPurchasePrice" formControlName="productPurchasePrice" placeholder="ราคาซื้อ" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="ข้อมูลหน่วยนับ">
+                <!-- <div class="text-header">ข้อมูลหน่วยนับ</div> -->
+                <div class="unit-info">
+                    <div class="table grid-inline" data-gridtype="gridSelectMulti" data-gridid="gridUnit">
+                        <div class="grid-inline-groupHeader">
+                            <div class="grid-inline-row">
+                                <div class="grid-inline-header"></div>
+                                <div class="grid-inline-header"></div>
+                                <div class="grid-inline-header">บาร์โค้ด</div>
+                                <div class="grid-inline-header">หน่วยนับ</div>
+                                <div class="grid-inline-header">หน่วยนับหลัก</div>
+                                <div class="grid-inline-header">
+                                    <mat-icon (click)="addUnit()">add_circle_outline</mat-icon>
+                                    <button class="green-button" (click)="addUnit()">
+                                        เพิ่มหน่วยนับ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-inline-body">
+                            <div formArrayName="productUnits">
+                                <div *ngFor="let field of productUnits; let i = index;" [formGroupName]="i">
+                                    <div class="grid-inline-row">
                                         <div class="grid-inline-cell"></div>
-                                        <div class="grid-inline-cell">
-                                            <i class="material-icons" (click)="changeisFocus(field.value.uid, false, i)">done</i>
-                                            <i class="material-icons">clear</i>
-                                            <!-- <mat-icon (click)="acceptUnit(unit.unitID)">done</mat-icon>
-                                            <mat-icon (click)="cancelUnit()">clear</mat-icon> -->
+                                        <div class="grid-inline-cell" *ngIf="field.value.isFocus; else editAccept">
+                                            <mat-icon (click)="changeisFocus(field.value.uid, false, i)">done</mat-icon>
+                                            <mat-icon >clear</mat-icon>
                                         </div>
-                    
+                                        <ng-template #editAccept>
+                                            <div class="grid-inline-cell">   
+                                                <mat-icon (click)="changeisFocus(field.value.uid, true, i)">edit</mat-icon>
+                                                <mat-icon >delete_outline</mat-icon>              
+                                            </div>
+                                        </ng-template>
+                                        
                                         <div class="grid-inline-cell">
                                             <input type="text" id="barcode" class="form-input" formControlName="barcode"  placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
                                         </div>
-                
                                         <div class="grid-inline-cell">
-                                            <mat-select formControlName="unitID" [disabled]="!field.value.isFocus">
-                                                <mat-option *ngFor="let un of service.listUnit" [value]="un.unitID">{{un.unitName}}</mat-option>
+                                            <mat-select formControlName="unitID" [disabled]="!field.value.isFocus" [value]="unitService.units[0].unitID">
+                                                <mat-option *ngFor="let un of unitService.units" [value]="un.unitID">{{un.unitName}}</mat-option>
                                             </mat-select>
                                             <div *ngIf="field.controls.unitID.invalid && (field.controls.unitID.dirty || field.controls.unitID.touched)" class="alert-danger">
                                                 <div *ngIf="field.controls.unitID.errors.required"><span>กรุณาเลือกหน่วยนับ.</span></div>
                                             </div>
                                         </div>
-                
                                         <div class="grid-inline-cell">
                                             <mat-checkbox [color]="'primary'" formControlName="isBaseUnit" [checked]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
-                                            <!-- <input type="text" id="unitNameEng" formControlName="unitNameEng" class="form-input" placeholder="ชื่อหน่วยนับภาษาอังกฤษ" autocomplete="off" maxlength="255"> -->
                                         </div>
-                
-                                        <div class="grid-inline-cell">
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            <!-- </ng-template> -->
+                            </div>
                         </div>
                     </div>
                 </div>
-    
-                <ng-template #emptyUnits>
-                    <div class="grid-inline-body empty-items">
-                        <img src="assets/images/empty-items.png">
-                        <h1>บะปะข้อมูลตี้คิงหา !!</h1>
-                    </div>
-                </ng-template>
-            </div>
-            <!-- <table class="table">
-                <thead>
-                    <tr>
-                        <th class="action">
-                            <a class="button blue-button" (click)="addUnit()">
-                                เพิ่มหน่วยนับ
-                            </a>
-                        </th>
-                        <th class="">บาร์โค้ด</th>
-                        <th class="">หน่วยนับ</th>
-                        <th class="txt-c">หน่วยนับหลัก</th>
-                    </tr>
-                </thead>
-                <tbody id='test'>
-                    <div formArrayName="productUnits">
-                        <tr *ngFor="let field of productUnits; let i = index;" [formGroupName]="i">
-                            <td class="txt-c" *ngIf="field.value.isFocus; else editAccept">
-                                <i class="material-icons" (click)="changeisFocus(field.value.uid, false, i)">done</i>
-                                <i class="material-icons">clear</i>
-                            </td>
-                            <ng-template #editAccept>
-                                <td class="txt-c">                            
-                                    <i class="material-icons" (click)="changeisFocus(field.value.uid, true, i)">edit</i>
-                                    <i class="material-icons">delete_outline</i>
-                                </td>
-                            </ng-template>
-                            
-                            <td>
-                                <input type="text" id="barcode" class="form-input" formControlName="barcode"  placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
-                            </td>
-                            <td>
-                                <mat-select formControlName="unitID" [disabled]="!field.value.isFocus">
-                                    <mat-option *ngFor="let un of service.listUnit" [value]="un.unitID">{{un.unitName}}</mat-option>
-                                </mat-select>
-                                <div *ngIf="field.controls.unitID.invalid && (field.controls.unitID.dirty || field.controls.unitID.touched)" class="alert-danger">
-                                    <div *ngIf="field.controls.unitID.errors.required"><span>กรุณาเลือกหน่วยนับ.</span></div>
-                                </div>
-                            </td>
-                            <td class="txt-c">
-                                <mat-checkbox [color]="'primary'" formControlName="isBaseUnit" [checked]="field.isBaseUnit">หน่วยนับหลัก</mat-checkbox>
-                            </td>
-                        </tr>
-                    </div>
-                </tbody>
-            </table> -->
-        </div>
+            </mat-tab>
+
+            <mat-tab label="รูปภาพ" disabled> Content 3 </mat-tab>
+        </mat-tab-group>
     </form>
         <!-- <div class="text-header">รายละเอียดอื่นๆ</div> -->
    
 </div>
 <div class="modal-footer">
     <div class="form-group">
-        <a class="button light-button" (click)="closeDialog(false)">ยกเลิก</a>
+        <a class="button light-button" (click)="baseService._closeDialog('ProductModalComponent', null)">ยกเลิก</a>
         <a class="button success-button" (click)="manageProduct(productForm.get('productID').value)">บันทึก</a>
     </div>
 </div>
