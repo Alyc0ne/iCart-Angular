@@ -6,6 +6,7 @@ import { AlertModalComponent } from '../../../Shared/Modal/Alert/alert-modal.com
 import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppService } from '@services/base/apps.service';
 import { UnitService } from 'app/modules/unit/Shared/unit.service';
+import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
 
 @Component({
     selector: 'product-modal',
@@ -28,8 +29,8 @@ export class ProductModalComponent {
         let objProduct = this.dataDialogRef.objProduct;
         if (!!objProduct) {
             this.productForm = this.fb.group({
-                runningFormatID: [objProduct.runningFormatID],
-                productID: [objProduct.productID],
+                runningFormatID: [{ value: objProduct.runningFormatID, disabled:true }],
+                productID: [{ value: objProduct.productID, disabled:true }],
                 productNo: [{ value: objProduct.productNo, disabled:true }],
                 productName: [objProduct.productName, Validators.required],
                 productNameEng: [objProduct.productNameEng],
@@ -75,7 +76,7 @@ export class ProductModalComponent {
             uid: [Math.random().toString(16).slice(2)],
             isFocus: [true],
             barcode: [{ value: null, disabled: false }],
-            unitID: [this.unitService.units[0].unitID, Validators.required],
+            unitID: [this.unitService.units[0].unitID],
             isBaseUnit: [false]
         });
 
@@ -120,7 +121,7 @@ export class ProductModalComponent {
             let myForm = (<FormArray>this.productForm.controls['productUnits']).at(index);
             if (!!myForm) {                          
                 if (myForm.value.uid == uid) {
-                    if (await this.validateAllFormFields(<FormGroup>myForm)) {
+                    if (isFocus ? true : await this.validateAllFormFields(<FormGroup>myForm)) {
                         myForm.patchValue({ isFocus: isFocus })
                         if (isFocus)
                             myForm.enable();
@@ -141,8 +142,15 @@ export class ProductModalComponent {
 
     bindSave = async () => {
         if (this.productForm.valid){
-            // if (await this.validateProductUnit())
-            //     await this.productService.bindSave(this.productForm.getRawValue()).then(res => this.closeDialog(true));
+            if (await this.validateProductUnit()){
+                await this.productService.bindSave(this.productForm.getRawValue()).then(res => {
+                    this.baseService._closeDialog('ProductModalComponent', null)
+                    this.productService.refreshList();
+                    this.baseService.configDialog.success.data = { message: "ระบบบันทึกข้อมูลสินค้าเรียบร้อยแล้ว" }
+                    this.baseService._openDialog(SuccessModalComponent, "success")
+                });
+            }
+            else  document.getElementsByClassName('mat-tab-label')[1]['click']()
         } 
         else
         {
@@ -199,7 +207,9 @@ export class ProductModalComponent {
 
     validateProductUnit = async () => {
         if (this.productUnits.length == 0 || this.productUnits.filter(e => {  return e.value.isFocus == true; }).length > 0) {
-            this.baseService.configDialog.alert.position.top = '50px'
+            this.baseService.configDialog.alert.position = null
+            // this.baseService.configDialog.alert.position.right = "500px"
+            this.baseService.configDialog.alert.width = null
             this.baseService.configDialog.alert.hasBackdrop = true
             this.baseService.configDialog.alert.data = { message: "ไม่สามารภดำเนินการได้ กรุณาบันทึกหน่วยนับ" }
             this.baseService._openDialog(AlertModalComponent, "alert")   
@@ -207,7 +217,8 @@ export class ProductModalComponent {
         else
         {
             if (this.productUnits.filter(e => {  return e.value.isBaseUnit == true; }).length == 0) {
-                this.baseService.configDialog.alert.position.top = '50px'
+                this.baseService.configDialog.alert.position = null
+                this.baseService.configDialog.alert.width = null
                 this.baseService.configDialog.alert.hasBackdrop = true
                 this.baseService.configDialog.alert.data = { message: "ไม่สามารภดำเนินการได้ กรุณาบันทึกหน่วยนับ" }
                 this.baseService._openDialog(AlertModalComponent, "alert")      

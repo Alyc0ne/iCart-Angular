@@ -1,4 +1,7 @@
 <div class="content">
     <mat-icon>warning</mat-icon>
     <p>{{ dataRef.message }}</p>
+    <div class="close-modal" (click)="baseService._closeDialog('AlertModalComponent', null)">
+        <span>x</span>
+    </div>
 </div>

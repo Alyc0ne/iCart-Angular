@@ -66,12 +66,13 @@ export class AppService {
         this.objDialog.push(this.dialogRef)
 
         this.dialogRef.afterOpened().subscribe(() => {
+            if(type == "default") this.focusInput(component)
             this.configDialog['default'] = { id: null, autoFocus: null, disableClose: null, width: null, height: null, data: null, hasBackdrop: null, position: null }
         })
 
         if (type == "alert" || type =="success") {
             setTimeout(() => {
-                this._closeDialog(componentName, null)
+                //this._closeDialog(componentName, null)
             }, 1500);
         }
     }
@@ -88,7 +89,14 @@ export class AppService {
         }
     }
 
-
+    focusInput(component) {
+        var tagName = component.decorators[0].args[0].selector
+        var elm = document.getElementsByTagName(tagName)
+        setTimeout(() => { 
+            elm[0].querySelector('input:not([disabled])').focus()
+        });
+        
+    }
 
     getIdFromFocus = async (gridID) => {
         if(gridID === undefined || gridID === null) return

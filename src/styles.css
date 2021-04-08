@@ -715,10 +715,28 @@ app-alert-modal .content {
 }
 
 app-alert-modal .content > p {
-    margin: 3px 0 0 10px;
+    margin: 3px 30px 0 10px;
 }
 
-app-alert-modal:hover::before {
+.close-modal {
+    color: white;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+    background-color: #e16a70;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+.close-modal span{
+    cursor: pointer;
+}
+
+/* app-alert-modal::after {
     color: white;
     width: 1.5em;
     height: 1.5em;
@@ -733,7 +751,7 @@ app-alert-modal:hover::before {
     right: 530px;
     top: 2px;
     cursor: pointer;
-}
+} */
 
 
 
@@ -790,4 +808,8 @@ product-modal .mat-select-trigger {
     padding: 0 0 0 10px !important;
     line-height: 13px;
     /* width: 250px !important; */
+}
+
+.alert-danger span {
+    color: red;
 }
