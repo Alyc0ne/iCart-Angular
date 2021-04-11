@@ -14,7 +14,7 @@ export class UnitService {
         private http: HttpClient,
     ) {}
 
-    readonly baseUrl = 'http://localhost:5000/api/'
+    readonly baseUrl = this.baseService.baseURL
     units: UnitModel[]
     runningNumber: string;
     runningFormatID: string;

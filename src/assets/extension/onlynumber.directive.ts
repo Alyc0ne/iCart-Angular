@@ -1,9 +1,9 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appOnlynumber]'
+  selector: '[numberOnly]'
 })
-export class OnlynumberDirective {
+export class NumberOnlyDirective {
 
   private navigationKeys = [
     'Backspace',
@@ -25,7 +25,7 @@ export class OnlynumberDirective {
   }
 
   @HostListener('keydown', ['$event'])
-  onKeyDown(e: KeyboardEvent) {
+  onKeyDowsn(e: KeyboardEvent) {
     if (
       this.navigationKeys.indexOf(e.key) > -1 || // Allow: navigation keys: backspace, delete, arrows etc.
       (e.key === 'a' && e.ctrlKey === true) || // Allow: Ctrl+A
@@ -41,11 +41,13 @@ export class OnlynumberDirective {
       return;
     }
     // Ensure that it is a number and stop the keypress
-    if (
-      (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
-      (e.keyCode < 96 || e.keyCode > 105)
-    ) {
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105) || isNaN(parseInt(e.key))) 
+    {
       e.preventDefault();
+    }
+    else
+    {
+      document.execCommand('insertText', false, this.AddCommaNumberFloat(e.target['value']));
     }
   }
 
@@ -64,5 +66,13 @@ export class OnlynumberDirective {
     const textData = event.dataTransfer.getData('text').replace(/\D/g, '');
     this.inputElement.focus();
     document.execCommand('insertText', false, textData);
+  }
+
+  AddCommaNumberFloat(data, length = null) {
+    if (data == null || data == '') {
+        data = 0;
+    }
+    length = length != undefined ? length : 2;
+    return data.toFixed(length).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 }

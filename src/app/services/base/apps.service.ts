@@ -11,6 +11,7 @@ export class AppService {
         private dialog:MatDialog,
     ) {}
     
+    public baseURL = 'http://localhost:16969/api/'
     public isLoading: Subject<boolean> = new BehaviorSubject(false)
     private objDialog = []
     public dialogRef;
@@ -56,7 +57,7 @@ export class AppService {
         this.isLoading.next(value)
     }
 
-    _openDialog(component, type) {
+    _openDialog(component, type, allowClose = false) {
         var componentName = component.name
 
         if (this.objDialog.filter(x => x.componentName == componentName).length > 0) return;
@@ -70,14 +71,14 @@ export class AppService {
             this.configDialog['default'] = { id: null, autoFocus: null, disableClose: null, width: null, height: null, data: null, hasBackdrop: null, position: null }
         })
 
-        if (type == "alert" || type =="success") {
+        if (allowClose) {
             setTimeout(() => {
-                //this._closeDialog(componentName, null)
+                this._closeDialog(componentName)
             }, 1500);
         }
     }
 
-    _closeDialog(componentName, action) {
+    _closeDialog(componentName, action = null) {
         if (!!componentName && typeof componentName == "string") {
             var _dialog = this.objDialog.filter(x => x.componentName == componentName)
             if (_dialog.length > 0) {                             

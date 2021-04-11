@@ -147,7 +147,7 @@ export class ProductModalComponent {
                     this.baseService._closeDialog('ProductModalComponent', null)
                     this.productService.refreshList();
                     this.baseService.configDialog.success.data = { message: "ระบบบันทึกข้อมูลสินค้าเรียบร้อยแล้ว" }
-                    this.baseService._openDialog(SuccessModalComponent, "success")
+                    this.baseService._openDialog(SuccessModalComponent, "success", true)
                 });
             }
             else  document.getElementsByClassName('mat-tab-label')[1]['click']()

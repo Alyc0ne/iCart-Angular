@@ -34,7 +34,7 @@ import { ReceiptModalComponent } from './modules/pos/Shared/Receipt/receipt-moda
 import { UnitModalComponent } from './modules/unit/Shared/modal/unit-modal.component';
 
 //Extension
-import { OnlynumberDirective } from '../assets/extension/onlynumber.directive';
+import { NumberOnlyDirective } from '../assets/extension/onlynumber.directive';
 import { TableControlDirective } from '../assets/extension/tableControl.directive';
 import { NumberPipePipe } from '../assets/extension/number-pipe';
 import { OrderByPipe } from '../assets/extension/order-by.pipe';
@@ -59,7 +59,7 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     UnitModalComponent,
 
     //Extension
-    OnlynumberDirective,
+    NumberOnlyDirective,
     NumberPipePipe,
     OrderByPipe,
     TableControlDirective,

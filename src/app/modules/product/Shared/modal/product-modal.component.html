@@ -47,7 +47,7 @@
                         <label for="productSalePrice" class="formLabel" title="ราคาขาย">ราคาขาย</label>
                         <div class="form-content">
                             <!-- [value]="productForm.get('productSalePrice').value | numberPipe" -->
-                            <input appOnlynumber type="text" id="productSalePrice" formControlName="productSalePrice" placeholder="ราคาขาย" autocomplete="off" required maxlength="10">
+                            <input numberOnly type="text" id="productSalePrice" formControlName="productSalePrice" placeholder="ราคาขาย" autocomplete="off" required maxlength="20">
                             <div *ngIf="product.productSalePrice.invalid && (product.productSalePrice.dirty || product.productSalePrice.touched)" class="alert-danger">
                                 <div *ngIf="product.productSalePrice.errors.required"><span>กรุณากรอกราคาขาย</span></div>
                             </div>

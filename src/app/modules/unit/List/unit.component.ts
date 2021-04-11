@@ -177,11 +177,11 @@ export class UnitListComponent {
                 if (isResult) {
                     this.unitService.refreshList();
                     this.baseService.configDialog.success.data = { message: "ระบบบันทึกข้อมูลหน่วยนับเรียบร้อยแล้ว" }
-                    this.baseService._openDialog(SuccessModalComponent, "success")
+                    this.baseService._openDialog(SuccessModalComponent, "success", true)
                 }
             } catch (error) {
                 this.baseService.configDialog.alert.data = { message: "ระบบทำงานผิดพลาดไม่สามารถบันทึกหน่วยนับได้" }
-                this.baseService._openDialog(AlertModalComponent, "alert")
+                this.baseService._openDialog(AlertModalComponent, "alert", true)
             }
         }
     }
@@ -220,7 +220,7 @@ export class UnitListComponent {
             })
         } else {
             this.baseService.configDialog.alert.data = { message: "ไม่สามารถดำเนินการได้ กรุณาทำการเลือกหน่วยนับ" }
-            this.baseService._openDialog(AlertModalComponent, "alert")
+            this.baseService._openDialog(AlertModalComponent, "alert", true)
         }
     }
 
@@ -230,17 +230,17 @@ export class UnitListComponent {
                 await this.unitService.bindDelete(unitIDs)
                 this.unitService.refreshList();
                 this.baseService.configDialog.success.data = { message: "ระบบทำการลบหน่วยนับเรียบร้อยแล้ว" }
-                this.baseService._openDialog(SuccessModalComponent, "success")
+                this.baseService._openDialog(SuccessModalComponent, "success", true)
             }
         } catch (error) {
             this.baseService.configDialog.alert.data = { message: "ระบบทำงานผิดพลาดไม่สามารถลบหน่วยนับได้" }
-            this.baseService._openDialog(AlertModalComponent, "alert")
+            this.baseService._openDialog(AlertModalComponent, "alert", true)
         }
     }
 
     validateNewUnit() {
         if (this.unitService.units.filter(x => x.isAdd == true).length == 0) return true
         this.baseService.configDialog.alert.data = { message: "ไม่สามารภดำเนินการได้ กรุณาบันทึกหน่วยนับ" }
-        this.baseService._openDialog(AlertModalComponent, "alert")
+        this.baseService._openDialog(AlertModalComponent, "alert", true)
     }
 }

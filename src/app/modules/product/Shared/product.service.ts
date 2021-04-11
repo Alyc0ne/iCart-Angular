@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductModel } from '../Shared/product.model';
 import { UnitModel } from '../Shared/unit.model';
+import { AppService } from '@services/base/apps.service';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class ProductService {
-    constructor(private http: HttpClient) {}
+    constructor(
+        private baseService: AppService,
+        private http: HttpClient
+        ) {}
 
-    readonly baseUrl = 'http://localhost:5000/api/'
+    readonly baseUrl = this.baseService.baseURL
     //formData: ProductModel = new ProductModel();
     list: ProductModel[];
     runningNumber: string;
@@ -19,11 +23,12 @@ export class ProductService {
     productModel: ProductModel[];
 
     refreshList = async () => {
+        this.baseService.setIsLoading(true)
         this.http.get(this.baseUrl + 'Products')
         .toPromise()
         .then(res => { 
             this.list = res as ProductModel[] 
-            //console.log(res.headers.get('x-pagination'));
+            this.baseService.setIsLoading(false)
         });
     }
 
