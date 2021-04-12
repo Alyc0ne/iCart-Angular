@@ -44,7 +44,7 @@
     padding-right: 10px;
 }
 
-.table  tbody > tr {
+.table tbody > tr {
     background-color: #FFFFFF;
     height: 44px;
     margin-top: 20px;
@@ -52,6 +52,19 @@
 
 .table tbody > tr:hover, .table tbody > tr.active {
     background: #f2f2f2;
+}
+
+
+.table tbody mat-icon:first-child {
+    margin-top: 6px;
+    color: #20B49E;
+    font-size: 14pt;
+}
+
+.table tbody mat-icon:last-child {
+    margin-top: 6px;
+    color: #f44336;
+    font-size: 14pt;
 }
 
 .table button {
@@ -68,8 +81,13 @@
     min-width: 50px;
 }
 
-/* NO */
+/* Button */
 .table td:nth-child(2), th:nth-child(2) {
+    min-width: 80px;
+}
+
+/* NO */
+.table td:nth-child(3), th:nth-child(3) {
     min-width: 200px;
 }
 

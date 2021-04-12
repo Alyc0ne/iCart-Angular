@@ -49,10 +49,11 @@ export class ProductListComponent {
     }
 
     manageProduct = async (productID) => {  
+        this.baseService.configDialog.default.width = "1200px"
+        this.baseService.configDialog.default.height = "500px"
+
         if (this.productID == null) {
             await this.productService.newProduct().then(res => {
-                this.baseService.configDialog.default.width = "1200px"
-                this.baseService.configDialog.default.height = "500px"
                 this.baseService.configDialog.default.data = { 
                     textHeader: "เพิ่มสินค้า",
                     objProduct: { 
@@ -60,28 +61,18 @@ export class ProductListComponent {
                         productNo: this.productService.runningNumber 
                     }
                 }
-                // dialogConfig.data = {
-                //     headerText: "เพิ่มสินค้า",
-                //     objProduct : { 
-                //         runningFormatID: this.productService.runningFormatID, 
-                //         productNo: this.productService.runningNumber 
-                //     }
-                // },
-                // this.dialog.open(ProductModalComponent, dialogConfig)
             });
         }
-        // else
-        // {
-        //     let productModel = null;
-        //     await this.productService.getProduct(this.productID).then(res => (
-        //         productModel = this.productService.productModel,
-        //         dialogConfig.data = {
-        //             headerText: "แก้ไขสินค้า",
-        //             objProduct: productModel
-        //         },
-        //         this.dialog.open(ProductModalComponent, dialogConfig)
-        //     ));
-        // }
+        else
+        {
+            let productModel = null;
+            await this.productService.getProduct(this.productID).then(res => (
+                this.baseService.configDialog.default.data = { 
+                    textHeader: "แก้ไขสินค้า",
+                    objProduct: null
+                }
+            ));
+        }
         this.baseService._openDialog(ProductModalComponent, "default")
     }
 

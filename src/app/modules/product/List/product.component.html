@@ -42,6 +42,7 @@
         <thead>
             <tr>
                 <th></th>
+                <th></th>
                 <th class="txt-l">รหัสสินค้า</th>
                 <th class="txt-l">Barcode</th>
                 <th class="txt-l">ชื่อสินค้า</th>
@@ -49,12 +50,15 @@
                 <th class="txt-l">หน่วยนับหลัก</th>
                 <th class="txt-r">ราคาซื้อ</th>
                 <th class="txt-r">ราคาขาย</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let product of productService.list">
                 <td><mat-checkbox [color]="'primary'" [checked]="product.isCheck"></mat-checkbox></td>
+                <td>
+                    <mat-icon (click)="manageProduct(product.productID)">edit</mat-icon>
+                    <mat-icon (click)="deleteProduct(product.productID)">delete_outline</mat-icon>
+                </td>
                 <td>{{ product.productNo }}</td>
                 <td>{{ product.barcode }}</td>
                 <td>{{ product.productName }}</td>
@@ -62,11 +66,6 @@
                 <td>{{ product.unitName }}</td>
                 <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
                 <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
-                <td>
-                    <button mat-icon-button [matMenuTriggerFor]="menuAction" (click)="productID = product.productID">
-                        <mat-icon>more_horiz</mat-icon>
-                    </button>                    
-                </td>
             </tr>
         </tbody>
         <!-- <tfoot>
@@ -78,96 +77,3 @@
         </tfoot> -->
     </table>
 </div>
-
-
-<!-- <div class="top-bar">
-    <h1>รายการสินค้าทั้งหมด</h1>
-</div>
-<mat-divider></mat-divider>
-<div class="header-menu">
-    <div class="search">
-        <mat-icon>search</mat-icon>
-        <input type="text" name="" id="" placeholder="Search Products">
-    </div>
-
-    <div class="groupAction">
-        <button class="green-button" (click)="productID = null; callProductModal()">
-            เพิ่มสินค้า
-        </button>
-
-        <button class="multipleAction" [matMenuTriggerFor]="menu">
-             <mat-icon>more_horiz</mat-icon>            
-        </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="callProductModal()">
-                <mat-icon>create</mat-icon>
-                <span>แก้ไขสินค้า</span>
-            </button>
-            <button mat-menu-item>
-                <mat-icon>delete</mat-icon>
-                <span>ลบสินค้า</span>
-            </button>
-            <button mat-menu-item>
-                <mat-icon>file_upload</mat-icon>
-                <span>นำเข้าสินค้า</span>
-            </button>
-            <button mat-menu-item>
-                <mat-icon>file_download</mat-icon>
-                <span>นำออกสินค้า</span>
-            </button>
-        </mat-menu>
-    </div>
-</div>
-
-<div class="table-wrapper">
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th class="txt-l">รหัสสินค้า</th>
-                <th class="txt-l">Barcode</th>
-                <th class="txt-l">ชื่อสินค้า</th>
-                <th class="txt-r">จำนวนคงเหลือ</th>
-                <th class="txt-l">หน่วยนับหลัก</th>
-                <th class="txt-r">ราคาซื้อ</th>
-                <th class="txt-r">ราคาขาย</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of service.list">
-                <td><mat-checkbox [color]="'primary'" [checked]="product.isCheck"></mat-checkbox></td>
-                <td>{{ product.productNo }}</td>
-                <td>{{ product.barcode }}</td>
-                <td>{{ product.productName }}</td>
-                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-c">{{ product.productQuantity | number:'1.2-2' }}</td>
-                <td>{{ product.unitName }}</td>
-                <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
-                <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
-                <td>
-                    <button mat-icon-button [matMenuTriggerFor]="menuAction" (click)="productID = product.productID">
-                        <mat-icon>more_horiz</mat-icon>
-                    </button>                    
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <div class="pagination">
-                <a>&laquo;</a>
-                <a *ngFor="let page of totalPages; let i = index;">{{ i + 1 }}</a>                
-                <a>&raquo;</a>
-            </div>
-        </tfoot>
-    </table>
-
-    <mat-menu #menuAction="matMenu">
-        <button mat-menu-item (click)="callProductModal()">
-            <mat-icon>create</mat-icon>
-            <span>แก้ไขสินค้า</span>
-        </button>
-        <button mat-menu-item>
-            <mat-icon>delete</mat-icon>
-            <span>ลบหน่วยนับ</span>
-        </button>
-    </mat-menu>
-</div> -->

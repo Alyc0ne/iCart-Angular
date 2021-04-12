@@ -19,9 +19,22 @@ export class NumberOnlyDirective {
     'Copy',
     'Paste'
   ];
-  inputElement: HTMLElement;
+  inputElement: HTMLElement
   constructor(public el: ElementRef) {
     this.inputElement = el.nativeElement;
+  }
+
+  @HostListener('focus', ['$event'])
+  onFocus(e: KeyboardEvent) {
+    var value = this.RemoveCommaNumber(this.getValueElement())
+    if (!!value) this.inputElement['value'] = value
+  }
+
+  @HostListener('change', ['$event'])
+  @HostListener('blur', ['$event'])
+  onChangeBlur(e: KeyboardEvent) {
+    var value = this.getValueElement()
+    if (value != '' && value != undefined) if (isFinite(value)) this.inputElement['value'] = this.AddCommaNumberFloat(value)
   }
 
   @HostListener('keydown', ['$event'])
@@ -41,14 +54,9 @@ export class NumberOnlyDirective {
       return;
     }
     // Ensure that it is a number and stop the keypress
-    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105) || isNaN(parseInt(e.key))) 
-    {
-      e.preventDefault();
-    }
-    else
-    {
-      document.execCommand('insertText', false, this.AddCommaNumberFloat(e.target['value']));
-    }
+    if (((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105) || isNaN(parseInt(e.key))) && e.keyCode != 110) e.preventDefault();
+
+    console.log('eee')
   }
 
   @HostListener('paste', ['$event'])
@@ -68,11 +76,19 @@ export class NumberOnlyDirective {
     document.execCommand('insertText', false, textData);
   }
 
+  getValueElement() {
+    return this.inputElement['value']
+  }
+
   AddCommaNumberFloat(data, length = null) {
     if (data == null || data == '') {
         data = 0;
     }
     length = length != undefined ? length : 2;
-    return data.toFixed(length).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parseFloat(data).toFixed(length).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  RemoveCommaNumber(data) {
+    if (data != undefined && data != "") return parseFloat(data.replace(/,/g, ''))
   }
 }
