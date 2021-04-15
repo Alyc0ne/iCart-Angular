@@ -102,7 +102,7 @@
                                             <input type="text" id="barcode" class="form-input" formControlName="barcode"  placeholder="รหัสบาร์โค้ด" autocomplete="off">                               
                                         </div>
                                         <div class="grid-inline-cell">
-                                            <mat-select formControlName="unitID" [disabled]="!field.value.isFocus" [value]="unitService.units[0].unitID">
+                                            <mat-select formControlName="unitID" [disabled]="!field.value.isFocus" [value]="field.unitID">
                                                 <mat-option *ngFor="let un of unitService.units" [value]="un.unitID">{{un.unitName}}</mat-option>
                                             </mat-select>
                                             <div *ngIf="field.controls.unitID.invalid && (field.controls.unitID.dirty || field.controls.unitID.touched)" class="alert-danger">

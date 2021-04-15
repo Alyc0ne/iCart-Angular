@@ -8,6 +8,8 @@ import { AppService } from '@services/base/apps.service';
 import { UnitService } from 'app/modules/unit/Shared/unit.service';
 import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
 
+declare function SetNumberFormat(data): any;
+
 @Component({
     selector: 'product-modal',
     templateUrl: './product-modal.component.html',
@@ -35,14 +37,15 @@ export class ProductModalComponent {
                 productName: [objProduct.productName, Validators.required],
                 productNameEng: [objProduct.productNameEng],
                 productDesc: [objProduct.productDesc],
-                productSalePrice: [objProduct.productSalePrice, Validators.required],
-                productPurchasePrice: [objProduct.productPurchasePrice],
+                productSalePrice: [ SetNumberFormat(objProduct.productSalePrice), Validators.required],
+                productPurchasePrice: [SetNumberFormat(objProduct.productPurchasePrice)],
                 productUnits: this.genProductUnits(objProduct.productUnits)
             })
         }
 
         // this.productForm.valueChanges.subscribe(console.log); 
         this.unitService.refreshList()
+        // console.log('product modal ngoninit')
     }
 
     get product() {
@@ -60,6 +63,7 @@ export class ProductModalComponent {
                 productUnitAR.push(this.fb.group({
                     uid: [Math.random().toString(16).slice(2)],
                     isFocus: [false],
+                    productUnitID: [element.productUnitID],
                     barcode: [{ value: element.barcode, disabled: true }],
                     unitID: [element.unitID, Validators.required],
                     isBaseUnit: [{ value: element.isBaseUnit, disabled: true }]
@@ -160,6 +164,7 @@ export class ProductModalComponent {
 
     bindEdit = async () => {
         if (this.productForm.valid){
+            console.log(this.productForm.getRawValue())
             // if (await this.validateProductUnit())
             //     await this.productService.bindEdit(this.productForm.getRawValue()).then(res => this.closeDialog(true));
         } 

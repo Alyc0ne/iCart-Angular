@@ -1,5 +1,8 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
+declare function AddCommaNumberFloat(data): any;
+declare function RemoveCommaNumber(data): any;
+
 @Directive({
   selector: '[numberOnly]'
 })
@@ -21,24 +24,37 @@ export class NumberOnlyDirective {
   ];
   inputElement: HTMLElement
   constructor(public el: ElementRef) {
-    this.inputElement = el.nativeElement;
+    this.inputElement = el.nativeElement
+    const value = this.getValueElement();
+    console.log(this.inputElement)
+    if (value) {
+      
+    }
+  }
+
+  @HostListener('input', ['$event'])
+  onInput(e: KeyboardEvent) {
+    console.log('input')
   }
 
   @HostListener('focus', ['$event'])
   onFocus(e: KeyboardEvent) {
-    var value = this.RemoveCommaNumber(this.getValueElement())
+    console.log('focus')
+    var value = RemoveCommaNumber(this.getValueElement())
     if (!!value) this.inputElement['value'] = value
   }
 
   @HostListener('change', ['$event'])
   @HostListener('blur', ['$event'])
   onChangeBlur(e: KeyboardEvent) {
+    console.log('Change Blur')
     var value = this.getValueElement()
-    if (value != '' && value != undefined) if (isFinite(value)) this.inputElement['value'] = this.AddCommaNumberFloat(value)
+    if (value != '' && value != undefined) if (isFinite(value)) this.inputElement['value'] = AddCommaNumberFloat(value)
   }
 
   @HostListener('keydown', ['$event'])
   onKeyDowsn(e: KeyboardEvent) {
+    console.log('keydown')
     if (
       this.navigationKeys.indexOf(e.key) > -1 || // Allow: navigation keys: backspace, delete, arrows etc.
       (e.key === 'a' && e.ctrlKey === true) || // Allow: Ctrl+A
@@ -61,6 +77,7 @@ export class NumberOnlyDirective {
 
   @HostListener('paste', ['$event'])
   onPaste(event: ClipboardEvent) {
+    console.log('paste')
     event.preventDefault();
     const pastedInput: string = event.clipboardData
       .getData('text/plain')
@@ -70,6 +87,7 @@ export class NumberOnlyDirective {
 
   @HostListener('drop', ['$event'])
   onDrop(event: DragEvent) {
+    console.log('drop')
     event.preventDefault();
     const textData = event.dataTransfer.getData('text').replace(/\D/g, '');
     this.inputElement.focus();
@@ -78,17 +96,5 @@ export class NumberOnlyDirective {
 
   getValueElement() {
     return this.inputElement['value']
-  }
-
-  AddCommaNumberFloat(data, length = null) {
-    if (data == null || data == '') {
-        data = 0;
-    }
-    length = length != undefined ? length : 2;
-    return parseFloat(data).toFixed(length).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
-  RemoveCommaNumber(data) {
-    if (data != undefined && data != "") return parseFloat(data.replace(/,/g, ''))
   }
 }

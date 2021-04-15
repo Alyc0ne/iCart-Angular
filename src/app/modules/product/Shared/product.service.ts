@@ -45,14 +45,15 @@ export class ProductService {
     }
 
     newProduct = async () => {
-        await this.getRunning();
-        await this.getUnit();
+        await this.getRunning()
+        //await this.getUnit()
     }
 
     getProduct = async (productID) => {
-        await this.http.get(this.baseUrl + 'Products/' + productID)
+        //await this.getUnit()
+        return await this.http.get(this.baseUrl + 'Products/' + productID)
         .toPromise()
-        .then(res => (this.productModel = res as ProductModel[], this.getUnit()))
+        .then(res => { return res })
     }
 
     bindSave = async (ProductModel) => {

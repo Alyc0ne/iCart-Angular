@@ -28,7 +28,9 @@
               "src/styles.css",
               "src/assets/css/table.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/extension/app.js"
+            ]
           },
           "configurations": {
             "production": {
