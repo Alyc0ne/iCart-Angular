@@ -1,0 +1,13 @@
+<form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <div class="container-fluid">
+        <h2 class="form-signin-heading">Login</h2>
+        <br>
+        <label for="username" class="sr-only">User Name</label>
+        <input type="text" name="username" id="username" ngModel class="form-control" placeholder="User Name" required autofocus>
+        <br>
+        <label for="password" class="sr-only">Password</label>
+        <input type="text" name="password" id="password" ngModel class="form-control" placeholder="Password" required autofocus>
+        <br>
+        <button type="submit">Submit</button>
+    </div>
+</form>

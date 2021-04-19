@@ -18,6 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './default/top-bar/top-bar.component';
+import { LoginComponent } from './modules/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { ProductListComponent } from './modules/product/List/product.component';
 import { POSComponent } from './modules/pos/pos.component';
@@ -44,6 +45,8 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
   declarations: [
     AppComponent,
     TopBarComponent,
+    LoginComponent,
+    DashboardComponent,
     ProductListComponent,
     ProductModalComponent,
     POSComponent,
@@ -71,12 +74,9 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {
-        path: '', redirectTo: '/DashboardComponent', pathMatch: 'full' 
-      },
-      { 
-        path: 'Dashboard', component: DashboardComponent
-      },
+      { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
+      { path: 'Login', component: LoginComponent },
+      { path: 'Dashboard', component: DashboardComponent },
       { 
         path: 'POS', component: POSComponent
       },

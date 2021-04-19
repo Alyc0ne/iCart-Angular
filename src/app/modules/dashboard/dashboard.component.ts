@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -8,5 +9,21 @@ import { Component } from '@angular/core';
 
 export class DashboardComponent {
     
-    constructor() { }
+    constructor(
+        private router: Router
+    ) { }
+
+    isUserAuthenticated() {
+        const token: string = localStorage.getItem("jwt")
+        console.log(token)
+        if (token) {
+            return true
+        } else {
+            return this.router.navigate(["login"])
+        }
+    }
+
+    logOut() {
+        localStorage.removeItem("jwt")
+    }
 }
