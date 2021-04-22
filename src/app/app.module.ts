@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,6 +41,9 @@ import { TableControlDirective } from '../assets/extension/tableControl.directiv
 import { NumberPipePipe } from '../assets/extension/number-pipe';
 import { OrderByPipe } from '../assets/extension/order-by.pipe';
 
+export function tokenGetter() {
+  return localStorage.getItem('jwt')
+}
 
 @NgModule({
   declarations: [
@@ -77,19 +81,14 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
       { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
       { path: 'Login', component: LoginComponent },
       { path: 'Dashboard', component: DashboardComponent },
-      { 
-        path: 'POS', component: POSComponent
-      },
-      { 
-        path: 'ListProduct', component: ProductListComponent
-      },
-      {
-        path: 'ListUnit', component: UnitListComponent
-      },
-      {
-        path: 'ListEmployee', component: EmployeeListComponent
-      }
+      { path: 'POS', component: POSComponent },
+      { path: 'ListProduct', component: ProductListComponent },
+      { path: 'ListUnit', component: UnitListComponent },
+      { path: 'ListEmployee', component: EmployeeListComponent }
     ]),
+    JwtModule.forRoot({
+
+    }),
     BrowserAnimationsModule,
     MatDialogModule,
     MatSelectModule,
