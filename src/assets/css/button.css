@@ -1,0 +1,13 @@
+.button-wrapper {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.button-wrapper button {
+    margin-right: 10px;
+}
+
+.button-wrapper button:last-of-type {
+    margin-right: 0px !important;
+}

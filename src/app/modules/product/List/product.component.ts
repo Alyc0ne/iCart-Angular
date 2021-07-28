@@ -5,24 +5,27 @@ import { ProductModel } from '../Shared/product.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { AppService } from '@services/base/apps.service';
+import { Products } from '@interfaces/products';
+import { initColumns } from '../Shared/initColumns';
 
 @Component({
     selector: 'app-product',
     templateUrl: './product.component.html',
-    styleUrls: ['./product.component.css']
+    styleUrls: ['./product.component.css'],
+    exportAs: 'myExport'
 })
 
 export class ProductListComponent {
     constructor(
         public baseService: AppService,
         public productService: ProductService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
     ) { }
 
-    productModel: ProductModel[]
-    totalPages: any;
+    initColumns = initColumns
 
     @ViewChild('allSelected') private allSelected: MatOption;
+
     filterSeleted: string[]
     searchFilterForm: FormGroup;
     filters = [
@@ -33,11 +36,23 @@ export class ProductListComponent {
     ];
     
     ngOnInit(): void {
-        this.totalPages = Array(6);
-        this.productService.refreshList()
         this.searchFilterForm = this.fb.group({ productFilters: [null] })
         this.searchFilterForm.get('productFilters').setValue(['all'])
     }
+
+    // ngAfterViewInit() {
+    //     setTimeout(() => {
+    //         this.fetchData()
+    //     }, 0);
+    // }
+
+    // fetchData() {
+    //     this.productService.getProducts().then(res => {
+    //         this.productTable.initColumns = initColumns
+    //         this.productTable.displayedColumns = initColumns.map(col => col.field)
+    //         this.productTable.dataSource = res
+    //     })
+    // }
 
     selectAll() {
 
@@ -48,11 +63,12 @@ export class ProductListComponent {
     }
 
     manageProduct = async (productID) => {  
-        this.baseService.configDialog.default.width = "1200px"
-        this.baseService.configDialog.default.height = "500px"
+        // this.baseService.configDialog.default.width = "1200px"
+        // this.baseService.configDialog.default.height = "500px"
 
         if (productID == null) {
             await this.productService.newProduct().then(res => {
+                this.baseService.callBack = "fetchData"
                 this.baseService.configDialog.default.data = { 
                     textHeader: "เพิ่มสินค้า",
                     objProduct: { 
@@ -72,6 +88,9 @@ export class ProductListComponent {
             ));
         }
         this.baseService._openDialog(ProductModalComponent, "default")
+        this.baseService.dialogRef.afterClosed().subscribe((callback, c3) => {
+            //this.fetchData()
+        })
     }
 
     bindDeleteMulti() {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UnitService } from '../unit.service';
-import { AlertModalComponent } from '../../../Shared/Modal/Alert/alert-modal.component';
+import { AlertModalComponent } from '@shared/Modal/Alert/alert-modal.component';
 import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({

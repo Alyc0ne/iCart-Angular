@@ -38,42 +38,5 @@
 <mat-divider></mat-divider>
 
 <div class="content-menu">
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th class="txt-l">รหัสสินค้า</th>
-                <th class="txt-l">Barcode</th>
-                <th class="txt-l">ชื่อสินค้า</th>
-                <th class="txt-r">จำนวนคงเหลือ</th>
-                <th class="txt-l">หน่วยนับหลัก</th>
-                <th class="txt-r">ราคาซื้อ</th>
-                <th class="txt-r">ราคาขาย</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of productService.list">
-                <td><mat-checkbox [color]="'primary'" [checked]="product.isCheck"></mat-checkbox></td>
-                <td>
-                    <mat-icon (click)="manageProduct(product.productID)">edit</mat-icon>
-                    <mat-icon (click)="deleteProduct(product.productID)">delete_outline</mat-icon>
-                </td>
-                <td>{{ product.productNo }}</td>
-                <td>{{ product.barcode }}</td>
-                <td>{{ product.productName }}</td>
-                <td [ngClass]="(product.productQuantity > 10) ? 'text-colorBule' : 'text-colorRed'" class="txt-c">{{ product.productQuantity | number:'1.2-2' }}</td>
-                <td>{{ product.unitName }}</td>
-                <td class="txt-r">{{ product.productPurchasePrice | number:'1.2-2' }}</td>
-                <td class="txt-r">{{ product.productSalePrice | number:'1.2-2' }}</td>
-            </tr>
-        </tbody>
-        <!-- <tfoot>
-            <div class="pagination">
-                <a>&laquo;</a>
-                <a *ngFor="let page of totalPages; let i = index;">{{ i + 1 }}</a>                
-                <a>&raquo;</a>
-            </div>
-        </tfoot> -->
-    </table>
+    <app-table #productTable gridName='gridProduct' bindLoad='Products' [initColumns]='initColumns'></app-table>
 </div>

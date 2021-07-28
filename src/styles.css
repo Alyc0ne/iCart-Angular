@@ -556,14 +556,7 @@ mat-checkbox > label {
 
 /* transition: .3s cubic-bezier(.25,.8,.5,1); */
 
-/* MODAL */
-.mat-dialog-container {
-    display: flex !important;
-    padding-bottom: 10px !important;
-    border-radius: 20px !important;
-    width: 100% !important;
-    padding: 0px !important;
-}
+
 
 .close-dialog {
     height: 30px;
@@ -573,38 +566,13 @@ mat-checkbox > label {
     padding: 10px;
 }
 
-.modal-header {
-    height: 65px;
-    width: 100%;
-    /* margin-top: 24px; */
-    padding: 15px 0;
-    padding: 0 1.3rem;
-}
-
-.modal-header .text-header {
-    color: black !important;
-}
-
-.modal-content {
-    padding: 0 1.3rem;
-    /* margin-left: 2.6rem; */
-    height: 450px;
-    margin-bottom: 40px;
-}
-
-.modal-content .mat-tab-nav-bar, .modal-content .mat-tab-header {
-    border: none !important;
-}
 
 
 
-.modal-content > .content-header {
-    margin-bottom: 20px;
-}
 
-.modal-content mat-ink-bar {
-    background-color: #20B49E !important;
-}
+
+
+/* 
 
 .modal-content .mat-tab-label-active {
     font-weight: bold;
@@ -629,7 +597,7 @@ mat-checkbox > label {
 .content-header {
     font-weight: bold;
     font-size: 18pt;
-}
+} */
 
 app-confirm-modal {
     width: 100%;

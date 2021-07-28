@@ -3,9 +3,9 @@ import { UnitService } from '../Shared/unit.service';
 import { UnitModel } from '../Shared/unit.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppService } from '@services/base/apps.service';
-import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
-import { AlertModalComponent } from 'app/modules/Shared/Modal/Alert/alert-modal.component';
-import { ConfirmModalComponent } from 'app/modules/Shared/Modal/Confirm/confirm-modal.component';
+import { SuccessModalComponent } from '@shared/Modal/Success/success-modal.component';
+import { AlertModalComponent } from '@shared/Modal/Alert/alert-modal.component';
+import { ConfirmModalComponent } from '@shared/Modal/Confirm/confirm-modal.component';
 import { MatOption } from '@angular/material/core';
 
 @Component({

@@ -14,8 +14,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { AppRoutingModule } from './app-routing.module';
+
+
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './default/top-bar/top-bar.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
@@ -26,18 +30,20 @@ import { EmployeeListComponent } from './modules/employee/List/employee.componen
 
 //Modal
 import { ProductModalComponent } from './modules/product/Shared/modal/product-modal.component';
-import { AlertModalComponent } from './modules/Shared/Modal/Alert/alert-modal.component';
-import { SuccessModalComponent } from './modules/Shared/Modal/Success/success-modal.component';
-import { ConfirmModalComponent } from './modules/Shared/Modal/Confirm/confirm-modal.component';
+import { AlertModalComponent } from '@shared/Modal/Alert/alert-modal.component';
+import { SuccessModalComponent } from '@shared/Modal/Success/success-modal.component';
+import { ConfirmModalComponent } from '@shared/Modal/Confirm/confirm-modal.component';
 import { PaymentModalComponent } from './modules/pos/Shared/Payment/payment-modal.component';
 import { ReceiptModalComponent } from './modules/pos/Shared/Receipt/receipt-modal.component';
 import { UnitModalComponent } from './modules/unit/Shared/modal/unit-modal.component';
+import { TableInlineComponent } from './shared/table-inline/table-inline.component';
 
 //Extension
 import { NumberOnlyDirective } from '../assets/extension/onlynumber.directive';
 import { TableControlDirective } from '../assets/extension/tableControl.directive';
 import { NumberPipePipe } from '../assets/extension/number-pipe';
 import { OrderByPipe } from '../assets/extension/order-by.pipe';
+import { TableModule } from '@shared/table/default/table.module';
 
 
 @NgModule({
@@ -63,6 +69,7 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     NumberPipePipe,
     OrderByPipe,
     TableControlDirective,
+    TableInlineComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +107,11 @@ import { OrderByPipe } from '../assets/extension/order-by.pipe';
     MatIconModule,
     MatRippleModule,
     MatDividerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    TableModule
   ],
   entryComponents:[
     ProductModalComponent, 

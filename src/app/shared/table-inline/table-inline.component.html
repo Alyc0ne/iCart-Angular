@@ -1,0 +1,93 @@
+<div class="table-wrapper" [style.height.px]='tableHeight'>
+    <table class="table" mat-table [dataSource]="dataSource">
+        <ng-container [matColumnDef]="column.field" *ngFor="let column of initColumns;">
+            <ng-container *ngIf="column.field == 'select' && !isDetail">
+                <th mat-header-cell *matHeaderCellDef [style.width.px]='60'>
+                    <mat-checkbox appRowControl [attr.data-selectall]=true (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"></mat-checkbox>
+                </th>
+
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox appRowControl (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"></mat-checkbox>
+                </td> 
+            </ng-container>
+
+            <ng-container *ngIf="column.field == 'action'">
+                <th mat-header-cell *matHeaderCellDef [style.width.px]='110'></th>
+                <td mat-cell class="action-wrapper" *matCellDef="let element">
+                    <i class="material-icons-outlined icon-edit">border_color</i>
+                    <i class="material-icons-outlined icon-delete">delete</i>
+                </td>
+            </ng-container>
+
+            <ng-container *ngIf="column.field == 'delete'">
+                <th mat-header-cell *matHeaderCellDef [style.width.px]='column.width'></th>
+                <td mat-cell *matCellDef="let element">
+                    <i class="trash-icon"></i>
+                </td>
+            </ng-container>
+
+            <ng-container  *ngIf="column.type == 'number'; else genaral">
+                <th mat-header-cell class="grid-header" *matHeaderCellDef [style.width.px]='column.width' style="text-align: right;"> {{column.display}}</th>
+                <td mat-cell class="grid-detail" *matCellDef="let element" style="text-align: right;"> {{ element[column.field] | number:'1.2-2' }}</td>
+            </ng-container>
+
+            <ng-template #genaral>
+                <th mat-header-cell class="grid-header" *matHeaderCellDef [style.width.px]='column.width'> {{column.display}}</th>
+
+                <!-- <ng-container *ngIf="element.isAdd == true; else detail">
+
+                </ng-container>
+        
+                <ng-template #detail> -->
+                    <td mat-cell class="grid-detail" *matCellDef="let element">
+                        <ng-container *ngIf="element.isAdd == true; else detail">
+                            <input type="text" value="12345">
+                        </ng-container>
+
+                        <ng-template #detail>
+                            {{ element[column.field] }}
+                        </ng-template>
+                    </td>
+                <!-- </ng-template> -->
+            </ng-template>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr appRowControl mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>  
+
+    <!-- <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <i class="material-icons">content_copy</i>
+            <span class="grid-detail">Copy</span>
+        </button>
+        <button mat-menu-item>
+            <i class="bi bi-trash"></i>
+            <span class="grid-detail">Delete</span>
+        </button>
+    </mat-menu> -->
+</div>
+
+<!-- <div class="pagination-wrapper">
+    <div class="pagination">
+        <div class="page" *ngFor="let page of pagination; let i = index;" [ngClass]="{'active': i == 0}">
+            <span *ngIf="i <= 4; else morePage">{{ i + 1}}</span>
+            <span *ngIf="i == 5">..</span>
+        </div>
+        
+        
+        <div class="page next">ถัดไป</div>
+        <div class="pageoption">
+            <div>ข้อมูล</div>  
+            <mat-select [(ngModel)]="pageOptionSeleted">
+                <mat-option *ngFor="let pageOption of pageOptions" [value]="pageOption.value">
+                  {{pageOption.value}}
+                </mat-option>
+            </mat-select>
+            <div>Items per page</div>
+        </div>
+    </div>
+    <div class="pagination-detail">
+        แสดงจาก 1-{{ pageOptionSeleted }} จาก {{ totalPages.length }} รายการ
+    </div>
+</div> -->

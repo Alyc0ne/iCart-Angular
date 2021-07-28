@@ -1,14 +1,9 @@
-.table {
+/* .table {
     border-collapse: separate;
     width: 100%;
     border-spacing: 0 10px;
     table-layout: fixed;
 }
-
-/* .table .table-scroll {
-    width: min-content;
-    overflow-x: scroll;
-} */
 
 .table thead {
     padding-right: 20px;
@@ -76,17 +71,14 @@
     color: #B5C2C8;
 }
 
-/* CHECK BOX */
 .table td:nth-child(1), th:nth-child(1) {
     min-width: 50px;
 }
 
-/* Button */
 .table td:nth-child(2), th:nth-child(2) {
     min-width: 80px;
 }
 
-/* NO */
 .table td:nth-child(3), th:nth-child(3) {
     min-width: 200px;
 }
@@ -97,23 +89,18 @@
 }
 
 .pagination > a {
-    /* border: solid 1px black; */
-    /* width: 50px;
-    height: 50px; */
     margin: 0 20px 20px 0;
     text-align: center;
     padding: 10px 18px;
     background-color: white;
     color: #91A5AF;
     font-weight: bold;
-    /* box-shadow: 0px 1px 3px 0px rgb(0, 0, 0); */
 }
 
 .pagination > a:hover {
     background: #f2f2f2;
 }
 
-/** Grid Inline **/
 .grid-inline {
 	display: table;
 	width: 100%;
@@ -150,7 +137,6 @@
     overflow-y: scroll;
     height: 450px;
     padding-right: 10px;
-    /* width: fit-content; */
 }
 
 .grid-inline-body.empty-items {
@@ -239,4 +225,4 @@
 .grid-inline-cell > mat-icon:last-child {
     color: #f44336;
     font-size: 16pt;
-}
+} */

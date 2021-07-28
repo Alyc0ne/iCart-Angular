@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { POSService } from './Shared/pos.service';
 import { cartModel } from './Shared/pos.model';
 import { PaymentModalComponent } from './Shared/Payment/payment-modal.component';
-import { ConfirmModalComponent } from '../Shared/Modal/Confirm/confirm-modal.component';
+import { ConfirmModalComponent } from '@shared/Modal/Confirm/confirm-modal.component';
 import { AppService } from '@services/base/apps.service';
 
 @Component({

@@ -4,7 +4,10 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@services/*": ["app/services/*"]
+      "@services/*": ["app/services/*"],
+      "@shared/*": ["app/shared/*"],
+      "@interfaces/*": ["app/interfaces/*"],
+      "@directives/*": ["app/directives/*"],
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

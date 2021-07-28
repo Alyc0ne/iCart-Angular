@@ -1,4 +1,5 @@
-import { HostListener, Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { HostListener, Injectable, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 
@@ -8,13 +9,15 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 export class AppService {
 
     constructor(
-        private dialog:MatDialog,
+        private dialog: MatDialog,
+        private http: HttpClient
     ) {}
     
     public baseURL = 'http://localhost:16969/api/'
     public isLoading: Subject<boolean> = new BehaviorSubject(false)
     private objDialog = []
     public dialogRef;
+    public callBack
     public configDialog = {
         default: { id: null, autoFocus: true, disableClose: true, width: null, height: null, data: null, hasBackdrop: true, position: null },
         confirm: {
@@ -57,6 +60,13 @@ export class AppService {
         this.isLoading.next(value)
     }
 
+    httpRequest(httpVerb: string, path: string, filter: string = '', isObserve: boolean = false) {
+        let observe = isObserve ? {observe: 'response'} : ''
+        return this.http[httpVerb](this.baseURL + path + filter, observe)
+        .toPromise()
+        .then(response => { return response })
+    }
+
     _openDialog(component, type, allowClose = false) {
         var componentName = component.name
 
@@ -82,7 +92,7 @@ export class AppService {
         if (!!componentName && typeof componentName == "string") {
             var _dialog = this.objDialog.filter(x => x.componentName == componentName)
             if (_dialog.length > 0) {                             
-                _dialog[0].close(action)
+                _dialog[0].close(action, this.callBack)
                 this.dialogRef.afterClosed().subscribe(() => {                    
                     this.objDialog = this.objDialog.filter(x => x.componentName != componentName) 
                 })                

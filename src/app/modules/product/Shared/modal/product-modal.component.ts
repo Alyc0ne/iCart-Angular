@@ -1,12 +1,15 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductModel } from '../product.model';
 import { ProductService } from '../product.service';
-import { AlertModalComponent } from '../../../Shared/Modal/Alert/alert-modal.component';
+import { AlertModalComponent } from '../../../../shared/Modal/Alert/alert-modal.component';
 import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppService } from '@services/base/apps.service';
 import { UnitService } from 'app/modules/unit/Shared/unit.service';
-import { SuccessModalComponent } from 'app/modules/Shared/Modal/Success/success-modal.component';
+import { SuccessModalComponent } from '@shared/Modal/Success/success-modal.component';
+import { TableInlineComponent } from '@shared/table-inline/table-inline.component';
+import { initColumns } from '../initColumns';
+import { MatTableDataSource } from '@angular/material/table';
 
 declare function SetNumberFormat(data): any;
 
@@ -17,6 +20,11 @@ declare function SetNumberFormat(data): any;
 })
 
 export class ProductModalComponent {
+    productForm: FormGroup
+    @ViewChild('unitTable') unitTable: TableInlineComponent
+    dataSource = new MatTableDataSource([{ productNo: '12345', barcode: '6789', productName: 'ทดสอบ' }])
+    num = 0
+
     constructor(
         @Inject(MAT_DIALOG_DATA) public dataDialogRef,
         public baseService: AppService,
@@ -24,8 +32,6 @@ export class ProductModalComponent {
         public unitService: UnitService,
         private fb: FormBuilder
     ) {}
-
-    productForm: FormGroup;
 
     ngOnInit(): void {
         let objProduct = this.dataDialogRef.objProduct;
@@ -46,6 +52,25 @@ export class ProductModalComponent {
         // this.productForm.valueChanges.subscribe(console.log); 
         this.unitService.refreshList()
         // console.log('product modal ngoninit')
+
+        //console.log();
+    }
+
+    ngAfterViewInit() {
+        const initColumns = [
+            { field: 'select'},
+            { field: 'action'},
+            { display: 'รหัสสินค้า', field: 'productNo', width: 150 },
+            { display: 'Barcode', field: 'barcode', width: 160 },
+            { display: 'ชื่อสินค้า', field: 'productName' }
+        ];
+
+        setTimeout(() => {
+            this.unitTable.tableHeight = 200
+            this.unitTable.initColumns = initColumns
+            this.unitTable.displayedColumns = initColumns.map(col => col.field)
+            this.unitTable.dataSource = this.dataSource
+        }, 0);
     }
 
     get product() {
@@ -59,16 +84,16 @@ export class ProductModalComponent {
     genProductUnits(productUnits) {
         var productUnitAR = this.fb.array([]);
         if (!!productUnits) {
-            productUnits.forEach(element => {
+            productUnits.forEach(value => {
                 productUnitAR.push(this.fb.group({
                     uid: [Math.random().toString(16).slice(2)],
                     isFocus: [false],
-                    productUnitID: [element.productUnitID],
-                    barcode: [{ value: element.barcode, disabled: true }],
-                    unitID: [element.unitID, Validators.required],
-                    isBaseUnit: [{ value: element.isBaseUnit, disabled: true }]
+                    productUnitID: [value.productUnitID],
+                    barcode: [value.barcode],
+                    unitID: [value.unitID, Validators.required],
+                    isBaseUnit: [value.isBaseUnit]
                 }))
-                console.log(element)
+                console.log(value)
             });
         }
 
@@ -76,48 +101,59 @@ export class ProductModalComponent {
     }
 
     addUnit() {
-        var productUnitFG = this.fb.group({
-            uid: [Math.random().toString(16).slice(2)],
-            isFocus: [true],
-            barcode: [{ value: null, disabled: false }],
-            unitID: [this.unitService.units[0].unitID],
-            isBaseUnit: [false]
-        });
+        var e = [
+            { isAdd: true ,productNo: '00000' + this.num, barcode: '000', productName: 'ทดสอบ1' },
+            { productNo: '11111' + this.num, barcode: '111', productName: 'ทดสอบ2' },
+            { productNo: '22222' + this.num, barcode: '222', productName: 'ทดสอบ3' }
+        ]
+        this.unitTable.dataSource.data.push(e[this.num])
+        this.unitTable.dataSource.filter = "";
 
-        var len = this.productUnits.length;
-        if (len == 0) {
-            this.productForm.setControl('productUnits', this.fb.array([productUnitFG]));
-        }
-        else
-        {   
-            var controls = this.productUnits[len - 1];
-            if (controls.get('isFocus').value) {
-                this.baseService.configDialog.alert.position = null
-                this.baseService.configDialog.alert.hasBackdrop = true
-                this.baseService.configDialog.alert.data = { message: "ไม่สามารภดำเนินการได้ กรุณาบันทึกหน่วยนับ" }
-                this.baseService._openDialog(AlertModalComponent, "alert")
-            }
-            else
-            {
-                this.productUnits.push(productUnitFG);
+        this.num++
 
-                var table = document.getElementsByClassName('unit-info');
-                if (table.length > 0) {
-                    var tbody = table[0].querySelector('tbody');
-                    if (!!tbody) {
-                        setTimeout(() => { 
-                            tbody.scrollTo(0, 50000);
-                            tbody.querySelector('input').focus();
-                        }, 100);
-                    }
-                }
-            } 
-        }
+        
+        // var productUnitFG = this.fb.group({
+        //     uid: [Math.random().toString(16).slice(2)],
+        //     isFocus: [true],
+        //     barcode: [{ value: null, disabled: false }],
+        //     unitID: [this.unitService.units[0].unitID],
+        //     isBaseUnit: [false]
+        // });
 
-        setTimeout(() => { 
-            const field = document.getElementById("barcode")
-            if (!!field) field.focus();
-        }, 100);
+        // var len = this.productUnits.length;
+        // if (len == 0) {
+        //     this.productForm.setControl('productUnits', this.fb.array([productUnitFG]));
+        // }
+        // else
+        // {   
+        //     var controls = this.productUnits[len - 1];
+        //     if (controls.get('isFocus').value) {
+        //         this.baseService.configDialog.alert.position = null
+        //         this.baseService.configDialog.alert.hasBackdrop = true
+        //         this.baseService.configDialog.alert.data = { message: "ไม่สามารภดำเนินการได้ กรุณาบันทึกหน่วยนับ" }
+        //         this.baseService._openDialog(AlertModalComponent, "alert")
+        //     }
+        //     else
+        //     {
+        //         this.productUnits.push(productUnitFG);
+
+        //         var table = document.getElementsByClassName('unit-info');
+        //         if (table.length > 0) {
+        //             var tbody = table[0].querySelector('tbody');
+        //             if (!!tbody) {
+        //                 setTimeout(() => { 
+        //                     tbody.scrollTo(0, 50000);
+        //                     tbody.querySelector('input').focus();
+        //                 }, 100);
+        //             }
+        //         }
+        //     } 
+        // }
+
+        // setTimeout(() => { 
+        //     const field = document.getElementById("barcode")
+        //     if (!!field) field.focus();
+        // }, 100);
     }
 
     changeisFocus = async (uid, isFocus, index) => {
@@ -149,7 +185,6 @@ export class ProductModalComponent {
             if (await this.validateProductUnit()){
                 await this.productService.bindSave(this.productForm.getRawValue()).then(res => {
                     this.baseService._closeDialog('ProductModalComponent', null)
-                    this.productService.refreshList();
                     this.baseService.configDialog.success.data = { message: "ระบบบันทึกข้อมูลสินค้าเรียบร้อยแล้ว" }
                     this.baseService._openDialog(SuccessModalComponent, "success", true)
                 });
@@ -164,8 +199,8 @@ export class ProductModalComponent {
 
     bindEdit = async () => {
         if (this.productForm.valid){
-            console.log(this.productForm.getRawValue())
-            // if (await this.validateProductUnit())
+            if (await this.validateProductUnit())
+                console.log(this.productForm.getRawValue())
             //     await this.productService.bindEdit(this.productForm.getRawValue()).then(res => this.closeDialog(true));
         } 
         else

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductModel } from '../Shared/product.model';
 import { UnitModel } from '../Shared/unit.model';
 import { AppService } from '@services/base/apps.service';
+import { Products } from '@interfaces/products';
 
 @Injectable({
     providedIn: 'root'
@@ -15,20 +16,20 @@ export class ProductService {
         ) {}
 
     readonly baseUrl = this.baseService.baseURL
-    //formData: ProductModel = new ProductModel();
     list: ProductModel[];
     runningNumber: string;
     runningFormatID: string;
     listUnit: UnitModel[];
-    productModel: ProductModel[];
+    
+    products: Products[]
 
-    refreshList = async () => {
+    getProducts = async () => {
         this.baseService.setIsLoading(true)
-        this.http.get(this.baseUrl + 'Products')
+        return await this.http.get<Products[]>(this.baseUrl + 'Products')
         .toPromise()
         .then(res => { 
-            this.list = res as ProductModel[] 
             this.baseService.setIsLoading(false)
+            return res
         });
     }
 
